@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 0**
+**Current phase: 1**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -24,6 +24,20 @@ loaded directly by the web app, producing 60 seconds of audio.
 **Gate:** render 30 seconds. Would you send it to a friend unprompted? If no, iterate on
 constraints — do not proceed. If it still fails after serious iteration, this project does
 not work and that is worth knowing now rather than in month three.
+
+**Passed.** The gate took four rounds of listening, and none of what it caught was visible
+in a test: chords piling up because the release outlived the bar, a lead that was in key
+and on the grid and still a random walk because nothing repeated, a bell drifting out of
+tune as the harmony moved under its decay. Every one of those passed the full suite.
+
+Phase 0 was meant to be throwaway and is not being thrown away — the constraints it found
+are the product. What carries forward: the Score IR and its validator, the seeded PRNG with
+named streams, the voice-leading and spacing rules, the mixdown arbiter, and the recorded
+score in `fixtures/react.expected.json` that makes any of it hard to break by accident.
+
+Percussion is deliberately not built. Ranks 5–6 are assigned by `assignVoices` and ignored
+by `generateScore`; the six pitched voices already carry the dynamic shape, and drums are a
+change of genre rather than a missing feature. Worth a listen before committing to them.
 
 ---
 

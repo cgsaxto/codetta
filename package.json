@@ -14,7 +14,8 @@
     "test": "pnpm -r --if-present test",
     "typecheck": "pnpm -r --if-present typecheck",
     "lint": "eslint . && prettier --check .",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "fixtures:update": "pnpm -r --if-present fixtures:update"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

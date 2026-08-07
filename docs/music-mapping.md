@@ -197,11 +197,23 @@ constants, not computed.
 
 ## How to evaluate a change
 
-Not by reading the diff. Render the fixtures and listen:
+Not by reading the diff. Two things, and they answer different questions.
 
-```bash
-pnpm render:fixtures     # writes WAVs to .tmp/renders/
-```
+**What changed** is a JSON diff. Every fixture has a recorded Score in
+`fixtures/*.expected.json`, and `pnpm test` fails when the generated one differs. Most
+changes to this project move those numbers deliberately — the check is not there to stop
+you, it is there so that a change you did not intend cannot pass silently. When the diff is
+what you meant, run `pnpm fixtures:update` in the same commit that justifies it.
+
+**Whether it is better** is your ears, and there is no substitute. Run `pnpm dev` and
+listen to the peak section, which is where the shareable clip is cut from.
 
 The bar is: **would I send this 30-second clip to a friend unprompted?** If no, the change
 is not done, regardless of test status.
+
+Everything in Phase 0 that actually mattered was found this way. Muddy chord voicings, a
+lead that was in key and on the grid and still sounded like a random walk, a bell drifting
+out of tune as the harmony moved underneath it — every one of those passed the entire test
+suite. Tests keep the output legal; only listening keeps it good.
+
+Offline WAV rendering, so a clip can be produced without a browser, is Phase 4.
