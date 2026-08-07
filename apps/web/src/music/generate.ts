@@ -1,6 +1,7 @@
 import type { RepoFeatures } from '../features/types';
 import { assignVoices } from './arrangement';
-import { assertValidScore, type NoteEvent, type Score } from './score';
+import { mixdown } from './mixdown';
+import { assertValidScore, barToTick, type NoteEvent, type Score } from './score';
 import { buildSkeleton, scoreFrom } from './skeleton';
 import { bassEvents } from './voices/bass';
 import { leadEvents } from './voices/lead';
@@ -23,7 +24,8 @@ export function generateScore(features: RepoFeatures): Score {
     // arp, bell, texture and percussion are still to come.
   }
 
-  const score = scoreFrom(skeleton, events);
+  // Voices are written independently, so nothing before this point can see a collision.
+  const score = scoreFrom(skeleton, mixdown(events, barToTick(skeleton.bars)));
 
   // Cheap, and it means a violation surfaces here rather than as a click in the render.
   assertValidScore(score);

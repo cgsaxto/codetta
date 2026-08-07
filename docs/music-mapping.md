@@ -71,8 +71,28 @@ name hash — the largest module should always be the most prominent voice).
 Pad and bass are not derived from code at all. They are the safety net that makes everything
 else work. Do not make them feature-driven.
 
-Constraint: **max 8 simultaneous notes**. Two voices must never occupy the same octave range
-in the same bar — if they collide, transpose the lower-ranked one down an octave.
+### Collisions
+
+Constraint: **max 8 simultaneous notes**, and **no two voices sounding the same pitch at the
+same time**.
+
+Both are enforced in one place, after every voice has produced its notes — `music/mixdown.ts`.
+They cannot be enforced inside a voice, because a voice cannot see what the others are doing.
+
+An earlier version of this rule said two voices must never occupy the same octave range in the
+same bar. That cannot be implemented as written: the registers in the table above are chosen to
+overlap — pad reaches C5 and lead starts at C4 — so the rule fires constantly and the only way
+to satisfy it is to push a voice outside its own register. What is audible is not that two
+voices share an octave, it is that two voices land on the same note, where the quieter one
+simply disappears into the louder. That is the rule.
+
+Resolution order:
+
+- On a unison, the **later-ranked** voice moves by an octave — up first, then down — and keeps
+  its pitch only if neither octave is inside its register. Pad and bass never move: they are
+  the safety net, and their voicing is chosen as a whole.
+- Over the polyphony ceiling, notes are dropped from the **lowest-ranked voice first**, in
+  reverse rank order. Pad and bass are dropped last and in practice never.
 
 ## Layer 3 — Feature → parameter mapping
 
