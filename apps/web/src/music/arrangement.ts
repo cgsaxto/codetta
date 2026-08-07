@@ -1,5 +1,17 @@
+import { TICKS_PER_BAR, TICKS_PER_BEAT } from './score';
 import type { RepoFeatures, RepoModule, TimelineEntry } from '../features/types';
 import type { Skeleton } from './skeleton';
+
+/**
+ * Every foreground voice breathes on the same grid: two-bar phrases, the last half bar
+ * silent. Shared rather than per-voice on purpose — if the arp kept running through the
+ * lead's rest it would fill the air the rest exists to create, and neither voice would
+ * sound like it was phrasing at all.
+ */
+export const PHRASE_BARS = 2;
+export const PHRASE_TICKS = TICKS_PER_BAR * PHRASE_BARS;
+export const PHRASE_REST_TICKS = TICKS_PER_BEAT * 2;
+export const PHRASE_ACTIVE_TICKS = PHRASE_TICKS - PHRASE_REST_TICKS;
 
 /**
  * Layer 3 of docs/music-mapping.md: which voices are active, and which module drives each.

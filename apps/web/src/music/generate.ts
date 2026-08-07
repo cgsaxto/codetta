@@ -3,6 +3,7 @@ import { assignVoices } from './arrangement';
 import { mixdown } from './mixdown';
 import { assertValidScore, barToTick, type NoteEvent, type Score } from './score';
 import { buildSkeleton, scoreFrom } from './skeleton';
+import { arpEvents } from './voices/arp';
 import { bassEvents } from './voices/bass';
 import { leadEvents } from './voices/lead';
 import { padEvents } from './voices/pad';
@@ -21,7 +22,8 @@ export function generateScore(features: RepoFeatures): Score {
 
   for (const context of assignVoices(features, skeleton)) {
     if (context.voice === 'lead') events.push(...leadEvents(context));
-    // arp, bell, texture and percussion are still to come.
+    if (context.voice === 'arp') events.push(...arpEvents(context));
+    // bell, texture and percussion are still to come.
   }
 
   // Voices are written independently, so nothing before this point can see a collision.

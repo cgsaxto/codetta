@@ -1,14 +1,8 @@
-import type { VoiceContext } from '../arrangement';
+import { PHRASE_ACTIVE_TICKS, PHRASE_TICKS, type VoiceContext } from '../arrangement';
 import { pick } from '../palette';
 import { degreeToMidi } from '../progressions';
 import { unitHash } from '../rng';
-import {
-  TICKS_PER_BAR,
-  TICKS_PER_BEAT,
-  VOICE_REGISTERS,
-  barToTick,
-  type NoteEvent,
-} from '../score';
+import { TICKS_PER_BAR, VOICE_REGISTERS, barToTick, type NoteEvent } from '../score';
 import { chordLoop } from '../skeleton';
 
 /**
@@ -23,12 +17,6 @@ import { chordLoop } from '../skeleton';
  * Every feature here selects an index or a probability. None reaches a MIDI number, a
  * frequency or a millisecond: the lead chooses scale degrees and the key decides the notes.
  */
-
-/** Two bars, the last half bar silent — six beats of line, two of air. */
-const PHRASE_BARS = 2;
-const PHRASE_TICKS = TICKS_PER_BAR * PHRASE_BARS;
-const PHRASE_REST_TICKS = TICKS_PER_BEAT * 2;
-const PHRASE_ACTIVE_TICKS = PHRASE_TICKS - PHRASE_REST_TICKS;
 
 /**
  * AABA over eight bars: state it, confirm it, answer it, resolve it. The oldest melodic

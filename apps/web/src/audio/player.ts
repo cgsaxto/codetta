@@ -137,10 +137,25 @@ export async function startPlayback(
     envelope: { attack: 0.005, decay: barSeconds * 0.12, sustain: 0.12, release: 0.18 },
   }).connect(leadFilter);
 
+  // Well under the lead. The arp is motion, not a second melody, and the moment it is loud
+  // enough to follow it starts competing with the tune for attention.
+  const arpGain = new Tone.Gain(Tone.dbToGain(-21)).connect(master);
+  const arpFilter = new Tone.Filter({
+    frequency: 2400,
+    type: 'lowpass',
+    rolloff: -12,
+  }).connect(arpGain);
+  // Notes butt up against each other, so the decay has to finish inside its own slot or the
+  // figure smears into a chord.
+  const arp = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.004, decay: barSeconds * 0.06, sustain: 0.05, release: 0.08 },
+  }).connect(arpFilter);
+
   // Impulse responses are generated asynchronously; starting first gives a dry opening bar.
   await Promise.all([padReverb.ready, leadReverb.ready]);
 
-  const instruments = { pad, bass, lead } as const;
+  const instruments = { pad, bass, lead, arp } as const;
 
   const part = new Tone.Part<ScheduledNote>(
     (time, note) => {
@@ -149,7 +164,9 @@ export async function startPlayback(
           ? instruments.bass
           : note.voice === 'lead'
             ? instruments.lead
-            : instruments.pad;
+            : note.voice === 'arp'
+              ? instruments.arp
+              : instruments.pad;
       instrument.triggerAttackRelease(
         Tone.Frequency(note.midi, 'midi').toFrequency(),
         ticksToTransportTime(note.durationTicks),
@@ -197,6 +214,9 @@ export async function startPlayback(
         leadFilter,
         leadReverb,
         leadGain,
+        arp,
+        arpFilter,
+        arpGain,
       ]) {
         node.dispose();
       }

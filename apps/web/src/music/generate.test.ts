@@ -187,6 +187,7 @@ describe('generateScore', () => {
       ['pad', 70],
       ['bass', 31],
       ['lead', 70],
+      ['arp', 62],
     ]);
   });
 });
