@@ -15,7 +15,7 @@ loaded directly by the web app, producing 60 seconds of audio.
 - [x] Vite + React + TS scaffold, Tone.js wired to a play button
 - [x] `fixtures/react.json` hand-authored by eyeballing a real repo, with a conformance test
 - [x] Seeded PRNG (`music/rng.ts`) — no unseeded randomness anywhere
-- [ ] Global skeleton: key, mode, tempo, 4-bar chord loop, 16th grid
+- [x] Global skeleton: key, mode, tempo, 4-bar chord loop, 16th grid
 - [ ] Pad + bass voices only. Verify this alone sounds pleasant on loop.
 - [ ] Add lead, arp, bell, texture per @docs/music-mapping.md
 - [ ] Fixed song-structure template (intro → build → peak → break → return → outro)
