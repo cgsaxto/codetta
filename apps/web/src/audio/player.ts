@@ -117,12 +117,39 @@ export async function startPlayback(
     },
   }).connect(bassGain);
 
-  // The impulse response is generated asynchronously; starting first gives a dry opening bar.
-  await padReverb.ready;
+  const leadGain = new Tone.Gain(Tone.dbToGain(-13)).connect(master);
+  // Some of the pad's space so the lead does not sit in front of the track, but much less
+  // of it — a wet lead loses the articulation that makes it read as a line.
+  const leadReverb = new Tone.Reverb({
+    decay: barSeconds * 0.5,
+    preDelay: 0.01,
+    wet: 0.14,
+  }).connect(leadGain);
+  const leadFilter = new Tone.Filter({
+    frequency: 3200,
+    type: 'lowpass',
+    rolloff: -12,
+  }).connect(leadReverb);
+  // Short and plucked. A sustaining lead would refill the midrange the pad was just cleared
+  // out of, and the notes are as close as a 16th apart.
+  const lead = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: { attack: 0.005, decay: barSeconds * 0.12, sustain: 0.12, release: 0.18 },
+  }).connect(leadFilter);
+
+  // Impulse responses are generated asynchronously; starting first gives a dry opening bar.
+  await Promise.all([padReverb.ready, leadReverb.ready]);
+
+  const instruments = { pad, bass, lead } as const;
 
   const part = new Tone.Part<ScheduledNote>(
     (time, note) => {
-      const instrument = note.voice === 'bass' ? bass : pad;
+      const instrument =
+        note.voice === 'bass'
+          ? instruments.bass
+          : note.voice === 'lead'
+            ? instruments.lead
+            : instruments.pad;
       instrument.triggerAttackRelease(
         Tone.Frequency(note.midi, 'midi').toFrequency(),
         ticksToTransportTime(note.durationTicks),
@@ -158,7 +185,19 @@ export async function startPlayback(
 
       pad.releaseAll();
       part.dispose();
-      for (const node of [pad, padHighpass, padFilter, padReverb, padGain, bass, bassGain]) {
+      for (const node of [
+        pad,
+        padHighpass,
+        padFilter,
+        padReverb,
+        padGain,
+        bass,
+        bassGain,
+        lead,
+        leadFilter,
+        leadReverb,
+        leadGain,
+      ]) {
         node.dispose();
       }
     },

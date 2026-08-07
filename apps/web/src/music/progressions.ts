@@ -118,6 +118,37 @@ function degreeToSemitone(scale: readonly number[], degree: number): number {
   return semitone + octave * 12;
 }
 
+/**
+ * Pitch class (0–11) of a scale degree in a given key. Degrees wrap, so degree 7 is the
+ * tonic again an octave up.
+ *
+ * This is the only sanctioned way to turn a degree into a note. Callers choose a degree;
+ * they never choose a semitone. That is what keeps every voice inside the active scale by
+ * construction rather than by a check after the fact.
+ */
+export function degreePitchClass(mode: ModeName, root: RootName, degree: number): number {
+  const semitone = ROOT_PITCH_CLASS[root] + degreeToSemitone(MODES[mode], degree);
+  return ((semitone % 12) + 12) % 12;
+}
+
+/**
+ * MIDI note of a scale degree, counting from the tonic in `octave`. Degrees run in both
+ * directions without limit: degree 7 is the tonic an octave up, degree −1 the seventh below.
+ *
+ * Melodic voices use this rather than {@link degreePitchClass} because a melody is defined
+ * by the interval between consecutive notes. Choosing a pitch class and then placing it in
+ * the nearest octave throws that contour away — two adjacent degrees can land a seventh
+ * apart — and the result is a random walk rather than a line.
+ */
+export function degreeToMidi(
+  mode: ModeName,
+  root: RootName,
+  degree: number,
+  octave: number,
+): number {
+  return 12 * (octave + 1) + ROOT_PITCH_CLASS[root] + degreeToSemitone(MODES[mode], degree);
+}
+
 function qualityOf(intervals: readonly number[]): ChordQuality {
   const [rootMidi, thirdMidi, fifthMidi] = intervals;
   if (rootMidi === undefined || thirdMidi === undefined || fifthMidi === undefined) {

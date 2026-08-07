@@ -1,0 +1,185 @@
+import type { VoiceContext } from '../arrangement';
+import { pick } from '../palette';
+import { degreeToMidi } from '../progressions';
+import { unitHash } from '../rng';
+import {
+  TICKS_PER_BAR,
+  TICKS_PER_BEAT,
+  VOICE_REGISTERS,
+  barToTick,
+  type NoteEvent,
+} from '../score';
+import { chordLoop } from '../skeleton';
+
+/**
+ * Rank 1: the largest module gets the most prominent voice.
+ *
+ * The lead states a two-bar motif and then restates it. That is the whole idea. Notes drawn
+ * fresh for forty bars are a random walk over the scale even when every interval is
+ * stepwise and every pitch is in key — there is nothing for a listener to hold on to, and
+ * it reads as busy no matter how few notes there are. Repetition is what turns pitches into
+ * a tune, and it is also what makes the line feel calm.
+ *
+ * Every feature here selects an index or a probability. None reaches a MIDI number, a
+ * frequency or a millisecond: the lead chooses scale degrees and the key decides the notes.
+ */
+
+/** Two bars, the last half bar silent — six beats of line, two of air. */
+const PHRASE_BARS = 2;
+const PHRASE_TICKS = TICKS_PER_BAR * PHRASE_BARS;
+const PHRASE_REST_TICKS = TICKS_PER_BEAT * 2;
+const PHRASE_ACTIVE_TICKS = PHRASE_TICKS - PHRASE_REST_TICKS;
+
+/**
+ * AABA over eight bars: state it, confirm it, answer it, resolve it. The oldest melodic
+ * form there is, and the reason is that a listener needs the third hearing before the
+ * contrast means anything.
+ */
+const PHRASE_FORM = ['a', 'a', 'b', 'a'] as const;
+
+/**
+ * Curated rhythms, one per density step, ordered from sparse to busy. A palette rather than
+ * a per-16th coin flip: a memoryless probability produces rhythms that are merely irregular,
+ * and irregular is not the same as syncopated. Every entry starts on the downbeat so the
+ * phrase has a floor, and none crosses into the rest.
+ */
+const RHYTHMS: ReadonlyArray<readonly number[]> = [
+  [0, 8, 16],
+  [0, 8, 12, 16],
+  [0, 4, 8, 16],
+  [0, 6, 12, 16],
+  [0, 4, 8, 16, 20],
+  [0, 3, 8, 11, 16],
+  [0, 2, 4, 8, 12, 16],
+  [0, 2, 6, 8, 12, 16, 20],
+];
+
+/** docs/music-mapping.md: bucket into {16n, 8n, 4n, 2n}. Longer functions, longer notes. */
+const NOTE_DURATIONS = [1, 2, 4, 8] as const;
+
+/** Never 1.0 — a voice firing on every 16th is a wall of sound, and always sounds bad. */
+const MIN_DENSITY = 0.15;
+const MAX_DENSITY = 0.75;
+
+/**
+ * Steps the contour may take, in scale degrees. Stepwise motion dominates because that is
+ * what makes a line singable; nothing leaps more than a fifth.
+ */
+const CONTOUR_STEPS = [-4, -3, -2, -2, -1, -1, -1, -1, 1, 1, 1, 1, 2, 2, 3, 4] as const;
+
+/** How far a motif may roam from its own first note, in scale degrees. */
+const CONTOUR_RANGE = 5;
+
+/** Weight on staying in the module's register when anchoring a phrase, against smoothness. */
+const REGISTER_PULL = 0.5;
+
+function clamp(value: number, lo: number, hi: number): number {
+  return Math.min(Math.max(value, lo), hi);
+}
+
+function durationIndexFor(avgFunctionLength: number): number {
+  if (avgFunctionLength < 10) return 0;
+  if (avgFunctionLength < 18) return 1;
+  if (avgFunctionLength < 28) return 2;
+  return 3;
+}
+
+/**
+ * Degree offsets from the phrase anchor, one per onset. Generated once and reused, which is
+ * what makes it a motif rather than a sequence of notes. The last offset returns to the
+ * anchor so every phrase resolves onto a chord tone.
+ */
+function buildContour(length: number, salt: string): number[] {
+  const offsets = [0];
+  for (let i = 1; i < length - 1; i++) {
+    const previous = offsets[i - 1] ?? 0;
+    const step = pick(CONTOUR_STEPS, unitHash(`${salt}#${i}`) * CONTOUR_STEPS.length);
+    offsets.push(clamp(previous + step, -CONTOUR_RANGE, CONTOUR_RANGE));
+  }
+  if (length > 1) offsets.push(0);
+  return offsets;
+}
+
+export function leadEvents(context: VoiceContext): NoteEvent[] {
+  const { skeleton, module, timeline } = context;
+  const [lo, hi] = VOICE_REGISTERS.lead;
+
+  const chords = chordLoop(skeleton);
+  const midiOf = (degree: number) => degreeToMidi(skeleton.mode, skeleton.root, degree, 4);
+
+  const density = clamp(module.cyclomaticDensity, MIN_DENSITY, MAX_DENSITY);
+  const rhythm = pick(
+    RHYTHMS,
+    ((density - MIN_DENSITY) / (MAX_DENSITY - MIN_DENSITY)) * RHYTHMS.length,
+  );
+  const noteTicks = pick(NOTE_DURATIONS, durationIndexFor(module.avgFunctionLength));
+  // Deeper nesting sits higher in the register. Depth 1 hugs the bottom, 5 and above the top.
+  const target = lo + (hi - lo) * clamp((module.avgNestingDepth - 1) / 4, 0, 1);
+  // Bigger module, louder voice.
+  const velocity = clamp(0.45 + module.share * 0.6, 0.4, 0.8);
+
+  // Motifs are hashed from the repo's own files, so two repos get different tunes and the
+  // same repo gets the same one forever.
+  const salt =
+    timeline
+      .slice(0, 8)
+      .map((entry) => entry.path)
+      .join('|') || module.path;
+  const contours = {
+    a: buildContour(rhythm.length, `${salt}#a`),
+    b: buildContour(rhythm.length, `${salt}#b`),
+  };
+
+  const totalTicks = barToTick(skeleton.bars);
+  const events: NoteEvent[] = [];
+  let previousMidi = target;
+
+  for (let phraseStart = 0; phraseStart < totalTicks; phraseStart += PHRASE_TICKS) {
+    const phraseIndex = phraseStart / PHRASE_TICKS;
+    const form = PHRASE_FORM[phraseIndex % PHRASE_FORM.length] ?? 'a';
+    const contour = contours[form];
+
+    const bar = Math.floor(phraseStart / TICKS_PER_BAR);
+    const chordDegree = chords[bar % chords.length]?.degree ?? 0;
+
+    // Anchor on a chord tone, close to where the last phrase left off so the phrases join,
+    // but pulled back toward the module's register so the line cannot drift away over
+    // forty bars.
+    let anchor = chordDegree;
+    let bestScore = Infinity;
+    for (const tone of [0, 2, 4]) {
+      for (let octave = -2; octave <= 2; octave++) {
+        const candidate = chordDegree + tone + octave * 7;
+        const midi = midiOf(candidate);
+        if (midi < lo || midi > hi) continue;
+        const score = Math.abs(midi - previousMidi) + REGISTER_PULL * Math.abs(midi - target);
+        if (score < bestScore) {
+          bestScore = score;
+          anchor = candidate;
+        }
+      }
+    }
+
+    for (const [i, onset] of rhythm.entries()) {
+      const tick = phraseStart + onset;
+      if (tick >= totalTicks) break;
+
+      let degree = anchor + (contour[i] ?? 0);
+      for (let guard = 0; guard < 8 && midiOf(degree) < lo; guard++) degree += 7;
+      for (let guard = 0; guard < 8 && midiOf(degree) > hi; guard++) degree -= 7;
+      const midi = midiOf(degree);
+      if (midi < lo || midi > hi) continue;
+
+      const nextOnset = rhythm[i + 1] ?? PHRASE_ACTIVE_TICKS;
+      const durationTicks = Math.max(
+        1,
+        Math.min(noteTicks, nextOnset - onset, PHRASE_ACTIVE_TICKS - onset, totalTicks - tick),
+      );
+
+      events.push({ voice: 'lead', tick, durationTicks, midi, velocity });
+      previousMidi = midi;
+    }
+  }
+
+  return events;
+}

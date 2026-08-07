@@ -90,7 +90,17 @@ describe('pad', () => {
       })),
       timeline: [],
     };
-    expect(generateScore(mutated).events).toStrictEqual(generateScore(reactFeatures).events);
+    const safetyNet = (features: RepoFeatures) =>
+      generateScore(features).events.filter(
+        (event) => event.voice === 'pad' || event.voice === 'bass',
+      );
+
+    // Only pad and bass. Every other voice is supposed to move when the features do — that
+    // is the whole point of them.
+    expect(safetyNet(mutated)).toStrictEqual(safetyNet(reactFeatures));
+    expect(generateScore(mutated).events).not.toStrictEqual(
+      generateScore(reactFeatures).events,
+    );
   });
 });
 
@@ -148,8 +158,8 @@ describe('generateScore', () => {
   });
 
   it('leaves headroom under the polyphony ceiling for the voices still to come', () => {
-    // Pad is three notes and bass is one. If this ever reaches the ceiling, adding the
-    // lead is impossible without dropping something.
+    // Pad is two or three notes, bass one, lead one. Arp, bell, texture and percussion are
+    // still to come, so hitting the ceiling now would mean dropping something later.
     const score = generateScore(reactFeatures);
     const totalTicks = barToTick(score.bars);
     const active = new Array<number>(totalTicks).fill(0);
@@ -159,7 +169,7 @@ describe('generateScore', () => {
         if (slot !== undefined) active[tick] = slot + 1;
       }
     }
-    expect(Math.max(...active)).toBeLessThanOrEqual(MAX_CONCURRENT_NOTES / 2);
+    expect(Math.max(...active)).toBeLessThanOrEqual(MAX_CONCURRENT_NOTES - 2);
   });
 
   it('matches its recorded opening bar', () => {
@@ -169,12 +179,14 @@ describe('generateScore', () => {
       .map((event) => [event.voice, event.midi]);
     // G Dorian, 'current' loop. The pad opens on G minor spread across G3, D4 and Bb4 —
     // a fifth then a minor sixth. A closer voicing would score better on movement alone;
-    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1.
+    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1,
+    // and the lead states its motif from the downbeat.
     expect(openingBar).toStrictEqual([
       ['pad', 55],
       ['pad', 62],
       ['pad', 70],
       ['bass', 31],
+      ['lead', 70],
     ]);
   });
 });
