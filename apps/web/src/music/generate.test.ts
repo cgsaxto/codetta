@@ -193,17 +193,15 @@ describe('generateScore', () => {
       .map((event) => [event.voice, event.midi]);
     // G Dorian, 'current' loop. The pad opens on G minor spread across G3, D4 and Bb4 —
     // a fifth then a minor sixth. A closer voicing would score better on movement alone;
-    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1,
-    // and the lead states its motif from the downbeat.
+    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1.
+    //
+    // Nothing else: bar 0 is the intro, and the intro is pad and bass alone. Every other
+    // voice has written its part for this bar and the arrangement is holding it back.
     expect(openingBar).toStrictEqual([
       ['pad', 55],
       ['pad', 62],
       ['pad', 70],
       ['bass', 31],
-      ['lead', 70],
-      ['arp', 62],
-      ['bell', 74],
-      ['texture', 55],
     ]);
   });
 });

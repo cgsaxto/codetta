@@ -165,10 +165,20 @@ Section behaviour is the same in all three:
 Intro     Pad + bass only
 Build     Voices 1, 2 enter — voice 1 at the start, voice 2 at the midpoint
 Peak      All voices, full density, percussion enters
-Break     Drop to pad + lead, density × 0.4
+Break     Drop to pad, bass and lead, density × 0.4
 Return    Full, plus bell accents
-Outro     Voices drop out in reverse rank order
+Outro     Voices drop out in reverse rank order, pad and bass last
 ```
+
+Break used to read "drop to pad + lead", which contradicted Layer 2's "always present" for
+the bass. Layer 2 wins: the safety net is the one thing nothing is allowed to switch off,
+and four bars with no bass is not a breakdown, it is a hole. The density multiplier applies
+to the foreground voices — pad and bass keep their own pattern, because thinning the safety
+net is the same mistake in a different form.
+
+This is enforced in one place, after every voice has produced its notes, for the same reason
+the collision rules are: a voice cannot see the section it is in without every voice growing
+its own copy of the arrangement.
 
 `RepoFeatures.timeline` walks the repo's files in a stable order and maps them onto bars,
 so a repo with a dense core module gets a dense peak. But the entry/exit points are template

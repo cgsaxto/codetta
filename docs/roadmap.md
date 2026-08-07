@@ -18,7 +18,7 @@ loaded directly by the web app, producing 60 seconds of audio.
 - [x] Global skeleton: key, mode, tempo, 4-bar chord loop, 16th grid
 - [x] Pad + bass voices only. Verify this alone sounds pleasant on loop.
 - [x] Add lead, arp, bell, texture per @docs/music-mapping.md
-- [ ] Fixed song-structure template (intro → build → peak → break → return → outro)
+- [x] Fixed song-structure template (intro → build → peak → break → return → outro)
 - [x] Master limiter
 
 **Gate:** render 30 seconds. Would you send it to a friend unprompted? If no, iterate on

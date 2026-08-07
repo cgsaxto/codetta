@@ -1,5 +1,5 @@
 import type { RepoFeatures } from '../features/types';
-import { assignVoices } from './arrangement';
+import { applyStructure, assignVoices } from './arrangement';
 import { mixdown } from './mixdown';
 import {
   assertValidScore,
@@ -41,8 +41,11 @@ export function generateScore(features: RepoFeatures): Score {
     // Percussion is still to come.
   }
 
-  // Voices are written independently, so nothing before this point can see a collision.
-  const score = scoreFrom(skeleton, mixdown(events, barToTick(skeleton.bars)), timbre);
+  // Voices write the whole piece; the arrangement decides what is heard, and the mixdown
+  // then resolves whatever is left. Structure first, because there is no point resolving a
+  // collision between two notes one of which is about to be silenced.
+  const arranged = applyStructure(events, skeleton.sections);
+  const score = scoreFrom(skeleton, mixdown(arranged, barToTick(skeleton.bars)), timbre);
 
   // Cheap, and it means a violation surfaces here rather than as a click in the render.
   assertValidScore(score);
