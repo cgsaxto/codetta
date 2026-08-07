@@ -1,0 +1,126 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "facebook",
+    "name": "react",
+    "ref": "main",
+    "commitSha": "7c8e5e7ab2f0d5a1c4b93f6e2d8a105f3bc47e9d",
+    "primaryLanguage": "JavaScript",
+    "stars": 232400,
+    "fetchedAt": "2026-08-06T09:14:22Z"
+  },
+  "seed": "7c8e5e7a",
+  "totals": {
+    "filesScanned": 1487,
+    "filesSkipped": 412,
+    "linesOfCode": 268430,
+    "functions": 9284,
+    "classes": 312,
+    "imports": 8140
+  },
+  "languages": [
+    { "name": "JavaScript", "share": 0.7801, "files": 1160 },
+    { "name": "TypeScript", "share": 0.16, "files": 238 },
+    { "name": "Python", "share": 0.0599, "files": 89 }
+  ],
+  "modules": [
+    {
+      "path": "packages/react-dom",
+      "share": 0.2911,
+      "files": 218,
+      "linesOfCode": 78140,
+      "avgNestingDepth": 2.6,
+      "maxNestingDepth": 11,
+      "avgFunctionLength": 16.4,
+      "cyclomaticDensity": 0.284,
+      "commentRatio": 0.112,
+      "asyncRatio": 0.09
+    },
+    {
+      "path": "packages/react-reconciler",
+      "share": 0.213,
+      "files": 96,
+      "linesOfCode": 57180,
+      "avgNestingDepth": 3.1,
+      "maxNestingDepth": 14,
+      "avgFunctionLength": 21.8,
+      "cyclomaticDensity": 0.342,
+      "commentRatio": 0.164,
+      "asyncRatio": 0.04
+    },
+    {
+      "path": "packages/react-devtools-shared",
+      "share": 0.1418,
+      "files": 174,
+      "linesOfCode": 38060,
+      "avgNestingDepth": 2.2,
+      "maxNestingDepth": 9,
+      "avgFunctionLength": 13.9,
+      "cyclomaticDensity": 0.221,
+      "commentRatio": 0.068,
+      "asyncRatio": 0.18
+    },
+    {
+      "path": "packages/react",
+      "share": 0.0904,
+      "files": 82,
+      "linesOfCode": 24270,
+      "avgNestingDepth": 1.8,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 11.2,
+      "cyclomaticDensity": 0.174,
+      "commentRatio": 0.193,
+      "asyncRatio": 0.06
+    },
+    {
+      "path": "packages/react-server",
+      "share": 0.0661,
+      "files": 44,
+      "linesOfCode": 17740,
+      "avgNestingDepth": 2.9,
+      "maxNestingDepth": 12,
+      "avgFunctionLength": 19.6,
+      "cyclomaticDensity": 0.301,
+      "commentRatio": 0.101,
+      "asyncRatio": 0.34
+    },
+    {
+      "path": "packages/scheduler",
+      "share": 0.0312,
+      "files": 26,
+      "linesOfCode": 8380,
+      "avgNestingDepth": 2.0,
+      "maxNestingDepth": 8,
+      "avgFunctionLength": 14.1,
+      "cyclomaticDensity": 0.256,
+      "commentRatio": 0.145,
+      "asyncRatio": 0.02
+    }
+  ],
+  "timeline": [
+    { "index": 0, "modulePath": "packages/react-devtools-shared", "path": "packages/react-devtools-shared/src/backend/agent.js", "linesOfCode": 612, "functions": 34, "maxNesting": 6, "branches": 88, "commentLines": 41 },
+    { "index": 1, "modulePath": "packages/react-devtools-shared", "path": "packages/react-devtools-shared/src/backend/renderer.js", "linesOfCode": 1840, "functions": 96, "maxNesting": 9, "branches": 412, "commentLines": 130 },
+    { "index": 2, "modulePath": "packages/react-devtools-shared", "path": "packages/react-devtools-shared/src/devtools/store.js", "linesOfCode": 1104, "functions": 61, "maxNesting": 7, "branches": 236, "commentLines": 74 },
+    { "index": 3, "modulePath": "packages/react-devtools-shared", "path": "packages/react-devtools-shared/src/utils.js", "linesOfCode": 388, "functions": 42, "maxNesting": 4, "branches": 61, "commentLines": 22 },
+    { "index": 4, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/client/ReactDOMComponent.js", "linesOfCode": 1592, "functions": 58, "maxNesting": 10, "branches": 344, "commentLines": 168 },
+    { "index": 5, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/client/ReactDOMHostConfig.js", "linesOfCode": 1218, "functions": 74, "maxNesting": 8, "branches": 251, "commentLines": 142 },
+    { "index": 6, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/client/ReactDOMRoot.js", "linesOfCode": 214, "functions": 9, "maxNesting": 5, "branches": 33, "commentLines": 27 },
+    { "index": 7, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/events/DOMPluginEventSystem.js", "linesOfCode": 786, "functions": 31, "maxNesting": 9, "branches": 178, "commentLines": 96 },
+    { "index": 8, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/events/SyntheticEvent.js", "linesOfCode": 542, "functions": 27, "maxNesting": 6, "branches": 84, "commentLines": 58 },
+    { "index": 9, "modulePath": "packages/react-dom", "path": "packages/react-dom/src/server/ReactDOMServerFormatConfig.js", "linesOfCode": 2104, "functions": 88, "maxNesting": 11, "branches": 496, "commentLines": 174 },
+    { "index": 10, "modulePath": "packages/react-reconciler", "path": "packages/react-reconciler/src/ReactChildFiber.js", "linesOfCode": 1348, "functions": 46, "maxNesting": 12, "branches": 388, "commentLines": 210 },
+    { "index": 11, "modulePath": "packages/react-reconciler", "path": "packages/react-reconciler/src/ReactFiberBeginWork.js", "linesOfCode": 3960, "functions": 102, "maxNesting": 14, "branches": 941, "commentLines": 604 },
+    { "index": 12, "modulePath": "packages/react-reconciler", "path": "packages/react-reconciler/src/ReactFiberCommitWork.js", "linesOfCode": 3410, "functions": 94, "maxNesting": 13, "branches": 812, "commentLines": 522 },
+    { "index": 13, "modulePath": "packages/react-reconciler", "path": "packages/react-reconciler/src/ReactFiberHooks.js", "linesOfCode": 3184, "functions": 168, "maxNesting": 10, "branches": 604, "commentLines": 488 },
+    { "index": 14, "modulePath": "packages/react-reconciler", "path": "packages/react-reconciler/src/ReactFiberWorkLoop.js", "linesOfCode": 3720, "functions": 121, "maxNesting": 13, "branches": 878, "commentLines": 640 },
+    { "index": 15, "modulePath": "packages/react-server", "path": "packages/react-server/src/ReactFizzServer.js", "linesOfCode": 2280, "functions": 79, "maxNesting": 12, "branches": 508, "commentLines": 246 },
+    { "index": 16, "modulePath": "packages/react-server", "path": "packages/react-server/src/ReactFlightServer.js", "linesOfCode": 1642, "functions": 64, "maxNesting": 11, "branches": 372, "commentLines": 164 },
+    { "index": 17, "modulePath": "packages/react-server", "path": "packages/react-server/src/ReactServerStreamConfigNode.js", "linesOfCode": 296, "functions": 22, "maxNesting": 5, "branches": 41, "commentLines": 18 },
+    { "index": 18, "modulePath": "packages/react", "path": "packages/react/src/React.js", "linesOfCode": 188, "functions": 6, "maxNesting": 3, "branches": 14, "commentLines": 34 },
+    { "index": 19, "modulePath": "packages/react", "path": "packages/react/src/ReactContext.js", "linesOfCode": 142, "functions": 8, "maxNesting": 4, "branches": 21, "commentLines": 26 },
+    { "index": 20, "modulePath": "packages/react", "path": "packages/react/src/ReactElement.js", "linesOfCode": 604, "functions": 24, "maxNesting": 6, "branches": 112, "commentLines": 148 },
+    { "index": 21, "modulePath": "packages/react", "path": "packages/react/src/ReactHooks.js", "linesOfCode": 388, "functions": 31, "maxNesting": 4, "branches": 52, "commentLines": 88 },
+    { "index": 22, "modulePath": "packages/scheduler", "path": "packages/scheduler/src/SchedulerMinHeap.js", "linesOfCode": 124, "functions": 7, "maxNesting": 5, "branches": 34, "commentLines": 11 },
+    { "index": 23, "modulePath": "packages/scheduler", "path": "packages/scheduler/src/forks/Scheduler.js", "linesOfCode": 664, "functions": 38, "maxNesting": 8, "branches": 162, "commentLines": 94 }
+  ]
+}
