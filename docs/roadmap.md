@@ -16,10 +16,10 @@ loaded directly by the web app, producing 60 seconds of audio.
 - [x] `fixtures/react.json` hand-authored by eyeballing a real repo, with a conformance test
 - [x] Seeded PRNG (`music/rng.ts`) — no unseeded randomness anywhere
 - [x] Global skeleton: key, mode, tempo, 4-bar chord loop, 16th grid
-- [ ] Pad + bass voices only. Verify this alone sounds pleasant on loop.
+- [x] Pad + bass voices only. Verify this alone sounds pleasant on loop.
 - [ ] Add lead, arp, bell, texture per @docs/music-mapping.md
 - [ ] Fixed song-structure template (intro → build → peak → break → return → outro)
-- [ ] Master limiter
+- [x] Master limiter
 
 **Gate:** render 30 seconds. Would you send it to a friend unprompted? If no, iterate on
 constraints — do not proceed. If it still fails after serious iteration, this project does

@@ -9,7 +9,7 @@ import {
   barToTick,
   validateScore,
 } from './score';
-import { buildSkeleton } from './skeleton';
+import { buildSkeleton, chordLoop } from './skeleton';
 import { bassEvents } from './voices/bass';
 import { padEvents } from './voices/pad';
 
@@ -31,7 +31,29 @@ describe('pad', () => {
     const events = padEvents(skeleton);
     const bars = new Set(events.map((event) => event.tick / TICKS_PER_BAR));
     expect(bars.size).toBe(skeleton.bars);
-    expect(events).toHaveLength(skeleton.bars * 3);
+    for (const bar of bars) {
+      const inBar = events.filter((event) => event.tick === barToTick(bar));
+      // Two when the third was dropped, three when it was high enough to keep.
+      expect(inBar.length, `bar ${bar}`).toBeGreaterThanOrEqual(2);
+      expect(inBar.length, `bar ${bar}`).toBeLessThanOrEqual(3);
+    }
+  });
+
+  it('drops the third rather than letting it muddy the low register', () => {
+    const skeleton = buildSkeleton(reactFeatures);
+    const chords = chordLoop(skeleton);
+    const events = padEvents(skeleton);
+
+    for (const [bar, chord] of chords.entries()) {
+      const thirdClass = (((chord.midi[1] ?? 0) % 12) + 12) % 12;
+      const played = events.filter((event) => event.tick === barToTick(bar));
+      for (const event of played) {
+        const isThird = ((event.midi % 12) + 12) % 12 === thirdClass;
+        if (isThird) expect(event.midi, `bar ${bar}`).toBeGreaterThanOrEqual(60);
+      }
+      // The root and the fifth always survive, so the chord is never reduced to one note.
+      expect(played.length, `bar ${bar}`).toBeGreaterThanOrEqual(2);
+    }
   });
 
   it('stays inside the pad register', () => {
@@ -145,13 +167,13 @@ describe('generateScore', () => {
     const openingBar = score.events
       .filter((event) => event.tick === 0)
       .map((event) => [event.voice, event.midi]);
-    // G Dorian, 'current' loop. The pad opens on G minor in second inversion — D3, Bb3,
-    // G4 — because the opening chord is placed nearest an even spread of C3–C5 rather
-    // than in root position. Bass takes the root at G1.
+    // G Dorian, 'current' loop. The pad opens on G minor spread across G3, D4 and Bb4 —
+    // a fifth then a minor sixth. A closer voicing would score better on movement alone;
+    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1.
     expect(openingBar).toStrictEqual([
-      ['pad', 50],
-      ['pad', 58],
-      ['pad', 67],
+      ['pad', 55],
+      ['pad', 62],
+      ['pad', 70],
       ['bass', 31],
     ]);
   });

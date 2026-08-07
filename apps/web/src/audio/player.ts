@@ -1,5 +1,11 @@
 import * as Tone from 'tone';
-import { TICKS_PER_BAR, TICKS_PER_BEAT, type NoteEvent, type Score } from '../music/score';
+import {
+  BEATS_PER_BAR,
+  TICKS_PER_BAR,
+  TICKS_PER_BEAT,
+  type NoteEvent,
+  type Score,
+} from '../music/score';
 import { masterBus } from './engine';
 
 /**
@@ -42,31 +48,74 @@ export async function startPlayback(
   await Tone.start();
   const master = masterBus();
 
+  // Envelope times are fractions of a bar, not fixed seconds. Tempo is repo-dependent, so
+  // a fixed release that crossfades nicely at 116 BPM piles chords up at 72.
+  const barSeconds = (60 / score.bpm) * BEATS_PER_BAR;
+
   const padGain = new Tone.Gain(Tone.dbToGain(-15)).connect(master);
-  const padReverb = new Tone.Reverb({ decay: 6, wet: 0.32 }).connect(padGain);
+  // The tail has to die inside the bar that produced it. Reverb longer than the chord cycle
+  // is a dense copy of the previous harmony sounding underneath the current one, which is
+  // the same pile-up as a long release but harder to hear as a cause.
+  const padReverb = new Tone.Reverb({
+    decay: barSeconds * 0.6,
+    preDelay: 0.02,
+    wet: 0.16,
+  }).connect(padGain);
   const padFilter = new Tone.Filter({
-    frequency: 1600,
+    frequency: 2600,
     type: 'lowpass',
     rolloff: -12,
   }).connect(padReverb);
+  // Keeps the pad out of the bass fundamentals. The lowest pad note is C3 at 131 Hz, so
+  // this removes rumble below the voice rather than thinning it.
+  const padHighpass = new Tone.Filter({
+    frequency: 110,
+    type: 'highpass',
+    rolloff: -12,
+  }).connect(padFilter);
   const pad = new Tone.PolySynth(Tone.Synth, {
     oscillator: { type: 'triangle' },
-    // Slow in, slow out. A pad that speaks immediately reads as an organ, not a pad.
-    envelope: { attack: 0.9, decay: 0.5, sustain: 0.75, release: 2.4 },
-  }).connect(padFilter);
+    envelope: {
+      attack: barSeconds * 0.1,
+      decay: barSeconds * 0.25,
+      sustain: 0.7,
+      // Must stay well under one bar. Longer, and each chord is still sounding when the
+      // next two arrive, which makes the Score's 8-note ceiling a fiction acoustically.
+      release: barSeconds * 0.35,
+    },
+  }).connect(padHighpass);
 
-  const bassGain = new Tone.Gain(Tone.dbToGain(-9)).connect(master);
-  const bassFilter = new Tone.Filter({
-    frequency: 900,
-    type: 'lowpass',
-    rolloff: -12,
-  }).connect(bassGain);
-  const bass = new Tone.Synth({
-    // Triangle rather than sine: C1 is 33 Hz, and the harmonics are what make it audible
-    // on anything that is not a pair of studio monitors.
+  const bassGain = new Tone.Gain(Tone.dbToGain(-10)).connect(master);
+  /**
+   * A filter envelope rather than a fixed lowpass, because the problem is not that the bass
+   * is too bright — it is that its harmonics sustain.
+   *
+   * A triangle at G1 (49 Hz) puts its third harmonic at 147 Hz, right under the pad's lowest
+   * note. No fixed cutoff removes that without taking the fundamental with it. So the filter
+   * opens for the attack, where the harmonics read as definition and make the note audible on
+   * anything that is not a pair of studio monitors, then shuts to near the fundamental for the
+   * sustain, where they would only be mud.
+   */
+  const bass = new Tone.MonoSynth({
     oscillator: { type: 'triangle' },
-    envelope: { attack: 0.02, decay: 0.35, sustain: 0.55, release: 0.35 },
-  }).connect(bassFilter);
+    envelope: {
+      attack: 0.008,
+      decay: barSeconds * 0.18,
+      sustain: 0.45,
+      // Shorter than the 16th of silence the bass line leaves, so the gap stays a gap.
+      release: barSeconds * 0.04,
+    },
+    filter: { type: 'lowpass', rolloff: -24, Q: 1 },
+    filterEnvelope: {
+      attack: 0.004,
+      decay: barSeconds * 0.09,
+      // Settles around 100 Hz: fundamentals pass, the third harmonic does not.
+      sustain: 0.06,
+      release: barSeconds * 0.04,
+      baseFrequency: 90,
+      octaves: 3.2,
+    },
+  }).connect(bassGain);
 
   // The impulse response is generated asynchronously; starting first gives a dry opening bar.
   await padReverb.ready;
@@ -109,7 +158,7 @@ export async function startPlayback(
 
       pad.releaseAll();
       part.dispose();
-      for (const node of [pad, padFilter, padReverb, padGain, bass, bassFilter, bassGain]) {
+      for (const node of [pad, padHighpass, padFilter, padReverb, padGain, bass, bassGain]) {
         node.dispose();
       }
     },

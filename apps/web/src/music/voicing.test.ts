@@ -95,6 +95,27 @@ describe('voiceLead', () => {
     expect(Math.abs(average - centre)).toBeLessThanOrEqual(4);
   });
 
+  it('widens the interval between voices as they descend', () => {
+    // The rule that stops the pad turning to mud: a third at 150 Hz smears, the same third
+    // an octave up is clear. Minimum movement alone will not find this.
+    for (const voicing of voiceLead(LOOP, PAD)) {
+      for (let i = 1; i < voicing.length; i++) {
+        const lower = voicing[i - 1] ?? 0;
+        const gap = (voicing[i] ?? 0) - lower;
+        const required = lower < 52 ? 12 : lower < 60 ? 7 : 3;
+        expect(gap, `voice at midi ${lower}`).toBeGreaterThanOrEqual(required);
+      }
+    }
+  });
+
+  it('keeps the lowest pad note clear of the bass register', () => {
+    // Bass tops out at C2 (36). Its harmonics reach well above that, so a pad note down
+    // near C3 competes with them for the same few hundred hertz.
+    for (const voicing of voiceLead(LOOP, PAD)) {
+      expect(voicing[0]).toBeGreaterThanOrEqual(52);
+    }
+  });
+
   it('is deterministic', () => {
     expect(voiceLead(LOOP, PAD)).toStrictEqual(voiceLead(LOOP, PAD));
   });

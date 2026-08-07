@@ -54,6 +54,40 @@ function movementCost(candidate: readonly number[], target: readonly number[]): 
 }
 
 /**
+ * How far apart two adjacent voices have to be, given where the lower one sits.
+ *
+ * A major third at 150 Hz is mud; the same third an octave up is clear. Widening intervals
+ * as you descend is the oldest rule in orchestration, and a pure minimum-movement search
+ * will not discover it — left alone it happily parks two voices a third apart at the very
+ * bottom of the register, which is exactly where they smear.
+ */
+function minimumGap(lowerMidi: number): number {
+  if (lowerMidi < 52) return 12; // below E3, roughly 165 Hz: nothing closer than an octave
+  if (lowerMidi < 60) return 7; // below C4: a fifth
+  return 3; // above middle C, thirds are clear
+}
+
+function spacingPenalty(voicing: readonly number[]): number {
+  let penalty = 0;
+  for (let i = 1; i < voicing.length; i++) {
+    const lower = voicing[i - 1] ?? 0;
+    const upper = voicing[i] ?? 0;
+    penalty += Math.max(0, minimumGap(lower) - (upper - lower));
+  }
+  return penalty;
+}
+
+/**
+ * Spacing outweighs movement per semitone, because a muddy voicing is audible on every
+ * repeat of the loop while an extra semitone of movement is not audible at all.
+ */
+const SPACING_WEIGHT = 1.5;
+
+function voicingCost(candidate: readonly number[], target: readonly number[]): number {
+  return movementCost(candidate, target) + spacingPenalty(candidate) * SPACING_WEIGHT;
+}
+
+/**
  * Voice each chord inside `register`, minimising total semitone movement from the previous
  * chord. The first chord has no predecessor, so it is placed nearest an even spread of the
  * register — which keeps the pad centred instead of hugging one end.
@@ -95,9 +129,9 @@ export function voiceLead(
 
     const target = previous ?? idealSpread(pitchClasses.length, lo, hi);
     let best = candidates[0] ?? [];
-    let bestCost = movementCost(best, target);
+    let bestCost = voicingCost(best, target);
     for (const candidate of candidates) {
-      const cost = movementCost(candidate, target);
+      const cost = voicingCost(candidate, target);
       if (cost < bestCost) {
         best = candidate;
         bestCost = cost;
