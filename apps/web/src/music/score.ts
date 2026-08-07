@@ -83,6 +83,19 @@ export interface NoteEvent {
   velocity: number;
 }
 
+/**
+ * Timbral choices, per voice.
+ *
+ * Normalised 0–1, never hertz and never milliseconds. A filter cutoff is a frequency, and
+ * CLAUDE.md forbids a repo feature from choosing one — so music/ says how open a voice
+ * should be and audio/ owns the palette that turns into an actual cutoff. Exactly the same
+ * split as pitch: a scale degree here, a frequency there.
+ */
+export interface VoiceTimbre {
+  /** 0 is closed and dry, 1 is open and airy. */
+  openness: number;
+}
+
 export interface Score {
   /** `RepoFeatures.seed`, carried through so a rendered Score is self-identifying. */
   seed: string;
@@ -93,6 +106,8 @@ export interface Score {
   bars: number;
   sections: Section[];
   events: NoteEvent[];
+  /** Only the voices that have a timbral choice to make appear here. */
+  timbre: Partial<Record<VoiceId, VoiceTimbre>>;
 }
 
 export function barToTick(bar: number): number {
@@ -165,6 +180,12 @@ export function validateScore(score: Score): ScoreProblem[] {
       'duration',
       `${duration.toFixed(1)} s is outside ${MIN_DURATION_SECONDS}–${MAX_DURATION_SECONDS} s`,
     );
+  }
+
+  for (const [voice, timbre] of Object.entries(score.timbre)) {
+    if (timbre && !(timbre.openness >= 0 && timbre.openness <= 1)) {
+      report('timbre', `${voice} openness must be in 0–1, got ${timbre.openness}`);
+    }
   }
 
   validateSections(score, report);

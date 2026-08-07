@@ -17,7 +17,7 @@ loaded directly by the web app, producing 60 seconds of audio.
 - [x] Seeded PRNG (`music/rng.ts`) — no unseeded randomness anywhere
 - [x] Global skeleton: key, mode, tempo, 4-bar chord loop, 16th grid
 - [x] Pad + bass voices only. Verify this alone sounds pleasant on loop.
-- [ ] Add lead, arp, bell, texture per @docs/music-mapping.md
+- [x] Add lead, arp, bell, texture per @docs/music-mapping.md
 - [ ] Fixed song-structure template (intro → build → peak → break → return → outro)
 - [x] Master limiter
 

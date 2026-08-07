@@ -19,6 +19,8 @@ import {
   type NoteEvent,
   type Score,
   type Section,
+  type VoiceId,
+  type VoiceTimbre,
 } from './score';
 
 /**
@@ -139,7 +141,11 @@ export function chordLoop(skeleton: Skeleton, options?: RealizeOptions): Realize
 }
 
 /** Assemble a Score. Events are sorted here so callers cannot emit an unordered one. */
-export function scoreFrom(skeleton: Skeleton, events: readonly NoteEvent[] = []): Score {
+export function scoreFrom(
+  skeleton: Skeleton,
+  events: readonly NoteEvent[] = [],
+  timbre: Partial<Record<VoiceId, VoiceTimbre>> = {},
+): Score {
   return {
     seed: skeleton.seed,
     bpm: skeleton.bpm,
@@ -149,5 +155,6 @@ export function scoreFrom(skeleton: Skeleton, events: readonly NoteEvent[] = [])
     bars: skeleton.bars,
     sections: skeleton.sections,
     events: sortEvents(events),
+    timbre,
   };
 }

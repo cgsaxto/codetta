@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../features/fixture';
 import type { RepoFeatures } from '../features/types';
+import { assignVoices } from './arrangement';
 import { generateScore } from './generate';
 import {
   MAX_CONCURRENT_NOTES,
@@ -157,9 +158,22 @@ describe('generateScore', () => {
     }
   });
 
-  it('leaves headroom under the polyphony ceiling for the voices still to come', () => {
-    // Pad is two or three notes, bass one, lead one. Arp, bell, texture and percussion are
-    // still to come, so hitting the ceiling now would mean dropping something later.
+  it('sounds every voice the arrangement assigned', () => {
+    // Pad, bass, lead, arp, bell and texture together reach the ceiling exactly, so the
+    // mixdown is now live on every full bar. The risk it introduces is silently deleting a
+    // whole voice rather than trimming one note, and nothing else would notice.
+    const score = generateScore(reactFeatures);
+    const heard = new Set(score.events.map((event) => event.voice));
+
+    expect([...heard]).toContain('pad');
+    expect([...heard]).toContain('bass');
+    for (const context of assignVoices(reactFeatures, buildSkeleton(reactFeatures))) {
+      if (context.voice === 'kick' || context.voice === 'hat') continue;
+      expect([...heard], context.voice).toContain(context.voice);
+    }
+  });
+
+  it('never exceeds the polyphony ceiling', () => {
     const score = generateScore(reactFeatures);
     const totalTicks = barToTick(score.bars);
     const active = new Array<number>(totalTicks).fill(0);
@@ -169,7 +183,7 @@ describe('generateScore', () => {
         if (slot !== undefined) active[tick] = slot + 1;
       }
     }
-    expect(Math.max(...active)).toBeLessThanOrEqual(MAX_CONCURRENT_NOTES - 2);
+    expect(Math.max(...active)).toBeLessThanOrEqual(MAX_CONCURRENT_NOTES);
   });
 
   it('matches its recorded opening bar', () => {
@@ -188,6 +202,8 @@ describe('generateScore', () => {
       ['bass', 31],
       ['lead', 70],
       ['arp', 62],
+      ['bell', 74],
+      ['texture', 55],
     ]);
   });
 });

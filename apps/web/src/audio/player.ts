@@ -152,10 +152,63 @@ export async function startPlayback(
     envelope: { attack: 0.004, decay: barSeconds * 0.06, sustain: 0.05, release: 0.08 },
   }).connect(arpFilter);
 
-  // Impulse responses are generated asynchronously; starting first gives a dry opening bar.
-  await Promise.all([padReverb.ready, leadReverb.ready]);
+  const bellGain = new Tone.Gain(Tone.dbToGain(-24)).connect(master);
+  /**
+   * The tail has to be mostly gone by the time the chord changes.
+   *
+   * A bell is meant to hang in the air, but the harmony moves every bar, and a high sine
+   * still ringing over the next chord is the most exposed dissonance available — it reads
+   * as the bell being out of tune rather than as a suspension. music/ picks tones the
+   * neighbouring chords share where it can; this is the other half of the same fix, and it
+   * is what covers the progressions that have no shared tone to offer.
+   */
+  const bellReverb = new Tone.Reverb({
+    decay: barSeconds * 0.7,
+    preDelay: 0.01,
+    wet: 0.26,
+  }).connect(bellGain);
+  const bell = new Tone.Synth({
+    oscillator: { type: 'sine' },
+    envelope: {
+      attack: 0.002,
+      decay: barSeconds * 0.35,
+      sustain: 0,
+      release: barSeconds * 0.25,
+    },
+  }).connect(bellReverb);
 
-  const instruments = { pad, bass, lead, arp } as const;
+  /**
+   * The one place a repo feature reaches timbre. music/ hands over `openness` on 0–1 and
+   * this owns what that means in hertz — commentRatio never picks a cutoff itself.
+   */
+  const openness = score.timbre.texture?.openness ?? 0;
+  const textureGain = new Tone.Gain(Tone.dbToGain(-24)).connect(master);
+  const textureReverb = new Tone.Reverb({
+    decay: barSeconds * 1.2,
+    preDelay: 0.03,
+    wet: 0.25 + openness * 0.35,
+  }).connect(textureGain);
+  const textureFilter = new Tone.Filter({
+    frequency: 320 + openness * 1400,
+    type: 'lowpass',
+    rolloff: -24,
+  }).connect(textureReverb);
+  // Slower in and out than anything else. It is a bed, and the moment its attack is audible
+  // as an event it has become a second bass.
+  const texture = new Tone.Synth({
+    oscillator: { type: 'triangle' },
+    envelope: {
+      attack: barSeconds * 0.4,
+      decay: barSeconds * 0.3,
+      sustain: 0.6,
+      release: barSeconds * 0.6,
+    },
+  }).connect(textureFilter);
+
+  // Impulse responses are generated asynchronously; starting first gives a dry opening bar.
+  await Promise.all([padReverb.ready, leadReverb.ready, bellReverb.ready, textureReverb.ready]);
+
+  const instruments = { pad, bass, lead, arp, bell, texture } as const;
 
   const part = new Tone.Part<ScheduledNote>(
     (time, note) => {
@@ -166,7 +219,11 @@ export async function startPlayback(
             ? instruments.lead
             : note.voice === 'arp'
               ? instruments.arp
-              : instruments.pad;
+              : note.voice === 'bell'
+                ? instruments.bell
+                : note.voice === 'texture'
+                  ? instruments.texture
+                  : instruments.pad;
       instrument.triggerAttackRelease(
         Tone.Frequency(note.midi, 'midi').toFrequency(),
         ticksToTransportTime(note.durationTicks),
@@ -217,6 +274,13 @@ export async function startPlayback(
         arp,
         arpFilter,
         arpGain,
+        bell,
+        bellReverb,
+        bellGain,
+        texture,
+        textureFilter,
+        textureReverb,
+        textureGain,
       ]) {
         node.dispose();
       }

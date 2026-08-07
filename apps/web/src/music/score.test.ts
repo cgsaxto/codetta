@@ -35,6 +35,7 @@ function baseScore(): Score {
       { voice: 'lead', tick: 8, durationTicks: 2, midi: 60, velocity: 0.6 },
       { voice: 'kick', tick: 0, durationTicks: 1, midi: 36, velocity: 1 },
     ]),
+    timbre: { texture: { openness: 0.4 } },
   };
 }
 
@@ -129,6 +130,16 @@ describe('validateScore', () => {
     expect(
       kinds(withEvents([{ voice: 'kick', tick: 0, durationTicks: 1, midi: 38, velocity: 1 }])),
     ).toContain('pitch');
+  });
+
+  it('rejects an openness outside 0–1', () => {
+    // Normalised, because audio/ owns the cutoff palette it indexes into.
+    expect(kinds({ ...baseScore(), timbre: { texture: { openness: 1.4 } } })).toContain(
+      'timbre',
+    );
+    expect(kinds({ ...baseScore(), timbre: { texture: { openness: -0.1 } } })).toContain(
+      'timbre',
+    );
   });
 
   it('rejects events that are not in canonical order', () => {

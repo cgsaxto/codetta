@@ -115,6 +115,7 @@ describe('structureFor', () => {
         bars,
         sections,
         events: [],
+        timbre: {},
       };
       expect(validateScore(score), `${bpm} BPM`).toStrictEqual([]);
     }
