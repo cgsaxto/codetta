@@ -8,3 +8,9 @@ coverage/
 
 # Go build cache lives outside the repo; nothing to ignore yet beyond the workspace sum.
 go.work.sum
+
+# Secrets. GITHUB_TOKEN lives here for local development and must never be committed —
+# this repo is public from day one.
+.env
+.env.*
+!.env.example
