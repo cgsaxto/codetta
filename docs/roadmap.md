@@ -76,10 +76,34 @@ change of genre rather than a missing feature. Worth a listen before committing 
   shared. A new language is a table and a registry line, and nothing else moves — which is
   what @docs/features-schema.md asks for.
 
-- [ ] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding
+- [x] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding
 - [ ] Redis cache keyed on commit SHA, works when Redis is down
 - [ ] Golden tests: parsing a fixture repo produces a byte-identical document
 - [ ] Web app consumes the API instead of the local fixture
+
+  **Blocked on recalibrating Layer 3.** `fixtures/react.json` was hand-authored by
+  eyeballing, and every musical decision in Phase 0 was tuned against it. Parsing 6,600
+  lines of this repository's own real source says those numbers were fiction:
+
+  | feature             | hand-authored | really parsed |
+  | ------------------- | ------------- | ------------- |
+  | `cyclomaticDensity` | 0.17–0.34     | 0.003–0.018   |
+  | `avgNestingDepth`   | 1.8–3.1       | 0.2–1.0       |
+  | `avgFunctionLength` | 11–22         | 1.6–7.1       |
+  | `commentRatio`      | 0.07–0.19     | 0.13–0.20     |
+
+  Only `commentRatio` survives. On real numbers three of the Layer 3 mappings stop carrying
+  any information at all: density clamps to its 0.15 floor for every repository, nesting
+  clamps to the bottom of every register, and every function length falls in the first
+  duration bucket. Three features, one output each, identical for every repo on earth.
+
+  The counts are not wrong — they implement @docs/features-schema.md as written, and
+  `cyclomaticDensity` really is branch nodes over all AST nodes, which is a small number in
+  any real file. What was wrong was the range they were assumed to land in.
+
+  Recalibrating needs a real distribution, not one repository, so the order is: finish the
+  API, fetch several repositories, then retune Layer 3 against what actually comes back. The
+  golden score in `fixtures/react.expected.json` will show exactly what moves.
 
 Note: tree-sitter's Go bindings need cgo, which complicates builds. Keep the Dockerfile as
 the source of truth for building the API. If cgo becomes a real drag, swapping the API to
@@ -96,6 +120,19 @@ Node + `web-tree-sitter` requires zero frontend changes — that is what the con
 ---
 
 ## Phase 3 — The gallery (this is the landing page)
+
+**Blocked on a decision.** Four of the six repositories the README currently promises are
+in languages the parser does not support — `torvalds/linux` and `redis/redis` are C,
+`bitcoin/bitcoin` is C++, `neovim/neovim` is C and Lua. Only `facebook/react` and
+`vuejs/core` would return anything; the rest return the 422 that
+@docs/features-schema.md specifies for a repository with no supported files. Since Phase 3
+says the landing page _is_ the gallery, that is four broken tiles on the front page.
+
+Three ways out, and the choice changes the shape of this phase rather than just its
+content: add C, C++ and Lua grammars (the adapter design makes each a table, but it is
+three more grammars to carry); pick a gallery of repositories in the four languages we do
+support; or keep the list and let the gallery show what a 422 looks like, which is almost
+certainly the wrong answer for a landing page. Decide before pre-rendering anything.
 
 - [ ] Pre-render 8 famous repos, commit their RepoFeatures to `fixtures/gallery/`
 - [ ] Landing page **is** the gallery, playable in one click

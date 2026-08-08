@@ -2,6 +2,12 @@ module codetta.dev/api
 
 go 1.26
 
+require codetta.dev/schema v0.0.0
+
+// Workspace-local. The replace keeps this module buildable on its own, which the Dockerfile
+// needs — go.work is a developer convenience, not something a build image should depend on.
+replace codetta.dev/schema => ../../packages/schema/go
+
 require (
 	github.com/tree-sitter/go-tree-sitter v0.25.0
 	github.com/tree-sitter/tree-sitter-go v0.25.0
