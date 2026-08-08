@@ -16,4 +16,12 @@ require (
 	github.com/tree-sitter/tree-sitter-typescript v0.23.2
 )
 
-require github.com/mattn/go-pointer v0.0.1 // indirect
+require (
+	github.com/alicebob/miniredis/v2 v2.38.0 // indirect
+	github.com/cespare/xxhash/v2 v2.3.0 // indirect
+	github.com/mattn/go-pointer v0.0.1 // indirect
+	github.com/redis/go-redis/v9 v9.22.0 // indirect
+	github.com/yuin/gopher-lua v1.1.1 // indirect
+	go.uber.org/atomic v1.11.0 // indirect
+	golang.org/x/sys v0.30.0 // indirect
+)

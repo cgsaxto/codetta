@@ -18,6 +18,9 @@ type Config struct {
 	// talks to GitHub, and no token crosses the wire to it.
 	GitHubToken string
 	Addr        string
+	// RedisURL is optional by design. docs/features-schema.md: the app must work with Redis
+	// down, and a cache that is required at boot is not a cache — it is a dependency.
+	RedisURL string
 }
 
 // Load reads the environment, failing if the token is absent.
@@ -41,5 +44,5 @@ func Load() (Config, error) {
 		addr = defaultAddr
 	}
 
-	return Config{GitHubToken: token, Addr: addr}, nil
+	return Config{GitHubToken: token, Addr: addr, RedisURL: os.Getenv("REDIS_URL")}, nil
 }

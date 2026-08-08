@@ -1,0 +1,16 @@
+# Local cache only. Redis holds computed RepoFeatures documents keyed by commit SHA, and
+# nothing else — there is no database in this project and the app runs correctly without
+# this container. Bring it up to stop re-parsing the same repository during development.
+services:
+  redis:
+    image: redis:7-alpine
+    ports:
+      - '6379:6379'
+    # No persistence. Everything here is recomputable from a commit SHA, so losing it costs
+    # time and nothing else.
+    command: redis-server --save '' --appendonly no
+    healthcheck:
+      test: ['CMD', 'redis-cli', 'ping']
+      interval: 5s
+      timeout: 3s
+      retries: 5

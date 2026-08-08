@@ -77,7 +77,13 @@ change of genre rather than a missing feature. Worth a listen before committing 
   what @docs/features-schema.md asks for.
 
 - [x] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding
-- [ ] Redis cache keyed on commit SHA, works when Redis is down
+- [x] Redis cache keyed on commit SHA, works when Redis is down
+
+  The Cache interface returns no errors, from either method. Not a simplification — the
+  mechanism: a caller that cannot see a Redis failure cannot fail a request because of one,
+  so "cache miss and cache unavailable take the same path" stops depending on every future
+  caller remembering it. Tests run against miniredis, so `make api-test` stays offline.
+
 - [ ] Golden tests: parsing a fixture repo produces a byte-identical document
 - [ ] Web app consumes the API instead of the local fixture
 

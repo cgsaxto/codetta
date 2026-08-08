@@ -37,6 +37,20 @@ func TestLoadReadsTheToken(t *testing.T) {
 	}
 }
 
+func TestRedisIsOptional(t *testing.T) {
+	// A missing cache is a slower service, not a broken one. Only the token is required.
+	t.Setenv("GITHUB_TOKEN", "ghp_example")
+	t.Setenv("REDIS_URL", "")
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	if cfg.RedisURL != "" {
+		t.Errorf("RedisURL = %q, want empty", cfg.RedisURL)
+	}
+}
+
 func TestLoadHonoursAnExplicitAddress(t *testing.T) {
 	t.Setenv("GITHUB_TOKEN", "ghp_example")
 	t.Setenv("ADDR", "127.0.0.1:9000")
