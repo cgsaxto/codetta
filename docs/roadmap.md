@@ -69,7 +69,13 @@ change of genre rather than a missing feature. Worth a listen before committing 
   Tests are entirely offline: `httptest` for the GitHub client, in-memory tarballs for the
   walker. `make api-test` never touches the network and never spends a rate limit, which
   matters for a service whose whole job is calling a rate-limited API.
-- [ ] tree-sitter parsers: TypeScript, JavaScript, Python, Go
+
+- [x] tree-sitter parsers: TypeScript, JavaScript, Python, Go
+
+  All language knowledge lives in a table of node kinds; the walk that counts them is
+  shared. A new language is a table and a registry line, and nothing else moves — which is
+  what @docs/features-schema.md asks for.
+
 - [ ] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding
 - [ ] Redis cache keyed on commit SHA, works when Redis is down
 - [ ] Golden tests: parsing a fixture repo produces a byte-identical document

@@ -109,8 +109,22 @@ The app must work with Redis down. Cache miss and cache unavailable take the sam
 ## Language support
 
 Phase 1: TypeScript, JavaScript, Python, Go. Each language needs a grammar and a small
-adapter mapping its node types to the four things we count: functions, classes, branches,
-comments. Adding a language must not require touching aggregation code.
+adapter mapping its node types to the things we count. Adding a language must not require
+touching aggregation code, and does not: an adapter is one table plus one line in a
+registry, and the walk that reads it is shared by every language.
+
+That table has seven sets, not the four this section used to claim. Functions, classes,
+branches and comments are the four that are obvious; imports appear in `totals`,
+`avgFunctionLength` is measured in statements so statements have to be nameable, and
+`asyncRatio` needs to know what asynchrony looks like in that grammar. All seven are just
+lists of node kinds.
+
+Two traps worth writing down, because both fail silently as a wrong number rather than as
+an error. A keyword token carries the same kind string as the rule it belongs to — `class`
+is both a node kind and a keyword — so only named nodes may be counted, with async markers
+the deliberate exception because those _are_ keywords. And Go has neither async/await nor
+promises, so `asyncRatio` is 0 for a Go module; counting goroutines instead would be
+inventing a meaning this document never asked for.
 
 Unsupported languages count toward `filesSkipped` and are otherwise ignored. A repo with
 zero supported files returns a 422 with a message naming the languages we do support.
