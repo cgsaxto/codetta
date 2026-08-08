@@ -60,7 +60,15 @@ change of genre rather than a missing feature. Worth a listen before committing 
   Both failure directions are verified rather than assumed: adding a field to a fixture
   fails the TS check by name, and dropping one from a key list is a compile error.
 
-- [ ] Go service: resolve ref → SHA, stream tarball, enforce all caps in @docs/features-schema.md
+- [x] Go service: resolve ref → SHA, stream tarball, enforce all caps in @docs/features-schema.md
+
+  `GITHUB_TOKEN` is required at startup rather than optional. Anonymous GitHub allows sixty
+  requests an hour, which is enough to look like it works and then fail mid-demo — better
+  refused at boot, with a link to where you get one, than at request time.
+
+  Tests are entirely offline: `httptest` for the GitHub client, in-memory tarballs for the
+  walker. `make api-test` never touches the network and never spends a rate limit, which
+  matters for a service whose whole job is calling a rate-limited API.
 - [ ] tree-sitter parsers: TypeScript, JavaScript, Python, Go
 - [ ] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding
 - [ ] Redis cache keyed on commit SHA, works when Redis is down

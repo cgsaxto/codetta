@@ -24,7 +24,7 @@ import (
 func fixturePaths(t *testing.T) []string {
 	t.Helper()
 
-	matches, err := filepath.Glob(filepath.Join("..", "..", "fixtures", "*.json"))
+	matches, err := filepath.Glob(filepath.Join("..", "..", "..", "fixtures", "*.json"))
 	if err != nil {
 		t.Fatalf("globbing fixtures: %v", err)
 	}

@@ -1,3 +1,6 @@
 go 1.26
 
-use ./packages/schema
+use (
+	./apps/api
+	./packages/schema/go
+)
