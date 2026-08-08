@@ -1,4 +1,4 @@
-import type { RepoFeatures } from '../features/types';
+import type { RepoFeatures } from '@codetta/schema';
 import { applyStructure, assignVoices } from './arrangement';
 import { mixdown } from './mixdown';
 import {

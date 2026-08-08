@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../../features/fixture';
-import type { RepoModule } from '../../features/types';
+import type { RepoModule } from '@codetta/schema';
 import { PHRASE_TICKS, assignVoices, type VoiceContext } from '../arrangement';
 import { TICKS_PER_BAR, VOICE_REGISTERS, barToTick } from '../score';
 import { PROGRESSIONS } from '../progressions';

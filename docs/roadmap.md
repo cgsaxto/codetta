@@ -43,7 +43,23 @@ change of genre rather than a missing feature. Worth a listen before committing 
 
 ## Phase 1 — Real repos
 
-- [ ] `packages/schema` — RepoFeatures types for TS and Go from one source
+- [x] `packages/schema` — RepoFeatures types for TS and Go, hand-written, proved equivalent
+
+  This originally read "from one source", meaning codegen. Two hand-written declarations
+  and a test that proves they agree turned out to be less machinery for the same guarantee:
+  the contract is six types that change roughly never, and a generator plus its config
+  would have been more to maintain than the thing it generated.
+
+  What replaces the generator is a pair of tests that between them close every gap. Go
+  decodes the fixtures with `DisallowUnknownFields` and re-encodes them, which catches a
+  field the fixtures have that Go lacks and a field Go has that they lack. TypeScript
+  cannot do the same, because structural typing accepts a document with extra fields — so
+  the TS side declares its field names as data, proves at compile time that those lists
+  cover their own types, and checks the fixtures against them at runtime.
+
+  Both failure directions are verified rather than assumed: adding a field to a fixture
+  fails the TS check by name, and dropping one from a key list is a compile error.
+
 - [ ] Go service: resolve ref → SHA, stream tarball, enforce all caps in @docs/features-schema.md
 - [ ] tree-sitter parsers: TypeScript, JavaScript, Python, Go
 - [ ] Aggregation into modules + timeline, deterministic ordering, 4-decimal rounding

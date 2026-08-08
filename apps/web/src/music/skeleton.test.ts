@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../features/fixture';
-import type { RepoFeatures } from '../features/types';
+import type { RepoFeatures } from '@codetta/schema';
 import { MODE_NAMES, ROOT_NAMES } from './progressions';
 import { MAX_BPM, SECTION_ORDER, validateScore } from './score';
 import {

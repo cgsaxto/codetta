@@ -1,5 +1,5 @@
 import raw from '@fixtures/react.json';
-import type { RepoFeatures } from './types';
+import type { RepoFeatures } from '@codetta/schema';
 
 /**
  * An annotated assignment rather than a cast, deliberately: this makes `pnpm typecheck`

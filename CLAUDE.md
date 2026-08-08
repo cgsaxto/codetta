@@ -15,7 +15,8 @@ would post. Features that don't serve "sounds good" or "gets shared" are out of 
 ```
 apps/web     Vite + React 19 + TypeScript + Tone.js + Tailwind. Owns ALL music and visuals.
 apps/api     Go 1.23+. Fetches repo tarballs, parses with tree-sitter, emits RepoFeatures JSON.
-packages/schema   Shared TypeScript types + Go structs for RepoFeatures. Single source of truth.
+packages/schema   TypeScript types + Go structs for RepoFeatures. Hand-written in both
+                  languages; conformance tests prove the two agree. Single source of truth.
 docs/        Design specs (see references below).
 fixtures/    Committed RepoFeatures JSON for known repos. Used by tests and the gallery.
 ```
@@ -38,7 +39,7 @@ pnpm typecheck            # tsc --noEmit across workspaces
 pnpm lint                 # eslint + prettier check
 
 make api-dev              # go run ./cmd/server, :8080
-make api-test             # go test ./...
+make api-test             # go test, every module in go.work
 docker compose up redis   # local cache
 ```
 

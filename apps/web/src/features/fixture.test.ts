@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from './fixture';
-import type { RepoFeatures } from './types';
+import type { RepoFeatures } from '@codetta/schema';
 
 /**
  * The fixtures are hand-authored, so nothing but a test stops them from drifting away

@@ -5,3 +5,6 @@ coverage/
 *.log
 .DS_Store
 .vite/
+
+# Go build cache lives outside the repo; nothing to ignore yet beyond the workspace sum.
+go.work.sum

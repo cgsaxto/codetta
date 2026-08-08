@@ -13,6 +13,7 @@
     "fixtures:update": "vitest run -u"
   },
   "dependencies": {
+    "@codetta/schema": "workspace:*",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "tone": "^15.1.22"

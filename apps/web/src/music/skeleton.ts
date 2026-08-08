@@ -1,4 +1,4 @@
-import type { RepoFeatures } from '../features/types';
+import type { RepoFeatures } from '@codetta/schema';
 import { pick } from './palette';
 import {
   MODE_NAMES,

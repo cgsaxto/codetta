@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../features/fixture';
-import type { RepoFeatures } from '../features/types';
+import type { RepoFeatures } from '@codetta/schema';
 import {
   LANGUAGE_SHARE_FLOOR,
   MODULE_VOICE_ORDER,

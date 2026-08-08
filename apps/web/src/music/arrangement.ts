@@ -8,7 +8,7 @@ import {
   type SectionName,
   type VoiceId,
 } from './score';
-import type { RepoFeatures, RepoModule, TimelineEntry } from '../features/types';
+import type { RepoFeatures, RepoModule, TimelineEntry } from '@codetta/schema';
 import type { Skeleton } from './skeleton';
 
 /**

@@ -50,6 +50,12 @@ export default tseslint.config(
   {
     rules: {
       '@typescript-eslint/no-explicit-any': 'error',
+      // A leading underscore marks a binding that exists to be declared rather than read —
+      // a type parameter carrying a constraint that is itself the assertion, for instance.
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', caughtErrorsIgnorePattern: '^_' },
+      ],
       '@typescript-eslint/consistent-type-imports': 'error',
     },
   },

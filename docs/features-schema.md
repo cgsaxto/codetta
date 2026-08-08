@@ -1,8 +1,9 @@
 # RepoFeatures contract
 
-The single interface between `apps/api` and `apps/web`. Types live in `packages/schema`
-and are generated for both TypeScript and Go from one source. Changing this file means
-bumping `schemaVersion` and updating every fixture in `fixtures/`.
+The single interface between `apps/api` and `apps/web`. Types live in `packages/schema`,
+hand-written once in TypeScript and once in Go, with conformance tests on both sides that
+fail if the two drift apart. Changing this file means bumping `schemaVersion` and updating
+every fixture in `fixtures/`.
 
 Nothing music-related may appear here. If a field name mentions pitch, tempo, instrument,
 or volume, it is in the wrong document.

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../../features/fixture';
-import type { RepoModule } from '../../features/types';
+import type { RepoModule } from '@codetta/schema';
 import {
   PHRASE_ACTIVE_TICKS,
   PHRASE_TICKS,
