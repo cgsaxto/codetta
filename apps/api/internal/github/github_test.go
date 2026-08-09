@@ -189,6 +189,17 @@ func TestTarballReportsAMissingCommit(t *testing.T) {
 	}
 }
 
+func TestTheClientImposesNoTimeoutOfItsOwn(t *testing.T) {
+	// http.Client.Timeout covers reading the body, so any value here would cut off a tarball
+	// that is merely large or on a slow link. facebook/react is 9.7 MB and took 11 s to
+	// download on the connection this was written on; a 25-second client timeout killed it
+	// mid-body while the caller still had budget left. The context owns the deadline.
+	client := New("test-token")
+	if client.http.Timeout != 0 {
+		t.Errorf("http client Timeout = %v, want 0 so the context decides", client.http.Timeout)
+	}
+}
+
 func TestRequestsCarryTheContext(t *testing.T) {
 	client, _ := newServer(t, map[string]route{
 		"/repos/o/r": {status: 200, body: `{"default_branch":"main"}`},

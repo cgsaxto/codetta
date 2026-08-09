@@ -72,7 +72,14 @@ func New(token string, opts ...Option) *Client {
 	client := &Client{
 		baseURL: DefaultBaseURL,
 		token:   token,
-		http:    &http.Client{Timeout: DefaultTimeout},
+		// No Timeout on the client, deliberately.
+		//
+		// http.Client.Timeout covers the whole exchange including reading the body, so a
+		// 25-second one kills a legitimate tarball download that is simply large or on a
+		// slow link — which is exactly what it did to facebook/react on a 900 KB/s
+		// connection. The budget belongs to the context the caller passes, which is the only
+		// thing that knows whether this is a served request or a gallery pre-render.
+		http: &http.Client{},
 	}
 	for _, opt := range opts {
 		opt(client)
