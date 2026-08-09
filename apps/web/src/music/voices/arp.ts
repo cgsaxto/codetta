@@ -1,4 +1,5 @@
 import { PHRASE_ACTIVE_TICKS, PHRASE_TICKS, type VoiceContext } from '../arrangement';
+import { branchingPosition, clamp } from '../calibration';
 import { pick } from '../palette';
 import { unitHash } from '../rng';
 import { TICKS_PER_BAR, VOICE_REGISTERS, barToTick, type NoteEvent } from '../score';
@@ -36,13 +37,6 @@ const ARP_PATTERNS: ReadonlyArray<readonly number[]> = [
 /** Ticks between notes: quarter, eighth, eighth, sixteenth. Busier repos run faster. */
 const ARP_RATES = [4, 2, 2, 1] as const;
 
-const MIN_DENSITY = 0.15;
-const MAX_DENSITY = 0.75;
-
-function clamp(value: number, lo: number, hi: number): number {
-  return Math.min(Math.max(value, lo), hi);
-}
-
 /** The bar's chord, placed low to high inside the arp's octave. */
 function chordTonesIn(midiOfChord: readonly number[], lo: number, hi: number): number[] {
   const placed = midiOfChord
@@ -56,11 +50,7 @@ export function arpEvents(context: VoiceContext): NoteEvent[] {
   const [lo, hi] = VOICE_REGISTERS.arp;
 
   const chords = chordLoop(skeleton);
-  const density = clamp(module.cyclomaticDensity, MIN_DENSITY, MAX_DENSITY);
-  const rate = pick(
-    ARP_RATES,
-    ((density - MIN_DENSITY) / (MAX_DENSITY - MIN_DENSITY)) * ARP_RATES.length,
-  );
+  const rate = pick(ARP_RATES, branchingPosition(module) * ARP_RATES.length);
   const pattern = pick(ARP_PATTERNS, unitHash(module.path) * ARP_PATTERNS.length);
   // Background, so quieter than the lead at the same module size.
   const velocity = clamp(0.32 + module.share * 0.5, 0.28, 0.6);

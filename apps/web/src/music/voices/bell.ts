@@ -1,4 +1,5 @@
 import { PHRASE_ACTIVE_TICKS, PHRASE_TICKS, type VoiceContext } from '../arrangement';
+import { branchingPosition, clamp } from '../calibration';
 import { pick } from '../palette';
 import { unitHash } from '../rng';
 import { TICKS_PER_BAR, VOICE_REGISTERS, barToTick, type NoteEvent } from '../score';
@@ -32,23 +33,12 @@ const BELL_ACCENTS: ReadonlyArray<readonly number[]> = [
 /** Struck, so it rings. Clamped to the phrase so the tail is decay rather than new notes. */
 const BELL_DURATION_TICKS = 8;
 
-const MIN_DENSITY = 0.15;
-const MAX_DENSITY = 0.75;
-
-function clamp(value: number, lo: number, hi: number): number {
-  return Math.min(Math.max(value, lo), hi);
-}
-
 export function bellEvents(context: VoiceContext): NoteEvent[] {
   const { skeleton, module } = context;
   const [lo, hi] = VOICE_REGISTERS.bell;
 
   const chords = chordLoop(skeleton);
-  const density = clamp(module.cyclomaticDensity, MIN_DENSITY, MAX_DENSITY);
-  const accents = pick(
-    BELL_ACCENTS,
-    ((density - MIN_DENSITY) / (MAX_DENSITY - MIN_DENSITY)) * BELL_ACCENTS.length,
-  );
+  const accents = pick(BELL_ACCENTS, branchingPosition(module) * BELL_ACCENTS.length);
   // Quietest of the pitched voices: an accent works by being noticed, not by being loud.
   const velocity = clamp(0.3 + module.share * 0.5, 0.25, 0.55);
 

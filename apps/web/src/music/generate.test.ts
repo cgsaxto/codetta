@@ -191,17 +191,22 @@ describe('generateScore', () => {
     const openingBar = score.events
       .filter((event) => event.tick === 0)
       .map((event) => [event.voice, event.midi]);
-    // G Dorian, 'current' loop. The pad opens on G minor spread across G3, D4 and Bb4 —
-    // a fifth then a minor sixth. A closer voicing would score better on movement alone;
-    // the spacing rule is what keeps the bottom interval open. Bass takes the root at G1.
+    // C Aeolian, 'current' loop. The pad opens on C minor voiced G3, C4, Eb4, and the bass
+    // takes the root at C1.
+    //
+    // The bottom pair is a fourth, inside the fifth the spacing rule asks for below middle
+    // C, and it stands because spacing is a cost rather than a veto: it carries a two-
+    // semitone penalty and still wins, because every voicing that satisfies the gap sits
+    // further from an even spread of the pad's register. Worth knowing which way that trade
+    // fell, since it is the chord heard first and heard most.
     //
     // Nothing else: bar 0 is the intro, and the intro is pad and bass alone. Every other
     // voice has written its part for this bar and the arrangement is holding it back.
     expect(openingBar).toStrictEqual([
       ['pad', 55],
-      ['pad', 62],
-      ['pad', 70],
-      ['bass', 31],
+      ['pad', 60],
+      ['pad', 63],
+      ['bass', 24],
     ]);
   });
 });

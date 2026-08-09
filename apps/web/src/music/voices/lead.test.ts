@@ -83,10 +83,19 @@ describe('lead', () => {
     expect(pitchesOf(events, 0)).not.toStrictEqual(pitchesOf(events, 1));
   });
 
-  it('answers with a contrasting phrase', () => {
+  it('answers with a contrasting phrase, on every rhythm in the palette', () => {
     // AABA. Without the B the loop is one idea repeated until it wears out.
-    const events = leadEvents(leadContext());
-    expect(shapeOf(events, 2)).not.toStrictEqual(shapeOf(events, 0));
+    //
+    // Every rhythm, because checking one repository is what let this break: B used to be an
+    // independently hashed contour, which on the sparsest rhythm has a single free step and
+    // therefore a coin-flip chance of landing on A's shape. The one fixture this ran against
+    // happened to select the busiest rhythm, so the collapse to AAAA never showed up here.
+    for (const cyclomaticDensity of [0, 0.004, 0.008, 0.012, 0.016, 0.02, 0.05, 1]) {
+      const events = leadEvents(leadContext({ cyclomaticDensity }));
+      expect(shapeOf(events, 2), `density ${cyclomaticDensity}`).not.toStrictEqual(
+        shapeOf(events, 0),
+      );
+    }
   });
 
   it('keeps the same rhythm in every phrase', () => {
@@ -124,22 +133,29 @@ describe('lead', () => {
     }
   });
 
+  // The values below are real ones. Everything in this block used to be written against
+  // ranges taken from a hand-authored fixture — nesting of 1 and 5, function lengths of 4
+  // and 40, densities of 0.1 and 0.6 — and every one of those numbers is off the top of
+  // what a parser actually reports. The tests passed and proved nothing, because the mapping
+  // they were checking clamped to the same answer for every repository on earth. See
+  // music/calibration.ts for where these replacements come from.
+
   it('stays near the register its module asked for', () => {
     // Without the tether a random walk drifts and avgNestingDepth would only decide where
     // the first note landed.
-    const events = leadEvents(leadContext({ avgNestingDepth: 1 }));
+    const events = leadEvents(leadContext({ avgNestingDepth: 0.05 }));
     const average = events.reduce((sum, event) => sum + event.midi, 0) / events.length;
     const [lo, hi] = VOICE_REGISTERS.lead;
     expect(average).toBeLessThan(lo + (hi - lo) / 2);
   });
 
   it('takes note length from average function length', () => {
-    const short = leadEvents(leadContext({ avgFunctionLength: 4 }))[0]?.durationTicks;
-    const medium = leadEvents(leadContext({ avgFunctionLength: 16 }))[0]?.durationTicks;
-    const long = leadEvents(leadContext({ avgFunctionLength: 40 }))[0]?.durationTicks;
-    expect(short).toBe(1);
-    expect(medium).toBe(2);
-    expect(long).toBe(8);
+    const ticks = (avgFunctionLength: number) =>
+      leadEvents(leadContext({ avgFunctionLength }))[0]?.durationTicks ?? 0;
+
+    // Across the observed p10–p90, every one of the four duration buckets is reachable.
+    expect(new Set([ticks(1), ticks(3), ticks(5), ticks(7)]).size).toBe(4);
+    expect(ticks(1)).toBeLessThan(ticks(7));
   });
 
   it('takes register from nesting depth, deeper being higher', () => {
@@ -147,20 +163,21 @@ describe('lead', () => {
       const events = leadEvents(leadContext({ avgNestingDepth: depth }));
       return events.reduce((sum, event) => sum + event.midi, 0) / events.length;
     };
-    expect(average(1)).toBeLessThan(average(5));
+    expect(average(0.05)).toBeLessThan(average(0.85));
   });
 
   it('takes density from cyclomatic density, and never fills every slot', () => {
     const count = (density: number) =>
       leadEvents(leadContext({ cyclomaticDensity: density })).length;
 
-    expect(count(0.1)).toBeLessThan(count(0.6));
+    expect(count(0.002)).toBeLessThan(count(0.02));
 
-    // Clamped at 0.75, and notes are at least a 16th long, so a wall of sound is
-    // unreachable however extreme the repo is.
+    // No rhythm in the palette fires on every 16th, so a wall of sound is unreachable
+    // however extreme the repo is — including well past anything yet measured.
     const slots = barToTick(skeleton.bars);
     expect(count(1)).toBeLessThan(slots);
-    // The floor keeps the loudest voice from vanishing on a repo with no branching at all.
+    // The sparsest rhythm still has notes, so a repo with no branching at all keeps its
+    // loudest voice rather than losing it.
     expect(count(0)).toBeGreaterThan(0);
   });
 

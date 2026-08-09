@@ -185,9 +185,10 @@ describe('buildSkeleton', () => {
       progression: skeleton.progression.id,
       bars: skeleton.bars,
     }).toStrictEqual({
-      root: 'G',
-      mode: 'dorian',
-      bpm: 116,
+      root: 'C',
+      mode: 'aeolian',
+      bpm: 120,
+      // 293,684 lines puts the tempo index at 12 of 14, so the 40-bar template.
       progression: 'current',
       bars: 40,
     });
@@ -199,8 +200,8 @@ describe('chordLoop', () => {
     const skeleton = buildSkeleton(reactFeatures);
     const chords = chordLoop(skeleton, { octave: 3 });
     expect(chords).toHaveLength(4);
-    // G3 is MIDI 55, and the loop always opens on the tonic.
-    expect(chords[0]?.midi[0]).toBe(55);
+    // C3 is MIDI 48, and the loop always opens on the tonic.
+    expect(chords[0]?.midi[0]).toBe(48);
     expect(chords.every((chord) => chord.quality === 'maj' || chord.quality === 'min')).toBe(
       true,
     );

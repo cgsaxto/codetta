@@ -1,4 +1,5 @@
 import type { VoiceContext } from '../arrangement';
+import { commentPosition } from '../calibration';
 import { degreeToMidi } from '../progressions';
 import {
   TICKS_PER_BAR,
@@ -25,16 +26,12 @@ import { placementsInRange } from '../voicing';
  * note it has become a second bass. */
 const TEXTURE_VELOCITY = 0.22;
 
-function clamp(value: number, lo: number, hi: number): number {
-  return Math.min(Math.max(value, lo), hi);
-}
-
 /**
  * More comments, more open and airier. The only feature that reaches timbre, and it stays
  * normalised — audio/ owns the cutoff palette this indexes into.
  */
 export function textureTimbre(context: VoiceContext): VoiceTimbre {
-  return { openness: clamp(context.module.commentRatio * 3, 0, 1) };
+  return { openness: commentPosition(context.module) };
 }
 
 export function textureEvents(context: VoiceContext): NoteEvent[] {

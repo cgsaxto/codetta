@@ -1,4 +1,10 @@
 import { PHRASE_ACTIVE_TICKS, PHRASE_TICKS, type VoiceContext } from '../arrangement';
+import {
+  branchingPosition,
+  clamp,
+  functionLengthPosition,
+  nestingPosition,
+} from '../calibration';
 import { pick } from '../palette';
 import { degreeToMidi } from '../progressions';
 import { unitHash } from '../rng';
@@ -45,10 +51,6 @@ const RHYTHMS: ReadonlyArray<readonly number[]> = [
 /** docs/music-mapping.md: bucket into {16n, 8n, 4n, 2n}. Longer functions, longer notes. */
 const NOTE_DURATIONS = [1, 2, 4, 8] as const;
 
-/** Never 1.0 — a voice firing on every 16th is a wall of sound, and always sounds bad. */
-const MIN_DENSITY = 0.15;
-const MAX_DENSITY = 0.75;
-
 /**
  * Steps the contour may take, in scale degrees. Stepwise motion dominates because that is
  * what makes a line singable; nothing leaps more than a fifth.
@@ -60,17 +62,6 @@ const CONTOUR_RANGE = 5;
 
 /** Weight on staying in the module's register when anchoring a phrase, against smoothness. */
 const REGISTER_PULL = 0.5;
-
-function clamp(value: number, lo: number, hi: number): number {
-  return Math.min(Math.max(value, lo), hi);
-}
-
-function durationIndexFor(avgFunctionLength: number): number {
-  if (avgFunctionLength < 10) return 0;
-  if (avgFunctionLength < 18) return 1;
-  if (avgFunctionLength < 28) return 2;
-  return 3;
-}
 
 /**
  * Degree offsets from the phrase anchor, one per onset. Generated once and reused, which is
@@ -88,6 +79,23 @@ function buildContour(length: number, salt: string): number[] {
   return offsets;
 }
 
+/**
+ * The B phrase is A turned upside down, not a second contour from a second hash.
+ *
+ * Hashing B independently made the contrast a coincidence rather than a property, and on the
+ * sparsest rhythm the coincidence stops happening: three onsets means one free step, one
+ * free step means one of two directions, so half of all repositories got a B identical to
+ * their A and the form quietly collapsed to AAAA. That went unnoticed for as long as it did
+ * because the fixture the tests ran on was hand-authored with a branching figure ten times
+ * anything real, which put every repository on the busiest rhythm in the palette.
+ *
+ * Inversion is also the better answer musically. An independent contour is a second idea;
+ * the same idea mirrored is an answer to the first, which is what the B of an AABA is for.
+ */
+function invert(contour: readonly number[]): number[] {
+  return contour.map((offset) => -offset);
+}
+
 export function leadEvents(context: VoiceContext): NoteEvent[] {
   const { skeleton, module, timeline } = context;
   const [lo, hi] = VOICE_REGISTERS.lead;
@@ -95,14 +103,13 @@ export function leadEvents(context: VoiceContext): NoteEvent[] {
   const chords = chordLoop(skeleton);
   const midiOf = (degree: number) => degreeToMidi(skeleton.mode, skeleton.root, degree, 4);
 
-  const density = clamp(module.cyclomaticDensity, MIN_DENSITY, MAX_DENSITY);
-  const rhythm = pick(
-    RHYTHMS,
-    ((density - MIN_DENSITY) / (MAX_DENSITY - MIN_DENSITY)) * RHYTHMS.length,
+  const rhythm = pick(RHYTHMS, branchingPosition(module) * RHYTHMS.length);
+  const noteTicks = pick(
+    NOTE_DURATIONS,
+    functionLengthPosition(module) * NOTE_DURATIONS.length,
   );
-  const noteTicks = pick(NOTE_DURATIONS, durationIndexFor(module.avgFunctionLength));
-  // Deeper nesting sits higher in the register. Depth 1 hugs the bottom, 5 and above the top.
-  const target = lo + (hi - lo) * clamp((module.avgNestingDepth - 1) / 4, 0, 1);
+  // Deeper nesting sits higher in the register.
+  const target = lo + (hi - lo) * nestingPosition(module);
   // Bigger module, louder voice.
   const velocity = clamp(0.45 + module.share * 0.6, 0.4, 0.8);
 
@@ -113,10 +120,8 @@ export function leadEvents(context: VoiceContext): NoteEvent[] {
       .slice(0, 8)
       .map((entry) => entry.path)
       .join('|') || module.path;
-  const contours = {
-    a: buildContour(rhythm.length, `${salt}#a`),
-    b: buildContour(rhythm.length, `${salt}#b`),
-  };
+  const a = buildContour(rhythm.length, `${salt}#a`);
+  const contours = { a, b: invert(a) };
 
   const totalTicks = barToTick(skeleton.bars);
   const events: NoteEvent[] = [];

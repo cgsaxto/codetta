@@ -96,7 +96,8 @@ describe('arp', () => {
       const events = arpEvents(arpContext({ cyclomaticDensity: density }));
       return (events[1]?.tick ?? 0) - (events[0]?.tick ?? 0);
     };
-    expect(spacing(0.15)).toBeGreaterThan(spacing(0.75));
+    // Real cyclomatic densities: the p10 and p90 of 44 modules across eight repositories.
+    expect(spacing(0.001)).toBeGreaterThan(spacing(0.022));
   });
 
   it('sits below the lead at the same module size', () => {

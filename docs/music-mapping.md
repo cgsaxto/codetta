@@ -98,15 +98,39 @@ Resolution order:
 
 Each voice reads its module's aggregate features:
 
-| Code feature          | Musical parameter          | Mapping                                                        |
-| --------------------- | -------------------------- | -------------------------------------------------------------- |
-| `avgNestingDepth`     | Octave                     | Clamp to 2–6, deeper = higher                                  |
-| `avgFunctionLength`   | Note duration              | Bucket into {16n, 8n, 4n, 2n}; longer fn = longer note         |
-| `cyclomaticDensity`   | Note density               | Probability a 16th slot fires. **Clamp 0.15–0.75.** Never 1.0. |
-| `commentRatio`        | Reverb wet + filter cutoff | More comments = more open, airier. Texture only.               |
-| `asyncRatio`          | Delay feedback / swing     | Subtle. Max 20% swing.                                         |
-| `share` (module size) | Voice gain + rank          | Bigger module = louder, earlier entry                          |
-| `languages` diversity | Number of active voices    | See the table below                                            |
+| Code feature          | Musical parameter          | Mapping                                                   |
+| --------------------- | -------------------------- | --------------------------------------------------------- |
+| `avgNestingDepth`     | Octave                     | Deeper sits higher in the voice's register                |
+| `avgFunctionLength`   | Note duration              | Bucket into {16n, 8n, 4n, 2n}; longer fn = longer note    |
+| `cyclomaticDensity`   | Note density               | Selects a rhythm, sparse to busy. Never fills every 16th. |
+| `commentRatio`        | Reverb wet + filter cutoff | More comments = more open, airier. Texture only.          |
+| `asyncRatio`          | Delay feedback / swing     | Subtle. Max 20% swing. **Not built yet.**                 |
+| `share` (module size) | Voice gain + rank          | Bigger module = louder, earlier entry                     |
+| `languages` diversity | Number of active voices    | See the table below                                       |
+
+### Calibration
+
+Every row above is "feature selects an index", and an index needs a range. The ranges are in
+`music/calibration.ts` and nowhere else — the p10 and p90 of 44 modules parsed from eight
+repositories across all four supported languages.
+
+They are there because the first set was guessed. `fixtures/react.json` was originally
+hand-authored by eyeballing a repository, every mapping was tuned against it, and it was
+wrong by an order of magnitude: `cyclomaticDensity` was assumed to sit in 0.17–0.34 and
+really sits in 0.001–0.025. Three of the five mappings clamped to the same answer for every
+repository on earth, and the whole test suite passed, because the tests asserted against the
+same invented numbers.
+
+Two consequences worth knowing before changing anything here:
+
+- **Nesting, branching and function length are one axis, not three.** Across the sample they
+  correlate at r = +0.73 to +0.79 — algorithmic code is nested and branchy and long-bodied
+  together. Octave, density and note length therefore move together, which is coherent but
+  is not three independent dimensions, and stacking a fourth mapping onto the same axis buys
+  nothing. `commentRatio` (r ≈ −0.05 to −0.38) is the one genuinely independent feature.
+- **`asyncRatio` is zero for more than half of all modules.** Go has no async by definition
+  and Python's median is also 0. Whatever eventually reads it has to sound right when the
+  answer is "none", because that is the common case rather than the edge case.
 
 ### Voice count
 

@@ -84,32 +84,50 @@ change of genre rather than a missing feature. Worth a listen before committing 
   so "cache miss and cache unavailable take the same path" stops depending on every future
   caller remembering it. Tests run against miniredis, so `make api-test` stays offline.
 
+- [x] Recalibrate Layer 3 against real parsed features
+
+  Not originally a line item. `fixtures/react.json` was hand-authored by eyeballing, every
+  musical decision in Phase 0 was tuned against it, and its numbers were wrong by an order
+  of magnitude — `cyclomaticDensity` guessed at 0.17–0.34 against a real 0.001–0.025. Three
+  of the five Layer 3 mappings clamped to the same answer for every repository on earth, and
+  the tests all passed, because they asserted against the same invented numbers.
+
+  Fixed in three parts. The ranges now live in one file, `music/calibration.ts`, taken from
+  the p10/p90 of 44 modules across eight repositories in all four supported languages —
+  previously each voice clamped and scaled inline and the two density constants were copied
+  into three files. `fixtures/react.json` is a real document now, produced by `cmd/fetch`.
+  And the tests that encoded the fiction were rewritten against measured values.
+
+  It caught a real musical bug on the way. The lead's AABA form built its B phrase from an
+  independent hash, which on the sparsest rhythm has one free step and therefore a coin-flip
+  chance of matching A — half of all repositories would have collapsed to AAAA. The old
+  fixture's invented branching figure put every repo on the busiest rhythm, so it never
+  showed. B is now A inverted, which makes the contrast a property rather than a coincidence
+  and is the better answer musically anyway.
+
 - [ ] Golden tests: parsing a fixture repo produces a byte-identical document
+
+  Two fetches of `vuejs/core` at the same SHA already produce byte-identical documents apart
+  from `stars`, which moved by five between them. So the equality check has to exclude
+  `stars` as well as `fetchedAt` — neither is derived from the commit, and the schema doc
+  currently only names the latter.
+
 - [ ] Web app consumes the API instead of the local fixture
 
-  **Blocked on recalibrating Layer 3.** `fixtures/react.json` was hand-authored by
-  eyeballing, and every musical decision in Phase 0 was tuned against it. Parsing 6,600
-  lines of this repository's own real source says those numbers were fiction:
+Two findings from the calibration set that are decisions rather than work, both recorded in
+@docs/music-mapping.md and neither blocking:
 
-  | feature             | hand-authored | really parsed |
-  | ------------------- | ------------- | ------------- |
-  | `cyclomaticDensity` | 0.17–0.34     | 0.003–0.018   |
-  | `avgNestingDepth`   | 1.8–3.1       | 0.2–1.0       |
-  | `avgFunctionLength` | 11–22         | 1.6–7.1       |
-  | `commentRatio`      | 0.07–0.19     | 0.13–0.20     |
+**Nesting, branching and function length are one axis, not three** (r = +0.73 to +0.79).
+Octave, density and note duration therefore move together. Coherent, but it means Layer 3
+has two real dimensions plus `commentRatio`, not five.
 
-  Only `commentRatio` survives. On real numbers three of the Layer 3 mappings stop carrying
-  any information at all: density clamps to its 0.15 floor for every repository, nesting
-  clamps to the bottom of every register, and every function length falls in the first
-  duration bucket. Three features, one output each, identical for every repo on earth.
-
-  The counts are not wrong — they implement @docs/features-schema.md as written, and
-  `cyclomaticDensity` really is branch nodes over all AST nodes, which is a small number in
-  any real file. What was wrong was the range they were assumed to land in.
-
-  Recalibrating needs a real distribution, not one repository, so the order is: finish the
-  API, fetch several repositories, then retune Layer 3 against what actually comes back. The
-  golden score in `fixtures/react.expected.json` will show exactly what moves.
+**JS and TS repositories systematically land at the calm end.** Their largest module is flat
+and unbranchy where Python's and Go's is not — react's top module scores 0.05 nesting and
+0.11 branching, django's 0.83 and 0.71. So react and express get a three-note lead in a
+three-semitone band while django, flask, requests and cobra get ten to fourteen semitones and
+several note lengths. Honest, and probably right, but Phase 3's gallery is mostly JS and TS,
+which would make the landing page sound uniformly sparse. Worth listening to before deciding
+whether it needs anything.
 
 Note: tree-sitter's Go bindings need cgo, which complicates builds. Keep the Dockerfile as
 the source of truth for building the API. If cgo becomes a real drag, swapping the API to
