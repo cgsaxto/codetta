@@ -158,9 +158,13 @@ describe('lead', () => {
     const ticks = (avgFunctionLength: number) =>
       leadEvents(leadContext({ avgFunctionLength }))[0]?.durationTicks ?? 0;
 
-    // Across the observed p10–p90, every one of the four articulations is reachable.
-    expect(new Set([ticks(1), ticks(3), ticks(5), ticks(7)]).size).toBe(4);
-    expect(ticks(1)).toBeLessThan(ticks(7));
+    // Monotonic across the observed p10–p90, and the ends are audibly apart. Not four
+    // distinct lengths: the note length is a fraction of the gap to the next onset, and on a
+    // busy rhythm that gap is a few sixteenths — a grid no palette can subdivide further.
+    // Asserting four would be asserting against the grid rather than against the mapping.
+    const lengths = [1, 3, 5, 7].map(ticks);
+    expect(lengths).toStrictEqual([...lengths].sort((a, b) => a - b));
+    expect(ticks(7)).toBeGreaterThan(ticks(1));
   });
 
   it('is never mostly silence, however sparse the repo', () => {

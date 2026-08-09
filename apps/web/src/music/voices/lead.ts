@@ -36,14 +36,29 @@ const PHRASE_FORM = ['a', 'a', 'b', 'a'] as const;
  * a per-16th coin flip: a memoryless probability produces rhythms that are merely irregular,
  * and irregular is not the same as syncopated. Every entry starts on the downbeat so the
  * phrase has a floor, and none crosses into the rest.
+ *
+ * The floor is five onsets, and it used to be three. Three notes across two bars is not a
+ * lead — it is below the rate the arp runs at, in the voice Layer 2 calls the most active
+ * one — and it fails in both directions at once. Short notes at that rate are hollow; long
+ * notes at that rate drag. Both were heard on facebook/react, whose largest module is flat
+ * DOM plumbing and lands at the bottom of this palette. There is no note length that rescues
+ * three onsets, because the problem is the rate rather than the sustain, which is why this
+ * moved rather than the articulation.
+ *
+ * That the fix compounds with articulation is the useful part: more onsets means smaller
+ * gaps, and a gap-relative note length is shorter automatically. Raising the rate makes the
+ * line move without making it heavier.
+ *
+ * The two busiest entries are deliberately untouched — nothing reported a problem at that
+ * end, and psf/requests sits on the second of them.
  */
 const RHYTHMS: ReadonlyArray<readonly number[]> = [
-  [0, 8, 16],
-  [0, 8, 12, 16],
-  [0, 4, 8, 16],
-  [0, 6, 12, 16],
-  [0, 4, 8, 16, 20],
-  [0, 3, 8, 11, 16],
+  [0, 4, 8, 12, 16],
+  [0, 4, 6, 12, 16],
+  [0, 4, 6, 8, 16],
+  [0, 2, 4, 8, 16, 20],
+  [0, 3, 6, 8, 11, 16],
+  [0, 4, 6, 8, 12, 16],
   [0, 2, 4, 8, 12, 16],
   [0, 2, 6, 8, 12, 16, 20],
 ];

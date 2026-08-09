@@ -225,6 +225,9 @@ constants, not computed.
 - Notes shorter than a 16th, or triplets against a straight grid
 - Tempo above 128 BPM
 - Density of 1.0 on any voice (creates a wall of sound, always sounds bad)
+- A lead sparser than the arp beneath it. Three onsets in two bars fails in both directions
+  at once — hollow when the notes are short, dragging when they are long — and no note length
+  rescues it, because the fault is the rate. The rhythm palette's floor is five.
 - Adding a new voice to "represent" a new metric — the voice budget is fixed at 6
 - More than 8 concurrent notes
 - Any generation step that reads the wall clock or unseeded randomness

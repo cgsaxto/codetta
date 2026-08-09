@@ -209,8 +209,15 @@
     {
       "voice": "lead",
       "tick": 64,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 68,
+      "durationTicks": 3,
+      "midi": 62,
       "velocity": 0.57978
     },
     {
@@ -223,8 +230,15 @@
     {
       "voice": "lead",
       "tick": 72,
-      "durationTicks": 6,
-      "midi": 62,
+      "durationTicks": 3,
+      "midi": 67,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 76,
+      "durationTicks": 3,
+      "midi": 60,
       "velocity": 0.57978
     },
     {
@@ -300,8 +314,15 @@
     {
       "voice": "lead",
       "tick": 96,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 100,
+      "durationTicks": 3,
+      "midi": 63,
       "velocity": 0.57978
     },
     {
@@ -314,8 +335,15 @@
     {
       "voice": "lead",
       "tick": 104,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 108,
+      "durationTicks": 3,
+      "midi": 65,
       "velocity": 0.57978
     },
     {
@@ -391,7 +419,7 @@
     {
       "voice": "lead",
       "tick": 128,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -408,6 +436,13 @@
       "durationTicks": 2,
       "midi": 67,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 132,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -433,8 +468,8 @@
     {
       "voice": "lead",
       "tick": 136,
-      "durationTicks": 6,
-      "midi": 65,
+      "durationTicks": 3,
+      "midi": 72,
       "velocity": 0.57978
     },
     {
@@ -450,6 +485,13 @@
       "durationTicks": 2,
       "midi": 67,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 140,
+      "durationTicks": 3,
+      "midi": 67,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -566,7 +608,7 @@
     {
       "voice": "lead",
       "tick": 160,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -583,6 +625,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 164,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -608,8 +657,8 @@
     {
       "voice": "lead",
       "tick": 168,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -625,6 +674,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 172,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -741,7 +797,7 @@
     {
       "voice": "lead",
       "tick": 192,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -767,6 +823,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 196,
+      "durationTicks": 3,
+      "midi": 62,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 196,
       "durationTicks": 2,
@@ -790,8 +853,8 @@
     {
       "voice": "lead",
       "tick": 200,
-      "durationTicks": 6,
-      "midi": 62,
+      "durationTicks": 3,
+      "midi": 67,
       "velocity": 0.57978
     },
     {
@@ -816,6 +879,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 204,
+      "durationTicks": 3,
+      "midi": 60,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 204,
       "durationTicks": 2,
@@ -826,7 +896,7 @@
       "voice": "arp",
       "tick": 206,
       "durationTicks": 2,
-      "midi": 60,
+      "midi": 72,
       "velocity": 0.4057
     },
     {
@@ -944,7 +1014,7 @@
     {
       "voice": "lead",
       "tick": 224,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -970,6 +1040,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 228,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 228,
       "durationTicks": 2,
@@ -993,8 +1070,8 @@
     {
       "voice": "lead",
       "tick": 232,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -1017,6 +1094,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 236,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -1147,7 +1231,7 @@
     {
       "voice": "lead",
       "tick": 256,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -1173,6 +1257,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 260,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 260,
       "durationTicks": 2,
@@ -1196,8 +1287,8 @@
     {
       "voice": "lead",
       "tick": 264,
-      "durationTicks": 6,
-      "midi": 65,
+      "durationTicks": 3,
+      "midi": 72,
       "velocity": 0.57978
     },
     {
@@ -1220,6 +1311,13 @@
       "durationTicks": 2,
       "midi": 67,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 268,
+      "durationTicks": 3,
+      "midi": 67,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -1350,7 +1448,7 @@
     {
       "voice": "lead",
       "tick": 288,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -1376,6 +1474,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 292,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 292,
       "durationTicks": 2,
@@ -1399,8 +1504,8 @@
     {
       "voice": "lead",
       "tick": 296,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -1423,6 +1528,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 300,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -1553,7 +1665,7 @@
     {
       "voice": "lead",
       "tick": 320,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -1579,6 +1691,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 324,
+      "durationTicks": 3,
+      "midi": 62,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 324,
       "durationTicks": 2,
@@ -1602,8 +1721,8 @@
     {
       "voice": "lead",
       "tick": 328,
-      "durationTicks": 6,
-      "midi": 62,
+      "durationTicks": 3,
+      "midi": 67,
       "velocity": 0.57978
     },
     {
@@ -1628,6 +1747,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 332,
+      "durationTicks": 3,
+      "midi": 60,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 332,
       "durationTicks": 2,
@@ -1638,7 +1764,7 @@
       "voice": "arp",
       "tick": 334,
       "durationTicks": 2,
-      "midi": 60,
+      "midi": 72,
       "velocity": 0.4057
     },
     {
@@ -1756,7 +1882,7 @@
     {
       "voice": "lead",
       "tick": 352,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -1782,6 +1908,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 356,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 356,
       "durationTicks": 2,
@@ -1805,8 +1938,8 @@
     {
       "voice": "lead",
       "tick": 360,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -1829,6 +1962,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 364,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -1957,6 +2097,13 @@
       "velocity": 0.75
     },
     {
+      "voice": "lead",
+      "tick": 388,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
+    },
+    {
       "voice": "bass",
       "tick": 392,
       "durationTicks": 7,
@@ -2036,8 +2183,15 @@
     {
       "voice": "lead",
       "tick": 416,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 420,
+      "durationTicks": 3,
+      "midi": 63,
       "velocity": 0.57978
     },
     {
@@ -2113,7 +2267,7 @@
     {
       "voice": "lead",
       "tick": 448,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -2139,6 +2293,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 452,
+      "durationTicks": 3,
+      "midi": 62,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 452,
       "durationTicks": 2,
@@ -2162,8 +2323,8 @@
     {
       "voice": "lead",
       "tick": 456,
-      "durationTicks": 6,
-      "midi": 62,
+      "durationTicks": 3,
+      "midi": 67,
       "velocity": 0.57978
     },
     {
@@ -2188,6 +2349,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 460,
+      "durationTicks": 3,
+      "midi": 60,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 460,
       "durationTicks": 2,
@@ -2198,7 +2366,7 @@
       "voice": "arp",
       "tick": 462,
       "durationTicks": 2,
-      "midi": 60,
+      "midi": 72,
       "velocity": 0.4057
     },
     {
@@ -2316,7 +2484,7 @@
     {
       "voice": "lead",
       "tick": 480,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -2342,6 +2510,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 484,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 484,
       "durationTicks": 2,
@@ -2365,8 +2540,8 @@
     {
       "voice": "lead",
       "tick": 488,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -2389,6 +2564,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 492,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -2519,7 +2701,7 @@
     {
       "voice": "lead",
       "tick": 512,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -2545,6 +2727,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 516,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 516,
       "durationTicks": 2,
@@ -2568,8 +2757,8 @@
     {
       "voice": "lead",
       "tick": 520,
-      "durationTicks": 6,
-      "midi": 65,
+      "durationTicks": 3,
+      "midi": 72,
       "velocity": 0.57978
     },
     {
@@ -2592,6 +2781,13 @@
       "durationTicks": 2,
       "midi": 67,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 524,
+      "durationTicks": 3,
+      "midi": 67,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -2722,7 +2918,7 @@
     {
       "voice": "lead",
       "tick": 544,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
       "velocity": 0.57978
     },
@@ -2748,6 +2944,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 548,
+      "durationTicks": 3,
+      "midi": 63,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 548,
       "durationTicks": 2,
@@ -2771,8 +2974,8 @@
     {
       "voice": "lead",
       "tick": 552,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
       "velocity": 0.57978
     },
     {
@@ -2795,6 +2998,13 @@
       "durationTicks": 2,
       "midi": 70,
       "velocity": 0.4057
+    },
+    {
+      "voice": "lead",
+      "tick": 556,
+      "durationTicks": 3,
+      "midi": 65,
+      "velocity": 0.57978
     },
     {
       "voice": "arp",
@@ -2925,7 +3135,7 @@
     {
       "voice": "lead",
       "tick": 576,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 63,
       "velocity": 0.57978
     },
@@ -2951,6 +3161,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 580,
+      "durationTicks": 3,
+      "midi": 62,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 580,
       "durationTicks": 2,
@@ -2974,8 +3191,8 @@
     {
       "voice": "lead",
       "tick": 584,
-      "durationTicks": 6,
-      "midi": 62,
+      "durationTicks": 3,
+      "midi": 67,
       "velocity": 0.57978
     },
     {
@@ -3000,6 +3217,13 @@
       "velocity": 0.4057
     },
     {
+      "voice": "lead",
+      "tick": 588,
+      "durationTicks": 3,
+      "midi": 60,
+      "velocity": 0.57978
+    },
+    {
       "voice": "arp",
       "tick": 588,
       "durationTicks": 2,
@@ -3010,7 +3234,7 @@
       "voice": "arp",
       "tick": 590,
       "durationTicks": 2,
-      "midi": 60,
+      "midi": 72,
       "velocity": 0.4057
     },
     {
@@ -3121,8 +3345,15 @@
     {
       "voice": "lead",
       "tick": 608,
-      "durationTicks": 6,
+      "durationTicks": 3,
       "midi": 62,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 612,
+      "durationTicks": 3,
+      "midi": 63,
       "velocity": 0.57978
     },
     {
@@ -3135,8 +3366,15 @@
     {
       "voice": "lead",
       "tick": 616,
-      "durationTicks": 6,
-      "midi": 63,
+      "durationTicks": 3,
+      "midi": 70,
+      "velocity": 0.57978
+    },
+    {
+      "voice": "lead",
+      "tick": 620,
+      "durationTicks": 3,
+      "midi": 65,
       "velocity": 0.57978
     },
     {
