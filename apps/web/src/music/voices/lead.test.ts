@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { reactFeatures } from '../../features/fixture';
 import type { RepoModule } from '@codetta/schema';
-import { assignVoices, type VoiceContext } from '../arrangement';
+import {
+  PHRASE_ACTIVE_TICKS,
+  PHRASE_TICKS,
+  assignVoices,
+  type VoiceContext,
+} from '../arrangement';
 import { MODES, ROOT_PITCH_CLASS } from '../progressions';
 import {
   TICKS_PER_BAR,
@@ -153,9 +158,32 @@ describe('lead', () => {
     const ticks = (avgFunctionLength: number) =>
       leadEvents(leadContext({ avgFunctionLength }))[0]?.durationTicks ?? 0;
 
-    // Across the observed p10–p90, every one of the four duration buckets is reachable.
+    // Across the observed p10–p90, every one of the four articulations is reachable.
     expect(new Set([ticks(1), ticks(3), ticks(5), ticks(7)]).size).toBe(4);
     expect(ticks(1)).toBeLessThan(ticks(7));
+  });
+
+  it('is never mostly silence, however sparse the repo', () => {
+    // What "react sounds empty" was, measured. Its lead ran at a quarter of its own phrase
+    // window — three sixteenths of sound in two bars — because the same axis that selects a
+    // sparse rhythm also selected the shortest note length, and the two multiplied.
+    //
+    // The floor is on the fraction of the phrase that sounds, not on note count, because a
+    // sparse line is a legitimate outcome for a flat repository and a hollow one is not.
+    const active = PHRASE_ACTIVE_TICKS;
+
+    for (const avgFunctionLength of [0, 1, 3, 5, 7, 20]) {
+      for (const cyclomaticDensity of [0, 0.004, 0.01, 0.022, 1]) {
+        const events = leadEvents(leadContext({ avgFunctionLength, cyclomaticDensity }));
+        const sounding = events
+          .filter((event) => event.tick < PHRASE_TICKS)
+          .reduce((sum, event) => sum + event.durationTicks, 0);
+        expect(
+          sounding / active,
+          `fnLength ${avgFunctionLength}, density ${cyclomaticDensity}`,
+        ).toBeGreaterThan(0.4);
+      }
+    }
   });
 
   it('takes register from nesting depth, deeper being higher', () => {

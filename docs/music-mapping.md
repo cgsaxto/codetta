@@ -101,7 +101,7 @@ Each voice reads its module's aggregate features:
 | Code feature          | Musical parameter          | Mapping                                                   |
 | --------------------- | -------------------------- | --------------------------------------------------------- |
 | `avgNestingDepth`     | Octave                     | Deeper sits higher in the voice's register                |
-| `avgFunctionLength`   | Note duration              | Bucket into {16n, 8n, 4n, 2n}; longer fn = longer note    |
+| `avgFunctionLength`   | Note duration              | Articulation: fraction of the gap filled, 0.5 to legato   |
 | `cyclomaticDensity`   | Note density               | Selects a rhythm, sparse to busy. Never fills every 16th. |
 | `commentRatio`        | Reverb wet + filter cutoff | More comments = more open, airier. Texture only.          |
 | `asyncRatio`          | Delay feedback / swing     | Subtle. Max 20% swing. **Not built yet.**                 |
@@ -131,6 +131,16 @@ Two consequences worth knowing before changing anything here:
 - **`asyncRatio` is zero for more than half of all modules.** Go has no async by definition
   and Python's median is also 0. Whatever eventually reads it has to sound right when the
   answer is "none", because that is the common case rather than the edge case.
+
+That correlation is also why note duration is an articulation rather than an absolute length,
+which is a change from what this table used to specify. Bucketing into {16n, 8n, 4n, 2n} reads
+fine on its own and cannot work alongside the density mapping: the repos that select a sparse
+rhythm select the short buckets too, so react's lead came out at three sixteenths of sound per
+two bars — a quarter of its phrase, and audibly empty rather than calm. At the busy end the
+mapping did nothing instead, because those notes were already being cut short by the next
+onset. As a fraction of the gap to the next onset, one number means the same thing at both
+ends. **A voice is never mostly silence**; sparse and hollow are different outcomes and only
+the first one is ever correct.
 
 ### Voice count
 

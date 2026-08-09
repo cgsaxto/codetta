@@ -48,8 +48,23 @@ const RHYTHMS: ReadonlyArray<readonly number[]> = [
   [0, 2, 6, 8, 12, 16, 20],
 ];
 
-/** docs/music-mapping.md: bucket into {16n, 8n, 4n, 2n}. Longer functions, longer notes. */
-const NOTE_DURATIONS = [1, 2, 4, 8] as const;
+/**
+ * How much of the space before the next onset a note fills. Longer functions, longer notes —
+ * the mapping docs/music-mapping.md asks for, expressed as articulation rather than as an
+ * absolute number of ticks.
+ *
+ * Absolute durations do not work here, and the reason is the correlation in
+ * music/calibration.ts. Function length, nesting and branching move together, so the repos
+ * that select a sparse rhythm also select the short end of any absolute duration palette:
+ * react's lead came out three notes per two bars, each a sixteenth, which is a quarter of a
+ * second of sound and one and a half seconds of silence, over and over. Empty rather than
+ * calm. At the other end the effect vanished instead — a busy rhythm's notes were already
+ * being cut short by the next onset, so the long buckets were unreachable.
+ *
+ * As a fraction of the gap, the same feature means the same thing at both ends: sparse
+ * rhythms sustain and busy ones are clipped, which is also how a player would phrase them.
+ */
+const ARTICULATIONS = [0.5, 0.7, 0.85, 1] as const;
 
 /**
  * Steps the contour may take, in scale degrees. Stepwise motion dominates because that is
@@ -104,9 +119,9 @@ export function leadEvents(context: VoiceContext): NoteEvent[] {
   const midiOf = (degree: number) => degreeToMidi(skeleton.mode, skeleton.root, degree, 4);
 
   const rhythm = pick(RHYTHMS, branchingPosition(module) * RHYTHMS.length);
-  const noteTicks = pick(
-    NOTE_DURATIONS,
-    functionLengthPosition(module) * NOTE_DURATIONS.length,
+  const articulation = pick(
+    ARTICULATIONS,
+    functionLengthPosition(module) * ARTICULATIONS.length,
   );
   // Deeper nesting sits higher in the register.
   const target = lo + (hi - lo) * nestingPosition(module);
@@ -163,11 +178,17 @@ export function leadEvents(context: VoiceContext): NoteEvent[] {
       const midi = midiOf(degree);
       if (midi < lo || midi > hi) continue;
 
+      // Space before the next onset, the phrase's rest, or the end of the piece — whichever
+      // comes first. A note may fill it and never exceed it, which is what keeps the line
+      // monophonic and keeps the rest silent without either being checked for separately.
       const nextOnset = rhythm[i + 1] ?? PHRASE_ACTIVE_TICKS;
-      const durationTicks = Math.max(
-        1,
-        Math.min(noteTicks, nextOnset - onset, PHRASE_ACTIVE_TICKS - onset, totalTicks - tick),
+      const available = Math.min(
+        nextOnset - onset,
+        PHRASE_ACTIVE_TICKS - onset,
+        totalTicks - tick,
       );
+      if (available <= 0) continue;
+      const durationTicks = Math.max(1, Math.round(available * articulation));
 
       events.push({ voice: 'lead', tick, durationTicks, midi, velocity });
       previousMidi = midi;

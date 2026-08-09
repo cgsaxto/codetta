@@ -186,10 +186,20 @@ export async function startPlayback(
   const textureReverb = new Tone.Reverb({
     decay: barSeconds * 1.2,
     preDelay: 0.03,
-    wet: 0.25 + openness * 0.35,
+    wet: 0.3 + openness * 0.35,
   }).connect(textureGain);
+  /**
+   * The floor is where the whole range lives or dies, and 320 Hz was below it.
+   *
+   * This voice sits in C3–C4, so its fundamental is 130–262 Hz and a lowpass at 320 keeps
+   * the first two harmonics of a triangle wave and throws away everything that makes it a
+   * timbre rather than a sine. A module with few comments — psf/requests' test server, at
+   * 0.06 — landed there and simply disappeared. 700 Hz keeps about five harmonics at the
+   * bottom of the register, which is dark but present, and that is the intent: the texture
+   * is felt rather than heard, and inaudible is not the same as felt.
+   */
   const textureFilter = new Tone.Filter({
-    frequency: 320 + openness * 1400,
+    frequency: 700 + openness * 2100,
     type: 'lowpass',
     rolloff: -24,
   }).connect(textureReverb);
