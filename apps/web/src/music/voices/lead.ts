@@ -82,13 +82,35 @@ const RHYTHMS: ReadonlyArray<readonly number[]> = [
 const ARTICULATIONS = [0.5, 0.7, 0.85, 1] as const;
 
 /**
- * Steps the contour may take, in scale degrees. Stepwise motion dominates because that is
- * what makes a line singable; nothing leaps more than a fifth.
+ * Steps the contour may take, in scale degrees: seconds 67%, thirds 25%, fourths 8%.
+ *
+ * Stepwise motion dominates because that is what makes a line singable. It used to be an
+ * even half, with fifths as likely as fourths, and that reads as jumpy over a motif heard
+ * twenty times — a leap is the most memorable thing in a melody, so it has to be rare enough
+ * to still be an event. Fifths are gone outright: across eight repositories not one of them
+ * produced a gesture, only a hole in the middle of a phrase.
  */
-const CONTOUR_STEPS = [-4, -3, -2, -2, -1, -1, -1, -1, 1, 1, 1, 1, 2, 2, 3, 4] as const;
+const CONTOUR_STEPS = [
+  -3, -2, -2, -2, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 3,
+] as const;
 
 /** How far a motif may roam from its own first note, in scale degrees. */
 const CONTOUR_RANGE = 5;
+
+/**
+ * How far the note before the last may sit from the anchor it resolves onto, in degrees.
+ *
+ * The last note returns to the anchor, and that return was the one interval in the phrase
+ * that no rule applied to: a contour that had wandered to the edge of CONTOUR_RANGE snapped
+ * back across it in a single step. That, and not the step weights, is where the widest
+ * intervals in the whole set came from — a nine-semitone jump on express and minus seven on
+ * flask, both of them the final note, both of them wider than anything the palette can
+ * express. Melodies approach their resolution by step; this makes that structural.
+ *
+ * A leap-recovery rule was tried alongside it — after a leap, force a step the other way —
+ * and changed nothing measurable once this was in place, so it is not here.
+ */
+const APPROACH = 2;
 
 /** Weight on staying in the module's register when anchoring a phrase, against smoothness. */
 const REGISTER_PULL = 0.5;
@@ -129,7 +151,11 @@ function buildContour(length: number, salt: string): number[] {
     const step = pick(CONTOUR_STEPS, unitHash(`${salt}#${i}`) * CONTOUR_STEPS.length);
     offsets.push(clamp(previous + step, -CONTOUR_RANGE, CONTOUR_RANGE));
   }
-  if (length > 1) offsets.push(0);
+  if (length > 1) {
+    const penultimate = offsets.length - 1;
+    offsets[penultimate] = clamp(offsets[penultimate] ?? 0, -APPROACH, APPROACH);
+    offsets.push(0);
+  }
   return offsets;
 }
 

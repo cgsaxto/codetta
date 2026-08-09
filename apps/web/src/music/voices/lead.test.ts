@@ -113,13 +113,28 @@ describe('lead', () => {
     expect(onsets(2)).toStrictEqual(onsets(0));
   });
 
-  it('never leaps further than a fifth', () => {
-    const events = leadEvents(leadContext());
-    for (let i = 1; i < events.length; i++) {
-      const previous = events[i - 1];
-      const current = events[i];
-      if (!previous || !current) continue;
-      expect(Math.abs(current.midi - previous.midi), `note ${i}`).toBeLessThanOrEqual(7);
+  it('never leaps further than a fourth, including the note that resolves', () => {
+    // The resolution is called out because it was the exception. Every other interval comes
+    // from the step palette; the last note returns to the anchor, and that return obeyed no
+    // rule at all — a contour that had wandered to the edge of its range crossed the whole
+    // range in one step. It produced the widest intervals in the entire calibration set,
+    // nine semitones on express and minus seven on flask, both of them the final note.
+    //
+    // Swept rather than checked once, because whether a given repository draws a leap at all
+    // is a property of its hash, and one fixture cannot speak for the palette.
+    for (const cyclomaticDensity of [0, 0.004, 0.008, 0.012, 0.016, 0.02, 0.05, 1]) {
+      for (const avgFunctionLength of [1, 4, 7]) {
+        const events = leadEvents(leadContext({ cyclomaticDensity, avgFunctionLength }));
+        for (let i = 1; i < events.length; i++) {
+          const previous = events[i - 1];
+          const current = events[i];
+          if (!previous || !current) continue;
+          expect(
+            Math.abs(current.midi - previous.midi),
+            `density ${cyclomaticDensity}, note ${i}`,
+          ).toBeLessThanOrEqual(5);
+        }
+      }
     }
   });
 
