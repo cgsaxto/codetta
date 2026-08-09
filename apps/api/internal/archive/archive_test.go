@@ -271,6 +271,38 @@ func TestTheSampleIsTheSameEveryTime(t *testing.T) {
 	}
 }
 
+func TestTheSampleIgnoresTheOrderTheArchiveHappensToUse(t *testing.T) {
+	// The one ordering failure nothing downstream can repair.
+	//
+	// Aggregation sorts its input too, so for a repository under the cap a tar in a strange
+	// order still produces the right document — the two layers cover each other. Once the cap
+	// bites they do not: the sample chooses *which* files are read, from the candidate list,
+	// in the order that list happens to be in. Get that order from the tar and a differently
+	// ordered tar of the same repository is parsed as a different repository, and no amount
+	// of sorting afterwards can bring back a file that was never opened.
+	limits := DefaultLimits()
+	limits.MaxFiles = 8
+
+	entries := make([]entry, 0, 60)
+	for i := range 60 {
+		entries = append(entries, entry{name: fmt.Sprintf("d%d/f%02d.go", i%5, i), body: "package main"})
+	}
+
+	forward := paths(walk(t, buildArchive(t, "o-r-sha", entries), limits, acceptAll))
+
+	shuffled := make([]entry, len(entries))
+	for i, e := range entries {
+		// Deterministic and thoroughly unsorted: reverse, then interleave the halves.
+		shuffled[(i*7+3)%len(entries)] = e
+	}
+	got := paths(walk(t, buildArchive(t, "o-r-sha", shuffled), limits, acceptAll))
+
+	if strings.Join(got, ",") != strings.Join(forward, ",") {
+		t.Errorf("tar order changed which files were sampled:\n  sorted:   %v\n  shuffled: %v",
+			forward, got)
+	}
+}
+
 func TestFileContentsStayWithTheirPaths(t *testing.T) {
 	// Two passes means the path is read in one and the body in the other. Pairing them up
 	// wrongly would be invisible in every count and wrong in every parse.

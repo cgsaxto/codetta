@@ -1,0 +1,121 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "o",
+    "name": "r",
+    "ref": "main",
+    "commitSha": "7c8e5e7ab2f0d5a1c4b93f6e2d8a105f3bc47e9d",
+    "primaryLanguage": "TypeScript",
+    "stars": 42,
+    "fetchedAt": "2026-08-08T12:00:00Z"
+  },
+  "seed": "7c8e5e7a",
+  "totals": {
+    "filesScanned": 5,
+    "filesSkipped": 5,
+    "linesOfCode": 56,
+    "functions": 7,
+    "classes": 5,
+    "imports": 4
+  },
+  "languages": [
+    {
+      "name": "TypeScript",
+      "share": 0.4,
+      "files": 2
+    },
+    {
+      "name": "Go",
+      "share": 0.2,
+      "files": 1
+    },
+    {
+      "name": "JavaScript",
+      "share": 0.2,
+      "files": 1
+    },
+    {
+      "name": "Python",
+      "share": 0.2,
+      "files": 1
+    }
+  ],
+  "modules": [
+    {
+      "path": "packages/core",
+      "share": 0.6786,
+      "files": 3,
+      "linesOfCode": 38,
+      "avgNestingDepth": 2,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 3.5,
+      "cyclomaticDensity": 0.0468,
+      "commentRatio": 0.0789,
+      "asyncRatio": 0.5
+    },
+    {
+      "path": "packages/cli",
+      "share": 0.3214,
+      "files": 2,
+      "linesOfCode": 18,
+      "avgNestingDepth": 1,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 2.3333,
+      "cyclomaticDensity": 0.0337,
+      "commentRatio": 0.0556,
+      "asyncRatio": 0.3333
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "packages/cli",
+      "path": "packages/cli/main.go",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 1,
+      "modulePath": "packages/cli",
+      "path": "packages/cli/tool.py",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 2,
+      "modulePath": "packages/core",
+      "path": "packages/core/src/index.ts",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 3,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 3,
+      "modulePath": "packages/core",
+      "path": "packages/core/src/legacy.js",
+      "linesOfCode": 22,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 4,
+      "commentLines": 2
+    },
+    {
+      "index": 4,
+      "modulePath": "packages/core",
+      "path": "packages/core/src/util.ts",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    }
+  ]
+}

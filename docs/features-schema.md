@@ -83,7 +83,13 @@ Given the same `commitSha`, the API must emit a byte-identical document. That me
 - File traversal order is depth-first, lexicographic by path. Never filesystem order.
 - Parallel parsing is fine, but results are re-sorted before aggregation.
 - Floats are rounded to 4 decimal places before serialization.
-- `fetchedAt` is excluded from the cached payload's equality check.
+- `fetchedAt` and `repo.stars` are excluded from any equality check on the document.
+
+Two fields, not one. This used to name only `fetchedAt`, and that is wrong in a way that
+only shows up against the real API: two fetches of `vuejs/core` at the same commit produced
+byte-identical documents apart from a star count that had moved by five in the minute
+between them. Neither field is derived from the commit, so neither can be part of what
+"the same commit produces the same document" means. Nothing musical reads either one.
 
 ## Fetch limits (enforced in `apps/api`, non-negotiable)
 

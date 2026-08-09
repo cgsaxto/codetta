@@ -105,12 +105,28 @@ change of genre rather than a missing feature. Worth a listen before committing 
   showed. B is now A inverted, which makes the contrast a property rather than a coincidence
   and is the better answer musically anyway.
 
-- [ ] Golden tests: parsing a fixture repo produces a byte-identical document
+- [x] Golden tests: parsing a fixture repo produces a byte-identical document
 
-  Two fetches of `vuejs/core` at the same SHA already produce byte-identical documents apart
-  from `stars`, which moved by five between them. So the equality check has to exclude
-  `stars` as well as `fetchedAt` — neither is derived from the commit, and the schema doc
-  currently only names the latter.
+  The recorded document is `apps/api/internal/features/testdata/repo.golden.json`, from a
+  fixture repository that covers all four supported languages and every skip rule; the
+  escape hatch is `make api-golden`, the mirror of `pnpm fixtures:update`. Offline like the
+  rest of `make api-test`.
+
+  It closes the gap the other tests in that package leave. Each of those asserts a property
+  — this file is skipped, that count is five, the seed matches the sha — and not one of them
+  would notice a nesting sum shifting by one, which reaches the music as a different note
+  and a reviewer as nothing at all.
+
+  Alongside it, two ordering tests, and the split between them is worth keeping. At the
+  pipeline level a reordered tar must produce the same document; that survives deleting
+  either the archive's sort or the aggregation's, because they cover each other, and it is
+  meant to — the guarantee belongs to the pipeline. At the archive level a reordered tar
+  must produce the same _sample_, and that one is load-bearing on a single sort: once the
+  file cap bites, order decides which files are opened, and nothing downstream can sort in a
+  file that was never read.
+
+  `stars` had to join `fetchedAt` in the exclusions, per @docs/features-schema.md — two
+  fetches of `vuejs/core` at one SHA differ by five stars and nothing else.
 
 - [ ] Web app consumes the API instead of the local fixture
 

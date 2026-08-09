@@ -1,5 +1,5 @@
 # The Go half of the repo. `pnpm test` covers the TypeScript half; both have to pass.
-.PHONY: api-test api-dev
+.PHONY: api-test api-dev api-golden
 
 # Not `go test ./...`: the repo root is not a Go module, it is a workspace. The module-path
 # pattern picks up every module go.work lists, so apps/api joins this target for free.
@@ -12,3 +12,9 @@ api-test:
 # enough for one repository, so this is a hard requirement rather than a soft upgrade.
 api-dev:
 	go run codetta.dev/api/cmd/server
+
+# Re-record the parsed document the golden test compares against. The web half's equivalent
+# is `pnpm fixtures:update`; both belong in the commit that justifies the change, never on
+# their own.
+api-golden:
+	go test codetta.dev/api/internal/features -run TestGoldenDocument -update

@@ -7,6 +7,7 @@ import (
 	"context"
 	"encoding/json"
 	"errors"
+	"sort"
 	"strings"
 	"testing"
 	"time"
@@ -19,8 +20,8 @@ import (
 
 const sha = "7c8e5e7ab2f0d5a1c4b93f6e2d8a105f3bc47e9d"
 
-// A small repository with the shape that matters: two modules of different sizes, three
-// languages, and files that every cap and skip rule has an opinion about.
+// A small repository with the shape that matters: two modules of different sizes, all four
+// supported languages, and files that every skip rule has an opinion about.
 var fixtureRepo = map[string]string{
 	"packages/core/src/index.ts": `import { helper } from "../util"
 
@@ -56,6 +57,31 @@ func Run(cfg Config) error {
 }
 
 func main() { os.Exit(0) }`,
+	"packages/core/src/legacy.js": `const { readFile } = require("fs/promises")
+
+// Kept for the old entry point. Deliberately unlike the TypeScript beside it: no types, a
+// promise chain rather than await, and a comment ratio of its own.
+class Loader {
+  constructor(root) {
+    this.root = root
+  }
+
+  async load(names) {
+    const out = []
+    for (const name of names) {
+      if (name) {
+        try {
+          out.push(await readFile(this.root + "/" + name))
+        } catch (err) {
+          if (err.code !== "ENOENT") throw err
+        }
+      }
+    }
+    return out
+  }
+}
+
+module.exports = { Loader }`,
 	"packages/cli/tool.py": `import sys
 
 class Tool:
@@ -72,24 +98,31 @@ class Tool:
 	"README.md":                 "# docs",
 }
 
+// sortedNames is the order buildFixture writes in by default. Fixed, so the archive bytes
+// are reproducible; the pipeline sorts anyway, which is what the ordering tests lean on.
+func sortedNames(files map[string]string) []string {
+	names := make([]string, 0, len(files))
+	for name := range files {
+		names = append(names, name)
+	}
+	sort.Strings(names)
+	return names
+}
+
 func buildFixture(t *testing.T, files map[string]string) []byte {
+	t.Helper()
+	return buildFixtureInOrder(t, files, sortedNames(files))
+}
+
+// buildFixtureInOrder writes the same repository with the tar entries in a given sequence.
+// The paths inside the archive are untouched — only the order the archive presents them in
+// changes, which is the one thing a tarball gives no guarantees about.
+func buildFixtureInOrder(t *testing.T, files map[string]string, names []string) []byte {
 	t.Helper()
 
 	var buf bytes.Buffer
 	gz := gzip.NewWriter(&buf)
 	tw := tar.NewWriter(gz)
-
-	// Written in a fixed order so the archive bytes are reproducible; the pipeline sorts
-	// anyway, which is the property the ordering test below leans on.
-	names := make([]string, 0, len(files))
-	for name := range files {
-		names = append(names, name)
-	}
-	for i := 1; i < len(names); i++ {
-		for j := i; j > 0 && names[j] < names[j-1]; j-- {
-			names[j], names[j-1] = names[j-1], names[j]
-		}
-	}
 
 	for _, name := range names {
 		body := files[name]
@@ -181,16 +214,18 @@ func TestPipelineCountsWhatItKept(t *testing.T) {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
-	if parsed.Totals.FilesScanned != 4 {
-		t.Errorf("FilesScanned = %d, want 4", parsed.Totals.FilesScanned)
+	if parsed.Totals.FilesScanned != 5 {
+		t.Errorf("FilesScanned = %d, want 5", parsed.Totals.FilesScanned)
 	}
 	// The five files that were seen and rejected. Skipping is a counted outcome, not a
 	// silent one — the totals still add up to what the archive contained.
 	if parsed.Totals.FilesSkipped != 5 {
 		t.Errorf("FilesSkipped = %d, want 5", parsed.Totals.FilesSkipped)
 	}
-	if len(parsed.Languages) != 3 {
-		t.Errorf("languages = %v, want TypeScript, Go and Python", parsed.Languages)
+	// All four supported languages, so the golden document exercises every adapter in the
+	// registry rather than most of them.
+	if len(parsed.Languages) != 4 {
+		t.Errorf("languages = %v, want all four supported languages", parsed.Languages)
 	}
 
 	paths := make([]string, 0, len(parsed.Modules))
