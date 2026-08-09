@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { reactFeatures } from '../features/fixture';
+import { reactFeatures, requestsFeatures } from '../features/fixture';
 import type { RepoFeatures } from '@codetta/schema';
 import { assignVoices } from './arrangement';
 import { generateScore } from './generate';
@@ -12,6 +12,7 @@ import {
 } from './score';
 import { buildSkeleton, chordLoop } from './skeleton';
 import { bassEvents } from './voices/bass';
+import { leadEvents } from './voices/lead';
 import { padEvents } from './voices/pad';
 
 function featuresWith(seed: string, linesOfCode = reactFeatures.totals.linesOfCode) {
@@ -184,6 +185,28 @@ describe('generateScore', () => {
       }
     }
     expect(Math.max(...active)).toBeLessThanOrEqual(MAX_CONCURRENT_NOTES);
+  });
+
+  it('lets the melody through the mixdown unaltered', () => {
+    // The lead is rank 1, so nothing below it may move it and nothing above it is in the
+    // set that resolves unisons. That makes its pitches inviolate, and it is worth pinning
+    // here rather than only in mixdown's own tests: a rank-3 bell used to displace a lead
+    // note by an octave mid-phrase, which is a -17 semitone leap in a line whose whole
+    // point is that it repeats. The arrangement may still silence a note. It may not
+    // rewrite one.
+    for (const features of [reactFeatures, requestsFeatures]) {
+      const skeleton = buildSkeleton(features);
+      const [context] = assignVoices(features, skeleton);
+      if (!context) throw new Error('no module voices');
+
+      const written = new Map(leadEvents(context).map((event) => [event.tick, event.midi]));
+      const heard = generateScore(features).events.filter((event) => event.voice === 'lead');
+
+      expect(heard.length).toBeGreaterThan(0);
+      for (const event of heard) {
+        expect(written.get(event.tick), `tick ${event.tick}`).toBe(event.midi);
+      }
+    }
   });
 
   it('matches its recorded opening bar', () => {

@@ -54,11 +54,22 @@ function rankOf(voice: VoiceId): number {
  * Move the later-ranked voice off a unison, by an octave, if an octave is available inside
  * its own register. If neither octave works the note keeps its pitch: a doubled note is a
  * smaller loss than a hole in the melody.
+ *
+ * The order this walks in is the rule. Rank, not tick — "the later-ranked voice moves" and
+ * "whichever note started first wins" are different rules, and this used to implement the
+ * second one by accident, because it walked the canonical order and that sorts by tick. A
+ * bell struck on the eighth of a bar therefore outranked a lead note landing on the ninth,
+ * and rank 3 shoved rank 1 down an octave in the middle of its own phrase: a -17 semitone
+ * leap in a voice that guarantees it never moves by more than a fifth. Once every voice
+ * above has been placed, nothing below can reach up and move it.
  */
 function resolveUnisons(events: readonly NoteEvent[]): NoteEvent[] {
+  const byRank = [...events].sort(
+    (a, b) => rankOf(a.voice) - rankOf(b.voice) || a.tick - b.tick || a.midi - b.midi,
+  );
   const accepted: NoteEvent[] = [];
 
-  for (const event of events) {
+  for (const event of byRank) {
     const register = registerOf(event.voice);
     const collides = (midi: number) =>
       accepted.some(

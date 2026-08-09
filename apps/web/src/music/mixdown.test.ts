@@ -33,6 +33,19 @@ describe('unisons', () => {
     expect(result.map((event) => event.midi)).toStrictEqual([70, 70]);
   });
 
+  it('decides by rank, not by which note started first', () => {
+    // The rule is "the later-ranked voice moves". Walking the canonical order implements
+    // "whichever note started first wins" instead, because that order sorts by tick — so a
+    // bell struck on the eighth of the bar outranked a lead note landing on the ninth, and
+    // rank 3 pushed rank 1 down an octave in the middle of its own phrase. It showed up as
+    // a -17 semitone leap in a voice that guarantees it never moves by more than a fifth.
+    const result = mixdown([note('bell', 8, 77, 8), note('lead', 12, 77, 4)], 64);
+    expect(result.find((event) => event.voice === 'lead')?.midi).toBe(77);
+    // 77 - 12 is below the bell's own register, so it stays put and doubles instead. A
+    // doubled accent is a much smaller loss than a hole punched in the melody.
+    expect(result.find((event) => event.voice === 'bell')?.midi).toBe(77);
+  });
+
   it('never moves pad or bass', () => {
     const result = mixdown([note('bass', 0, 36), note('pad', 0, 48), note('pad', 0, 36)], 64);
     expect(result.filter((e) => e.voice === 'pad').map((e) => e.midi)).toStrictEqual([36, 48]);

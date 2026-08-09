@@ -91,6 +91,11 @@ Resolution order:
 - On a unison, the **later-ranked** voice moves by an octave — up first, then down — and keeps
   its pitch only if neither octave is inside its register. Pad and bass never move: they are
   the safety net, and their voicing is chosen as a whole.
+  - Rank decides this, never which note started first. Those are different rules and the
+    second one is easy to write by accident, because the canonical event order sorts by tick:
+    a bell struck on the eighth of a bar then outranks a lead note landing on the ninth, and
+    rank 3 displaces rank 1 in the middle of its own phrase. Resolve in rank order, so that
+    once a voice is placed nothing below it can reach up and move it.
 - Over the polyphony ceiling, notes are dropped from the **lowest-ranked voice first**, in
   reverse rank order. Pad and bass are dropped last and in practice never.
 
