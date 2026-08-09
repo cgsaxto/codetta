@@ -1,3 +1,4 @@
+import { pick } from './palette';
 import { unitHash } from './rng';
 import {
   TICKS_PER_BAR,
@@ -130,6 +131,38 @@ export function applyStructure(
     }
     return true;
   });
+}
+
+/**
+ * Metric accent: how loud a note is for sitting where it sits in the bar.
+ *
+ * Every voice used to emit one velocity for the entire piece — 156 arp notes at 0.4057, 85
+ * lead notes at 0.57978, not one accent anywhere. That is why the output had no pulse. A
+ * listener locates the beat by hearing which notes are stressed, and a line with no stresses
+ * has no metre to find, however correct its rhythm is on the grid. It is not a drum problem;
+ * drums would have covered it up rather than fixed it.
+ *
+ * The shape is the ordinary hierarchy of 4/4: beat one strongest, beat three next, the other
+ * two beats after that, then offbeat eighths, then sixteenths. Multiplicative, so a voice's
+ * feature-driven gain still decides how loud it is relative to the others and this only
+ * decides how it is shaped within the bar.
+ *
+ * Beds are not exempted, because they do not need to be — the pad and the texture only ever
+ * strike on the downbeat, where the multiplier is 1.
+ */
+const METRIC_ACCENTS = [
+  1, 0.72, 0.82, 0.72, 0.88, 0.72, 0.82, 0.72, 0.94, 0.72, 0.82, 0.72, 0.88, 0.72, 0.82, 0.72,
+] as const;
+
+export function applyAccents(events: readonly NoteEvent[]): NoteEvent[] {
+  return events.map((event) => ({
+    ...event,
+    // Four places, matching the rounding the API applies to every float it emits. Velocity
+    // is not audible at the fifth, and a golden diff is worth reading.
+    velocity:
+      Math.round(event.velocity * pick(METRIC_ACCENTS, event.tick % TICKS_PER_BAR) * 10000) /
+      10000,
+  }));
 }
 
 export interface VoiceContext {

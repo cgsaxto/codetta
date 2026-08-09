@@ -204,6 +204,18 @@ Return    Full, plus bell accents
 Outro     Voices drop out in reverse rank order, pad and bass last
 ```
 
+### Metric accent
+
+Velocity is shaped by position in the bar, in the ordinary 4/4 hierarchy: beat one strongest,
+beat three next, the other two beats after that, then offbeat eighths, then sixteenths. It is
+a multiplier, so a voice's feature-driven gain still sets its level against the other voices
+and this only shapes it within the bar.
+
+This is not decoration. Without it every voice emitted a single velocity for the whole piece,
+and the output had no pulse at all — a listener finds the beat by hearing which notes are
+stressed, and a line with no stresses has no metre to find however correct its rhythm is on
+the grid. Reaching for drums first would have covered that up rather than fixed it.
+
 Break used to read "drop to pad + lead", which contradicted Layer 2's "always present" for
 the bass. Layer 2 wins: the safety net is the one thing nothing is allowed to switch off,
 and four bars with no bass is not a breakdown, it is a hole. The density multiplier applies

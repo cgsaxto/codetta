@@ -4,10 +4,12 @@ import type { RepoFeatures } from '@codetta/schema';
 import {
   LANGUAGE_SHARE_FLOOR,
   MODULE_VOICE_ORDER,
+  applyAccents,
   assignVoices,
   countedLanguages,
   moduleVoiceCount,
 } from './arrangement';
+import { TICKS_PER_BAR } from './score';
 import { buildSkeleton } from './skeleton';
 
 function withLanguages(shares: number[]): RepoFeatures {
@@ -84,5 +86,60 @@ describe('assignVoices', () => {
     const voices: string[] = assignVoices(reactFeatures, skeleton).map((c) => c.voice);
     expect(voices).not.toContain('pad');
     expect(voices).not.toContain('bass');
+  });
+});
+
+describe('applyAccents', () => {
+  const at = (tick: number) => ({
+    voice: 'lead' as const,
+    tick,
+    durationTicks: 2,
+    midi: 72,
+    velocity: 0.5,
+  });
+
+  it('stresses the bar the way 4/4 is stressed', () => {
+    const [one, three, two, offbeat, sixteenth] = applyAccents([
+      at(0),
+      at(8),
+      at(4),
+      at(2),
+      at(1),
+    ]).map((event) => event.velocity);
+
+    // Strictly descending: beat 1, beat 3, the other beats, offbeat eighths, sixteenths.
+    expect([one, three, two, offbeat, sixteenth]).toStrictEqual(
+      [one, three, two, offbeat, sixteenth].sort((a, b) => (b ?? 0) - (a ?? 0)),
+    );
+    expect(one).toBeGreaterThan(sixteenth ?? 0);
+  });
+
+  it('shapes the bar without reordering the voices', () => {
+    // Multiplicative on purpose. A voice's own gain decides how loud it is against the
+    // others; this only decides how it is shaped inside the bar, so a quiet voice on a
+    // downbeat must not overtake a loud one on the same downbeat.
+    const quiet = { ...at(0), voice: 'texture' as const, velocity: 0.22 };
+    const loud = { ...at(0), velocity: 0.8 };
+    const [shapedQuiet, shapedLoud] = applyAccents([quiet, loud]);
+    expect(shapedQuiet?.velocity).toBeLessThan(shapedLoud?.velocity ?? 0);
+  });
+
+  it('repeats every bar and leaves everything but velocity alone', () => {
+    for (const tick of [0, 5, 11]) {
+      const [first] = applyAccents([at(tick)]);
+      const [later] = applyAccents([at(tick + TICKS_PER_BAR * 7)]);
+      expect(first?.velocity).toBe(later?.velocity);
+    }
+    const source = at(3);
+    const [accented] = applyAccents([source]);
+    expect({ ...accented, velocity: source.velocity }).toStrictEqual(source);
+  });
+
+  it('never pushes a velocity outside the range the validator allows', () => {
+    for (let tick = 0; tick < TICKS_PER_BAR; tick++) {
+      const [event] = applyAccents([{ ...at(tick), velocity: 1 }]);
+      expect(event?.velocity).toBeGreaterThan(0);
+      expect(event?.velocity).toBeLessThanOrEqual(1);
+    }
   });
 });

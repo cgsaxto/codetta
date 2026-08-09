@@ -64,7 +64,7 @@
       "tick": 8,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -99,7 +99,7 @@
       "tick": 24,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -134,7 +134,7 @@
       "tick": 40,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -169,7 +169,7 @@
       "tick": 56,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -204,35 +204,35 @@
       "tick": 66,
       "durationTicks": 2,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 68,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "bass",
       "tick": 72,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 72,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "lead",
       "tick": 76,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "pad",
@@ -274,7 +274,7 @@
       "tick": 88,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -316,63 +316,63 @@
       "tick": 96,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "lead",
       "tick": 98,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 100,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 100,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 104,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 104,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 104,
       "durationTicks": 4,
       "midi": 70,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 108,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 108,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -414,21 +414,21 @@
       "tick": 112,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "arp",
       "tick": 116,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 120,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -463,14 +463,14 @@
       "tick": 128,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 128,
       "durationTicks": 8,
       "midi": 79,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -484,56 +484,56 @@
       "tick": 130,
       "durationTicks": 2,
       "midi": 82,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 132,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 132,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 136,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 136,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 136,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 140,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 140,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -575,7 +575,7 @@
       "tick": 144,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -589,14 +589,14 @@
       "tick": 148,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 152,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -638,14 +638,14 @@
       "tick": 160,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 160,
       "durationTicks": 8,
       "midi": 77,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -659,56 +659,56 @@
       "tick": 162,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 164,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 164,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 168,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 168,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 168,
       "durationTicks": 4,
       "midi": 70,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 172,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 172,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -750,7 +750,7 @@
       "tick": 176,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -764,14 +764,14 @@
       "tick": 180,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 184,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -806,14 +806,14 @@
       "tick": 192,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 192,
       "durationTicks": 8,
       "midi": 79,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -827,56 +827,56 @@
       "tick": 194,
       "durationTicks": 2,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 196,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 196,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 200,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 200,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 200,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 204,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 204,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -918,7 +918,7 @@
       "tick": 208,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -932,14 +932,14 @@
       "tick": 212,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 216,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -981,14 +981,14 @@
       "tick": 224,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 224,
       "durationTicks": 8,
       "midi": 77,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -1002,56 +1002,56 @@
       "tick": 226,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 228,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 228,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 232,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 232,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 232,
       "durationTicks": 4,
       "midi": 70,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 236,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 236,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -1093,7 +1093,7 @@
       "tick": 240,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -1107,14 +1107,14 @@
       "tick": 244,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 248,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1142,21 +1142,21 @@
       "tick": 260,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "bass",
       "tick": 264,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 268,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "pad",
@@ -1191,7 +1191,7 @@
       "tick": 280,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1226,21 +1226,21 @@
       "tick": 290,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 292,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "bass",
       "tick": 296,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1275,7 +1275,7 @@
       "tick": 312,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1310,14 +1310,14 @@
       "tick": 320,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 320,
       "durationTicks": 8,
       "midi": 79,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -1331,56 +1331,56 @@
       "tick": 322,
       "durationTicks": 2,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 324,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 324,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 328,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 328,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 328,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 332,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 332,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -1422,7 +1422,7 @@
       "tick": 336,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -1436,14 +1436,14 @@
       "tick": 340,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 344,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1485,14 +1485,14 @@
       "tick": 352,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 352,
       "durationTicks": 8,
       "midi": 77,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -1506,56 +1506,56 @@
       "tick": 354,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 356,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 356,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 360,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 360,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 360,
       "durationTicks": 4,
       "midi": 70,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 364,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 364,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -1597,7 +1597,7 @@
       "tick": 368,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -1611,14 +1611,14 @@
       "tick": 372,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 376,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1653,14 +1653,14 @@
       "tick": 384,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 384,
       "durationTicks": 8,
       "midi": 79,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -1674,56 +1674,56 @@
       "tick": 386,
       "durationTicks": 2,
       "midi": 82,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 388,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 388,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 392,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 392,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 392,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 396,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 396,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -1765,7 +1765,7 @@
       "tick": 400,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -1779,14 +1779,14 @@
       "tick": 404,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 408,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1828,14 +1828,14 @@
       "tick": 416,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 416,
       "durationTicks": 8,
       "midi": 77,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -1849,56 +1849,56 @@
       "tick": 418,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 420,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 420,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 424,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 424,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 424,
       "durationTicks": 4,
       "midi": 70,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 428,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 428,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -1940,7 +1940,7 @@
       "tick": 432,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "texture",
@@ -1954,14 +1954,14 @@
       "tick": 436,
       "durationTicks": 4,
       "midi": 65,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 440,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -1996,14 +1996,14 @@
       "tick": 448,
       "durationTicks": 4,
       "midi": 60,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "bell",
       "tick": 448,
       "durationTicks": 8,
       "midi": 79,
-      "velocity": 0.31479999999999997
+      "velocity": 0.3148
     },
     {
       "voice": "texture",
@@ -2017,56 +2017,56 @@
       "tick": 450,
       "durationTicks": 2,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 452,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 452,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 456,
       "durationTicks": 7,
       "midi": 24,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 456,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "arp",
       "tick": 456,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4985
     },
     {
       "voice": "lead",
       "tick": 460,
       "durationTicks": 4,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "arp",
       "tick": 460,
       "durationTicks": 4,
       "midi": 64,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "pad",
@@ -2108,21 +2108,21 @@
       "tick": 464,
       "durationTicks": 4,
       "midi": 62,
-      "velocity": 0.53035
+      "velocity": 0.5304
     },
     {
       "voice": "arp",
       "tick": 468,
       "durationTicks": 4,
       "midi": 67,
-      "velocity": 0.53035
+      "velocity": 0.4667
     },
     {
       "voice": "bass",
       "tick": 472,
       "durationTicks": 7,
       "midi": 31,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "pad",
@@ -2164,35 +2164,35 @@
       "tick": 482,
       "durationTicks": 2,
       "midi": 81,
-      "velocity": 0.7662
+      "velocity": 0.6283
     },
     {
       "voice": "lead",
       "tick": 484,
       "durationTicks": 4,
       "midi": 79,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "bass",
       "tick": 488,
       "durationTicks": 7,
       "midi": 34,
-      "velocity": 0.75
+      "velocity": 0.705
     },
     {
       "voice": "lead",
       "tick": 488,
       "durationTicks": 4,
       "midi": 77,
-      "velocity": 0.7662
+      "velocity": 0.7202
     },
     {
       "voice": "lead",
       "tick": 492,
       "durationTicks": 4,
       "midi": 76,
-      "velocity": 0.7662
+      "velocity": 0.6743
     },
     {
       "voice": "pad",
@@ -2227,7 +2227,7 @@
       "tick": 504,
       "durationTicks": 7,
       "midi": 29,
-      "velocity": 0.75
+      "velocity": 0.705
     }
   ],
   "timbre": {
