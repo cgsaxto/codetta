@@ -16,7 +16,7 @@ import {
   type NoteEvent,
 } from '../score';
 import { buildSkeleton } from '../skeleton';
-import { leadEvents } from './lead';
+import { TARGET_BAND, leadEvents } from './lead';
 
 const skeleton = buildSkeleton(reactFeatures);
 
@@ -145,13 +145,35 @@ describe('lead', () => {
   // they were checking clamped to the same answer for every repository on earth. See
   // music/calibration.ts for where these replacements come from.
 
-  it('stays near the register its module asked for', () => {
+  it('stays near the target its module asked for', () => {
     // Without the tether a random walk drifts and avgNestingDepth would only decide where
-    // the first note landed.
-    const events = leadEvents(leadContext({ avgNestingDepth: 0.05 }));
-    const average = events.reduce((sum, event) => sum + event.midi, 0) / events.length;
-    const [lo, hi] = VOICE_REGISTERS.lead;
-    expect(average).toBeLessThan(lo + (hi - lo) / 2);
+    // the first note landed. Measured against the target band rather than the register,
+    // because the band is deliberately narrower than the register — "in the lower half of
+    // C4–C6" stopped being the same statement as "low".
+    const [bandLo, bandHi] = TARGET_BAND;
+    for (const [avgNestingDepth, position] of [
+      [0, 0],
+      [0.45, 0.5],
+      [5, 1],
+    ] as const) {
+      const events = leadEvents(leadContext({ avgNestingDepth }));
+      const average = events.reduce((sum, event) => sum + event.midi, 0) / events.length;
+      const target = bandLo + (bandHi - bandLo) * position;
+      expect(Math.abs(average - target), `nesting ${avgNestingDepth}`).toBeLessThan(4);
+    }
+  });
+
+  it('does not park inside the pad, however flat the module', () => {
+    // The mud that got reported. react's nesting is near zero, which used to put its lead at
+    // 60–72 against a pad voiced 53–70: not overlapping registers, the same register, and
+    // two voices sharing a register and a chord is what mud is made of. Single notes may dip
+    // into the pad — the register overlaps on purpose — but the line's centre may not.
+    const [, padTop] = VOICE_REGISTERS.pad;
+    for (const avgNestingDepth of [0, 0.05, 0.3, 0.85, 5]) {
+      const events = leadEvents(leadContext({ avgNestingDepth }));
+      const average = events.reduce((sum, event) => sum + event.midi, 0) / events.length;
+      expect(average, `nesting ${avgNestingDepth}`).toBeGreaterThanOrEqual(padTop);
+    }
   });
 
   it('takes note length from average function length', () => {

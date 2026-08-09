@@ -93,6 +93,30 @@ const CONTOUR_RANGE = 5;
 /** Weight on staying in the module's register when anchoring a phrase, against smoothness. */
 const REGISTER_PULL = 0.5;
 
+/** Room left below the register ceiling for the motif to rise into, in semitones. */
+const HEADROOM = 4;
+
+/**
+ * The band within the lead's register that nesting may place the line in.
+ *
+ * Not the whole register, in either direction, and both ends were audible.
+ *
+ * The floor is the top of the pad's register. The lead's register starts at C4 and the pad's
+ * runs to C5, so a lead targeted at the bottom of its own register is not overlapping the
+ * pad — it is inside it. facebook/react's nesting sits near zero, which parked its lead at
+ * 60–72 against a pad voiced 53–70, and it turned to mud exactly as you would expect of two
+ * voices sharing a register and a chord. The lower half of the register is where the contour
+ * may reach; it is not where the line should live.
+ *
+ * The ceiling is held back for the mirror reason. psf/requests pins nesting at the maximum,
+ * which put its target on C6 — the top note of the register, so every motif could only move
+ * downwards from it, and the line sat at the very edge of the instrument all piece.
+ */
+export const TARGET_BAND: readonly [number, number] = [
+  VOICE_REGISTERS.pad[1],
+  VOICE_REGISTERS.lead[1] - HEADROOM,
+];
+
 /**
  * Degree offsets from the phrase anchor, one per onset. Generated once and reused, which is
  * what makes it a motif rather than a sequence of notes. The last offset returns to the
@@ -138,8 +162,9 @@ export function leadEvents(context: VoiceContext): NoteEvent[] {
     ARTICULATIONS,
     functionLengthPosition(module) * ARTICULATIONS.length,
   );
-  // Deeper nesting sits higher in the register.
-  const target = lo + (hi - lo) * nestingPosition(module);
+  // Deeper nesting sits higher, inside the band rather than across the whole register.
+  const [bandLo, bandHi] = TARGET_BAND;
+  const target = bandLo + (bandHi - bandLo) * nestingPosition(module);
   // Bigger module, louder voice.
   const velocity = clamp(0.45 + module.share * 0.6, 0.4, 0.8);
 
