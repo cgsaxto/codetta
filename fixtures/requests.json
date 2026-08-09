@@ -1,0 +1,464 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "psf",
+    "name": "requests",
+    "ref": "main",
+    "commitSha": "1f6589ec3a1ee910f9a65cc3ceac60b26677bc0e",
+    "primaryLanguage": "Python",
+    "stars": 54261,
+    "fetchedAt": "2026-08-09T01:55:45Z"
+  },
+  "seed": "1f6589ec",
+  "totals": {
+    "filesScanned": 37,
+    "filesSkipped": 91,
+    "linesOfCode": 9841,
+    "functions": 714,
+    "classes": 96,
+    "imports": 311
+  },
+  "languages": [
+    {
+      "name": "Python",
+      "share": 1,
+      "files": 37
+    }
+  ],
+  "modules": [
+    {
+      "path": "src/requests",
+      "share": 0.527,
+      "files": 19,
+      "linesOfCode": 5186,
+      "avgNestingDepth": 0.8843,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 6.6045,
+      "cyclomaticDensity": 0.0188,
+      "commentRatio": 0.1026,
+      "asyncRatio": 0
+    },
+    {
+      "path": "tests",
+      "share": 0.4207,
+      "files": 13,
+      "linesOfCode": 4140,
+      "avgNestingDepth": 0.3681,
+      "maxNestingDepth": 3,
+      "avgFunctionLength": 4.787,
+      "cyclomaticDensity": 0.0059,
+      "commentRatio": 0.0331,
+      "asyncRatio": 0
+    },
+    {
+      "path": "docs",
+      "share": 0.0296,
+      "files": 1,
+      "linesOfCode": 291,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 0,
+      "avgFunctionLength": 0,
+      "cyclomaticDensity": 0,
+      "commentRatio": 0.7388,
+      "asyncRatio": 0
+    },
+    {
+      "path": "tests/testserver",
+      "share": 0.0146,
+      "files": 2,
+      "linesOfCode": 144,
+      "avgNestingDepth": 0.7857,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 5.7857,
+      "cyclomaticDensity": 0.0164,
+      "commentRatio": 0.0556,
+      "asyncRatio": 0
+    },
+    {
+      "path": "docs/_themes",
+      "share": 0.0075,
+      "files": 1,
+      "linesOfCode": 74,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 0,
+      "avgFunctionLength": 0,
+      "cyclomaticDensity": 0,
+      "commentRatio": 0.8919,
+      "asyncRatio": 0
+    },
+    {
+      "path": ".",
+      "share": 0.0006,
+      "files": 1,
+      "linesOfCode": 6,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 1,
+      "avgFunctionLength": 0,
+      "cyclomaticDensity": 0.0233,
+      "commentRatio": 0.1667,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "docs/_themes",
+      "path": "docs/_themes/flask_theme_support.py",
+      "linesOfCode": 74,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 66
+    },
+    {
+      "index": 1,
+      "modulePath": "docs",
+      "path": "docs/conf.py",
+      "linesOfCode": 291,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 215
+    },
+    {
+      "index": 2,
+      "modulePath": "src/requests",
+      "path": "src/requests/__init__.py",
+      "linesOfCode": 184,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 12,
+      "commentLines": 21
+    },
+    {
+      "index": 3,
+      "modulePath": "src/requests",
+      "path": "src/requests/__version__.py",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 4,
+      "modulePath": "src/requests",
+      "path": "src/requests/_internal_utils.py",
+      "linesOfCode": 40,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 5,
+      "modulePath": "src/requests",
+      "path": "src/requests/_types.py",
+      "linesOfCode": 148,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 9
+    },
+    {
+      "index": 6,
+      "modulePath": "src/requests",
+      "path": "src/requests/adapters.py",
+      "linesOfCode": 634,
+      "functions": 20,
+      "maxNesting": 3,
+      "branches": 47,
+      "commentLines": 21
+    },
+    {
+      "index": 7,
+      "modulePath": "src/requests",
+      "path": "src/requests/api.py",
+      "linesOfCode": 139,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 8,
+      "modulePath": "src/requests",
+      "path": "src/requests/auth.py",
+      "linesOfCode": 283,
+      "functions": 24,
+      "maxNesting": 3,
+      "branches": 34,
+      "commentLines": 30
+    },
+    {
+      "index": 9,
+      "modulePath": "src/requests",
+      "path": "src/requests/certs.py",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 10,
+      "modulePath": "src/requests",
+      "path": "src/requests/compat.py",
+      "linesOfCode": 94,
+      "functions": 1,
+      "maxNesting": 3,
+      "branches": 7,
+      "commentLines": 23
+    },
+    {
+      "index": 11,
+      "modulePath": "src/requests",
+      "path": "src/requests/cookies.py",
+      "linesOfCode": 503,
+      "functions": 52,
+      "maxNesting": 5,
+      "branches": 53,
+      "commentLines": 26
+    },
+    {
+      "index": 12,
+      "modulePath": "src/requests",
+      "path": "src/requests/exceptions.py",
+      "linesOfCode": 98,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 13,
+      "modulePath": "src/requests",
+      "path": "src/requests/help.py",
+      "linesOfCode": 110,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 14,
+      "commentLines": 7
+    },
+    {
+      "index": 14,
+      "modulePath": "src/requests",
+      "path": "src/requests/hooks.py",
+      "linesOfCode": 35,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 1
+    },
+    {
+      "index": 15,
+      "modulePath": "src/requests",
+      "path": "src/requests/models.py",
+      "linesOfCode": 988,
+      "functions": 52,
+      "maxNesting": 6,
+      "branches": 122,
+      "commentLines": 143
+    },
+    {
+      "index": 16,
+      "modulePath": "src/requests",
+      "path": "src/requests/packages.py",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 3,
+      "branches": 6,
+      "commentLines": 4
+    },
+    {
+      "index": 17,
+      "modulePath": "src/requests",
+      "path": "src/requests/sessions.py",
+      "linesOfCode": 758,
+      "functions": 29,
+      "maxNesting": 3,
+      "branches": 54,
+      "commentLines": 126
+    },
+    {
+      "index": 18,
+      "modulePath": "src/requests",
+      "path": "src/requests/status_codes.py",
+      "linesOfCode": 116,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 5
+    },
+    {
+      "index": 19,
+      "modulePath": "src/requests",
+      "path": "src/requests/structures.py",
+      "linesOfCode": 96,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 9
+    },
+    {
+      "index": 20,
+      "modulePath": "src/requests",
+      "path": "src/requests/utils.py",
+      "linesOfCode": 915,
+      "functions": 47,
+      "maxNesting": 5,
+      "branches": 132,
+      "commentLines": 99
+    },
+    {
+      "index": 21,
+      "modulePath": "tests",
+      "path": "tests/__init__.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 22,
+      "modulePath": "tests",
+      "path": "tests/compat.py",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 23,
+      "modulePath": "tests",
+      "path": "tests/conftest.py",
+      "linesOfCode": 48,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 4
+    },
+    {
+      "index": 24,
+      "modulePath": "tests",
+      "path": "tests/test_adapters.py",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 25,
+      "modulePath": "tests",
+      "path": "tests/test_help.py",
+      "linesOfCode": 18,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 26,
+      "modulePath": "tests",
+      "path": "tests/test_hooks.py",
+      "linesOfCode": 15,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 27,
+      "modulePath": "tests",
+      "path": "tests/test_lowlevel.py",
+      "linesOfCode": 329,
+      "functions": 22,
+      "maxNesting": 3,
+      "branches": 21,
+      "commentLines": 28
+    },
+    {
+      "index": 28,
+      "modulePath": "tests",
+      "path": "tests/test_packages.py",
+      "linesOfCode": 7,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 29,
+      "modulePath": "tests",
+      "path": "tests/test_requests.py",
+      "linesOfCode": 2597,
+      "functions": 284,
+      "maxNesting": 2,
+      "branches": 111,
+      "commentLines": 79
+    },
+    {
+      "index": 30,
+      "modulePath": "tests",
+      "path": "tests/test_structures.py",
+      "linesOfCode": 71,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 31,
+      "modulePath": "tests",
+      "path": "tests/test_testserver.py",
+      "linesOfCode": 129,
+      "functions": 12,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 7
+    },
+    {
+      "index": 32,
+      "modulePath": "tests",
+      "path": "tests/test_utils.py",
+      "linesOfCode": 875,
+      "functions": 79,
+      "maxNesting": 3,
+      "branches": 24,
+      "commentLines": 15
+    },
+    {
+      "index": 33,
+      "modulePath": "tests/testserver",
+      "path": "tests/testserver/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 34,
+      "modulePath": "tests/testserver",
+      "path": "tests/testserver/server.py",
+      "linesOfCode": 144,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 8
+    },
+    {
+      "index": 35,
+      "modulePath": "tests",
+      "path": "tests/utils.py",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    }
+  ]
+}

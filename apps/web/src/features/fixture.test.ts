@@ -1,20 +1,21 @@
 import { describe, expect, it } from 'vitest';
-import { reactFeatures } from './fixture';
-import type { RepoFeatures } from '@codetta/schema';
+import { FIXTURES } from './fixture';
 
 /**
- * The fixtures are hand-authored, so nothing but a test stops them from drifting away
- * from docs/features-schema.md. Every assertion here restates a rule from that document.
- * When the API lands in Phase 1 these become the golden-output checks.
+ * Every assertion here restates a rule from docs/features-schema.md.
+ *
+ * These began as a guard against hand-authored fixtures drifting from the spec. The
+ * fixtures are real API output now, which makes this the other half of the conformance
+ * story: packages/schema proves the two languages agree about the document's shape, and
+ * this proves apps/api actually honours the rules that shape cannot express — ordering,
+ * rounding, ratios that must sum to one, timeline entries that must sit under their module.
  */
-
-const FIXTURES: ReadonlyArray<readonly [string, RepoFeatures]> = [['react', reactFeatures]];
 
 const isCount = (n: number) => Number.isInteger(n) && n >= 0;
 const isRatio = (n: number) => n >= 0 && n <= 1;
 const isRounded = (n: number) => Number(n.toFixed(4)) === n;
 
-describe.each(FIXTURES)('fixtures/%s.json', (_name, features) => {
+describe.each(Object.entries(FIXTURES))('fixtures/%s.json', (_name, features) => {
   it('declares the current schema version', () => {
     expect(features.schemaVersion).toBe(1);
   });
