@@ -178,6 +178,125 @@ func TestStopsAtTheFileCapWithoutFailing(t *testing.T) {
 	}
 }
 
+func TestTheFileCapSamplesTheRepositoryInsteadOfTakingItsFirstCorner(t *testing.T) {
+	// The bug this exists for: the cap used to keep the first MaxFiles in tar order, which is
+	// roughly alphabetical. On facebook/react that spent all 2,000 inside compiler/ and never
+	// reached packages/react-dom, so the resulting document described the compiler and called
+	// it React. Sampling keeps the shape, which is what the timeline already does one layer up.
+	limits := DefaultLimits()
+	limits.MaxFiles = 6
+
+	entries := make([]entry, 0, 60)
+	for _, dir := range []string{"aaa", "mmm", "zzz"} {
+		for i := range 20 {
+			entries = append(entries, entry{
+				name: fmt.Sprintf("%s/f%02d.go", dir, i),
+				body: "package main",
+			})
+		}
+	}
+
+	result := walk(t, buildArchive(t, "o-r-sha", entries), limits, acceptAll)
+
+	seen := map[string]int{}
+	for _, f := range result.Files {
+		seen[strings.Split(f.Path, "/")[0]]++
+	}
+	for _, dir := range []string{"aaa", "mmm", "zzz"} {
+		if seen[dir] == 0 {
+			t.Errorf("directory %q got no files at all; kept %v", dir, paths(result))
+		}
+	}
+}
+
+func TestBothEndsOfTheRepositorySurviveTheFileCap(t *testing.T) {
+	// Keeping the ends is what makes the sample describe the whole repository rather than a
+	// window inside it, and it is the property the alphabetical truncation destroyed.
+	limits := DefaultLimits()
+	limits.MaxFiles = 4
+
+	entries := make([]entry, 0, 40)
+	for i := range 40 {
+		entries = append(entries, entry{name: fmt.Sprintf("f%02d.go", i), body: "package main"})
+	}
+
+	got := paths(walk(t, buildArchive(t, "o-r-sha", entries), limits, acceptAll))
+	if len(got) != 4 {
+		t.Fatalf("kept %v, want 4 files", got)
+	}
+	if got[0] != "f00.go" || got[3] != "f39.go" {
+		t.Errorf("kept %v, want it to start at f00.go and end at f39.go", got)
+	}
+}
+
+func TestFilesComeBackInLexicographicOrder(t *testing.T) {
+	// docs/features-schema.md: "File traversal order is depth-first, lexicographic by path.
+	// Never filesystem order." Tar order is close enough to hide a difference most of the
+	// time, which is exactly why it is worth pinning rather than assuming.
+	archive := buildArchive(t, "o-r-sha", []entry{
+		{name: "src/zebra.go", body: "package main"},
+		{name: "src/apple.go", body: "package main"},
+		{name: "lib/mango.go", body: "package main"},
+	})
+
+	got := paths(walk(t, archive, DefaultLimits(), acceptAll))
+	want := []string{"lib/mango.go", "src/apple.go", "src/zebra.go"}
+	if len(got) != len(want) {
+		t.Fatalf("paths = %v, want %v", got, want)
+	}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Fatalf("paths = %v, want %v", got, want)
+		}
+	}
+}
+
+func TestTheSampleIsTheSameEveryTime(t *testing.T) {
+	// Same commit, same document, forever. A sample chosen by anything but the sorted path
+	// list would break that quietly, one file at a time.
+	limits := DefaultLimits()
+	limits.MaxFiles = 7
+
+	entries := make([]entry, 0, 50)
+	for i := range 50 {
+		entries = append(entries, entry{name: fmt.Sprintf("d%d/f%02d.go", i%4, i), body: "package main"})
+	}
+	archive := buildArchive(t, "o-r-sha", entries)
+
+	first := strings.Join(paths(walk(t, archive, limits, acceptAll)), ",")
+	for range 5 {
+		if got := strings.Join(paths(walk(t, archive, limits, acceptAll)), ","); got != first {
+			t.Fatalf("the same archive produced %q then %q", first, got)
+		}
+	}
+}
+
+func TestFileContentsStayWithTheirPaths(t *testing.T) {
+	// Two passes means the path is read in one and the body in the other. Pairing them up
+	// wrongly would be invisible in every count and wrong in every parse.
+	limits := DefaultLimits()
+	limits.MaxFiles = 5
+
+	entries := make([]entry, 0, 30)
+	for i := range 30 {
+		entries = append(entries, entry{
+			name: fmt.Sprintf("f%02d.go", i),
+			body: fmt.Sprintf("package p%02d", i),
+		})
+	}
+
+	result := walk(t, buildArchive(t, "o-r-sha", entries), limits, acceptAll)
+	if len(result.Files) != 5 {
+		t.Fatalf("kept %d files, want 5", len(result.Files))
+	}
+	for _, f := range result.Files {
+		want := "package p" + strings.TrimSuffix(strings.TrimPrefix(f.Path, "f"), ".go")
+		if string(f.Data) != want {
+			t.Errorf("%s holds %q, want %q", f.Path, f.Data, want)
+		}
+	}
+}
+
 func TestTruncatesRatherThanReadingPastTheArchiveCap(t *testing.T) {
 	// The cap is on the compressed stream, because that is the only figure known before
 	// decompressing. A gzip bomb is small until it is not.

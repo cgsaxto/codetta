@@ -99,6 +99,18 @@ Given the same `commitSha`, the API must emit a byte-identical document. That me
 Exceeding a limit is a normal outcome, not an error: parse what fits, report the rest in
 `totals.filesSkipped`, and return a valid document.
 
+**"Parse what fits" means sample, never truncate** — the same rule the `timeline` above
+states, for the same reason, and it is worth spelling out separately because the obvious
+implementation of a file cap violates it. A tarball arrives in roughly alphabetical order, so
+keeping the first 2,000 files keeps the first alphabetical corner of the repository. On
+`facebook/react` that corner is `compiler/`, which swallowed the entire budget before the
+walk reached `packages/react-dom` — the document described the compiler and called it React.
+So the 2,000 are chosen evenly across the sorted candidate list, keeping both ends, and the
+files that fall between the samples count toward `filesSkipped` like any other.
+
+This is why the archive is read twice. A sample cannot pick anything until it knows how many
+candidates exist, and a stream cannot know that until it has ended.
+
 ## Caching
 
 Redis, key `features:v1:{commitSha}`, TTL 30 days. Resolve `ref` → `commitSha` first
