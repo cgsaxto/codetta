@@ -15,6 +15,16 @@ export default defineConfig({
   },
   server: {
     fs: { allow: [workspaceRoot] },
+    // So the app can call a same-origin /api in development and in production alike, and
+    // needs no build-time configuration to know where the service is. The API also sets
+    // permissive CORS, which is what VITE_API_URL is for when the two are hosted apart.
+    proxy: {
+      '/api': {
+        target: 'http://localhost:8080',
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ''),
+      },
+    },
   },
   test: {
     environment: 'node',

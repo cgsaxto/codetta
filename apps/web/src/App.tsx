@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import type { RepoFeatures } from '@codetta/schema';
 import { startPlayback, type Player } from './audio/player';
+import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
 import { FIXTURES, type FixtureName } from './features/fixture';
 import { generateScore } from './music/generate';
 import { scoreDurationSeconds, type Score } from './music/score';
@@ -15,19 +17,59 @@ function leadSummary(score: Score): string {
   return `${midi.length} notes · ${Math.max(...midi) - Math.min(...midi)} semitone span`;
 }
 
+/** The two committed fixtures, playable with no service running. */
+const EXAMPLES = Object.keys(FIXTURES) as FixtureName[];
+
 export default function App() {
-  const [name, setName] = useState<FixtureName>('react');
-  const features = FIXTURES[name];
-  const score = useMemo(() => generateScore(features), [features]);
-  const [player, setPlayer] = useState<Player | null>(null);
-  const [busy, setBusy] = useState(false);
+  const [features, setFeatures] = useState<RepoFeatures>(FIXTURES.react);
+  const [input, setInput] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [player, setPlayer] = useState<Player | null>(null);
+  const [starting, setStarting] = useState(false);
+
+  // So a slow repository can be abandoned when another is asked for, rather than arriving
+  // later and replacing whatever is playing by then.
+  const pending = useRef<AbortController | null>(null);
+
+  const score = useMemo(() => generateScore(features), [features]);
 
   useEffect(() => () => player?.stop(), [player]);
+  useEffect(() => () => pending.current?.abort(), []);
 
   function stop() {
     player?.stop();
     setPlayer(null);
+  }
+
+  function show(next: RepoFeatures) {
+    stop();
+    setFeatures(next);
+    setError(null);
+  }
+
+  async function load(text: string) {
+    const repo = parseRepoRef(text);
+    if (!repo) {
+      setError('That does not look like a repository. Try `facebook/react`.');
+      return;
+    }
+
+    pending.current?.abort();
+    const controller = new AbortController();
+    pending.current = controller;
+
+    stop();
+    setLoading(true);
+    setError(null);
+    try {
+      show(await fetchFeatures(repo, controller.signal));
+    } catch (cause) {
+      if (controller.signal.aborted) return;
+      setError(cause instanceof ApiError ? cause.message : String(cause));
+    } finally {
+      if (!controller.signal.aborted) setLoading(false);
+    }
   }
 
   async function toggle() {
@@ -35,14 +77,14 @@ export default function App() {
       stop();
       return;
     }
-    setBusy(true);
+    setStarting(true);
     try {
       setPlayer(await startPlayback(score));
       setError(null);
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
-      setBusy(false);
+      setStarting(false);
     }
   }
 
@@ -53,29 +95,51 @@ export default function App() {
     ['key', `${score.root} ${score.mode}`],
     ['tempo', `${score.bpm} BPM`],
     ['loop', score.progressionId],
+    ['kit', score.kit],
     ['length', `${score.bars} bars · ${scoreDurationSeconds(score).toFixed(1)} s`],
     ['notes', `${score.events.length}`],
     ['lead', leadSummary(score)],
   ];
 
   return (
-    <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-8 p-8 font-mono text-sm">
+    <main className="mx-auto flex min-h-dvh max-w-sm flex-col justify-center gap-6 p-8 font-mono text-sm">
       <h1 className="text-2xl font-semibold tracking-tight">Codetta</h1>
 
-      {/* A/B between the two ends of the calibration. Not a product feature — Phase 3 owns
-          what choosing a repo looks like, and it is a gallery, not a pair of buttons. This
-          is here because "is react too sparse" is only answerable against something else. */}
-      <div className="flex gap-2">
-        {(Object.keys(FIXTURES) as FixtureName[]).map((option) => (
+      <form
+        className="flex gap-2"
+        onSubmit={(event) => {
+          event.preventDefault();
+          void load(input);
+        }}
+      >
+        <input
+          value={input}
+          onChange={(event) => setInput(event.target.value)}
+          placeholder="owner/repo"
+          spellCheck={false}
+          autoCapitalize="off"
+          autoCorrect="off"
+          className="min-w-0 flex-1 rounded border border-neutral-300 px-3 py-1.5 outline-none focus:border-neutral-900"
+        />
+        <button
+          type="submit"
+          disabled={loading}
+          className="rounded border border-neutral-900 px-3 py-1.5 font-medium hover:bg-neutral-900 hover:text-white disabled:opacity-40"
+        >
+          {loading ? 'reading…' : 'load'}
+        </button>
+      </form>
+
+      {/* The committed fixtures. They need no service, and they sit at opposite ends of the
+          calibration, which is what makes them worth keeping as the first thing heard. */}
+      <div className="flex gap-2 text-xs">
+        {EXAMPLES.map((option) => (
           <button
             key={option}
             type="button"
-            onClick={() => {
-              stop();
-              setName(option);
-            }}
-            className={`rounded border px-3 py-1.5 ${
-              option === name
+            onClick={() => show(FIXTURES[option])}
+            className={`rounded border px-2 py-1 ${
+              FIXTURES[option].repo.commitSha === repo.commitSha
                 ? 'border-neutral-900 bg-neutral-900 text-white'
                 : 'border-neutral-300 text-neutral-500 hover:border-neutral-900'
             }`}
@@ -89,7 +153,7 @@ export default function App() {
         {rows.map(([label, value]) => (
           <div key={label} className="contents">
             <dt>{label}</dt>
-            <dd className="text-neutral-900">{value}</dd>
+            <dd className="truncate text-neutral-900">{value}</dd>
           </div>
         ))}
       </dl>
@@ -97,19 +161,18 @@ export default function App() {
       <button
         type="button"
         onClick={() => void toggle()}
-        disabled={busy}
+        disabled={starting}
         className="rounded border border-neutral-900 px-4 py-3 font-medium hover:bg-neutral-900 hover:text-white disabled:opacity-40"
       >
-        {busy ? 'loading…' : player ? 'stop' : 'play'}
+        {starting ? 'loading…' : player ? 'stop' : 'play'}
       </button>
 
       {error && <p className="text-red-600">{error}</p>}
 
       <p className="text-xs leading-relaxed text-neutral-400">
-        Both are real API output. The lead is the largest module, and the question these two are
-        here to answer is whether it carries anything: react&rsquo;s largest module is flat DOM
-        plumbing, requests&rsquo; is the library itself. The peak starts around bar&nbsp;12 and
-        is where the shareable clip is cut from. Headphones — the bass sits in C1–C2.
+        Paste any public repository in TypeScript, JavaScript, Python or Go. Large ones take a
+        few seconds the first time and are instant afterwards. The peak starts around bar 12,
+        which is where the shareable clip gets cut from. Headphones — the bass sits in C1–C2.
       </p>
     </main>
   );
