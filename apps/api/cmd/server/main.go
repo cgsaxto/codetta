@@ -15,6 +15,7 @@ import (
 	"syscall"
 	"time"
 
+	"codetta.dev/api/internal/api"
 	"codetta.dev/api/internal/cache"
 	"codetta.dev/api/internal/config"
 	"codetta.dev/api/internal/github"
@@ -42,25 +43,18 @@ func run(logger *slog.Logger) error {
 
 	// Constructed here rather than per-request so connections are reused, and so a bad token
 	// is a startup concern rather than a surprise on the first repository.
-	_ = github.New(cfg.GitHubToken)
+	client := github.New(cfg.GitHubToken)
 
 	// Never pings. A Redis that is down now and up later starts working on its own, which is
 	// the difference between a cache and a dependency.
-	features, err := cache.New(cfg.RedisURL, logger)
+	store, err := cache.New(cfg.RedisURL, logger)
 	if err != nil {
 		return fmt.Errorf("configuring the cache: %w", err)
 	}
-	_ = features
-
-	mux := http.NewServeMux()
-	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, _ *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		_, _ = w.Write([]byte(`{"status":"ok"}`))
-	})
 
 	server := &http.Server{
 		Addr:    cfg.Addr,
-		Handler: mux,
+		Handler: api.Handler(api.Deps{GitHub: client, Cache: store, Logger: logger}),
 		// Comfortably past the 25 s fetch budget, so a slow repository is cut off by its own
 		// deadline with a friendly message rather than by the socket closing underneath it.
 		ReadHeaderTimeout: 5 * time.Second,
