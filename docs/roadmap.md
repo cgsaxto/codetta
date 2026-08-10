@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 1**
+**Current phase: 2**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -41,7 +41,7 @@ change of genre rather than a missing feature. Worth a listen before committing 
 
 ---
 
-## Phase 1 — Real repos
+## Phase 1 — Real repos ✅
 
 - [x] `packages/schema` — RepoFeatures types for TS and Go, hand-written, proved equivalent
 
@@ -128,10 +128,22 @@ change of genre rather than a missing feature. Worth a listen before committing 
   `stars` had to join `fetchedAt` in the exclusions, per @docs/features-schema.md — two
   fetches of `vuejs/core` at one SHA differ by five stars and nothing else.
 
-- [ ] Web app consumes the API instead of the local fixture
+- [x] Web app consumes the API instead of the local fixture
 
-Two findings from the calibration set that are decisions rather than work, both recorded in
-@docs/music-mapping.md and neither blocking:
+  `GET /v1/features/{owner}/{name}`, with the four statuses @docs/features-schema.md implies
+  — 404, 422, 504 — plus a 502 for a dropped connection, which is what an ordinary network
+  blip actually looks like and which used to arrive as a 500 with no advice.
+
+  The two fixtures stay as one-click examples rather than being replaced. They need no
+  service, which makes them the honest answer to "does this work with the backend down".
+
+**Phase 1 is complete.** What it cost that was not on the list: recalibrating Layer 3 against
+real data, sampling the file cap instead of truncating it, and giving each repository its own
+instruments. All three were only findable by running the thing on real repositories, which is
+what the phase was for.
+
+Three findings that are decisions rather than work, all recorded in @docs/music-mapping.md
+and none blocking:
 
 **Nesting, branching and function length are one axis, not three** (r = +0.73 to +0.79).
 Octave, density and note duration therefore move together. Coherent, but it means Layer 3
@@ -144,6 +156,12 @@ three-semitone band while django, flask, requests and cobra get ten to fourteen 
 several note lengths. Honest, and probably right, but Phase 3's gallery is mostly JS and TS,
 which would make the landing page sound uniformly sparse. Worth listening to before deciding
 whether it needs anything.
+
+**The progression draw is skewed and the kit draw is not.** Progressions are filtered by mode
+before the draw, so `current` — valid in three of the four modes — lands 33% of the time and
+`updraft` takes all of Lydian at 25%, against 8% for `undertow`. Worth knowing before reading
+anything into how often a loop turns up. Fixing it means writing more progressions per mode,
+each of which has to be verified against @docs/music-mapping.md's no-diminished-triad rule.
 
 Note: tree-sitter's Go bindings need cgo, which complicates builds. Keep the Dockerfile as
 the source of truth for building the API. If cgo becomes a real drag, swapping the API to
