@@ -13,11 +13,13 @@ import {
 } from './progressions';
 import { createRng } from './rng';
 import {
+  KIT_IDS,
   MAX_BPM,
   SECTION_ORDER,
   sortEvents,
   type NoteEvent,
   type Score,
+  type KitId,
   type Section,
   type VoiceId,
   type VoiceTimbre,
@@ -34,6 +36,16 @@ import {
  * part of the output contract, not a label.
  */
 const SKELETON_STREAM = 'skeleton';
+
+/**
+ * A stream of its own, not another draw from the skeleton's.
+ *
+ * The order of draws inside a stream is part of the output contract — inserting one shifts
+ * the key of every repository ever rendered. A named stream is exactly the tool for adding a
+ * seed-derived choice without disturbing the ones already made, and this is the first time
+ * that has actually been needed.
+ */
+const KIT_STREAM = 'kit';
 
 /** 72–128 BPM in 4 BPM steps. Fifteen entries, and never a computed value between them. */
 export const TEMPOS = [
@@ -111,6 +123,7 @@ export interface Skeleton {
   mode: ModeName;
   bpm: number;
   progression: Progression;
+  kit: KitId;
   bars: number;
   sections: Section[];
 }
@@ -132,7 +145,11 @@ export function buildSkeleton(features: RepoFeatures): Skeleton {
   const bpm = tempoFor(features.totals.linesOfCode);
   const { bars, sections } = structureFor(bpm);
 
-  return { seed: features.seed, root, mode, bpm, progression, bars, sections };
+  // Uniform over the palette, unlike the progression, which is filtered by mode and is
+  // skewed as a result. Nothing constrains which instruments suit which key.
+  const kit = pick(KIT_IDS, createRng(features.seed, KIT_STREAM)() * KIT_IDS.length);
+
+  return { seed: features.seed, root, mode, bpm, progression, kit, bars, sections };
 }
 
 /** The four bars of chords the pad plays, in the skeleton's own key. */
@@ -152,6 +169,7 @@ export function scoreFrom(
     root: skeleton.root,
     mode: skeleton.mode,
     progressionId: skeleton.progression.id,
+    kit: skeleton.kit,
     bars: skeleton.bars,
     sections: skeleton.sections,
     events: sortEvents(events),

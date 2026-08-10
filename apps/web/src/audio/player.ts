@@ -7,6 +7,23 @@ import {
   type Score,
 } from '../music/score';
 import { masterBus } from './engine';
+import { KITS, type Waveform } from './kits';
+
+/**
+ * Tone types a synth's oscillator options as a discriminated union covering FM, AM and Fat
+ * oscillators, each with its own companion fields. There is no member of that union meaning
+ * "one of the plain waveform names", so a value typed as such cannot be narrowed into it.
+ *
+ * One cast, in one place, over a closed union of six strings that Tone accepts at runtime —
+ * rather than the alternative of enumerating every branch at all six call sites.
+ */
+type OscillatorOptions = NonNullable<
+  NonNullable<ConstructorParameters<typeof Tone.Synth>[0]>['oscillator']
+>;
+
+function osc(type: Waveform): OscillatorOptions {
+  return { type } as OscillatorOptions;
+}
 
 /**
  * Plays a Score. This layer knows nothing about repositories or music theory — it receives
@@ -52,6 +69,11 @@ export async function startPlayback(
   // a fixed release that crossfades nicely at 116 BPM piles chords up at 72.
   const barSeconds = (60 / score.bpm) * BEATS_PER_BAR;
 
+  // Which instruments play. Chosen from the seed in music/skeleton.ts and carried in the
+  // Score, so a rendered piece names its own sound rather than depending on what this file
+  // happened to hardcode. See audio/kits.ts for what a kit may and may not change.
+  const kit = KITS[score.kit];
+
   const padGain = new Tone.Gain(Tone.dbToGain(-15)).connect(master);
   // The tail has to die inside the bar that produced it. Reverb longer than the chord cycle
   // is a dense copy of the previous harmony sounding underneath the current one, which is
@@ -62,7 +84,7 @@ export async function startPlayback(
     wet: 0.16,
   }).connect(padGain);
   const padFilter = new Tone.Filter({
-    frequency: 2600,
+    frequency: kit.pad.cutoff,
     type: 'lowpass',
     rolloff: -12,
   }).connect(padReverb);
@@ -74,14 +96,14 @@ export async function startPlayback(
     rolloff: -12,
   }).connect(padFilter);
   const pad = new Tone.PolySynth(Tone.Synth, {
-    oscillator: { type: 'triangle' },
+    oscillator: osc(kit.pad.oscillator),
     envelope: {
       attack: barSeconds * 0.1,
       decay: barSeconds * 0.25,
       sustain: 0.7,
       // Must stay well under one bar. Longer, and each chord is still sounding when the
       // next two arrive, which makes the Score's 8-note ceiling a fiction acoustically.
-      release: barSeconds * 0.35,
+      release: barSeconds * kit.pad.release,
     },
   }).connect(padHighpass);
 
@@ -97,7 +119,7 @@ export async function startPlayback(
    * sustain, where they would only be mud.
    */
   const bass = new Tone.MonoSynth({
-    oscillator: { type: 'triangle' },
+    oscillator: osc(kit.bass.oscillator),
     envelope: {
       attack: 0.008,
       decay: barSeconds * 0.18,
@@ -113,7 +135,7 @@ export async function startPlayback(
       sustain: 0.06,
       release: barSeconds * 0.04,
       baseFrequency: 90,
-      octaves: 3.2,
+      octaves: kit.bass.octaves,
     },
   }).connect(bassGain);
 
@@ -126,29 +148,34 @@ export async function startPlayback(
     wet: 0.14,
   }).connect(leadGain);
   const leadFilter = new Tone.Filter({
-    frequency: 3200,
+    frequency: kit.lead.cutoff,
     type: 'lowpass',
     rolloff: -12,
   }).connect(leadReverb);
   // Short and plucked. A sustaining lead would refill the midrange the pad was just cleared
   // out of, and the notes are as close as a 16th apart.
   const lead = new Tone.Synth({
-    oscillator: { type: 'triangle' },
-    envelope: { attack: 0.005, decay: barSeconds * 0.12, sustain: 0.12, release: 0.18 },
+    oscillator: osc(kit.lead.oscillator),
+    envelope: {
+      attack: 0.005,
+      decay: barSeconds * kit.lead.decay,
+      sustain: kit.lead.sustain,
+      release: 0.18,
+    },
   }).connect(leadFilter);
 
   // Well under the lead. The arp is motion, not a second melody, and the moment it is loud
   // enough to follow it starts competing with the tune for attention.
   const arpGain = new Tone.Gain(Tone.dbToGain(-21)).connect(master);
   const arpFilter = new Tone.Filter({
-    frequency: 2400,
+    frequency: kit.arp.cutoff,
     type: 'lowpass',
     rolloff: -12,
   }).connect(arpGain);
   // Notes butt up against each other, so the decay has to finish inside its own slot or the
   // figure smears into a chord.
   const arp = new Tone.Synth({
-    oscillator: { type: 'triangle' },
+    oscillator: osc(kit.arp.oscillator),
     envelope: { attack: 0.004, decay: barSeconds * 0.06, sustain: 0.05, release: 0.08 },
   }).connect(arpFilter);
 
@@ -165,13 +192,13 @@ export async function startPlayback(
   const bellReverb = new Tone.Reverb({
     decay: barSeconds * 0.7,
     preDelay: 0.01,
-    wet: 0.26,
+    wet: kit.bell.wet,
   }).connect(bellGain);
   const bell = new Tone.Synth({
-    oscillator: { type: 'sine' },
+    oscillator: osc(kit.bell.oscillator),
     envelope: {
       attack: 0.002,
-      decay: barSeconds * 0.35,
+      decay: barSeconds * kit.bell.decay,
       sustain: 0,
       release: barSeconds * 0.25,
     },
@@ -206,7 +233,7 @@ export async function startPlayback(
   // Slower in and out than anything else. It is a bed, and the moment its attack is audible
   // as an event it has become a second bass.
   const texture = new Tone.Synth({
-    oscillator: { type: 'triangle' },
+    oscillator: osc(kit.texture.oscillator),
     envelope: {
       attack: barSeconds * 0.4,
       decay: barSeconds * 0.3,

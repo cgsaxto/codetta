@@ -4,6 +4,7 @@
   "root": "C",
   "mode": "aeolian",
   "progressionId": "current",
+  "kit": "organ",
   "bars": 40,
   "sections": [
     {

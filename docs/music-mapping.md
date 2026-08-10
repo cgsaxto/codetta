@@ -26,10 +26,35 @@ Derived once from `features.seed`. Never from raw feature magnitudes.
 | Tempo      | One of the 15 entries in `TEMPOS` (72–128 BPM in 4 BPM steps)     |
 | Grid       | 16th notes. Nothing shorter, nothing off-grid.                    |
 | Chord loop | One of 6 curated 4-bar progressions (see `music/progressions.ts`) |
+| Kit        | One of 4 instrument palettes (see `audio/kits.ts`)                |
 | Length     | 60–90 s, guaranteed by the templates in Layer 4                   |
 
 Mode and root come from the seed so the same repo always sounds the same, but different
 repos sound distinct.
+
+### Kit
+
+The kit row is newer than the rest of this table, and it is here because the row above it was
+not enough on its own. Root, mode, progression and tempo all varied per repository and the
+output still sounded like one track transposed — because every repository also shared six
+identical instruments, one structure template, one phrase grid, one accent pattern, one chord
+per bar and a bass on beats 1 and 3. **Key is the least salient thing a listener uses to tell
+two pieces apart**, and it was being asked to carry the whole job.
+
+A kit changes character and nothing else. Gains, registers, effect topology and every
+envelope constraint Phase 0 found by ear are outside its reach — `audio/kits.ts` says which,
+and `audio/kits.test.ts` enforces it. The worst a kit can do is be a timbre somebody dislikes.
+
+It is drawn from its own named rng stream rather than from the skeleton's. The order of draws
+within a stream is part of the output contract, so adding one to `skeleton` would have changed
+the key of every repository ever rendered; a separate stream is exactly what the named-stream
+design in `music/rng.ts` is for, and this is the first time it has been needed.
+
+Unlike the progression, the draw is uniform: nothing constrains which instruments suit which
+key. The progression draw is **not** uniform, because candidates are filtered by mode — the
+`current` loop is valid in three of the four modes and lands 33% of the time, while `updraft`
+takes all of Lydian at 25%. That skew is known and unfixed; it is worth knowing before reading
+anything into how often a given loop turns up.
 
 ### Tempo
 

@@ -112,6 +112,7 @@ describe('structureFor', () => {
         root: 'C' as const,
         mode: 'aeolian' as const,
         progressionId: 'nightfall',
+        kit: 'warm' as const,
         bars,
         sections,
         events: [],

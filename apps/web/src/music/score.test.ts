@@ -20,6 +20,7 @@ function baseScore(): Score {
     root: 'C',
     mode: 'aeolian',
     progressionId: 'nightfall',
+    kit: 'warm',
     bars: 40,
     sections: [
       { name: 'intro', startBar: 0, bars: 4 },

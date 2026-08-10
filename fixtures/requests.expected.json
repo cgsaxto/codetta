@@ -4,6 +4,7 @@
   "root": "C",
   "mode": "mixolydian",
   "progressionId": "current",
+  "kit": "organ",
   "bars": 32,
   "sections": [
     {

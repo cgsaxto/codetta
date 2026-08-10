@@ -96,6 +96,17 @@ export interface VoiceTimbre {
   openness: number;
 }
 
+/**
+ * The instrument palettes, named here rather than in audio/ because the Score is the whole
+ * description of a piece and which instruments play it is part of that. audio/kits.ts owns
+ * what each one means in oscillators and hertz; music/ only ever picks the name.
+ *
+ * Renaming or reordering these changes which kit every repository ever rendered gets. It is
+ * part of the output contract, like the progression ids and the rng stream names.
+ */
+export const KIT_IDS = ['warm', 'glass', 'organ', 'tape'] as const;
+export type KitId = (typeof KIT_IDS)[number];
+
 export interface Score {
   /** `RepoFeatures.seed`, carried through so a rendered Score is self-identifying. */
   seed: string;
@@ -103,6 +114,7 @@ export interface Score {
   root: RootName;
   mode: ModeName;
   progressionId: string;
+  kit: KitId;
   bars: number;
   sections: Section[];
   events: NoteEvent[];
