@@ -102,12 +102,18 @@ export const KITS: Readonly<Record<KitId, Kit>> = {
    */
   warm: {
     label: 'warm',
-    // The pad drops from 2600 to 1500. It is the same triangle it always was, and the
-    // envelopes and gains that passed the Phase 0 gate are untouched — what changed is that
-    // it no longer sits in the band its own lead is trying to sing in.
+    // A soft bed with a reedy line over it. The pad and the arp keep the triangle this kit is
+    // named for; the lead is the only voice that changed, and it had to.
+    //
+    // Dropping the pad from 2600 to 1500 helped less than the same move helped `tape`, and
+    // the reason is that a filter cannot separate two triangles: at 1/n² a triangle's third
+    // partial is already down to a ninth and its fifth to a twentieth, so almost nothing sits
+    // between 1500 Hz and 3200 Hz for the cutoff to remove. The separation was on paper only.
+    // A sawtooth lead has content at those frequencies to be heard by, which makes the gap
+    // real rather than notional.
     pad: { oscillator: 'triangle', cutoff: 1500, release: 0.35 },
     bass: { oscillator: 'triangle', octaves: 3.2 },
-    lead: { oscillator: 'triangle', cutoff: 3200, decay: 0.12, sustain: 0.12 },
+    lead: { oscillator: 'sawtooth8', cutoff: 2800, decay: 0.12, sustain: 0.12 },
     arp: { oscillator: 'triangle', cutoff: 2100 },
     bell: { oscillator: 'sine', decay: 0.35, wet: 0.26 },
     texture: { oscillator: 'triangle' },

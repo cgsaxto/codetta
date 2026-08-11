@@ -67,18 +67,41 @@ describe('kits', () => {
         Math.min(kit.lead.cutoff, kit.arp.cutoff),
       );
 
-      // Separation by cutoff, unless the pad is a sine — a filter has nothing to remove from
-      // one, so those kits separate by waveform instead and are checked below.
-      if (HARMONICS[kit.pad.oscillator] !== 0) {
-        expect(kit.lead.cutoff / kit.pad.cutoff, `${id}: lead over pad`).toBeGreaterThanOrEqual(
-          1.8,
-        );
-      } else {
-        expect(
-          HARMONICS[kit.lead.oscillator] ?? 0,
-          `${id}: a sine pad needs a lead with harmonics to be heard by`,
-        ).toBeGreaterThan(HARMONICS[kit.pad.oscillator] ?? 0);
-      }
+      expect(kit.lead.cutoff / kit.pad.cutoff, `${id}: lead over pad`).toBeGreaterThanOrEqual(
+        1.8,
+      );
+    }
+  });
+
+  it('separates by a means that works on the waveform it is using', () => {
+    /*
+     * The rule the cutoff ratio alone does not catch, and it was audible before it was
+     * understood: `tape` and `glass` were reported as having a better tune than `warm` and
+     * `organ` even after all four had the same 2x ratio between pad and lead.
+     *
+     * A lowpass separates two voices only in proportion to how much the lower one has above
+     * the cutoff to lose. A triangle falls off at 1/n² — third partial at a ninth, fifth at
+     * a twentieth — so moving a triangle pad from 3200 Hz to 1500 removes almost nothing and
+     * the lead is still sitting on it. A sawtooth falls off at 1/n, so the same move is
+     * drastic, which is why `tape` worked. `glass` worked for the opposite reason: its pad is
+     * a sine, with nothing above the fundamental at all.
+     *
+     * So a kit separates one of two ways, and has to actually pick one. Either the pad's
+     * waveform is rich enough for the filter to bite, or the lead's waveform is richer than
+     * the pad's. `warm` had neither — triangle under triangle — and was the one kit reported
+     * as having no melody.
+     */
+    const RICH = 3; // square4 and above: enough content for a cutoff to be worth moving.
+
+    for (const [id, kit] of entries) {
+      const pad = HARMONICS[kit.pad.oscillator] ?? 0;
+      const lead = HARMONICS[kit.lead.oscillator] ?? 0;
+
+      expect(
+        pad >= RICH || lead > pad,
+        `${id}: a ${kit.pad.oscillator} pad has too little above its fundamental for a ` +
+          `filter to separate, so the lead needs a richer waveform than ${kit.lead.oscillator}`,
+      ).toBe(true);
     }
   });
 
