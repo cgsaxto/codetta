@@ -49,6 +49,19 @@ interface ScheduledNote extends NoteEvent {
 export interface Player {
   /** Idempotent: safe to call from a React cleanup that may run twice. */
   stop(): void;
+  /**
+   * Seconds into the piece, as it is being heard rather than as it has been scheduled.
+   *
+   * Not `Transport.seconds`, which is the obvious reading and is wrong by a fixed amount.
+   * That getter resolves to `TickSource.getSecondsAtTime(this.now())`, and Tone's `now()` is
+   * `context.currentTime + context.lookAhead` — the scheduler looks 100 ms ahead by default
+   * so that it can place events before they are due. Anything drawn from it is a tenth of a
+   * second early, which at 120 BPM is most of a sixteenth: not drift, a constant lead, on
+   * every beat of every piece.
+   *
+   * Asking for the position at the context's actual current time removes it.
+   */
+  positionSeconds(): number;
 }
 
 export interface PlaybackOptions {
@@ -285,6 +298,12 @@ export async function startPlayback(
 
   let stopped = false;
   return {
+    positionSeconds() {
+      if (stopped) return 0;
+      // Negative for the instant between starting the transport and the context reaching it.
+      return Math.max(0, transport.getSecondsAtTime(Tone.getContext().currentTime));
+    },
+
     stop() {
       if (stopped) return;
       stopped = true;
