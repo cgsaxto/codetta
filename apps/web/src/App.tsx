@@ -6,6 +6,7 @@ import { FIXTURES, type FixtureName } from './features/fixture';
 import { generateScore } from './music/generate';
 import { scoreDurationSeconds, type Score } from './music/score';
 import { ClockProbe } from './visuals/ClockProbe';
+import { Field } from './visuals/Field';
 
 /**
  * What Layer 3 actually did to the most prominent voice, in one line. Note count and pitch
@@ -149,6 +150,8 @@ export default function App() {
           </button>
         ))}
       </div>
+
+      <Field player={player} score={score} features={features} />
 
       <ClockProbe player={player} score={score} />
 
