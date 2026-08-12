@@ -1,6 +1,12 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import type { Player } from '../audio/player';
-import { TICKS_PER_BAR, TICKS_PER_BEAT, type Score } from '../music/score';
+import {
+  TICKS_PER_BAR,
+  TICKS_PER_BEAT,
+  VOICE_ORDER,
+  type Score,
+  type VoiceId,
+} from '../music/score';
 import { useTransportFrame } from './useTransportFrame';
 
 /**
@@ -8,24 +14,48 @@ import { useTransportFrame } from './useTransportFrame';
  *
  * Sync is the one property of a visualiser that cannot be checked by reading the code or by
  * running a test: a hundred milliseconds of lead looks exactly like no lead at all in a
- * screenshot, and exactly like a mistake when you watch it against the bass. So the first
- * thing built is the smallest thing that makes the clock visible — a playhead across one bar
- * and a flash on every onset — and the question it answers is only "does this land with what
- * I am hearing".
+ * screenshot, and exactly like a mistake when you watch it against the bass.
  *
- * Everything here is placeholder: greys, a rectangle, no identity. The look comes later and
- * separately, so that a judgement about timing is never confused with one about taste.
+ * The first version of this drew one flash for every onset in the piece, which turned out to
+ * be useless in two separate ways. It conflated six voices, so "it looks off" could not be
+ * attributed to any of them; and its flash outlasted the gap between onsets — 167 ms of decay
+ * against a 156 ms median gap — so on most repositories it was simply lit the whole time.
+ *
+ * One lane per voice, decaying inside the shortest gap, answers the question the single flash
+ * could not: whether a mismatch belongs to the clock, which is shared by every voice, or to a
+ * particular sound. A sine bass at C1 has a thirty-millisecond cycle and no transient to
+ * speak of, and the ear cannot place its onset the way it places a plucked one — that is a
+ * fact about hearing rather than about timing, and it looks identical from inside the code.
+ *
+ * Everything here is placeholder: greys, rectangles, no identity. The look is a separate
+ * pass, so that a judgement about timing is never confused with one about taste.
  */
 
-const HEIGHT = 56;
+const LANE_HEIGHT = 16;
+const LABEL_WIDTH = 52;
+const PADDING = 6;
+
+/**
+ * How fast a flash fades, per second. Fast enough to go dark between two sixteenths at the
+ * quickest tempo the skeleton allows — otherwise a lane reads as "on" rather than as a
+ * sequence of events, which is what made the first probe unreadable.
+ */
+const DECAY = 14;
 
 export function ClockProbe({ player, score }: { player: Player | null; score: Score }) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  // Survives across frames without re-rendering: how bright the flash currently is.
-  const flash = useRef(0);
+  // Survives frames without re-rendering: how bright each lane currently is.
+  const flashes = useRef(new Map<VoiceId, number>());
 
-  // Backing-store size follows the display size and the device pixel ratio, or every line is
-  // soft on the machines most people have.
+  // Only the voices this piece actually uses, in the canonical order so the lanes do not
+  // move around between repositories.
+  const voices = useMemo(() => {
+    const present = new Set(score.events.map((event) => event.voice));
+    return VOICE_ORDER.filter((voice) => present.has(voice));
+  }, [score]);
+
+  const height = voices.length * LANE_HEIGHT + PADDING * 2;
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -33,7 +63,7 @@ export function ClockProbe({ player, score }: { player: Player | null; score: Sc
     const resize = () => {
       const ratio = window.devicePixelRatio || 1;
       canvas.width = Math.round(canvas.clientWidth * ratio);
-      canvas.height = Math.round(HEIGHT * ratio);
+      canvas.height = Math.round(height * ratio);
       canvas.getContext('2d')?.setTransform(ratio, 0, 0, ratio, 0, 0);
     };
 
@@ -41,7 +71,7 @@ export function ClockProbe({ player, score }: { player: Player | null; score: Sc
     const observer = new ResizeObserver(resize);
     observer.observe(canvas);
     return () => observer.disconnect();
-  }, []);
+  }, [height]);
 
   useTransportFrame(player, score, ({ tick, onsets, delta }) => {
     const canvas = canvasRef.current;
@@ -49,40 +79,52 @@ export function ClockProbe({ player, score }: { player: Player | null; score: Sc
     if (!canvas || !context) return;
 
     const width = canvas.clientWidth;
-    if (onsets.length > 0) flash.current = 1;
-    // Time-based decay rather than per-frame, so it looks the same at 30 fps and at 120.
-    flash.current = Math.max(0, flash.current - delta * 6);
+    const laneWidth = Math.max(0, width - LABEL_WIDTH);
 
-    context.clearRect(0, 0, width, HEIGHT);
+    for (const onset of onsets) flashes.current.set(onset.voice, 1);
 
-    // One bar wide, so the playhead crosses it four times a bar at walking pace and any lead
-    // or lag against the beat is obvious rather than subtle.
+    context.clearRect(0, 0, width, height);
+    context.font = '10px ui-monospace, monospace';
+    context.textBaseline = 'middle';
+
+    // One bar wide, so the playhead crosses it once a bar and any lead or lag against the
+    // beat shows up as a gap between the line and a lane lighting.
     const positionInBar = tick % TICKS_PER_BAR;
-    const beat = Math.floor(positionInBar / TICKS_PER_BEAT);
 
-    for (let index = 0; index < TICKS_PER_BAR / TICKS_PER_BEAT; index++) {
-      const x = (index / 4) * width;
-      context.fillStyle = index === beat ? '#171717' : '#d4d4d4';
-      context.fillRect(x, HEIGHT / 2 - 10, 2, 20);
+    voices.forEach((voice, index) => {
+      const y = PADDING + index * LANE_HEIGHT;
+      // Time-based rather than per-frame, so it looks the same at 30 fps and at 120.
+      const level = Math.max(0, (flashes.current.get(voice) ?? 0) - delta * DECAY);
+      flashes.current.set(voice, level);
+
+      context.fillStyle = '#a3a3a3';
+      context.fillText(voice, 0, y + LANE_HEIGHT / 2);
+
+      context.fillStyle = '#f5f5f5';
+      context.fillRect(LABEL_WIDTH, y + 3, laneWidth, LANE_HEIGHT - 6);
+
+      if (level > 0) {
+        context.globalAlpha = level;
+        context.fillStyle = '#171717';
+        context.fillRect(LABEL_WIDTH, y + 3, laneWidth, LANE_HEIGHT - 6);
+        context.globalAlpha = 1;
+      }
+    });
+
+    for (let beat = 0; beat < TICKS_PER_BAR / TICKS_PER_BEAT; beat++) {
+      const x = LABEL_WIDTH + (beat / 4) * laneWidth;
+      context.fillStyle = '#e5e5e5';
+      context.fillRect(x, PADDING, 1, height - PADDING * 2);
     }
 
     context.fillStyle = '#171717';
-    context.fillRect((positionInBar / TICKS_PER_BAR) * width, 0, 1.5, HEIGHT);
-
-    if (flash.current > 0) {
-      context.globalAlpha = flash.current;
-      context.fillStyle = '#171717';
-      context.beginPath();
-      context.arc(width - 14, HEIGHT / 2, 6, 0, Math.PI * 2);
-      context.fill();
-      context.globalAlpha = 1;
-    }
+    context.fillRect(LABEL_WIDTH + (positionInBar / TICKS_PER_BAR) * laneWidth, 0, 1.5, height);
   });
 
   return (
     <canvas
       ref={canvasRef}
-      style={{ width: '100%', height: HEIGHT }}
+      style={{ width: '100%', height }}
       aria-hidden
       className="rounded border border-neutral-200"
     />
