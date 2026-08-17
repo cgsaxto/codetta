@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 2**
+**Current phase: 3**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -169,11 +169,57 @@ Node + `web-tree-sitter` requires zero frontend changes — that is what the con
 
 ---
 
-## Phase 2 — Visuals
+## Phase 2 — Visuals ✅
 
-- [ ] Canvas 2D visualizer driven by `Tone.Transport` position, not rAF timestamps
-- [ ] Voices map to visual elements; module colours are seed-derived and stable
-- [ ] 60 fps on a mid-range laptop; degrade element count, never framerate
+- [x] Canvas 2D visualizer driven by `Tone.Transport` position, not rAF timestamps
+
+  `Transport.seconds` is the obvious reading and is wrong by a fixed amount: it resolves to
+  `getSecondsAtTime(now())`, and Tone's `now()` is `currentTime + lookAhead`, so anything
+  drawn from it leads the audio by 100 ms — most of a sixteenth at 120 BPM, on every beat of
+  every piece. Asking for the position at the context's actual current time removes it.
+
+  The frame decides when to paint and never what time it is. The awkward case is a frame
+  straddling the loop point, about one in three thousand, which lives in a pure module where
+  a test can reach it: stepping a real 40-bar score in frames visits all 448 notes exactly
+  once, at four frame sizes.
+
+- [x] Voices map to visual elements; module colours are seed-derived and stable
+
+  A column per module, as wide as that module is large, filled with its files — each a rule
+  as long as it has lines and indented as deep as it nests. A line descends in the
+  repository's own traversal order and what it has passed stays lit. Not a waveform: a
+  waveform is true of any audio and says nothing about this repository.
+
+  Colours are built the way the music is — one hue from the seed, five fixed rotations from
+  it, rather than six free hues that would clash on some commits with no way to know which.
+  In OKLCH converted to sRGB by hand, because the hue comes from a commit so every hue has
+  to work; contrast is asserted over 200 synthetic seeds.
+
+  It took two passes. The first read as "a progress line sweeping a black player" because
+  the colour lived only in the marks and the line, columns had no body so the
+  width-to-loudness mapping was invisible, and unread files were too faint to show that the
+  thing on screen was code. The palette now runs the ground, the column bodies, both file
+  states and the sounding voice, and the read region is tinted harder than the unread one so
+  progress is an area rather than the position of a line.
+
+- [x] 60 fps on a mid-range laptop; degrade element count, never framerate
+
+  Confirmed at a steady 60 with no repository triggering degradation, so the budget is a
+  safety net that never fires. It sheds four times faster than it restores, because
+  symmetric adjustment oscillates and the picture would pulse at a rate unrelated to the
+  music, and it floors at a quarter, because a strategy that can blank the screen is worse
+  than the slow frames it avoids.
+
+**Phase 2 is complete.** What it cost that was not on the list: `aggregate.buildTimeline` was
+dropping every file at the repository root, so 97% of `urfave/cli` was missing from the
+document meant to describe it. The music had absorbed that as a missing detail; the
+visualiser draws the timeline, so it rendered as one enormous empty column and the whole
+concept failed to read.
+
+The note left in that code said the cost was "the file-driven detail in the peak and nothing
+else", and it was accurate when it was written — nothing but the music read the timeline
+then. **A recorded trade-off expires when a new consumer arrives, and nothing goes back to
+check it.** That is the one worth remembering from this phase.
 
 ---
 

@@ -5,7 +5,6 @@ import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
 import { FIXTURES, type FixtureName } from './features/fixture';
 import { generateScore } from './music/generate';
 import { scoreDurationSeconds, type Score } from './music/score';
-import { ClockProbe } from './visuals/ClockProbe';
 import { Field } from './visuals/Field';
 
 /**
@@ -154,8 +153,6 @@ export default function App() {
       </div>
 
       <Field player={player} score={score} features={features} onFrameRate={setFps} />
-
-      <ClockProbe player={player} score={score} />
 
       <dl className="grid grid-cols-[4.5rem_1fr] gap-y-1 text-neutral-500">
         {rows.map(([label, value]) => (
