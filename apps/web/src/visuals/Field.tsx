@@ -2,6 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
 import type { Player } from '../audio/player';
 import { barToTick, scoreDurationSeconds, type Score, type VoiceId } from '../music/score';
+import { adjustDetail, smoothFps, stride } from './budget';
 import { fieldFor } from './layout';
 import { paletteFor } from './palette';
 import { useTransportFrame } from './useTransportFrame';
@@ -54,11 +55,19 @@ export interface FieldProps {
   features: RepoFeatures;
   /** Height in CSS pixels. Width follows the container. */
   height?: number;
+  /** Smoothed frames per second, reported so a machine can be checked rather than assumed. */
+  onFrameRate?: (fps: number) => void;
 }
 
-export function Field({ player, score, features, height = 300 }: FieldProps) {
+export function Field({ player, score, features, height = 300, onFrameRate }: FieldProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const flares = useRef(new Map<VoiceId, number>());
+
+  // How much of the optional detail this machine can afford, and what it is managing. Refs
+  // rather than state: both change every frame and neither belongs in a render.
+  const detail = useRef(1);
+  const fps = useRef(0);
+  const reported = useRef(0);
 
   const columns = useMemo(() => fieldFor(features), [features]);
   const palette = useMemo(() => paletteFor(score.seed), [score.seed]);
@@ -142,6 +151,7 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
     const read = totalTicks > 0 ? tick / totalTicks : 0;
     const readY = inset + read * innerHeight;
     const readSeconds = read * duration;
+    const step = stride(detail.current);
 
     for (const column of columns) {
       const x = inset + column.x * innerWidth;
@@ -164,7 +174,9 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
       context.globalAlpha = 0.16 + flare * 0.14;
       context.fillRect(x, inset, columnWidth, Math.max(0, readY - inset));
 
-      for (const mark of column.marks) {
+      for (const [index, mark] of column.marks.entries()) {
+        // Thinned only when the machine cannot keep up; a no-op at full detail.
+        if (index % step !== 0) continue;
         const y = inset + mark.y * innerHeight;
         const age = readSeconds - mark.y * duration;
         const fresh = !calm && age >= 0 && age < FRESH_SECONDS ? 1 - age / FRESH_SECONDS : 0;
@@ -196,7 +208,23 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
 
   paintRef.current = paint;
 
-  useTransportFrame(player, score, ({ tick, onsets, delta }) => paint(tick, onsets, delta));
+  useTransportFrame(player, score, ({ tick, onsets, delta }) => {
+    // Measured before drawing, from the gap since the last frame, so the level applied is
+    // the one this machine has actually been managing rather than a guess about this frame.
+    const frameMs = delta * 1000;
+    detail.current = adjustDetail(detail.current, frameMs);
+    fps.current = smoothFps(fps.current, frameMs);
+
+    paint(tick, onsets, delta);
+
+    // Rounded before reporting, so a readout costs a render only when the number it shows
+    // would actually change rather than sixty times a second.
+    const rounded = Math.round(fps.current);
+    if (onFrameRate && rounded !== reported.current) {
+      reported.current = rounded;
+      onFrameRate(rounded);
+    }
+  });
 
   // Paint once while stopped, so the repository's structure is on screen before anything
   // plays rather than the field being an empty rectangle until you press a button.

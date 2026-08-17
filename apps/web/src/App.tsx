@@ -29,6 +29,7 @@ export default function App() {
   const [error, setError] = useState<string | null>(null);
   const [player, setPlayer] = useState<Player | null>(null);
   const [starting, setStarting] = useState(false);
+  const [fps, setFps] = useState(0);
 
   // So a slow repository can be abandoned when another is asked for, rather than arriving
   // later and replacing whatever is playing by then.
@@ -101,6 +102,7 @@ export default function App() {
     ['length', `${score.bars} bars · ${scoreDurationSeconds(score).toFixed(1)} s`],
     ['notes', `${score.events.length}`],
     ['lead', leadSummary(score)],
+    ...(player && fps > 0 ? ([['frames', `${fps} fps`]] as Array<[string, string]>) : []),
   ];
 
   return (
@@ -151,7 +153,7 @@ export default function App() {
         ))}
       </div>
 
-      <Field player={player} score={score} features={features} />
+      <Field player={player} score={score} features={features} onFrameRate={setFps} />
 
       <ClockProbe player={player} score={score} />
 
