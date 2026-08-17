@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "vuejs",
+    "name": "core",
+    "ref": "main",
+    "commitSha": "a2b40db9a83b36ed9da3a16403cf8f040262d73f",
+    "primaryLanguage": "TypeScript",
+    "stars": 54210,
+    "fetchedAt": "2026-08-17T11:49:22Z"
+  },
+  "seed": "a2b40db9",
+  "totals": {
+    "filesScanned": 527,
+    "filesSkipped": 178,
+    "linesOfCode": 143315,
+    "functions": 12398,
+    "classes": 384,
+    "imports": 1914
+  },
+  "languages": [
+    {
+      "name": "TypeScript",
+      "share": 0.9317,
+      "files": 491
+    },
+    {
+      "name": "JavaScript",
+      "share": 0.0683,
+      "files": 36
+    }
+  ],
+  "modules": [
+    {
+      "path": "packages/runtime-core",
+      "share": 0.3317,
+      "files": 113,
+      "linesOfCode": 47539,
+      "avgNestingDepth": 0.2185,
+      "maxNestingDepth": 8,
+      "avgFunctionLength": 3.7866,
+      "cyclomaticDensity": 0.0089,
+      "commentRatio": 0.0832,
+      "asyncRatio": 0.1162
+    },
+    {
+      "path": "packages/compiler-core",
+      "share": 0.1641,
+      "files": 52,
+      "linesOfCode": 23525,
+      "avgNestingDepth": 0.5437,
+      "maxNestingDepth": 9,
+      "avgFunctionLength": 5.793,
+      "cyclomaticDensity": 0.0127,
+      "commentRatio": 0.0743,
+      "asyncRatio": 0.0009
+    },
+    {
+      "path": "packages/compiler-sfc",
+      "share": 0.1136,
+      "files": 51,
+      "linesOfCode": 16281,
+      "avgNestingDepth": 0.4503,
+      "maxNestingDepth": 11,
+      "avgFunctionLength": 4.9914,
+      "cyclomaticDensity": 0.0172,
+      "commentRatio": 0.0552,
+      "asyncRatio": 0.0139
+    },
+    {
+      "path": "packages/reactivity",
+      "share": 0.0764,
+      "files": 36,
+      "linesOfCode": 10954,
+      "avgNestingDepth": 0.2048,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 4.3742,
+      "cyclomaticDensity": 0.0069,
+      "commentRatio": 0.1037,
+      "asyncRatio": 0.0156
+    },
+    {
+      "path": "packages/runtime-dom",
+      "share": 0.0735,
+      "files": 34,
+      "linesOfCode": 10533,
+      "avgNestingDepth": 0.2616,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 4.666,
+      "cyclomaticDensity": 0.0076,
+      "commentRatio": 0.0709,
+      "asyncRatio": 0.1387
+    },
+    {
+      "path": "packages/vue",
+      "share": 0.0553,
+      "files": 41,
+      "linesOfCode": 7927,
+      "avgNestingDepth": 0.0642,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 3.5819,
+      "cyclomaticDensity": 0.0017,
+      "commentRatio": 0.0327,
+      "asyncRatio": 0.2783
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/codegen.spec.ts",
+      "linesOfCode": 726,
+      "functions": 39,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 1,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/compile.spec.ts",
+      "linesOfCode": 219,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 5
+    },
+    {
+      "index": 2,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/scopeId.spec.ts",
+      "linesOfCode": 53,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 3,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/testUtils.ts",
+      "linesOfCode": 92,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 4,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transform.spec.ts",
+      "linesOfCode": 342,
+      "functions": 33,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 13
+    },
+    {
+      "index": 5,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/cacheStatic.spec.ts",
+      "linesOfCode": 738,
+      "functions": 39,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 17
+    },
+    {
+      "index": 6,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/transformElement.spec.ts",
+      "linesOfCode": 1384,
+      "functions": 94,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 25
+    },
+    {
+      "index": 7,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/transformExpressions.spec.ts",
+      "linesOfCode": 701,
+      "functions": 55,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 8,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/transformSlotOutlet.spec.ts",
+      "linesOfCode": 392,
+      "functions": 16,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 9,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vBind.spec.ts",
+      "linesOfCode": 432,
+      "functions": 21,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 10,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vFor.spec.ts",
+      "linesOfCode": 1066,
+      "functions": 64,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 17
+    },
+    {
+      "index": 11,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vIf.spec.ts",
+      "linesOfCode": 825,
+      "functions": 38,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 13
+    },
+    {
+      "index": 12,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vMemo.spec.ts",
+      "linesOfCode": 84,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 13,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vOn.spec.ts",
+      "linesOfCode": 728,
+      "functions": 37,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 14,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vOnce.spec.ts",
+      "linesOfCode": 136,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 15,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/transforms/vSlot.spec.ts",
+      "linesOfCode": 1052,
+      "functions": 41,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 9
+    },
+    {
+      "index": 16,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/__tests__/utils.spec.ts",
+      "linesOfCode": 121,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 17,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/ast.ts",
+      "linesOfCode": 797,
+      "functions": 21,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 91
+    },
+    {
+      "index": 18,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/babelUtils.ts",
+      "linesOfCode": 501,
+      "functions": 29,
+      "maxNesting": 8,
+      "branches": 114,
+      "commentLines": 85
+    },
+    {
+      "index": 19,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/codegen.ts",
+      "linesOfCode": 1053,
+      "functions": 50,
+      "maxNesting": 4,
+      "branches": 143,
+      "commentLines": 61
+    },
+    {
+      "index": 20,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/compat/transformFilter.ts",
+      "linesOfCode": 182,
+      "functions": 6,
+      "maxNesting": 9,
+      "branches": 40,
+      "commentLines": 16
+    },
+    {
+      "index": 21,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/compile.ts",
+      "linesOfCode": 114,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 11,
+      "commentLines": 7
+    },
+    {
+      "index": 22,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/errors.ts",
+      "linesOfCode": 176,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 14
+    },
+    {
+      "index": 23,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/index.ts",
+      "linesOfCode": 75,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 24,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/parser.ts",
+      "linesOfCode": 999,
+      "functions": 46,
+      "maxNesting": 7,
+      "branches": 157,
+      "commentLines": 55
+    },
+    {
+      "index": 25,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/runtimeHelpers.ts",
+      "linesOfCode": 130,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 39,
+      "commentLines": 9
+    },
+    {
+      "index": 26,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/tokenizer.ts",
+      "linesOfCode": 1120,
+      "functions": 57,
+      "maxNesting": 8,
+      "branches": 160,
+      "commentLines": 184
+    },
+    {
+      "index": 27,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/cacheStatic.ts",
+      "linesOfCode": 444,
+      "functions": 11,
+      "maxNesting": 6,
+      "branches": 77,
+      "commentLines": 38
+    },
+    {
+      "index": 28,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/noopDirectiveTransform.ts",
+      "linesOfCode": 2,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 29,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/transformElement.ts",
+      "linesOfCode": 905,
+      "functions": 19,
+      "maxNesting": 9,
+      "branches": 123,
+      "commentLines": 109
+    },
+    {
+      "index": 30,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/transformExpression.ts",
+      "linesOfCode": 400,
+      "functions": 10,
+      "maxNesting": 8,
+      "branches": 52,
+      "commentLines": 73
+    },
+    {
+      "index": 31,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/transformText.ts",
+      "linesOfCode": 115,
+      "functions": 3,
+      "maxNesting": 6,
+      "branches": 12,
+      "commentLines": 22
+    },
+    {
+      "index": 32,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/transformVBindShorthand.ts",
+      "linesOfCode": 47,
+      "functions": 1,
+      "maxNesting": 5,
+      "branches": 5,
+      "commentLines": 4
+    },
+    {
+      "index": 33,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vBind.ts",
+      "linesOfCode": 78,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 13,
+      "commentLines": 8
+    },
+    {
+      "index": 34,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vFor.ts",
+      "linesOfCode": 375,
+      "functions": 10,
+      "maxNesting": 4,
+      "branches": 42,
+      "commentLines": 29
+    },
+    {
+      "index": 35,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vMemo.ts",
+      "linesOfCode": 41,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 2
+    },
+    {
+      "index": 36,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vModel.ts",
+      "linesOfCode": 154,
+      "functions": 4,
+      "maxNesting": 3,
+      "branches": 18,
+      "commentLines": 13
+    },
+    {
+      "index": 37,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vOn.ts",
+      "linesOfCode": 169,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 20,
+      "commentLines": 35
+    },
+    {
+      "index": 38,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/transforms/vSlot.ts",
+      "linesOfCode": 399,
+      "functions": 11,
+      "maxNesting": 6,
+      "branches": 46,
+      "commentLines": 43
+    },
+    {
+      "index": 39,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/utils.ts",
+      "linesOfCode": 581,
+      "functions": 39,
+      "maxNesting": 6,
+      "branches": 91,
+      "commentLines": 38
+    },
+    {
+      "index": 40,
+      "modulePath": "packages/compiler-core",
+      "path": "packages/compiler-core/src/validateExpression.ts",
+      "linesOfCode": 60,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 10
+    },
+    {
+      "index": 41,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript.spec.ts",
+      "linesOfCode": 1568,
+      "functions": 119,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 46
+    },
+    {
+      "index": 42,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/defineExpose.spec.ts",
+      "linesOfCode": 24,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 43,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/defineModel.spec.ts",
+      "linesOfCode": 292,
+      "functions": 13,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 44,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/defineOptions.spec.ts",
+      "linesOfCode": 136,
+      "functions": 19,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 45,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/definePropsDestructure.spec.ts",
+      "linesOfCode": 605,
+      "functions": 49,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 46,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/defineSlots.spec.ts",
+      "linesOfCode": 37,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 47,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/hoistStatic.spec.ts",
+      "linesOfCode": 206,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 48,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileScript/importUsageCheck.spec.ts",
+      "linesOfCode": 250,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 49,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileStyle.spec.ts",
+      "linesOfCode": 516,
+      "functions": 33,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 50,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/compileTemplate.spec.ts",
+      "linesOfCode": 467,
+      "functions": 27,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 30
+    },
+    {
+      "index": 51,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/cssVars.spec.ts",
+      "linesOfCode": 323,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 52,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/parse.spec.ts",
+      "linesOfCode": 393,
+      "functions": 42,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 53,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/templateTransformAssetUrl.spec.ts",
+      "linesOfCode": 231,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 17
+    },
+    {
+      "index": 54,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/templateTransformSrcset.spec.ts",
+      "linesOfCode": 127,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 55,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/__tests__/templateUtils.spec.ts",
+      "linesOfCode": 50,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 56,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/cache.ts",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 57,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/compileScript.ts",
+      "linesOfCode": 1336,
+      "functions": 28,
+      "maxNesting": 8,
+      "branches": 200,
+      "commentLines": 180
+    },
+    {
+      "index": 58,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/compileStyle.ts",
+      "linesOfCode": 223,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 14,
+      "commentLines": 14
+    },
+    {
+      "index": 59,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/compileTemplate.ts",
+      "linesOfCode": 307,
+      "functions": 13,
+      "maxNesting": 3,
+      "branches": 28,
+      "commentLines": 23
+    },
+    {
+      "index": 60,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/parse.ts",
+      "linesOfCode": 453,
+      "functions": 22,
+      "maxNesting": 6,
+      "branches": 43,
+      "commentLines": 42
+    },
+    {
+      "index": 61,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/rewriteDefault.ts",
+      "linesOfCode": 116,
+      "functions": 6,
+      "maxNesting": 6,
+      "branches": 17,
+      "commentLines": 7
+    },
+    {
+      "index": 62,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/analyzeScriptBindings.ts",
+      "linesOfCode": 122,
+      "functions": 5,
+      "maxNesting": 7,
+      "branches": 22,
+      "commentLines": 22
+    },
+    {
+      "index": 63,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/defineEmits.ts",
+      "linesOfCode": 115,
+      "functions": 6,
+      "maxNesting": 4,
+      "branches": 18,
+      "commentLines": 0
+    },
+    {
+      "index": 64,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/defineExpose.ts",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 65,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/defineModel.ts",
+      "linesOfCode": 163,
+      "functions": 4,
+      "maxNesting": 4,
+      "branches": 27,
+      "commentLines": 10
+    },
+    {
+      "index": 66,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/defineOptions.ts",
+      "linesOfCode": 78,
+      "functions": 1,
+      "maxNesting": 4,
+      "branches": 15,
+      "commentLines": 0
+    },
+    {
+      "index": 67,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/definePropsDestructure.ts",
+      "linesOfCode": 335,
+      "functions": 14,
+      "maxNesting": 5,
+      "branches": 49,
+      "commentLines": 20
+    },
+    {
+      "index": 68,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/defineSlots.ts",
+      "linesOfCode": 28,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 0
+    },
+    {
+      "index": 69,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/importUsageCheck.ts",
+      "linesOfCode": 157,
+      "functions": 8,
+      "maxNesting": 7,
+      "branches": 23,
+      "commentLines": 11
+    },
+    {
+      "index": 70,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/normalScript.ts",
+      "linesOfCode": 50,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 2
+    },
+    {
+      "index": 71,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/topLevelAwait.ts",
+      "linesOfCode": 65,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 33
+    },
+    {
+      "index": 72,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/script/utils.ts",
+      "linesOfCode": 127,
+      "functions": 20,
+      "maxNesting": 4,
+      "branches": 19,
+      "commentLines": 11
+    },
+    {
+      "index": 73,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/shims.d.ts",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 74,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/style/pluginScoped.ts",
+      "linesOfCode": 397,
+      "functions": 30,
+      "maxNesting": 4,
+      "branches": 43,
+      "commentLines": 34
+    },
+    {
+      "index": 75,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/style/pluginTrim.ts",
+      "linesOfCode": 16,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 76,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/style/preprocessors.ts",
+      "linesOfCode": 143,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 12,
+      "commentLines": 3
+    },
+    {
+      "index": 77,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/template/resolveTemplateAST.ts",
+      "linesOfCode": 37,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 78,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/template/transformAssetUrl.ts",
+      "linesOfCode": 254,
+      "functions": 11,
+      "maxNesting": 3,
+      "branches": 14,
+      "commentLines": 55
+    },
+    {
+      "index": 79,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/template/transformSrcset.ts",
+      "linesOfCode": 171,
+      "functions": 10,
+      "maxNesting": 6,
+      "branches": 22,
+      "commentLines": 6
+    },
+    {
+      "index": 80,
+      "modulePath": "packages/compiler-sfc",
+      "path": "packages/compiler-sfc/src/warn.ts",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 81,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__benchmarks__/effect.bench.ts",
+      "linesOfCode": 101,
+      "functions": 18,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 0
+    },
+    {
+      "index": 82,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__benchmarks__/reactiveArray.bench.ts",
+      "linesOfCode": 140,
+      "functions": 23,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 0
+    },
+    {
+      "index": 83,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__benchmarks__/reactiveMap.bench.ts",
+      "linesOfCode": 133,
+      "functions": 22,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 0
+    },
+    {
+      "index": 84,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__benchmarks__/reactiveObject.bench.ts",
+      "linesOfCode": 31,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 85,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/collections/Map.spec.ts",
+      "linesOfCode": 441,
+      "functions": 58,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 8
+    },
+    {
+      "index": 86,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/collections/Set.spec.ts",
+      "linesOfCode": 434,
+      "functions": 67,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 0
+    },
+    {
+      "index": 87,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/collections/WeakMap.spec.ts",
+      "linesOfCode": 127,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 88,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/collections/shallowReadonly.spec.ts",
+      "linesOfCode": 136,
+      "functions": 15,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 89,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/computed.spec.ts",
+      "linesOfCode": 999,
+      "functions": 189,
+      "maxNesting": 2,
+      "branches": 24,
+      "commentLines": 49
+    },
+    {
+      "index": 90,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/effect.spec.ts",
+      "linesOfCode": 1156,
+      "functions": 193,
+      "maxNesting": 1,
+      "branches": 14,
+      "commentLines": 20
+    },
+    {
+      "index": 91,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/effectScope.spec.ts",
+      "linesOfCode": 376,
+      "functions": 81,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 8
+    },
+    {
+      "index": 92,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/reactive.spec.ts",
+      "linesOfCode": 412,
+      "functions": 57,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 33
+    },
+    {
+      "index": 93,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/reactiveArray.spec.ts",
+      "linesOfCode": 738,
+      "functions": 157,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 38
+    },
+    {
+      "index": 94,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/readonly.spec.ts",
+      "linesOfCode": 506,
+      "functions": 56,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 26
+    },
+    {
+      "index": 95,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/ref.spec.ts",
+      "linesOfCode": 627,
+      "functions": 75,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 96,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/shallowReadonly.spec.ts",
+      "linesOfCode": 177,
+      "functions": 21,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 97,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/__tests__/watch.spec.ts",
+      "linesOfCode": 288,
+      "functions": 56,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 9
+    },
+    {
+      "index": 98,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/index.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 99,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/baseHandlers.ts",
+      "linesOfCode": 236,
+      "functions": 13,
+      "maxNesting": 7,
+      "branches": 38,
+      "commentLines": 25
+    },
+    {
+      "index": 100,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/collectionHandlers.ts",
+      "linesOfCode": 306,
+      "functions": 21,
+      "maxNesting": 3,
+      "branches": 42,
+      "commentLines": 17
+    },
+    {
+      "index": 101,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/computed.ts",
+      "linesOfCode": 203,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 87
+    },
+    {
+      "index": 102,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/constants.ts",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 103,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/effect.ts",
+      "linesOfCode": 527,
+      "functions": 25,
+      "maxNesting": 5,
+      "branches": 51,
+      "commentLines": 144
+    },
+    {
+      "index": 104,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/effectScope.ts",
+      "linesOfCode": 217,
+      "functions": 11,
+      "maxNesting": 4,
+      "branches": 27,
+      "commentLines": 70
+    },
+    {
+      "index": 105,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/index.ts",
+      "linesOfCode": 97,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 106,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/ref.ts",
+      "linesOfCode": 523,
+      "functions": 26,
+      "maxNesting": 3,
+      "branches": 29,
+      "commentLines": 182
+    },
+    {
+      "index": 107,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/warning.ts",
+      "linesOfCode": 3,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 108,
+      "modulePath": "packages/reactivity",
+      "path": "packages/reactivity/src/watch.ts",
+      "linesOfCode": 335,
+      "functions": 22,
+      "maxNesting": 7,
+      "branches": 49,
+      "commentLines": 35
+    },
+    {
+      "index": 109,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiAsyncComponent.spec.ts",
+      "linesOfCode": 805,
+      "functions": 149,
+      "maxNesting": 1,
+      "branches": 17,
+      "commentLines": 36
+    },
+    {
+      "index": 110,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiExpose.spec.ts",
+      "linesOfCode": 248,
+      "functions": 52,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 111,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiInject.spec.ts",
+      "linesOfCode": 351,
+      "functions": 87,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 112,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiLifecycle.spec.ts",
+      "linesOfCode": 408,
+      "functions": 88,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 14
+    },
+    {
+      "index": 113,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiOptions.spec.ts",
+      "linesOfCode": 1579,
+      "functions": 271,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 20
+    },
+    {
+      "index": 114,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiSetupHelpers.spec.ts",
+      "linesOfCode": 527,
+      "functions": 111,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 18
+    },
+    {
+      "index": 115,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiWatch.bench.ts",
+      "linesOfCode": 52,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 116,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/apiWatch.spec.ts",
+      "linesOfCode": 1810,
+      "functions": 254,
+      "maxNesting": 1,
+      "branches": 16,
+      "commentLines": 83
+    },
+    {
+      "index": 117,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/componentEmits.spec.ts",
+      "linesOfCode": 570,
+      "functions": 99,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 118,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/componentProps.spec.ts",
+      "linesOfCode": 807,
+      "functions": 102,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 30
+    },
+    {
+      "index": 119,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/componentPublicInstance.spec.ts",
+      "linesOfCode": 452,
+      "functions": 69,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 36
+    },
+    {
+      "index": 120,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/componentSlots.spec.ts",
+      "linesOfCode": 391,
+      "functions": 81,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 10
+    },
+    {
+      "index": 121,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/components/KeepAlive.spec.ts",
+      "linesOfCode": 1068,
+      "functions": 140,
+      "maxNesting": 1,
+      "branches": 16,
+      "commentLines": 39
+    },
+    {
+      "index": 122,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/components/Suspense.spec.ts",
+      "linesOfCode": 2864,
+      "functions": 471,
+      "maxNesting": 1,
+      "branches": 32,
+      "commentLines": 135
+    },
+    {
+      "index": 123,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/components/Teleport.spec.ts",
+      "linesOfCode": 1111,
+      "functions": 122,
+      "maxNesting": 2,
+      "branches": 20,
+      "commentLines": 19
+    },
+    {
+      "index": 124,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/errorHandling.spec.ts",
+      "linesOfCode": 612,
+      "functions": 153,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 7
+    },
+    {
+      "index": 125,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/h.spec.ts",
+      "linesOfCode": 77,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 126,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/createSlots.spec.ts",
+      "linesOfCode": 58,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 127,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/renderList.spec.ts",
+      "linesOfCode": 100,
+      "functions": 28,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 128,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/resolveAssets.spec.ts",
+      "linesOfCode": 217,
+      "functions": 32,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 129,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/toHandlers.spec.ts",
+      "linesOfCode": 18,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 130,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/useId.spec.ts",
+      "linesOfCode": 292,
+      "functions": 72,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 29
+    },
+    {
+      "index": 131,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/useModel.spec.ts",
+      "linesOfCode": 715,
+      "functions": 99,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 39
+    },
+    {
+      "index": 132,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/helpers/withMemo.spec.ts",
+      "linesOfCode": 257,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 27
+    },
+    {
+      "index": 133,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/hmr.spec.ts",
+      "linesOfCode": 960,
+      "functions": 88,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 41
+    },
+    {
+      "index": 134,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/hydration.spec.ts",
+      "linesOfCode": 2689,
+      "functions": 411,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 118
+    },
+    {
+      "index": 135,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererAttrsFallthrough.spec.ts",
+      "linesOfCode": 706,
+      "functions": 98,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 20
+    },
+    {
+      "index": 136,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererChildren.spec.ts",
+      "linesOfCode": 553,
+      "functions": 54,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 8
+    },
+    {
+      "index": 137,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererComponent.spec.ts",
+      "linesOfCode": 462,
+      "functions": 78,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 12
+    },
+    {
+      "index": 138,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererElement.spec.ts",
+      "linesOfCode": 41,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 139,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererOptimizedMode.spec.ts",
+      "linesOfCode": 1339,
+      "functions": 156,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 74
+    },
+    {
+      "index": 140,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/rendererTemplateRef.spec.ts",
+      "linesOfCode": 627,
+      "functions": 102,
+      "maxNesting": 1,
+      "branches": 14,
+      "commentLines": 13
+    },
+    {
+      "index": 141,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/scheduler.spec.ts",
+      "linesOfCode": 761,
+      "functions": 141,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 52
+    },
+    {
+      "index": 142,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/vnode.spec.ts",
+      "linesOfCode": 708,
+      "functions": 85,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 36
+    },
+    {
+      "index": 143,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/__tests__/vnodeHooks.spec.ts",
+      "linesOfCode": 90,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 144,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/index.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 145,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiAsyncComponent.ts",
+      "linesOfCode": 260,
+      "functions": 30,
+      "maxNesting": 3,
+      "branches": 29,
+      "commentLines": 13
+    },
+    {
+      "index": 146,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiCreateApp.ts",
+      "linesOfCode": 441,
+      "functions": 15,
+      "maxNesting": 4,
+      "branches": 33,
+      "commentLines": 82
+    },
+    {
+      "index": 147,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiDefineComponent.ts",
+      "linesOfCode": 306,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 31
+    },
+    {
+      "index": 148,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiInject.ts",
+      "linesOfCode": 87,
+      "functions": 3,
+      "maxNesting": 4,
+      "branches": 13,
+      "commentLines": 21
+    },
+    {
+      "index": 149,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiLifecycle.ts",
+      "linesOfCode": 109,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 9
+    },
+    {
+      "index": 150,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/apiWatch.ts",
+      "linesOfCode": 255,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 24,
+      "commentLines": 12
+    },
+    {
+      "index": 151,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/attrsFallthrough.ts",
+      "linesOfCode": 28,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 1
+    },
+    {
+      "index": 152,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/compatConfig.ts",
+      "linesOfCode": 560,
+      "functions": 21,
+      "maxNesting": 4,
+      "branches": 31,
+      "commentLines": 24
+    },
+    {
+      "index": 153,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/componentAsync.ts",
+      "linesOfCode": 53,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 154,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/componentFunctional.ts",
+      "linesOfCode": 59,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 155,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/componentVModel.ts",
+      "linesOfCode": 86,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 7
+    },
+    {
+      "index": 156,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/customDirective.ts",
+      "linesOfCode": 57,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 157,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/global.ts",
+      "linesOfCode": 597,
+      "functions": 40,
+      "maxNesting": 4,
+      "branches": 59,
+      "commentLines": 83
+    },
+    {
+      "index": 158,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/globalConfig.ts",
+      "linesOfCode": 80,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 21
+    },
+    {
+      "index": 159,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/instance.ts",
+      "linesOfCode": 182,
+      "functions": 41,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 9
+    },
+    {
+      "index": 160,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/instanceEventEmitter.ts",
+      "linesOfCode": 102,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 4
+    },
+    {
+      "index": 161,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/instanceListeners.ts",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 162,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/props.ts",
+      "linesOfCode": 42,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 6,
+      "commentLines": 3
+    },
+    {
+      "index": 163,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/compat/renderFn.ts",
+      "linesOfCode": 317,
+      "functions": 18,
+      "maxNesting": 6,
+      "branches": 38,
+      "commentLines": 24
+    },
+    {
+      "index": 164,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/component.ts",
+      "linesOfCode": 1219,
+      "functions": 44,
+      "maxNesting": 5,
+      "branches": 74,
+      "commentLines": 394
+    },
+    {
+      "index": 165,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentEmits.ts",
+      "linesOfCode": 290,
+      "functions": 6,
+      "maxNesting": 5,
+      "branches": 35,
+      "commentLines": 11
+    },
+    {
+      "index": 166,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentOptions.ts",
+      "linesOfCode": 1235,
+      "functions": 34,
+      "maxNesting": 6,
+      "branches": 98,
+      "commentLines": 134
+    },
+    {
+      "index": 167,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentProps.ts",
+      "linesOfCode": 761,
+      "functions": 19,
+      "maxNesting": 8,
+      "branches": 104,
+      "commentLines": 118
+    },
+    {
+      "index": 168,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentRenderContext.ts",
+      "linesOfCode": 114,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 51
+    },
+    {
+      "index": 169,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentRenderUtils.ts",
+      "linesOfCode": 472,
+      "functions": 14,
+      "maxNesting": 7,
+      "branches": 69,
+      "commentLines": 47
+    },
+    {
+      "index": 170,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/componentSlots.ts",
+      "linesOfCode": 236,
+      "functions": 11,
+      "maxNesting": 4,
+      "branches": 23,
+      "commentLines": 30
+    },
+    {
+      "index": 171,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/components/KeepAlive.ts",
+      "linesOfCode": 435,
+      "functions": 31,
+      "maxNesting": 3,
+      "branches": 41,
+      "commentLines": 60
+    },
+    {
+      "index": 172,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/components/Suspense.ts",
+      "linesOfCode": 898,
+      "functions": 27,
+      "maxNesting": 5,
+      "branches": 75,
+      "commentLines": 129
+    },
+    {
+      "index": 173,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/components/Teleport.ts",
+      "linesOfCode": 546,
+      "functions": 18,
+      "maxNesting": 5,
+      "branches": 60,
+      "commentLines": 59
+    },
+    {
+      "index": 174,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/customFormatter.ts",
+      "linesOfCode": 200,
+      "functions": 12,
+      "maxNesting": 5,
+      "branches": 30,
+      "commentLines": 5
+    },
+    {
+      "index": 175,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/directives.ts",
+      "linesOfCode": 186,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 10,
+      "commentLines": 23
+    },
+    {
+      "index": 176,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/enums.ts",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 177,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/errorHandling.ts",
+      "linesOfCode": 177,
+      "functions": 5,
+      "maxNesting": 5,
+      "branches": 22,
+      "commentLines": 13
+    },
+    {
+      "index": 178,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/h.ts",
+      "linesOfCode": 202,
+      "functions": 1,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 53
+    },
+    {
+      "index": 179,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/createSlots.ts",
+      "linesOfCode": 41,
+      "functions": 2,
+      "maxNesting": 5,
+      "branches": 6,
+      "commentLines": 9
+    },
+    {
+      "index": 180,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/renderList.ts",
+      "linesOfCode": 118,
+      "functions": 2,
+      "maxNesting": 5,
+      "branches": 12,
+      "commentLines": 19
+    },
+    {
+      "index": 181,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/renderSlot.ts",
+      "linesOfCode": 138,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 19,
+      "commentLines": 24
+    },
+    {
+      "index": 182,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/toHandlers.ts",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 4
+    },
+    {
+      "index": 183,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/useId.ts",
+      "linesOfCode": 26,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 184,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/useModel.ts",
+      "linesOfCode": 126,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 13
+    },
+    {
+      "index": 185,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/useTemplateRef.ts",
+      "linesOfCode": 40,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 0
+    },
+    {
+      "index": 186,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/helpers/withMemo.ts",
+      "linesOfCode": 34,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 2
+    },
+    {
+      "index": 187,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/hmr.ts",
+      "linesOfCode": 191,
+      "functions": 13,
+      "maxNesting": 5,
+      "branches": 20,
+      "commentLines": 31
+    },
+    {
+      "index": 188,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/hydration.ts",
+      "linesOfCode": 1026,
+      "functions": 32,
+      "maxNesting": 8,
+      "branches": 133,
+      "commentLines": 90
+    },
+    {
+      "index": 189,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/index.ts",
+      "linesOfCode": 451,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 53
+    },
+    {
+      "index": 190,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/internalObject.ts",
+      "linesOfCode": 11,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 191,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/profiling.ts",
+      "linesOfCode": 49,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 1
+    },
+    {
+      "index": 192,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/renderer.ts",
+      "linesOfCode": 2476,
+      "functions": 67,
+      "maxNesting": 6,
+      "branches": 274,
+      "commentLines": 291
+    },
+    {
+      "index": 193,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/scheduler.ts",
+      "linesOfCode": 268,
+      "functions": 12,
+      "maxNesting": 3,
+      "branches": 41,
+      "commentLines": 49
+    },
+    {
+      "index": 194,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/vnode.ts",
+      "linesOfCode": 874,
+      "functions": 26,
+      "maxNesting": 7,
+      "branches": 83,
+      "commentLines": 222
+    },
+    {
+      "index": 195,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/src/warning.ts",
+      "linesOfCode": 161,
+      "functions": 13,
+      "maxNesting": 5,
+      "branches": 25,
+      "commentLines": 13
+    },
+    {
+      "index": 196,
+      "modulePath": "packages/runtime-core",
+      "path": "packages/runtime-core/types/scriptSetupHelpers.d.ts",
+      "linesOfCode": 18,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 197,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/createApp.spec.ts",
+      "linesOfCode": 35,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 198,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/customElement.spec.ts",
+      "linesOfCode": 2379,
+      "functions": 317,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 65
+    },
+    {
+      "index": 199,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/customizedBuiltIn.spec.ts",
+      "linesOfCode": 19,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 200,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/directives/vModel.spec.ts",
+      "linesOfCode": 1399,
+      "functions": 100,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 15
+    },
+    {
+      "index": 201,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/directives/vOn.spec.ts",
+      "linesOfCode": 162,
+      "functions": 32,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 4
+    },
+    {
+      "index": 202,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/directives/vShow.spec.ts",
+      "linesOfCode": 255,
+      "functions": 30,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 203,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/helpers/useCssVars.spec.ts",
+      "linesOfCode": 435,
+      "functions": 93,
+      "maxNesting": 1,
+      "branches": 26,
+      "commentLines": 18
+    },
+    {
+      "index": 204,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/nodeOps.spec.ts",
+      "linesOfCode": 144,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 205,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/patchAttrs.spec.ts",
+      "linesOfCode": 111,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 206,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/patchClass.spec.ts",
+      "linesOfCode": 31,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 207,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/patchProps.spec.ts",
+      "linesOfCode": 353,
+      "functions": 38,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 24
+    },
+    {
+      "index": 208,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/patchStyle.spec.ts",
+      "linesOfCode": 165,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 209,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/__tests__/rendererStaticNode.spec.ts",
+      "linesOfCode": 43,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 210,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/index.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 211,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/components/Transition.ts",
+      "linesOfCode": 444,
+      "functions": 41,
+      "maxNesting": 4,
+      "branches": 49,
+      "commentLines": 35
+    },
+    {
+      "index": 212,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/components/TransitionGroup.ts",
+      "linesOfCode": 239,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 24,
+      "commentLines": 19
+    },
+    {
+      "index": 213,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/directives/vModel.ts",
+      "linesOfCode": 390,
+      "functions": 40,
+      "maxNesting": 4,
+      "branches": 57,
+      "commentLines": 26
+    },
+    {
+      "index": 214,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/directives/vShow.ts",
+      "linesOfCode": 58,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 4
+    },
+    {
+      "index": 215,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/helpers/useCssModule.ts",
+      "linesOfCode": 30,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 2
+    },
+    {
+      "index": 216,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/helpers/useCssVars.ts",
+      "linesOfCode": 99,
+      "functions": 12,
+      "maxNesting": 5,
+      "branches": 15,
+      "commentLines": 10
+    },
+    {
+      "index": 217,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/index.ts",
+      "linesOfCode": 277,
+      "functions": 18,
+      "maxNesting": 4,
+      "branches": 19,
+      "commentLines": 28
+    },
+    {
+      "index": 218,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/modules/attrs.ts",
+      "linesOfCode": 90,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 12,
+      "commentLines": 5
+    },
+    {
+      "index": 219,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/modules/class.ts",
+      "linesOfCode": 25,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 5
+    },
+    {
+      "index": 220,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/modules/events.ts",
+      "linesOfCode": 152,
+      "functions": 10,
+      "maxNesting": 3,
+      "branches": 15,
+      "commentLines": 19
+    },
+    {
+      "index": 221,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/modules/style.ts",
+      "linesOfCode": 150,
+      "functions": 5,
+      "maxNesting": 5,
+      "branches": 29,
+      "commentLines": 11
+    },
+    {
+      "index": 222,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/nodeOps.ts",
+      "linesOfCode": 117,
+      "functions": 15,
+      "maxNesting": 3,
+      "branches": 19,
+      "commentLines": 23
+    },
+    {
+      "index": 223,
+      "modulePath": "packages/runtime-dom",
+      "path": "packages/runtime-dom/src/patchProp.ts",
+      "linesOfCode": 159,
+      "functions": 6,
+      "maxNesting": 7,
+      "branches": 24,
+      "commentLines": 33
+    },
+    {
+      "index": 224,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/customElementCasing.spec.ts",
+      "linesOfCode": 38,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 225,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/TransitionGroup.spec.ts",
+      "linesOfCode": 878,
+      "functions": 88,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 13
+    },
+    {
+      "index": 226,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/commits.mock.ts",
+      "linesOfCode": 551,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 227,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/commits.spec.ts",
+      "linesOfCode": 58,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 228,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/e2eBrowserUtils.ts",
+      "linesOfCode": 393,
+      "functions": 56,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 6
+    },
+    {
+      "index": 229,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/grid.spec.ts",
+      "linesOfCode": 107,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 230,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/hydrationStrategies.spec.ts",
+      "linesOfCode": 141,
+      "functions": 53,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 231,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/markdown.spec.ts",
+      "linesOfCode": 39,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 232,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/ssr-custom-element.spec.ts",
+      "linesOfCode": 153,
+      "functions": 32,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 233,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/svg.spec.ts",
+      "linesOfCode": 138,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 234,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/todomvc.spec.ts",
+      "linesOfCode": 167,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 235,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/tree.spec.ts",
+      "linesOfCode": 104,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 236,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/e2e/vModel.spec.ts",
+      "linesOfCode": 53,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 237,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/index.spec.ts",
+      "linesOfCode": 453,
+      "functions": 49,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 238,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/mathmlNamespace.spec.ts",
+      "linesOfCode": 74,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 239,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/__tests__/svgNamespace.spec.ts",
+      "linesOfCode": 67,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 240,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/index.browser.js",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 241,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/index.browser.mjs",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 242,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/index.d.mts",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 243,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/index.js",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 244,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/index.mjs",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 245,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/compiler-sfc/register-ts.js",
+      "linesOfCode": 3,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 246,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/index.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 247,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/jsx-runtime/index.d.ts",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 248,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/jsx-runtime/index.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 249,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/jsx-runtime/index.mjs",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 250,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/server-renderer/index.d.mts",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 251,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/server-renderer/index.d.ts",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 252,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/server-renderer/index.js",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 253,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/server-renderer/index.mjs",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 254,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/src/index.ts",
+      "linesOfCode": 93,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 11
+    },
+    {
+      "index": 255,
+      "modulePath": "packages/vue",
+      "path": "packages/vue/src/runtime.ts",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 4,
+      "branches": 5,
+      "commentLines": 3
+    }
+  ]
+}

@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "django",
+    "name": "django",
+    "ref": "main",
+    "commitSha": "f7610bda78afb13ee395dfee2445805d8c7ad0f6",
+    "primaryLanguage": "Python",
+    "stars": 88401,
+    "fetchedAt": "2026-08-17T11:49:29Z"
+  },
+  "seed": "f7610bda",
+  "totals": {
+    "filesScanned": 2000,
+    "filesSkipped": 5080,
+    "linesOfCode": 312754,
+    "functions": 22834,
+    "classes": 7403,
+    "imports": 8142
+  },
+  "languages": [
+    {
+      "name": "Python",
+      "share": 0.9845,
+      "files": 1969
+    },
+    {
+      "name": "JavaScript",
+      "share": 0.0155,
+      "files": 31
+    }
+  ],
+  "modules": [
+    {
+      "path": "django/contrib",
+      "share": 0.0945,
+      "files": 241,
+      "linesOfCode": 29568,
+      "avgNestingDepth": 0.7178,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 4.873,
+      "cyclomaticDensity": 0.016,
+      "commentRatio": 0.0687,
+      "asyncRatio": 0.04
+    },
+    {
+      "path": "django/db",
+      "share": 0.089,
+      "files": 82,
+      "linesOfCode": 27828,
+      "avgNestingDepth": 0.9182,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 6.0022,
+      "cyclomaticDensity": 0.0225,
+      "commentRatio": 0.0933,
+      "asyncRatio": 0.0092
+    },
+    {
+      "path": "tests/migrations",
+      "share": 0.077,
+      "files": 165,
+      "linesOfCode": 24085,
+      "avgNestingDepth": 0.5334,
+      "maxNestingDepth": 5,
+      "avgFunctionLength": 8.57,
+      "cyclomaticDensity": 0.0052,
+      "commentRatio": 0.0409,
+      "asyncRatio": 0
+    },
+    {
+      "path": "tests/admin_views",
+      "share": 0.0396,
+      "files": 15,
+      "linesOfCode": 12374,
+      "avgNestingDepth": 0.2194,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 5.9643,
+      "cyclomaticDensity": 0.0023,
+      "commentRatio": 0.0499,
+      "asyncRatio": 0
+    },
+    {
+      "path": "tests/template_tests",
+      "share": 0.0369,
+      "files": 97,
+      "linesOfCode": 11547,
+      "avgNestingDepth": 0.2831,
+      "maxNestingDepth": 3,
+      "avgFunctionLength": 2.8413,
+      "cyclomaticDensity": 0.0049,
+      "commentRatio": 0.0184,
+      "asyncRatio": 0
+    },
+    {
+      "path": "django/core",
+      "share": 0.0333,
+      "files": 76,
+      "linesOfCode": 10403,
+      "avgNestingDepth": 0.9329,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 6.7393,
+      "cyclomaticDensity": 0.0218,
+      "commentRatio": 0.0702,
+      "asyncRatio": 0.0381
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/__init__.py",
+      "linesOfCode": 53,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 1,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/decorators.py",
+      "linesOfCode": 103,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 0
+    },
+    {
+      "index": 2,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/forms.py",
+      "linesOfCode": 25,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 3,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/migrations/0003_logentry_add_action_flag_choices.py",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 4,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/static/admin/js/SelectBox.js",
+      "linesOfCode": 177,
+      "functions": 17,
+      "maxNesting": 4,
+      "branches": 22,
+      "commentLines": 11
+    },
+    {
+      "index": 5,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/static/admin/js/admin/DateTimeShortcuts.js",
+      "linesOfCode": 653,
+      "functions": 37,
+      "maxNesting": 4,
+      "branches": 29,
+      "commentLines": 89
+    },
+    {
+      "index": 6,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/static/admin/js/cancel.js",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 7,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/static/admin/js/jquery.init.js",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 8,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/static/admin/js/prepopulate.js",
+      "linesOfCode": 41,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 10
+    },
+    {
+      "index": 9,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/templatetags/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 10,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/templatetags/admin_modify.py",
+      "linesOfCode": 144,
+      "functions": 9,
+      "maxNesting": 4,
+      "branches": 12,
+      "commentLines": 3
+    },
+    {
+      "index": 11,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/utils.py",
+      "linesOfCode": 558,
+      "functions": 30,
+      "maxNesting": 6,
+      "branches": 101,
+      "commentLines": 35
+    },
+    {
+      "index": 12,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admin/views/main.py",
+      "linesOfCode": 522,
+      "functions": 15,
+      "maxNesting": 5,
+      "branches": 86,
+      "commentLines": 64
+    },
+    {
+      "index": 13,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admindocs/apps.py",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 14,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/admindocs/views.py",
+      "linesOfCode": 426,
+      "functions": 13,
+      "maxNesting": 4,
+      "branches": 39,
+      "commentLines": 27
+    },
+    {
+      "index": 15,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/base_user.py",
+      "linesOfCode": 131,
+      "functions": 22,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 5
+    },
+    {
+      "index": 16,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/decorators.py",
+      "linesOfCode": 111,
+      "functions": 12,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 9
+    },
+    {
+      "index": 17,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/hashers.py",
+      "linesOfCode": 579,
+      "functions": 53,
+      "maxNesting": 2,
+      "branches": 24,
+      "commentLines": 30
+    },
+    {
+      "index": 18,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/middleware.py",
+      "linesOfCode": 251,
+      "functions": 18,
+      "maxNesting": 3,
+      "branches": 30,
+      "commentLines": 35
+    },
+    {
+      "index": 19,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/migrations/0003_alter_user_email_max_length.py",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 20,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/migrations/0007_alter_validators_add_error_messages.py",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 21,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/migrations/0012_alter_user_first_name_max_length.py",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 22,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/models.py",
+      "linesOfCode": 512,
+      "functions": 64,
+      "maxNesting": 2,
+      "branches": 41,
+      "commentLines": 11
+    },
+    {
+      "index": 23,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/templatetags/auth.py",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 24,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/auth/views.py",
+      "linesOfCode": 317,
+      "functions": 25,
+      "maxNesting": 3,
+      "branches": 19,
+      "commentLines": 17
+    },
+    {
+      "index": 25,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/contenttypes/apps.py",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 26,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/contenttypes/management/commands/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 27,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/contenttypes/migrations/0002_remove_content_type_name.py",
+      "linesOfCode": 37,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 28,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/contenttypes/views.py",
+      "linesOfCode": 79,
+      "functions": 1,
+      "maxNesting": 5,
+      "branches": 15,
+      "commentLines": 15
+    },
+    {
+      "index": 29,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/flatpages/middleware.py",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 30,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/flatpages/models.py",
+      "linesOfCode": 43,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 31,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/flatpages/urls.py",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 32,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/apps.py",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 33,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/base/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 34,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/base/operations.py",
+      "linesOfCode": 189,
+      "functions": 17,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 14
+    },
+    {
+      "index": 35,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/mysql/introspection.py",
+      "linesOfCode": 28,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 3,
+      "commentLines": 10
+    },
+    {
+      "index": 36,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/oracle/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 37,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/oracle/models.py",
+      "linesOfCode": 53,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 38,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/postgis/adapter.py",
+      "linesOfCode": 51,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 4
+    },
+    {
+      "index": 39,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/postgis/features.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 40,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/postgis/schema.py",
+      "linesOfCode": 112,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 5
+    },
+    {
+      "index": 41,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/spatialite/client.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 42,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/backends/spatialite/models.py",
+      "linesOfCode": 58,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 43,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/models/aggregates.py",
+      "linesOfCode": 73,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 2
+    },
+    {
+      "index": 44,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/db/models/lookups.py",
+      "linesOfCode": 295,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 17,
+      "commentLines": 16
+    },
+    {
+      "index": 45,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/feeds.py",
+      "linesOfCode": 129,
+      "functions": 14,
+      "maxNesting": 5,
+      "branches": 13,
+      "commentLines": 13
+    },
+    {
+      "index": 46,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/base.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 47,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/driver.py",
+      "linesOfCode": 88,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 13
+    },
+    {
+      "index": 48,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/geometries.py",
+      "linesOfCode": 732,
+      "functions": 92,
+      "maxNesting": 3,
+      "branches": 55,
+      "commentLines": 99
+    },
+    {
+      "index": 49,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/prototypes/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 50,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/prototypes/generation.py",
+      "linesOfCode": 142,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 10
+    },
+    {
+      "index": 51,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/raster/band.py",
+      "linesOfCode": 231,
+      "functions": 20,
+      "maxNesting": 3,
+      "branches": 17,
+      "commentLines": 14
+    },
+    {
+      "index": 52,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/gdal/srs.py",
+      "linesOfCode": 316,
+      "functions": 37,
+      "maxNesting": 3,
+      "branches": 24,
+      "commentLines": 14
+    },
+    {
+      "index": 53,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/__init__.py",
+      "linesOfCode": 18,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 54,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/factory.py",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 2
+    },
+    {
+      "index": 55,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/linestring.py",
+      "linesOfCode": 161,
+      "functions": 14,
+      "maxNesting": 4,
+      "branches": 22,
+      "commentLines": 16
+    },
+    {
+      "index": 56,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/polygon.py",
+      "linesOfCode": 159,
+      "functions": 15,
+      "maxNesting": 3,
+      "branches": 16,
+      "commentLines": 14
+    },
+    {
+      "index": 57,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/prototypes/geom.py",
+      "linesOfCode": 71,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 58,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/geos/prototypes/prepared.py",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 59,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/management/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 60,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/measure.py",
+      "linesOfCode": 332,
+      "functions": 24,
+      "maxNesting": 4,
+      "branches": 26,
+      "commentLines": 34
+    },
+    {
+      "index": 61,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/serializers/geojson.py",
+      "linesOfCode": 66,
+      "functions": 7,
+      "maxNesting": 3,
+      "branches": 10,
+      "commentLines": 4
+    },
+    {
+      "index": 62,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/static/gis/js/OLMapWidget.js",
+      "linesOfCode": 309,
+      "functions": 21,
+      "maxNesting": 4,
+      "branches": 27,
+      "commentLines": 22
+    },
+    {
+      "index": 63,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/gis/utils/ogrinspect.py",
+      "linesOfCode": 225,
+      "functions": 5,
+      "maxNesting": 4,
+      "branches": 29,
+      "commentLines": 18
+    },
+    {
+      "index": 64,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/humanize/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 65,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/messages/api.py",
+      "linesOfCode": 104,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 0
+    },
+    {
+      "index": 66,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/messages/middleware.py",
+      "linesOfCode": 21,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 2
+    },
+    {
+      "index": 67,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/messages/storage/cookie.py",
+      "linesOfCode": 211,
+      "functions": 19,
+      "maxNesting": 3,
+      "branches": 19,
+      "commentLines": 10
+    },
+    {
+      "index": 68,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/messages/views.py",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 69,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/aggregates/mixins.py",
+      "linesOfCode": 14,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 70,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/constraints.py",
+      "linesOfCode": 224,
+      "functions": 11,
+      "maxNesting": 3,
+      "branches": 38,
+      "commentLines": 1
+    },
+    {
+      "index": 71,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/fields/citext.py",
+      "linesOfCode": 38,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 72,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/forms/__init__.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 73,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/forms/ranges.py",
+      "linesOfCode": 99,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 9,
+      "commentLines": 0
+    },
+    {
+      "index": 74,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/operations.py",
+      "linesOfCode": 275,
+      "functions": 47,
+      "maxNesting": 2,
+      "branches": 24,
+      "commentLines": 9
+    },
+    {
+      "index": 75,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/postgres/validators.py",
+      "linesOfCode": 75,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 0
+    },
+    {
+      "index": 76,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/redirects/apps.py",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 77,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/redirects/migrations/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 78,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sessions/apps.py",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 79,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sessions/backends/db.py",
+      "linesOfCode": 173,
+      "functions": 20,
+      "maxNesting": 2,
+      "branches": 28,
+      "commentLines": 11
+    },
+    {
+      "index": 80,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sessions/exceptions.py",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 81,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sessions/management/commands/clearsessions.py",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 82,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sessions/models.py",
+      "linesOfCode": 25,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 83,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sites/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 84,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sites/checks.py",
+      "linesOfCode": 27,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 3
+    },
+    {
+      "index": 85,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sites/migrations/0001_initial.py",
+      "linesOfCode": 40,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 86,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/sites/shortcuts.py",
+      "linesOfCode": 14,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 87,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/staticfiles/checks.py",
+      "linesOfCode": 24,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 88,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/staticfiles/management/commands/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 89,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/staticfiles/testing.py",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 90,
+      "modulePath": "django/contrib",
+      "path": "django/contrib/staticfiles/views.py",
+      "linesOfCode": 30,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 91,
+      "modulePath": "django/core",
+      "path": "django/core/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 92,
+      "modulePath": "django/core",
+      "path": "django/core/cache/backends/db.py",
+      "linesOfCode": 265,
+      "functions": 14,
+      "maxNesting": 4,
+      "branches": 25,
+      "commentLines": 14
+    },
+    {
+      "index": 93,
+      "modulePath": "django/core",
+      "path": "django/core/cache/backends/locmem.py",
+      "linesOfCode": 100,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 17,
+      "commentLines": 2
+    },
+    {
+      "index": 94,
+      "modulePath": "django/core",
+      "path": "django/core/checks/__init__.py",
+      "linesOfCode": 46,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 95,
+      "modulePath": "django/core",
+      "path": "django/core/checks/commands.py",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 96,
+      "modulePath": "django/core",
+      "path": "django/core/checks/files.py",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 97,
+      "modulePath": "django/core",
+      "path": "django/core/checks/security/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 98,
+      "modulePath": "django/core",
+      "path": "django/core/checks/security/sessions.py",
+      "linesOfCode": 78,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 0
+    },
+    {
+      "index": 99,
+      "modulePath": "django/core",
+      "path": "django/core/exceptions.py",
+      "linesOfCode": 175,
+      "functions": 9,
+      "maxNesting": 4,
+      "branches": 21,
+      "commentLines": 3
+    },
+    {
+      "index": 100,
+      "modulePath": "django/core",
+      "path": "django/core/files/move.py",
+      "linesOfCode": 79,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 13
+    },
+    {
+      "index": 101,
+      "modulePath": "django/core",
+      "path": "django/core/files/storage/filesystem.py",
+      "linesOfCode": 193,
+      "functions": 21,
+      "maxNesting": 5,
+      "branches": 26,
+      "commentLines": 22
+    },
+    {
+      "index": 102,
+      "modulePath": "django/core",
+      "path": "django/core/files/temp.py",
+      "linesOfCode": 61,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 103,
+      "modulePath": "django/core",
+      "path": "django/core/handlers/asgi.py",
+      "linesOfCode": 331,
+      "functions": 19,
+      "maxNesting": 4,
+      "branches": 46,
+      "commentLines": 42
+    },
+    {
+      "index": 104,
+      "modulePath": "django/core",
+      "path": "django/core/handlers/wsgi.py",
+      "linesOfCode": 170,
+      "functions": 16,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 20
+    },
+    {
+      "index": 105,
+      "modulePath": "django/core",
+      "path": "django/core/mail/backends/console.py",
+      "linesOfCode": 40,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 7,
+      "commentLines": 1
+    },
+    {
+      "index": 106,
+      "modulePath": "django/core",
+      "path": "django/core/mail/backends/smtp.py",
+      "linesOfCode": 232,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 45,
+      "commentLines": 21
+    },
+    {
+      "index": 107,
+      "modulePath": "django/core",
+      "path": "django/core/mail/handler.py",
+      "linesOfCode": 62,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 11
+    },
+    {
+      "index": 108,
+      "modulePath": "django/core",
+      "path": "django/core/management/color.py",
+      "linesOfCode": 95,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 14
+    },
+    {
+      "index": 109,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/createcachetable.py",
+      "linesOfCode": 119,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 22,
+      "commentLines": 2
+    },
+    {
+      "index": 110,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/dumpdata.py",
+      "linesOfCode": 265,
+      "functions": 3,
+      "maxNesting": 4,
+      "branches": 37,
+      "commentLines": 10
+    },
+    {
+      "index": 111,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/makemessages.py",
+      "linesOfCode": 706,
+      "functions": 28,
+      "maxNesting": 5,
+      "branches": 105,
+      "commentLines": 26
+    },
+    {
+      "index": 112,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/optimizemigration.py",
+      "linesOfCode": 118,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 14,
+      "commentLines": 7
+    },
+    {
+      "index": 113,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/showmigrations.py",
+      "linesOfCode": 162,
+      "functions": 6,
+      "maxNesting": 6,
+      "branches": 24,
+      "commentLines": 12
+    },
+    {
+      "index": 114,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/startapp.py",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 115,
+      "modulePath": "django/core",
+      "path": "django/core/management/commands/testserver.py",
+      "linesOfCode": 57,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 116,
+      "modulePath": "django/core",
+      "path": "django/core/paginator.py",
+      "linesOfCode": 377,
+      "functions": 48,
+      "maxNesting": 2,
+      "branches": 41,
+      "commentLines": 12
+    },
+    {
+      "index": 117,
+      "modulePath": "django/core",
+      "path": "django/core/serializers/jsonl.py",
+      "linesOfCode": 54,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 2
+    },
+    {
+      "index": 118,
+      "modulePath": "django/core",
+      "path": "django/core/serializers/xml_serializer.py",
+      "linesOfCode": 505,
+      "functions": 38,
+      "maxNesting": 5,
+      "branches": 56,
+      "commentLines": 38
+    },
+    {
+      "index": 119,
+      "modulePath": "django/core",
+      "path": "django/core/validators.py",
+      "linesOfCode": 571,
+      "functions": 42,
+      "maxNesting": 2,
+      "branches": 59,
+      "commentLines": 40
+    },
+    {
+      "index": 120,
+      "modulePath": "django/db",
+      "path": "django/db/backends/base/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 121,
+      "modulePath": "django/db",
+      "path": "django/db/backends/base/creation.py",
+      "linesOfCode": 360,
+      "functions": 23,
+      "maxNesting": 5,
+      "branches": 37,
+      "commentLines": 53
+    },
+    {
+      "index": 122,
+      "modulePath": "django/db",
+      "path": "django/db/backends/base/validation.py",
+      "linesOfCode": 28,
+      "functions": 4,
+      "maxNesting": 3,
+      "branches": 3,
+      "commentLines": 4
+    },
+    {
+      "index": 123,
+      "modulePath": "django/db",
+      "path": "django/db/backends/dummy/features.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 124,
+      "modulePath": "django/db",
+      "path": "django/db/backends/mysql/client.py",
+      "linesOfCode": 66,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 10
+    },
+    {
+      "index": 125,
+      "modulePath": "django/db",
+      "path": "django/db/backends/mysql/operations.py",
+      "linesOfCode": 373,
+      "functions": 33,
+      "maxNesting": 3,
+      "branches": 53,
+      "commentLines": 40
+    },
+    {
+      "index": 126,
+      "modulePath": "django/db",
+      "path": "django/db/backends/oracle/base.py",
+      "linesOfCode": 595,
+      "functions": 42,
+      "maxNesting": 4,
+      "branches": 65,
+      "commentLines": 111
+    },
+    {
+      "index": 127,
+      "modulePath": "django/db",
+      "path": "django/db/backends/oracle/features.py",
+      "linesOfCode": 230,
+      "functions": 16,
+      "maxNesting": 3,
+      "branches": 7,
+      "commentLines": 11
+    },
+    {
+      "index": 128,
+      "modulePath": "django/db",
+      "path": "django/db/backends/oracle/schema.py",
+      "linesOfCode": 237,
+      "functions": 15,
+      "maxNesting": 4,
+      "branches": 30,
+      "commentLines": 28
+    },
+    {
+      "index": 129,
+      "modulePath": "django/db",
+      "path": "django/db/backends/postgresql/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 130,
+      "modulePath": "django/db",
+      "path": "django/db/backends/postgresql/features.py",
+      "linesOfCode": 180,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 4
+    },
+    {
+      "index": 131,
+      "modulePath": "django/db",
+      "path": "django/db/backends/postgresql/schema.py",
+      "linesOfCode": 356,
+      "functions": 17,
+      "maxNesting": 3,
+      "branches": 32,
+      "commentLines": 31
+    },
+    {
+      "index": 132,
+      "modulePath": "django/db",
+      "path": "django/db/backends/sqlite3/_functions.py",
+      "linesOfCode": 447,
+      "functions": 49,
+      "maxNesting": 3,
+      "branches": 83,
+      "commentLines": 10
+    },
+    {
+      "index": 133,
+      "modulePath": "django/db",
+      "path": "django/db/backends/sqlite3/introspection.py",
+      "linesOfCode": 432,
+      "functions": 13,
+      "maxNesting": 6,
+      "branches": 63,
+      "commentLines": 49
+    },
+    {
+      "index": 134,
+      "modulePath": "django/db",
+      "path": "django/db/migrations/__init__.py",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 135,
+      "modulePath": "django/db",
+      "path": "django/db/migrations/executor.py",
+      "linesOfCode": 382,
+      "functions": 12,
+      "maxNesting": 6,
+      "branches": 83,
+      "commentLines": 55
+    },
+    {
+      "index": 136,
+      "modulePath": "django/db",
+      "path": "django/db/migrations/operations/base.py",
+      "linesOfCode": 145,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 7
+    },
+    {
+      "index": 137,
+      "modulePath": "django/db",
+      "path": "django/db/migrations/optimizer.py",
+      "linesOfCode": 64,
+      "functions": 2,
+      "maxNesting": 5,
+      "branches": 9,
+      "commentLines": 7
+    },
+    {
+      "index": 138,
+      "modulePath": "django/db",
+      "path": "django/db/migrations/serializer.py",
+      "linesOfCode": 344,
+      "functions": 38,
+      "maxNesting": 2,
+      "branches": 37,
+      "commentLines": 25
+    },
+    {
+      "index": 139,
+      "modulePath": "django/db",
+      "path": "django/db/models/aggregates.py",
+      "linesOfCode": 385,
+      "functions": 29,
+      "maxNesting": 5,
+      "branches": 39,
+      "commentLines": 17
+    },
+    {
+      "index": 140,
+      "modulePath": "django/db",
+      "path": "django/db/models/deletion.py",
+      "linesOfCode": 480,
+      "functions": 31,
+      "maxNesting": 5,
+      "branches": 72,
+      "commentLines": 46
+    },
+    {
+      "index": 141,
+      "modulePath": "django/db",
+      "path": "django/db/models/fetch_modes.py",
+      "linesOfCode": 38,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 142,
+      "modulePath": "django/db",
+      "path": "django/db/models/fields/generated.py",
+      "linesOfCode": 199,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 22,
+      "commentLines": 1
+    },
+    {
+      "index": 143,
+      "modulePath": "django/db",
+      "path": "django/db/models/fields/related_descriptors.py",
+      "linesOfCode": 1462,
+      "functions": 97,
+      "maxNesting": 5,
+      "branches": 137,
+      "commentLines": 155
+    },
+    {
+      "index": 144,
+      "modulePath": "django/db",
+      "path": "django/db/models/fields/tuple_lookups.py",
+      "linesOfCode": 363,
+      "functions": 26,
+      "maxNesting": 3,
+      "branches": 39,
+      "commentLines": 29
+    },
+    {
+      "index": 145,
+      "modulePath": "django/db",
+      "path": "django/db/models/functions/json.py",
+      "linesOfCode": 105,
+      "functions": 10,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 12
+    },
+    {
+      "index": 146,
+      "modulePath": "django/db",
+      "path": "django/db/models/functions/text.py",
+      "linesOfCode": 289,
+      "functions": 30,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 8
+    },
+    {
+      "index": 147,
+      "modulePath": "django/db",
+      "path": "django/db/models/manager.py",
+      "linesOfCode": 175,
+      "functions": 22,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 30
+    },
+    {
+      "index": 148,
+      "modulePath": "django/db",
+      "path": "django/db/models/signals.py",
+      "linesOfCode": 40,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 149,
+      "modulePath": "django/db",
+      "path": "django/db/models/sql/constants.py",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 150,
+      "modulePath": "django/db",
+      "path": "django/db/models/utils.py",
+      "linesOfCode": 64,
+      "functions": 7,
+      "maxNesting": 5,
+      "branches": 11,
+      "commentLines": 4
+    },
+    {
+      "index": 151,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/admin.py",
+      "linesOfCode": 1219,
+      "functions": 87,
+      "maxNesting": 2,
+      "branches": 18,
+      "commentLines": 32
+    },
+    {
+      "index": 152,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/forms.py",
+      "linesOfCode": 68,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 2
+    },
+    {
+      "index": 153,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/test_breadcrumbs.py",
+      "linesOfCode": 24,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 154,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/test_multidb.py",
+      "linesOfCode": 183,
+      "functions": 17,
+      "maxNesting": 3,
+      "branches": 18,
+      "commentLines": 3
+    },
+    {
+      "index": 155,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/test_related_object_lookups.py",
+      "linesOfCode": 169,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 15
+    },
+    {
+      "index": 156,
+      "modulePath": "tests/admin_views",
+      "path": "tests/admin_views/views.py",
+      "linesOfCode": 8,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 157,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/deprecated_field_migrations/0002_remove_ipaddressfield_ip.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 158,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/faulty_migrations/file.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 159,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/alter_fk/author_app/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 160,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/alter_fk/book_app/migrations/0001_initial.py",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 161,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/conflicting_app_with_dependencies/migrations/0001_initial.py",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 162,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/lookuperror_a/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 163,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/lookuperror_a/migrations/0003_a3.py",
+      "linesOfCode": 25,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 164,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/lookuperror_b/migrations/0001_initial.py",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 165,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/lookuperror_b/models.py",
+      "linesOfCode": 7,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 166,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/lookuperror_c/migrations/0002_c2.py",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 167,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/migrated_app/migrations/0001_initial.py",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 168,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/migrated_unapplied_app/migrations/0001_initial.py",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 169,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/mutate_state_a/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 170,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/mutate_state_b/migrations/0001_initial.py",
+      "linesOfCode": 24,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 171,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/unmigrated_app/models.py",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 172,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/unmigrated_app_syncdb/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 173,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/unspecified_app_with_conflict/migrations/0002_conflicting_second.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 174,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/with_generic_model/migrations/0001_initial.py",
+      "linesOfCode": 36,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 175,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/migrations_test_apps/with_generic_model/models.py",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 176,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/models.py",
+      "linesOfCode": 43,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 177,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_add_many_to_many_field_initial/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 178,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_autodetector.py",
+      "linesOfCode": 5733,
+      "functions": 199,
+      "maxNesting": 5,
+      "branches": 45,
+      "commentLines": 209
+    },
+    {
+      "index": 179,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_executor.py",
+      "linesOfCode": 932,
+      "functions": 31,
+      "maxNesting": 2,
+      "branches": 19,
+      "commentLines": 100
+    },
+    {
+      "index": 180,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_fake_initial_case_insensitive/initial/0001_initial.py",
+      "linesOfCode": 25,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 181,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations/0001_initial.py",
+      "linesOfCode": 31,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 182,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_backwards_deps_1/0001_initial.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 183,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_clashing_prefix/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 184,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_conflict/0002_conflicting_second.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 185,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_conflict_long_name/0002_second.py",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 186,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_custom_user/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 187,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_fake_split_initial/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 188,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_initial_false/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 189,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_manual_porting/0003_third.py",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 190,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_no_ancestor/0001_initial.py",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 191,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_no_changes/0001_initial.py",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 192,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_no_changes/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 193,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_non_atomic/0001_initial.py",
+      "linesOfCode": 29,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 194,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_order/0001.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 195,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_plan/0002_second.py",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 196,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_private/.util.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 197,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_private/_util.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 198,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_run_before/0003_third.py",
+      "linesOfCode": 22,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 199,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 200,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_complex/3_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 201,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_complex/6_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 202,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_complex_multi_apps/app1/2_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 203,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_complex_multi_apps/app1/3_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 204,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_complex_multi_apps/app2/2_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 205,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_double/0003_squashed_0001_and_0002.py",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 206,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_double/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 207,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_erroneous/7_auto.py",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 208,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_extra/0002_second.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 209,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_loop/1_auto.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 210,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_no_replaces/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 211,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_partially_applied/0004_remove_mymodel1_field_1_mymodel1_field_3_and_more.py",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 212,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_ref_squashed/app1/1_auto.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 213,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_ref_squashed/app1/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 214,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_ref_squashed/app2/2_auto.py",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 215,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_replaced_order/app1/0001_squashed_initial.py",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 216,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_squashed_replaced_order/app2/0001_squashed_initial.py",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 217,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_migrations_unmigdep/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 218,
+      "modulePath": "tests/migrations",
+      "path": "tests/migrations/test_state.py",
+      "linesOfCode": 1985,
+      "functions": 91,
+      "maxNesting": 2,
+      "branches": 20,
+      "commentLines": 59
+    },
+    {
+      "index": 219,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/alternate_urls.py",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 220,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 221,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_center.py",
+      "linesOfCode": 38,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 222,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_default.py",
+      "linesOfCode": 49,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 223,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_dictsortreversed.py",
+      "linesOfCode": 52,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 224,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_filesizeformat.py",
+      "linesOfCode": 58,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 7,
+      "commentLines": 0
+    },
+    {
+      "index": 225,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_get_digit.py",
+      "linesOfCode": 11,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 226,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_json_script.py",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 227,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_linebreaksbr.py",
+      "linesOfCode": 47,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 228,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_phone2numeric.py",
+      "linesOfCode": 38,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 229,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_rjust.py",
+      "linesOfCode": 31,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 230,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_slugify.py",
+      "linesOfCode": 53,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 231,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_time.py",
+      "linesOfCode": 52,
+      "functions": 10,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 232,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_truncatechars_html.py",
+      "linesOfCode": 40,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 233,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_upper.py",
+      "linesOfCode": 35,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 234,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/filter_tests/test_urlizetrunc.py",
+      "linesOfCode": 93,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 235,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/__init__.py",
+      "linesOfCode": 0,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 236,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/i18n/test_filters.py",
+      "linesOfCode": 53,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 237,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/i18n/test_get_current_language_bidi.py",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 238,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/i18n/test_translate.py",
+      "linesOfCode": 265,
+      "functions": 30,
+      "maxNesting": 2,
+      "branches": 24,
+      "commentLines": 6
+    },
+    {
+      "index": 239,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_cache.py",
+      "linesOfCode": 191,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 1
+    },
+    {
+      "index": 240,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_cycle.py",
+      "linesOfCode": 203,
+      "functions": 25,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 241,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_filter_syntax.py",
+      "linesOfCode": 222,
+      "functions": 26,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 0
+    },
+    {
+      "index": 242,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_if_changed.py",
+      "linesOfCode": 338,
+      "functions": 26,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 243,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_list_index.py",
+      "linesOfCode": 71,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 244,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_named_endblock.py",
+      "linesOfCode": 73,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 2
+    },
+    {
+      "index": 245,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_regroup.py",
+      "linesOfCode": 146,
+      "functions": 9,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 1
+    },
+    {
+      "index": 246,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_simple_tag.py",
+      "linesOfCode": 17,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 247,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_url.py",
+      "linesOfCode": 256,
+      "functions": 48,
+      "maxNesting": 1,
+      "branches": 18,
+      "commentLines": 3
+    },
+    {
+      "index": 248,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/syntax_tests/test_with.py",
+      "linesOfCode": 56,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 0
+    },
+    {
+      "index": 249,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/templatetags/inclusion.py",
+      "linesOfCode": 192,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 250,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/test_autoreloader.py",
+      "linesOfCode": 149,
+      "functions": 15,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 251,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/test_context.py",
+      "linesOfCode": 274,
+      "functions": 26,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 9
+    },
+    {
+      "index": 252,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/test_extends_relative.py",
+      "linesOfCode": 93,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 253,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/test_origin.py",
+      "linesOfCode": 25,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 254,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/test_response.py",
+      "linesOfCode": 342,
+      "functions": 36,
+      "maxNesting": 2,
+      "branches": 12,
+      "commentLines": 26
+    },
+    {
+      "index": 255,
+      "modulePath": "tests/template_tests",
+      "path": "tests/template_tests/utils.py",
+      "linesOfCode": 135,
+      "functions": 23,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 7
+    }
+  ]
+}

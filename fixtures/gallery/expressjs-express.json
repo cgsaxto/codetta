@@ -1,0 +1,1144 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "expressjs",
+    "name": "express",
+    "ref": "master",
+    "commitSha": "a3714473feb3d2908add734d340e7755fd85e0a3",
+    "primaryLanguage": "JavaScript",
+    "stars": 69376,
+    "fetchedAt": "2026-08-17T11:50:17Z"
+  },
+  "seed": "a3714473",
+  "totals": {
+    "filesScanned": 141,
+    "filesSkipped": 72,
+    "linesOfCode": 17541,
+    "functions": 3111,
+    "classes": 0,
+    "imports": 0
+  },
+  "languages": [
+    {
+      "name": "JavaScript",
+      "share": 1,
+      "files": 141
+    }
+  ],
+  "modules": [
+    {
+      "path": "test",
+      "share": 0.7078,
+      "files": 70,
+      "linesOfCode": 12415,
+      "avgNestingDepth": 0.0557,
+      "maxNestingDepth": 1,
+      "avgFunctionLength": 2.6179,
+      "cyclomaticDensity": 0.0018,
+      "commentRatio": 0.0031,
+      "asyncRatio": 0
+    },
+    {
+      "path": "lib",
+      "share": 0.1335,
+      "files": 6,
+      "linesOfCode": 2342,
+      "avgNestingDepth": 0.789,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 6.055,
+      "cyclomaticDensity": 0.023,
+      "commentRatio": 0.5145,
+      "asyncRatio": 0
+    },
+    {
+      "path": "test/acceptance",
+      "share": 0.0551,
+      "files": 18,
+      "linesOfCode": 966,
+      "avgNestingDepth": 0.046,
+      "maxNestingDepth": 1,
+      "avgFunctionLength": 1.4686,
+      "cyclomaticDensity": 0.002,
+      "commentRatio": 0,
+      "asyncRatio": 0
+    },
+    {
+      "path": "examples/mvc",
+      "share": 0.0136,
+      "files": 7,
+      "linesOfCode": 239,
+      "avgNestingDepth": 0.3889,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 5.4444,
+      "cyclomaticDensity": 0.0121,
+      "commentRatio": 0.2427,
+      "asyncRatio": 0
+    },
+    {
+      "path": "examples/view-locals",
+      "share": 0.0085,
+      "files": 2,
+      "linesOfCode": 149,
+      "avgNestingDepth": 0.3158,
+      "maxNestingDepth": 1,
+      "avgFunctionLength": 1.9474,
+      "cyclomaticDensity": 0.0118,
+      "commentRatio": 0.4497,
+      "asyncRatio": 0
+    },
+    {
+      "path": "examples/auth",
+      "share": 0.0063,
+      "files": 1,
+      "linesOfCode": 111,
+      "avgNestingDepth": 0.5385,
+      "maxNestingDepth": 1,
+      "avgFunctionLength": 3.5385,
+      "cyclomaticDensity": 0.0187,
+      "commentRatio": 0.2252,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "examples/auth",
+      "path": "examples/auth/index.js",
+      "linesOfCode": 111,
+      "functions": 13,
+      "maxNesting": 1,
+      "branches": 12,
+      "commentLines": 25
+    },
+    {
+      "index": 1,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/controllers/main/index.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 2,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/controllers/pet/index.js",
+      "linesOfCode": 24,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 3,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/controllers/user-pet/index.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 4,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/controllers/user/index.js",
+      "linesOfCode": 33,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 5,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/db.js",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 6,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/index.js",
+      "linesOfCode": 74,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 33
+    },
+    {
+      "index": 7,
+      "modulePath": "examples/mvc",
+      "path": "examples/mvc/lib/boot.js",
+      "linesOfCode": 75,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 12
+    },
+    {
+      "index": 8,
+      "modulePath": "examples/view-locals",
+      "path": "examples/view-locals/index.js",
+      "linesOfCode": 121,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 62
+    },
+    {
+      "index": 9,
+      "modulePath": "examples/view-locals",
+      "path": "examples/view-locals/user.js",
+      "linesOfCode": 28,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 10,
+      "modulePath": "lib",
+      "path": "lib/application.js",
+      "linesOfCode": 530,
+      "functions": 25,
+      "maxNesting": 3,
+      "branches": 31,
+      "commentLines": 268
+    },
+    {
+      "index": 11,
+      "modulePath": "lib",
+      "path": "lib/express.js",
+      "linesOfCode": 64,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 30
+    },
+    {
+      "index": 12,
+      "modulePath": "lib",
+      "path": "lib/request.js",
+      "linesOfCode": 457,
+      "functions": 20,
+      "maxNesting": 2,
+      "branches": 20,
+      "commentLines": 303
+    },
+    {
+      "index": 13,
+      "modulePath": "lib",
+      "path": "lib/response.js",
+      "linesOfCode": 908,
+      "functions": 41,
+      "maxNesting": 4,
+      "branches": 84,
+      "commentLines": 431
+    },
+    {
+      "index": 14,
+      "modulePath": "lib",
+      "path": "lib/utils.js",
+      "linesOfCode": 222,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 23,
+      "commentLines": 102
+    },
+    {
+      "index": 15,
+      "modulePath": "lib",
+      "path": "lib/view.js",
+      "linesOfCode": 161,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 71
+    },
+    {
+      "index": 16,
+      "modulePath": "test",
+      "path": "test/Route.js",
+      "linesOfCode": 223,
+      "functions": 53,
+      "maxNesting": 1,
+      "branches": 9,
+      "commentLines": 2
+    },
+    {
+      "index": 17,
+      "modulePath": "test",
+      "path": "test/Router.js",
+      "linesOfCode": 505,
+      "functions": 138,
+      "maxNesting": 1,
+      "branches": 12,
+      "commentLines": 3
+    },
+    {
+      "index": 18,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/auth.js",
+      "linesOfCode": 106,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 19,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/content-negotiation.js",
+      "linesOfCode": 42,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 20,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/cookie-sessions.js",
+      "linesOfCode": 33,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 21,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/cookies.js",
+      "linesOfCode": 64,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 22,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/downloads.js",
+      "linesOfCode": 41,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 23,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/ejs.js",
+      "linesOfCode": 15,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 24,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/error-pages.js",
+      "linesOfCode": 87,
+      "functions": 24,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 25,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/error.js",
+      "linesOfCode": 25,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 26,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/hello-world.js",
+      "linesOfCode": 18,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 27,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/markdown.js",
+      "linesOfCode": 18,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 28,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/multi-router.js",
+      "linesOfCode": 39,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 29,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/mvc.js",
+      "linesOfCode": 119,
+      "functions": 27,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 30,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/params.js",
+      "linesOfCode": 39,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 31,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/resource.js",
+      "linesOfCode": 60,
+      "functions": 17,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 32,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/route-map.js",
+      "linesOfCode": 39,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 33,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/route-separation.js",
+      "linesOfCode": 86,
+      "functions": 21,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 34,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/vhost.js",
+      "linesOfCode": 42,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 35,
+      "modulePath": "test/acceptance",
+      "path": "test/acceptance/web-service.js",
+      "linesOfCode": 93,
+      "functions": 25,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 36,
+      "modulePath": "test",
+      "path": "test/app.all.js",
+      "linesOfCode": 30,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 37,
+      "modulePath": "test",
+      "path": "test/app.engine.js",
+      "linesOfCode": 68,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 38,
+      "modulePath": "test",
+      "path": "test/app.head.js",
+      "linesOfCode": 55,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 2
+    },
+    {
+      "index": 39,
+      "modulePath": "test",
+      "path": "test/app.js",
+      "linesOfCode": 98,
+      "functions": 22,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 40,
+      "modulePath": "test",
+      "path": "test/app.listen.js",
+      "linesOfCode": 51,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 41,
+      "modulePath": "test",
+      "path": "test/app.locals.js",
+      "linesOfCode": 23,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 42,
+      "modulePath": "test",
+      "path": "test/app.options.js",
+      "linesOfCode": 92,
+      "functions": 30,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 43,
+      "modulePath": "test",
+      "path": "test/app.param.js",
+      "linesOfCode": 262,
+      "functions": 59,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 0
+    },
+    {
+      "index": 44,
+      "modulePath": "test",
+      "path": "test/app.render.js",
+      "linesOfCode": 314,
+      "functions": 69,
+      "maxNesting": 1,
+      "branches": 21,
+      "commentLines": 0
+    },
+    {
+      "index": 45,
+      "modulePath": "test",
+      "path": "test/app.request.js",
+      "linesOfCode": 109,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 46,
+      "modulePath": "test",
+      "path": "test/app.response.js",
+      "linesOfCode": 109,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 47,
+      "modulePath": "test",
+      "path": "test/app.route.js",
+      "linesOfCode": 155,
+      "functions": 36,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 48,
+      "modulePath": "test",
+      "path": "test/app.router.js",
+      "linesOfCode": 940,
+      "functions": 211,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 3
+    },
+    {
+      "index": 49,
+      "modulePath": "test",
+      "path": "test/app.routes.error.js",
+      "linesOfCode": 53,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 50,
+      "modulePath": "test",
+      "path": "test/app.use.js",
+      "linesOfCode": 425,
+      "functions": 80,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 51,
+      "modulePath": "test",
+      "path": "test/config.js",
+      "linesOfCode": 168,
+      "functions": 41,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 52,
+      "modulePath": "test",
+      "path": "test/exports.js",
+      "linesOfCode": 65,
+      "functions": 18,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 53,
+      "modulePath": "test",
+      "path": "test/express.json.js",
+      "linesOfCode": 643,
+      "functions": 112,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 4
+    },
+    {
+      "index": 54,
+      "modulePath": "test",
+      "path": "test/express.raw.js",
+      "linesOfCode": 432,
+      "functions": 75,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 1
+    },
+    {
+      "index": 55,
+      "modulePath": "test",
+      "path": "test/express.static.js",
+      "linesOfCode": 692,
+      "functions": 153,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 56,
+      "modulePath": "test",
+      "path": "test/express.text.js",
+      "linesOfCode": 478,
+      "functions": 85,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 1
+    },
+    {
+      "index": 57,
+      "modulePath": "test",
+      "path": "test/express.urlencoded.js",
+      "linesOfCode": 701,
+      "functions": 120,
+      "maxNesting": 1,
+      "branches": 12,
+      "commentLines": 1
+    },
+    {
+      "index": 58,
+      "modulePath": "test",
+      "path": "test/middleware.basic.js",
+      "linesOfCode": 36,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 59,
+      "modulePath": "test",
+      "path": "test/regression.js",
+      "linesOfCode": 16,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 60,
+      "modulePath": "test",
+      "path": "test/req.accepts.js",
+      "linesOfCode": 97,
+      "functions": 21,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 0
+    },
+    {
+      "index": 61,
+      "modulePath": "test",
+      "path": "test/req.acceptsCharsets.js",
+      "linesOfCode": 50,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 62,
+      "modulePath": "test",
+      "path": "test/req.acceptsEncodings.js",
+      "linesOfCode": 32,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 63,
+      "modulePath": "test",
+      "path": "test/req.acceptsLanguages.js",
+      "linesOfCode": 47,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 64,
+      "modulePath": "test",
+      "path": "test/req.baseUrl.js",
+      "linesOfCode": 75,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 65,
+      "modulePath": "test",
+      "path": "test/req.fresh.js",
+      "linesOfCode": 88,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 66,
+      "modulePath": "test",
+      "path": "test/req.get.js",
+      "linesOfCode": 47,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 67,
+      "modulePath": "test",
+      "path": "test/req.host.js",
+      "linesOfCode": 121,
+      "functions": 25,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 68,
+      "modulePath": "test",
+      "path": "test/req.hostname.js",
+      "linesOfCode": 145,
+      "functions": 29,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 69,
+      "modulePath": "test",
+      "path": "test/req.ip.js",
+      "linesOfCode": 87,
+      "functions": 19,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 70,
+      "modulePath": "test",
+      "path": "test/req.ips.js",
+      "linesOfCode": 56,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 71,
+      "modulePath": "test",
+      "path": "test/req.is.js",
+      "linesOfCode": 135,
+      "functions": 28,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 72,
+      "modulePath": "test",
+      "path": "test/req.path.js",
+      "linesOfCode": 16,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 73,
+      "modulePath": "test",
+      "path": "test/req.protocol.js",
+      "linesOfCode": 86,
+      "functions": 19,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 74,
+      "modulePath": "test",
+      "path": "test/req.query.js",
+      "linesOfCode": 84,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 75,
+      "modulePath": "test",
+      "path": "test/req.range.js",
+      "linesOfCode": 82,
+      "functions": 18,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 76,
+      "modulePath": "test",
+      "path": "test/req.route.js",
+      "linesOfCode": 23,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 77,
+      "modulePath": "test",
+      "path": "test/req.secure.js",
+      "linesOfCode": 78,
+      "functions": 18,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 0
+    },
+    {
+      "index": 78,
+      "modulePath": "test",
+      "path": "test/req.signedCookies.js",
+      "linesOfCode": 30,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 79,
+      "modulePath": "test",
+      "path": "test/req.stale.js",
+      "linesOfCode": 40,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 80,
+      "modulePath": "test",
+      "path": "test/req.subdomains.js",
+      "linesOfCode": 139,
+      "functions": 32,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 81,
+      "modulePath": "test",
+      "path": "test/req.xhr.js",
+      "linesOfCode": 36,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 82,
+      "modulePath": "test",
+      "path": "test/res.append.js",
+      "linesOfCode": 95,
+      "functions": 18,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 83,
+      "modulePath": "test",
+      "path": "test/res.attachment.js",
+      "linesOfCode": 93,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 84,
+      "modulePath": "test",
+      "path": "test/res.clearCookie.js",
+      "linesOfCode": 49,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 85,
+      "modulePath": "test",
+      "path": "test/res.cookie.js",
+      "linesOfCode": 233,
+      "functions": 49,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 86,
+      "modulePath": "test",
+      "path": "test/res.download.js",
+      "linesOfCode": 402,
+      "functions": 69,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 87,
+      "modulePath": "test",
+      "path": "test/res.format.js",
+      "linesOfCode": 205,
+      "functions": 54,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 88,
+      "modulePath": "test",
+      "path": "test/res.get.js",
+      "linesOfCode": 17,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 89,
+      "modulePath": "test",
+      "path": "test/res.json.js",
+      "linesOfCode": 146,
+      "functions": 33,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 90,
+      "modulePath": "test",
+      "path": "test/res.jsonp.js",
+      "linesOfCode": 259,
+      "functions": 56,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 91,
+      "modulePath": "test",
+      "path": "test/res.links.js",
+      "linesOfCode": 52,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 92,
+      "modulePath": "test",
+      "path": "test/res.locals.js",
+      "linesOfCode": 31,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 93,
+      "modulePath": "test",
+      "path": "test/res.location.js",
+      "linesOfCode": 262,
+      "functions": 37,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 8
+    },
+    {
+      "index": 94,
+      "modulePath": "test",
+      "path": "test/res.redirect.js",
+      "linesOfCode": 174,
+      "functions": 33,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 95,
+      "modulePath": "test",
+      "path": "test/res.render.js",
+      "linesOfCode": 277,
+      "functions": 57,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 96,
+      "modulePath": "test",
+      "path": "test/res.send.js",
+      "linesOfCode": 489,
+      "functions": 101,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 97,
+      "modulePath": "test",
+      "path": "test/res.sendFile.js",
+      "linesOfCode": 749,
+      "functions": 143,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 0
+    },
+    {
+      "index": 98,
+      "modulePath": "test",
+      "path": "test/res.sendStatus.js",
+      "linesOfCode": 34,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 99,
+      "modulePath": "test",
+      "path": "test/res.set.js",
+      "linesOfCode": 99,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 100,
+      "modulePath": "test",
+      "path": "test/res.status.js",
+      "linesOfCode": 156,
+      "functions": 36,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 101,
+      "modulePath": "test",
+      "path": "test/res.type.js",
+      "linesOfCode": 88,
+      "functions": 19,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 102,
+      "modulePath": "test",
+      "path": "test/res.vary.js",
+      "linesOfCode": 74,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 103,
+      "modulePath": "test",
+      "path": "test/utils.js",
+      "linesOfCode": 94,
+      "functions": 28,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    }
+  ]
+}

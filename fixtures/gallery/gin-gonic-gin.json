@@ -1,0 +1,1064 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "gin-gonic",
+    "name": "gin",
+    "ref": "master",
+    "commitSha": "dcaa4296d111981ffb31ac3eba90bb63e1eb5ab9",
+    "primaryLanguage": "Go",
+    "stars": 89078,
+    "fetchedAt": "2026-08-17T11:50:11Z"
+  },
+  "seed": "dcaa4296",
+  "totals": {
+    "filesScanned": 98,
+    "filesSkipped": 32,
+    "linesOfCode": 20156,
+    "functions": 1807,
+    "classes": 329,
+    "imports": 514
+  },
+  "languages": [
+    {
+      "name": "Go",
+      "share": 1,
+      "files": 98
+    }
+  ],
+  "modules": [
+    {
+      "path": ".",
+      "share": 0.6941,
+      "files": 40,
+      "linesOfCode": 13990,
+      "avgNestingDepth": 0.2801,
+      "maxNestingDepth": 8,
+      "avgFunctionLength": 5.3603,
+      "cyclomaticDensity": 0.0067,
+      "commentRatio": 0.1239,
+      "asyncRatio": 0
+    },
+    {
+      "path": "binding",
+      "share": 0.2068,
+      "files": 30,
+      "linesOfCode": 4168,
+      "avgNestingDepth": 0.3713,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 6.2997,
+      "cyclomaticDensity": 0.0081,
+      "commentRatio": 0.0638,
+      "asyncRatio": 0
+    },
+    {
+      "path": "render",
+      "share": 0.066,
+      "files": 17,
+      "linesOfCode": 1331,
+      "avgNestingDepth": 0.2673,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 5.4257,
+      "cyclomaticDensity": 0.0041,
+      "commentRatio": 0.1082,
+      "asyncRatio": 0
+    },
+    {
+      "path": "ginS",
+      "share": 0.0158,
+      "files": 2,
+      "linesOfCode": 319,
+      "avgNestingDepth": 0.0333,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 2.4333,
+      "cyclomaticDensity": 0.0008,
+      "commentRatio": 0.1599,
+      "asyncRatio": 0
+    },
+    {
+      "path": "codec/json",
+      "share": 0.0084,
+      "files": 5,
+      "linesOfCode": 170,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 0,
+      "avgFunctionLength": 1,
+      "cyclomaticDensity": 0,
+      "commentRatio": 0.2882,
+      "asyncRatio": 0
+    },
+    {
+      "path": "internal/bytesconv",
+      "share": 0.0061,
+      "files": 2,
+      "linesOfCode": 122,
+      "avgNestingDepth": 0.9231,
+      "maxNestingDepth": 2,
+      "avgFunctionLength": 3.6154,
+      "cyclomaticDensity": 0.0249,
+      "commentRatio": 0.1311,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": ".",
+      "path": "auth.go",
+      "linesOfCode": 101,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 21
+    },
+    {
+      "index": 1,
+      "modulePath": ".",
+      "path": "auth_test.go",
+      "linesOfCode": 147,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 2,
+      "modulePath": ".",
+      "path": "benchmarks_test.go",
+      "linesOfCode": 136,
+      "functions": 44,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 4
+    },
+    {
+      "index": 3,
+      "modulePath": "binding",
+      "path": "binding/binding.go",
+      "linesOfCode": 113,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 32
+    },
+    {
+      "index": 4,
+      "modulePath": "binding",
+      "path": "binding/binding_msgpack_test.go",
+      "linesOfCode": 47,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 5,
+      "modulePath": "binding",
+      "path": "binding/binding_nomsgpack.go",
+      "linesOfCode": 107,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 31
+    },
+    {
+      "index": 6,
+      "modulePath": "binding",
+      "path": "binding/binding_test.go",
+      "linesOfCode": 1195,
+      "functions": 99,
+      "maxNesting": 1,
+      "branches": 23,
+      "commentLines": 13
+    },
+    {
+      "index": 7,
+      "modulePath": "binding",
+      "path": "binding/bson.go",
+      "linesOfCode": 23,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 8,
+      "modulePath": "binding",
+      "path": "binding/default_validator.go",
+      "linesOfCode": 85,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 13,
+      "commentLines": 10
+    },
+    {
+      "index": 9,
+      "modulePath": "binding",
+      "path": "binding/default_validator_benchmark_test.go",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 3
+    },
+    {
+      "index": 10,
+      "modulePath": "binding",
+      "path": "binding/default_validator_test.go",
+      "linesOfCode": 86,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 11,
+      "modulePath": "binding",
+      "path": "binding/form.go",
+      "linesOfCode": 53,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 3
+    },
+    {
+      "index": 12,
+      "modulePath": "binding",
+      "path": "binding/form_mapping.go",
+      "linesOfCode": 474,
+      "functions": 23,
+      "maxNesting": 4,
+      "branches": 108,
+      "commentLines": 26
+    },
+    {
+      "index": 13,
+      "modulePath": "binding",
+      "path": "binding/form_mapping_benchmark_test.go",
+      "linesOfCode": 57,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 14,
+      "modulePath": "binding",
+      "path": "binding/form_mapping_test.go",
+      "linesOfCode": 968,
+      "functions": 80,
+      "maxNesting": 1,
+      "branches": 14,
+      "commentLines": 42
+    },
+    {
+      "index": 15,
+      "modulePath": "binding",
+      "path": "binding/header.go",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 16,
+      "modulePath": "binding",
+      "path": "binding/json.go",
+      "linesOfCode": 46,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 10
+    },
+    {
+      "index": 17,
+      "modulePath": "binding",
+      "path": "binding/json_test.go",
+      "linesOfCode": 180,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 11
+    },
+    {
+      "index": 18,
+      "modulePath": "binding",
+      "path": "binding/msgpack.go",
+      "linesOfCode": 28,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 19,
+      "modulePath": "binding",
+      "path": "binding/msgpack_test.go",
+      "linesOfCode": 28,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 20,
+      "modulePath": "binding",
+      "path": "binding/multipart_form_mapping.go",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 6
+    },
+    {
+      "index": 21,
+      "modulePath": "binding",
+      "path": "binding/multipart_form_mapping_test.go",
+      "linesOfCode": 117,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 3
+    },
+    {
+      "index": 22,
+      "modulePath": "binding",
+      "path": "binding/plain.go",
+      "linesOfCode": 43,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 0
+    },
+    {
+      "index": 23,
+      "modulePath": "binding",
+      "path": "binding/protobuf.go",
+      "linesOfCode": 34,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 6
+    },
+    {
+      "index": 24,
+      "modulePath": "binding",
+      "path": "binding/query.go",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 25,
+      "modulePath": "binding",
+      "path": "binding/toml.go",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 26,
+      "modulePath": "binding",
+      "path": "binding/toml_test.go",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 27,
+      "modulePath": "binding",
+      "path": "binding/uri.go",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 28,
+      "modulePath": "binding",
+      "path": "binding/validate_test.go",
+      "linesOfCode": 204,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 22
+    },
+    {
+      "index": 29,
+      "modulePath": "binding",
+      "path": "binding/xml.go",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 30,
+      "modulePath": "binding",
+      "path": "binding/xml_test.go",
+      "linesOfCode": 21,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 31,
+      "modulePath": "binding",
+      "path": "binding/yaml.go",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 32,
+      "modulePath": "binding",
+      "path": "binding/yaml_test.go",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 33,
+      "modulePath": "codec/json",
+      "path": "codec/json/api.go",
+      "linesOfCode": 48,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 29
+    },
+    {
+      "index": 34,
+      "modulePath": "codec/json",
+      "path": "codec/json/go_json.go",
+      "linesOfCode": 30,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 35,
+      "modulePath": "codec/json",
+      "path": "codec/json/json.go",
+      "linesOfCode": 30,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 36,
+      "modulePath": "codec/json",
+      "path": "codec/json/jsoniter.go",
+      "linesOfCode": 31,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 37,
+      "modulePath": "codec/json",
+      "path": "codec/json/sonic.go",
+      "linesOfCode": 31,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 38,
+      "modulePath": ".",
+      "path": "context.go",
+      "linesOfCode": 1328,
+      "functions": 149,
+      "maxNesting": 4,
+      "branches": 103,
+      "commentLines": 384
+    },
+    {
+      "index": 39,
+      "modulePath": ".",
+      "path": "context_appengine.go",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 40,
+      "modulePath": ".",
+      "path": "context_file_test.go",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 41,
+      "modulePath": ".",
+      "path": "context_test.go",
+      "linesOfCode": 3319,
+      "functions": 254,
+      "maxNesting": 2,
+      "branches": 48,
+      "commentLines": 212
+    },
+    {
+      "index": 42,
+      "modulePath": ".",
+      "path": "debug.go",
+      "linesOfCode": 92,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 7
+    },
+    {
+      "index": 43,
+      "modulePath": ".",
+      "path": "debug_test.go",
+      "linesOfCode": 164,
+      "functions": 29,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 44,
+      "modulePath": ".",
+      "path": "deprecated.go",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 45,
+      "modulePath": ".",
+      "path": "deprecated_test.go",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 46,
+      "modulePath": ".",
+      "path": "doc.go",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 47,
+      "modulePath": ".",
+      "path": "errors.go",
+      "linesOfCode": 152,
+      "functions": 13,
+      "maxNesting": 3,
+      "branches": 20,
+      "commentLines": 29
+    },
+    {
+      "index": 48,
+      "modulePath": ".",
+      "path": "errors_test.go",
+      "linesOfCode": 120,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 12
+    },
+    {
+      "index": 49,
+      "modulePath": ".",
+      "path": "fs.go",
+      "linesOfCode": 40,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 12
+    },
+    {
+      "index": 50,
+      "modulePath": ".",
+      "path": "fs_test.go",
+      "linesOfCode": 55,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 51,
+      "modulePath": ".",
+      "path": "gin.go",
+      "linesOfCode": 716,
+      "functions": 53,
+      "maxNesting": 3,
+      "branches": 62,
+      "commentLines": 150
+    },
+    {
+      "index": 52,
+      "modulePath": "ginS",
+      "path": "ginS/gins.go",
+      "linesOfCode": 130,
+      "functions": 26,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 45
+    },
+    {
+      "index": 53,
+      "modulePath": "ginS",
+      "path": "ginS/gins_test.go",
+      "linesOfCode": 189,
+      "functions": 34,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 54,
+      "modulePath": ".",
+      "path": "gin_integration_test.go",
+      "linesOfCode": 526,
+      "functions": 83,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 104
+    },
+    {
+      "index": 55,
+      "modulePath": ".",
+      "path": "gin_test.go",
+      "linesOfCode": 959,
+      "functions": 131,
+      "maxNesting": 2,
+      "branches": 25,
+      "commentLines": 45
+    },
+    {
+      "index": 56,
+      "modulePath": ".",
+      "path": "githubapi_test.go",
+      "linesOfCode": 436,
+      "functions": 18,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 55
+    },
+    {
+      "index": 57,
+      "modulePath": "internal/bytesconv",
+      "path": "internal/bytesconv/bytesconv.go",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 58,
+      "modulePath": "internal/bytesconv",
+      "path": "internal/bytesconv/bytesconv_test.go",
+      "linesOfCode": 105,
+      "functions": 11,
+      "maxNesting": 2,
+      "branches": 16,
+      "commentLines": 9
+    },
+    {
+      "index": 59,
+      "modulePath": ".",
+      "path": "logger.go",
+      "linesOfCode": 263,
+      "functions": 16,
+      "maxNesting": 2,
+      "branches": 32,
+      "commentLines": 47
+    },
+    {
+      "index": 60,
+      "modulePath": ".",
+      "path": "logger_test.go",
+      "linesOfCode": 415,
+      "functions": 51,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 61,
+      "modulePath": ".",
+      "path": "middleware_test.go",
+      "linesOfCode": 229,
+      "functions": 42,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 62,
+      "modulePath": ".",
+      "path": "mode.go",
+      "linesOfCode": 84,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 23
+    },
+    {
+      "index": 63,
+      "modulePath": ".",
+      "path": "mode_test.go",
+      "linesOfCode": 49,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 64,
+      "modulePath": ".",
+      "path": "path.go",
+      "linesOfCode": 173,
+      "functions": 3,
+      "maxNesting": 5,
+      "branches": 27,
+      "commentLines": 59
+    },
+    {
+      "index": 65,
+      "modulePath": ".",
+      "path": "path_test.go",
+      "linesOfCode": 167,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 10
+    },
+    {
+      "index": 66,
+      "modulePath": ".",
+      "path": "recovery.go",
+      "linesOfCode": 185,
+      "functions": 12,
+      "maxNesting": 4,
+      "branches": 23,
+      "commentLines": 37
+    },
+    {
+      "index": 67,
+      "modulePath": ".",
+      "path": "recovery_test.go",
+      "linesOfCode": 371,
+      "functions": 34,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 45
+    },
+    {
+      "index": 68,
+      "modulePath": "render",
+      "path": "render/bson.go",
+      "linesOfCode": 26,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 69,
+      "modulePath": "render",
+      "path": "render/data.go",
+      "linesOfCode": 26,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 70,
+      "modulePath": "render",
+      "path": "render/html.go",
+      "linesOfCode": 86,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 15
+    },
+    {
+      "index": 71,
+      "modulePath": "render",
+      "path": "render/json.go",
+      "linesOfCode": 162,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 14,
+      "commentLines": 25
+    },
+    {
+      "index": 72,
+      "modulePath": "render",
+      "path": "render/msgpack.go",
+      "linesOfCode": 33,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 73,
+      "modulePath": "render",
+      "path": "render/pdf.go",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 74,
+      "modulePath": "render",
+      "path": "render/protobuf.go",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 75,
+      "modulePath": "render",
+      "path": "render/reader.go",
+      "linesOfCode": 42,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 7
+    },
+    {
+      "index": 76,
+      "modulePath": "render",
+      "path": "render/reader_test.go",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 77,
+      "modulePath": "render",
+      "path": "render/redirect.go",
+      "linesOfCode": 24,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 78,
+      "modulePath": "render",
+      "path": "render/render.go",
+      "linesOfCode": 37,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 79,
+      "modulePath": "render",
+      "path": "render/render_msgpack_test.go",
+      "linesOfCode": 63,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 80,
+      "modulePath": "render",
+      "path": "render/render_test.go",
+      "linesOfCode": 657,
+      "functions": 52,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 19
+    },
+    {
+      "index": 81,
+      "modulePath": "render",
+      "path": "render/text.go",
+      "linesOfCode": 33,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 82,
+      "modulePath": "render",
+      "path": "render/toml.go",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 83,
+      "modulePath": "render",
+      "path": "render/xml.go",
+      "linesOfCode": 22,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 84,
+      "modulePath": "render",
+      "path": "render/yaml.go",
+      "linesOfCode": 27,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 85,
+      "modulePath": ".",
+      "path": "response_writer.go",
+      "linesOfCode": 122,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 16
+    },
+    {
+      "index": 86,
+      "modulePath": ".",
+      "path": "response_writer_test.go",
+      "linesOfCode": 288,
+      "functions": 28,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 28
+    },
+    {
+      "index": 87,
+      "modulePath": ".",
+      "path": "routergroup.go",
+      "linesOfCode": 220,
+      "functions": 26,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 51
+    },
+    {
+      "index": 88,
+      "modulePath": ".",
+      "path": "routergroup_test.go",
+      "linesOfCode": 185,
+      "functions": 38,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 6
+    },
+    {
+      "index": 89,
+      "modulePath": ".",
+      "path": "routes_test.go",
+      "linesOfCode": 646,
+      "functions": 77,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 44
+    },
+    {
+      "index": 90,
+      "modulePath": ".",
+      "path": "test_helpers.go",
+      "linesOfCode": 49,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 15
+    },
+    {
+      "index": 91,
+      "modulePath": ".",
+      "path": "tree.go",
+      "linesOfCode": 834,
+      "functions": 15,
+      "maxNesting": 8,
+      "branches": 134,
+      "commentLines": 150
+    },
+    {
+      "index": 92,
+      "modulePath": ".",
+      "path": "tree_test.go",
+      "linesOfCode": 1006,
+      "functions": 49,
+      "maxNesting": 4,
+      "branches": 82,
+      "commentLines": 54
+    },
+    {
+      "index": 93,
+      "modulePath": ".",
+      "path": "utils.go",
+      "linesOfCode": 163,
+      "functions": 18,
+      "maxNesting": 2,
+      "branches": 24,
+      "commentLines": 14
+    },
+    {
+      "index": 94,
+      "modulePath": ".",
+      "path": "utils_test.go",
+      "linesOfCode": 146,
+      "functions": 22,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 95,
+      "modulePath": ".",
+      "path": "version.go",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    }
+  ]
+}

@@ -225,20 +225,31 @@ check it.** That is the one worth remembering from this phase.
 
 ## Phase 3 — The gallery (this is the landing page)
 
-**Blocked on a decision.** Four of the six repositories the README currently promises are
-in languages the parser does not support — `torvalds/linux` and `redis/redis` are C,
-`bitcoin/bitcoin` is C++, `neovim/neovim` is C and Lua. Only `facebook/react` and
-`vuejs/core` would return anything; the rest return the 422 that
-@docs/features-schema.md specifies for a repository with no supported files. Since Phase 3
-says the landing page _is_ the gallery, that is four broken tiles on the front page.
+**Decided: the gallery is drawn from the four languages the parser supports.** The README
+promised `torvalds/linux`, `redis/redis`, `bitcoin/bitcoin` and `neovim/neovim`, which are C,
+C++ and Lua and would each return the 422 that @docs/features-schema.md specifies — four
+broken tiles on a front page that _is_ the gallery.
 
-Three ways out, and the choice changes the shape of this phase rather than just its
-content: add C, C++ and Lua grammars (the adapter design makes each a table, but it is
-three more grammars to carry); pick a gallery of repositories in the four languages we do
-support; or keep the list and let the gallery show what a 422 looks like, which is almost
-certainly the wrong answer for a landing page. Decide before pre-rendering anything.
+Adding the grammars was a real option and the objection to it was not the one you would
+guess. An adapter genuinely is one table of node kinds and one registry line, exactly as
+@docs/features-schema.md claims; the cost is three more cgo grammars to carry in a build the
+roadmap already flags as awkward, and three more tables to verify against real grammars,
+which the keyword-token trap has already cost us once. Against that, TypeScript, JavaScript,
+Python and Go cover most of the open source anyone would recognise, and language support can
+be added later without reshaping the gallery — where the reverse blocks a launch.
 
-- [ ] Pre-render 8 famous repos, commit their RepoFeatures to `fixtures/gallery/`
+The README also has to change for a second reason. Its table of keys and tempos was written
+by hand and is fiction: it claims react is D Dorian at 104 BPM over 268,430 lines, and react
+is C Aeolian at 120 BPM over 293,684. The same class of mistake as the hand-authored fixture,
+in a file that is the first thing a stranger reads.
+
+- [x] Pre-render 8 famous repos, commit their RepoFeatures to `fixtures/gallery/`
+
+  Two per supported language, 428 KB in total. Fetched at their current HEADs, and separate
+  from `fixtures/react.json` and `fixtures/requests.json`, which stay pinned to fixed commits
+  — those exist so a change in the music is detectable, and a gallery that is refreshed would
+  destroy that the first time it moved.
+
 - [ ] Landing page **is** the gallery, playable in one click
 - [ ] **No URL input box above the fold.** Input appears after the first playthrough.
 

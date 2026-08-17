@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "kubernetes",
+    "name": "kubernetes",
+    "ref": "master",
+    "commitSha": "a231bf3f37761e8955eefba61855da1a526a3eb9",
+    "primaryLanguage": "Go",
+    "stars": 124490,
+    "fetchedAt": "2026-08-17T11:50:36Z"
+  },
+  "seed": "a231bf3f",
+  "totals": {
+    "filesScanned": 2000,
+    "filesSkipped": 29295,
+    "linesOfCode": 503617,
+    "functions": 25665,
+    "classes": 6372,
+    "imports": 14029
+  },
+  "languages": [
+    {
+      "name": "Go",
+      "share": 0.9995,
+      "files": 1999
+    },
+    {
+      "name": "Python",
+      "share": 0.0005,
+      "files": 1
+    }
+  ],
+  "modules": [
+    {
+      "path": "staging/src",
+      "share": 0.5175,
+      "files": 1158,
+      "linesOfCode": 260612,
+      "avgNestingDepth": 0.6466,
+      "maxNestingDepth": 9,
+      "avgFunctionLength": 6.4319,
+      "cyclomaticDensity": 0.0156,
+      "commentRatio": 0.2204,
+      "asyncRatio": 0
+    },
+    {
+      "path": "pkg/kubelet",
+      "share": 0.0756,
+      "files": 105,
+      "linesOfCode": 38092,
+      "avgNestingDepth": 0.6414,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 6.9303,
+      "cyclomaticDensity": 0.009,
+      "commentRatio": 0.1159,
+      "asyncRatio": 0
+    },
+    {
+      "path": "pkg/apis",
+      "share": 0.0672,
+      "files": 103,
+      "linesOfCode": 33833,
+      "avgNestingDepth": 0.3132,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 3.9171,
+      "cyclomaticDensity": 0.0126,
+      "commentRatio": 0.1347,
+      "asyncRatio": 0
+    },
+    {
+      "path": "pkg/registry",
+      "share": 0.0452,
+      "files": 66,
+      "linesOfCode": 22760,
+      "avgNestingDepth": 0.5465,
+      "maxNestingDepth": 5,
+      "avgFunctionLength": 4.9104,
+      "cyclomaticDensity": 0.0063,
+      "commentRatio": 0.0927,
+      "asyncRatio": 0
+    },
+    {
+      "path": "pkg/controller",
+      "share": 0.0436,
+      "files": 83,
+      "linesOfCode": 21944,
+      "avgNestingDepth": 0.7988,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 7.6737,
+      "cyclomaticDensity": 0.0098,
+      "commentRatio": 0.1301,
+      "asyncRatio": 0
+    },
+    {
+      "path": "test/e2e",
+      "share": 0.0427,
+      "files": 80,
+      "linesOfCode": 21519,
+      "avgNestingDepth": 0.6691,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 7.5331,
+      "cyclomaticDensity": 0.0098,
+      "commentRatio": 0.1724,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/abac/types.go",
+      "linesOfCode": 54,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 40
+    },
+    {
+      "index": 1,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/admissionregistration/v1/conversion.go",
+      "linesOfCode": 30,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 21
+    },
+    {
+      "index": 2,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/apiserverinternal/install/roundtrip_test.go",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 3,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/apps/v1beta2/zz_generated.defaults.go",
+      "linesOfCode": 1345,
+      "functions": 17,
+      "maxNesting": 6,
+      "branches": 425,
+      "commentLines": 21
+    },
+    {
+      "index": 4,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/authorization/v1/zz_generated.conversion.go",
+      "linesOfCode": 469,
+      "functions": 92,
+      "maxNesting": 1,
+      "branches": 46,
+      "commentLines": 50
+    },
+    {
+      "index": 5,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/batch/doc.go",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 6,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/certificates/v1beta1/defaults.go",
+      "linesOfCode": 68,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 19
+    },
+    {
+      "index": 7,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/core/install/install_test.go",
+      "linesOfCode": 65,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 15
+    },
+    {
+      "index": 8,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/discovery/register.go",
+      "linesOfCode": 43,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 9,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/extensions/v1beta1/conversion.go",
+      "linesOfCode": 189,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 32,
+      "commentLines": 25
+    },
+    {
+      "index": 10,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/flowcontrol/v1beta3/register.go",
+      "linesOfCode": 36,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 11,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/networking/v1/register.go",
+      "linesOfCode": 35,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 21
+    },
+    {
+      "index": 12,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/policy/register.go",
+      "linesOfCode": 45,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    },
+    {
+      "index": 13,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/rbac/v1alpha1/zz_generated.conversion.go",
+      "linesOfCode": 451,
+      "functions": 72,
+      "maxNesting": 3,
+      "branches": 52,
+      "commentLines": 44
+    },
+    {
+      "index": 14,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/resource/v1beta2/defaults_test.go",
+      "linesOfCode": 161,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 25
+    },
+    {
+      "index": 15,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/scheduling/v1beta1/register.go",
+      "linesOfCode": 36,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 16,
+      "modulePath": "pkg/apis",
+      "path": "pkg/apis/storagemigration/types.go",
+      "linesOfCode": 77,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 52
+    },
+    {
+      "index": 17,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/certificates/authority/policies_test.go",
+      "linesOfCode": 82,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 15
+    },
+    {
+      "index": 18,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/cronjob/utils.go",
+      "linesOfCode": 255,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 32,
+      "commentLines": 78
+    },
+    {
+      "index": 19,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/deployment/util/deployment_util_test.go",
+      "linesOfCode": 1437,
+      "functions": 63,
+      "maxNesting": 3,
+      "branches": 65,
+      "commentLines": 32
+    },
+    {
+      "index": 20,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/endpoint/endpoints_tracker.go",
+      "linesOfCode": 53,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 19
+    },
+    {
+      "index": 21,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/garbagecollector/dump.go",
+      "linesOfCode": 306,
+      "functions": 16,
+      "maxNesting": 3,
+      "branches": 44,
+      "commentLines": 29
+    },
+    {
+      "index": 22,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/namespace/config/v1alpha1/doc.go",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 23,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/nodelifecycle/config/v1alpha1/zz_generated.conversion.go",
+      "linesOfCode": 89,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 23
+    },
+    {
+      "index": 24,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/podgc/gc_controller_test.go",
+      "linesOfCode": 764,
+      "functions": 21,
+      "maxNesting": 3,
+      "branches": 48,
+      "commentLines": 36
+    },
+    {
+      "index": 25,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/resourceclaim/doc.go",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 26,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/statefulset/config/v1alpha1/register.go",
+      "linesOfCode": 25,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 27,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/ttlafterfinished/config/v1alpha1/zz_generated.conversion.go",
+      "linesOfCode": 76,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 22
+    },
+    {
+      "index": 28,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/volume/attachdetach/metrics/metrics_test.go",
+      "linesOfCode": 172,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 9,
+      "commentLines": 17
+    },
+    {
+      "index": 29,
+      "modulePath": "pkg/controller",
+      "path": "pkg/controller/volume/persistentvolume/index_test.go",
+      "linesOfCode": 1430,
+      "functions": 44,
+      "maxNesting": 2,
+      "branches": 58,
+      "commentLines": 48
+    },
+    {
+      "index": 30,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/allocation/state/state_mem.go",
+      "linesOfCode": 155,
+      "functions": 12,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 18
+    },
+    {
+      "index": 31,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/apis/podresources/client_test.go",
+      "linesOfCode": 47,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 15
+    },
+    {
+      "index": 32,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/cm/admission/errors_test.go",
+      "linesOfCode": 74,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 8,
+      "commentLines": 15
+    },
+    {
+      "index": 33,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/cm/cpumanager/topology/alignment.go",
+      "linesOfCode": 66,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 24
+    },
+    {
+      "index": 34,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/cm/helpers.go",
+      "linesOfCode": 82,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 17
+    },
+    {
+      "index": 35,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/cm/topologymanager/fake_topology_manager.go",
+      "linesOfCode": 79,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 19
+    },
+    {
+      "index": 36,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/config/http_test.go",
+      "linesOfCode": 354,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 18,
+      "commentLines": 16
+    },
+    {
+      "index": 37,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/eviction/defaults_linux.go",
+      "linesOfCode": 22,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 38,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/kubelet_getters_test.go",
+      "linesOfCode": 283,
+      "functions": 4,
+      "maxNesting": 4,
+      "branches": 5,
+      "commentLines": 18
+    },
+    {
+      "index": 39,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/kuberuntime/helpers.go",
+      "linesOfCode": 480,
+      "functions": 28,
+      "maxNesting": 2,
+      "branches": 64,
+      "commentLines": 49
+    },
+    {
+      "index": 40,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/lifecycle/admission_failure_handler_stub.go",
+      "linesOfCode": 29,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 41,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/nodeshutdown/systemd/inhibit_linux.go",
+      "linesOfCode": 165,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 14,
+      "commentLines": 33
+    },
+    {
+      "index": 42,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/pod/testing/mocks.go",
+      "linesOfCode": 742,
+      "functions": 93,
+      "maxNesting": 2,
+      "branches": 66,
+      "commentLines": 78
+    },
+    {
+      "index": 43,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/server/server_test.go",
+      "linesOfCode": 2432,
+      "functions": 164,
+      "maxNesting": 3,
+      "branches": 191,
+      "commentLines": 118
+    },
+    {
+      "index": 44,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/sysctl/allowlist_test.go",
+      "linesOfCode": 119,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 13,
+      "commentLines": 17
+    },
+    {
+      "index": 45,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/util/manager/watch_based_manager_test.go",
+      "linesOfCode": 646,
+      "functions": 39,
+      "maxNesting": 4,
+      "branches": 44,
+      "commentLines": 35
+    },
+    {
+      "index": 46,
+      "modulePath": "pkg/kubelet",
+      "path": "pkg/kubelet/volumemanager/volume_manager_test.go",
+      "linesOfCode": 963,
+      "functions": 32,
+      "maxNesting": 3,
+      "branches": 50,
+      "commentLines": 32
+    },
+    {
+      "index": 47,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/admissionregistration/validatingadmissionpolicy/doc.go",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 48,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/apps/replicaset/storage/storage_test.go",
+      "linesOfCode": 470,
+      "functions": 31,
+      "maxNesting": 4,
+      "branches": 39,
+      "commentLines": 30
+    },
+    {
+      "index": 49,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/certificates/certificates/storage/storage.go",
+      "linesOfCode": 125,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 42
+    },
+    {
+      "index": 50,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/core/namespace/strategy_test.go",
+      "linesOfCode": 150,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 21,
+      "commentLines": 17
+    },
+    {
+      "index": 51,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/core/replicationcontroller/storage/storage_test.go",
+      "linesOfCode": 449,
+      "functions": 31,
+      "maxNesting": 4,
+      "branches": 37,
+      "commentLines": 31
+    },
+    {
+      "index": 52,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/core/service/portallocator/allocator.go",
+      "linesOfCode": 241,
+      "functions": 19,
+      "maxNesting": 1,
+      "branches": 19,
+      "commentLines": 56
+    },
+    {
+      "index": 53,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/flowcontrol/prioritylevelconfiguration/doc.go",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 54,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/policy/poddisruptionbudget/strategy.go",
+      "linesOfCode": 172,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 46
+    },
+    {
+      "index": 55,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/registrytest/service.go",
+      "linesOfCode": 90,
+      "functions": 7,
+      "maxNesting": 3,
+      "branches": 3,
+      "commentLines": 16
+    },
+    {
+      "index": 56,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/scheduling/priorityclass/storage/storage_test.go",
+      "linesOfCode": 164,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 25
+    },
+    {
+      "index": 57,
+      "modulePath": "pkg/registry",
+      "path": "pkg/registry/storagemigration/rest/storage_storagemigration.go",
+      "linesOfCode": 77,
+      "functions": 4,
+      "maxNesting": 3,
+      "branches": 10,
+      "commentLines": 15
+    },
+    {
+      "index": 58,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/apidiscovery/v2/generated.pb.go",
+      "linesOfCode": 1496,
+      "functions": 40,
+      "maxNesting": 4,
+      "branches": 337,
+      "commentLines": 17
+    },
+    {
+      "index": 59,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/apps/v1beta2/zz_generated.deepcopy.go",
+      "linesOfCode": 818,
+      "functions": 77,
+      "maxNesting": 2,
+      "branches": 93,
+      "commentLines": 95
+    },
+    {
+      "index": 60,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/authorization/v1beta1/zz_generated.deepcopy.go",
+      "linesOfCode": 358,
+      "functions": 32,
+      "maxNesting": 3,
+      "branches": 38,
+      "commentLines": 50
+    },
+    {
+      "index": 61,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/certificates/v1/zz_generated.deepcopy.go",
+      "linesOfCode": 371,
+      "functions": 32,
+      "maxNesting": 3,
+      "branches": 44,
+      "commentLines": 50
+    },
+    {
+      "index": 62,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/core/v1/register.go",
+      "linesOfCode": 86,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 63,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/events/v1/zz_generated.prerelease-lifecycle.go",
+      "linesOfCode": 26,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 64,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/flowcontrol/v1beta2/zz_generated.model_name.go",
+      "linesOfCode": 108,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 41
+    },
+    {
+      "index": 65,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/networking/v1beta1/types_swagger_doc_generated.go",
+      "linesOfCode": 229,
+      "functions": 25,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 26
+    },
+    {
+      "index": 66,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/rbac/v1/generated.pb.go",
+      "linesOfCode": 2748,
+      "functions": 89,
+      "maxNesting": 4,
+      "branches": 602,
+      "commentLines": 17
+    },
+    {
+      "index": 67,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/resource/v1alpha3/zz_generated.model_name.go",
+      "linesOfCode": 80,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 34
+    },
+    {
+      "index": 68,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/scheduling/v1beta1/types.go",
+      "linesOfCode": 858,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 701
+    },
+    {
+      "index": 69,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/api/storagemigration/v1beta1/types.go",
+      "linesOfCode": 85,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 60
+    },
+    {
+      "index": 70,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/install/install.go",
+      "linesOfCode": 27,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 71,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/apis/apiextensions/validation/validation.go",
+      "linesOfCode": 1713,
+      "functions": 86,
+      "maxNesting": 9,
+      "branches": 366,
+      "commentLines": 194
+    },
+    {
+      "index": 72,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/apiserver/schema/defaulting/surroundingobject.go",
+      "linesOfCode": 135,
+      "functions": 11,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 54
+    },
+    {
+      "index": 73,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/client/applyconfiguration/apiextensions/v1/customresourcedefinitionversion.go",
+      "linesOfCode": 127,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 69
+    },
+    {
+      "index": 74,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/client/clientset/clientset/typed/apiextensions/v1beta1/fake/fake_apiextensions_client.go",
+      "linesOfCode": 31,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 75,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/pkg/features/kube_features.go",
+      "linesOfCode": 70,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 42
+    },
+    {
+      "index": 76,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiextensions-apiserver/test/integration/objectmeta_test.go",
+      "linesOfCode": 489,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 66,
+      "commentLines": 15
+    },
+    {
+      "index": 77,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/api/meta/multirestmapper.go",
+      "linesOfCode": 274,
+      "functions": 20,
+      "maxNesting": 4,
+      "branches": 39,
+      "commentLines": 69
+    },
+    {
+      "index": 78,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/api/validate/equality.go",
+      "linesOfCode": 31,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 16
+    },
+    {
+      "index": 79,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/internalversion/scheme/register.go",
+      "linesOfCode": 30,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 80,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/meta/v1/types_swagger_doc_generated.go",
+      "linesOfCode": 395,
+      "functions": 38,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 26
+    },
+    {
+      "index": 81,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/apis/testapigroup/v1/register.go",
+      "linesOfCode": 52,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 25
+    },
+    {
+      "index": 82,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/fieldinfo_127.go",
+      "linesOfCode": 26,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 18
+    },
+    {
+      "index": 83,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/serializer/json/collections.go",
+      "linesOfCode": 227,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 42,
+      "commentLines": 33
+    },
+    {
+      "index": 84,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/runtime/types_proto.go",
+      "linesOfCode": 192,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 22,
+      "commentLines": 41
+    },
+    {
+      "index": 85,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/framer/framer_test.go",
+      "linesOfCode": 214,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 33,
+      "commentLines": 25
+    },
+    {
+      "index": 86,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/managedfields/internal/stripmeta.go",
+      "linesOfCode": 77,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 20
+    },
+    {
+      "index": 87,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/remotecommand/constants.go",
+      "linesOfCode": 52,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 33
+    },
+    {
+      "index": 88,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apimachinery/pkg/util/wait/delay.go",
+      "linesOfCode": 41,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 89,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/attributes.go",
+      "linesOfCode": 175,
+      "functions": 23,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 23
+    },
+    {
+      "index": 90,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/plugin/manifest/validation_test.go",
+      "linesOfCode": 146,
+      "functions": 4,
+      "maxNesting": 3,
+      "branches": 11,
+      "commentLines": 15
+    },
+    {
+      "index": 91,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/plugin/policy/mutating/compilation.go",
+      "linesOfCode": 84,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 10,
+      "commentLines": 23
+    },
+    {
+      "index": 92,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/plugin/resourcequota/apis/resourcequota/types.go",
+      "linesOfCode": 59,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 47
+    },
+    {
+      "index": 93,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/plugin/webhook/config/apis/webhookadmission/v1/doc.go",
+      "linesOfCode": 18,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 94,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/admission/plugin/webhook/testing/authentication_info_resolver.go",
+      "linesOfCode": 67,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 95,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/apis/apiserver/v1alpha1/register.go",
+      "linesOfCode": 52,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    },
+    {
+      "index": 96,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/apis/example/install/roundtrip_test.go",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 97,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/audit/policy/util_test.go",
+      "linesOfCode": 73,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 15
+    },
+    {
+      "index": 98,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/authentication/token/cache/cached_token_authenticator.go",
+      "linesOfCode": 263,
+      "functions": 15,
+      "maxNesting": 2,
+      "branches": 19,
+      "commentLines": 74
+    },
+    {
+      "index": 99,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/cel/common/equality_test.go",
+      "linesOfCode": 734,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 36
+    },
+    {
+      "index": 100,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/cel/library/semverlib.go",
+      "linesOfCode": 302,
+      "functions": 19,
+      "maxNesting": 3,
+      "branches": 26,
+      "commentLines": 103
+    },
+    {
+      "index": 101,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/endpoints/discovery/aggregated/metrics.go",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 102,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/endpoints/filters/requestinfo.go",
+      "linesOfCode": 32,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 16
+    },
+    {
+      "index": 103,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/endpoints/handlers/responsewriters/writers.go",
+      "linesOfCode": 337,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 42,
+      "commentLines": 49
+    },
+    {
+      "index": 104,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/quota/v1/generic/evaluator.go",
+      "linesOfCode": 285,
+      "functions": 26,
+      "maxNesting": 4,
+      "branches": 28,
+      "commentLines": 61
+    },
+    {
+      "index": 105,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/registry/rest/validate_test.go",
+      "linesOfCode": 789,
+      "functions": 25,
+      "maxNesting": 3,
+      "branches": 33,
+      "commentLines": 56
+    },
+    {
+      "index": 106,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/server/filters/waitgroup.go",
+      "linesOfCode": 82,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 34
+    },
+    {
+      "index": 107,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/server/mux/doc.go",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 108,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/server/plugins.go",
+      "linesOfCode": 30,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 109,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/server/storage/resource_encoding_config.go",
+      "linesOfCode": 180,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 21,
+      "commentLines": 45
+    },
+    {
+      "index": 110,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/storage/cacher/watch_cache_history.go",
+      "linesOfCode": 230,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 16,
+      "commentLines": 84
+    },
+    {
+      "index": 111,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/storage/feature/feature_support_checker.go",
+      "linesOfCode": 185,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 17,
+      "commentLines": 48
+    },
+    {
+      "index": 112,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/storage/value/encrypt/envelope/kmsv2/grpc_service.go",
+      "linesOfCode": 131,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 24
+    },
+    {
+      "index": 113,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/util/flowcontrol/dropped_requests_tracker.go",
+      "linesOfCode": 199,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 65
+    },
+    {
+      "index": 114,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/util/flowcontrol/watch_tracker.go",
+      "linesOfCode": 199,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 77
+    },
+    {
+      "index": 115,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/pkg/util/webhook/certs_test.go",
+      "linesOfCode": 268,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 116,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/apiserver/plugin/pkg/authenticator/token/webhook/webhook.go",
+      "linesOfCode": 285,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 23,
+      "commentLines": 51
+    },
+    {
+      "index": 117,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cli-runtime/pkg/printers/json.go",
+      "linesOfCode": 69,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 20
+    },
+    {
+      "index": 118,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cli-runtime/pkg/resource/visitor_test.go",
+      "linesOfCode": 332,
+      "functions": 13,
+      "maxNesting": 4,
+      "branches": 17,
+      "commentLines": 18
+    },
+    {
+      "index": 119,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/admissionregistration/v1alpha1/mutatingadmissionpolicyspec.go",
+      "linesOfCode": 158,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 101
+    },
+    {
+      "index": 120,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/admissionregistration/v1beta1/webhookclientconfig.go",
+      "linesOfCode": 83,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 63
+    },
+    {
+      "index": 121,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/apps/v1beta1/statefulsetcondition.go",
+      "linesOfCode": 75,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 42
+    },
+    {
+      "index": 122,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/autoscaling/v2/horizontalpodautoscalerspec.go",
+      "linesOfCode": 90,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 57
+    },
+    {
+      "index": 123,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/certificates/v1/clustertrustbundlespec.go",
+      "linesOfCode": 70,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 57
+    },
+    {
+      "index": 124,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/core/v1/configmapenvsource.go",
+      "linesOfCode": 48,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 35
+    },
+    {
+      "index": 125,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/core/v1/fcvolumesource.go",
+      "linesOfCode": 81,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 49
+    },
+    {
+      "index": 126,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/core/v1/nodepodpreemptionpolicy.go",
+      "linesOfCode": 39,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 29
+    },
+    {
+      "index": 127,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/core/v1/podspec.go",
+      "linesOfCode": 670,
+      "functions": 44,
+      "maxNesting": 2,
+      "branches": 26,
+      "commentLines": 384
+    },
+    {
+      "index": 128,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/core/v1/serviceaccount.go",
+      "linesOfCode": 290,
+      "functions": 28,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 119
+    },
+    {
+      "index": 129,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/discovery/v1beta1/endpointconditions.go",
+      "linesOfCode": 61,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 43
+    },
+    {
+      "index": 130,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/extensions/v1beta1/scale.go",
+      "linesOfCode": 216,
+      "functions": 24,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 82
+    },
+    {
+      "index": 131,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/flowcontrol/v1beta1/serviceaccountsubject.go",
+      "linesOfCode": 45,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 32
+    },
+    {
+      "index": 132,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/flowcontrol/v1beta3/resourcepolicyrule.go",
+      "linesOfCode": 105,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 69
+    },
+    {
+      "index": 133,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/networking/v1/ingressloadbalanceringress.go",
+      "linesOfCode": 57,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 34
+    },
+    {
+      "index": 134,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/node/v1/scheduling.go",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 38
+    },
+    {
+      "index": 135,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/resource/v1/allocationresult.go",
+      "linesOfCode": 61,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 39
+    },
+    {
+      "index": 136,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/resource/v1/resourceclaimstatus.go",
+      "linesOfCode": 83,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 55
+    },
+    {
+      "index": 137,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/resource/v1beta1/devicederivedattribute.go",
+      "linesOfCode": 85,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 69
+    },
+    {
+      "index": 138,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/resource/v1beta2/devicetaint.go",
+      "linesOfCode": 84,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 57
+    },
+    {
+      "index": 139,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/scheduling/v1alpha3/topologyconstraint.go",
+      "linesOfCode": 37,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 29
+    },
+    {
+      "index": 140,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/storage/v1/storagehealthcondition.go",
+      "linesOfCode": 88,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 50
+    },
+    {
+      "index": 141,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/applyconfigurations/utils.go",
+      "linesOfCode": 2090,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 952,
+      "commentLines": 70
+    },
+    {
+      "index": 142,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/features/testing/features_init_test.go",
+      "linesOfCode": 151,
+      "functions": 19,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 18
+    },
+    {
+      "index": 143,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/informers/apps/v1beta2/interface.go",
+      "linesOfCode": 59,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 28
+    },
+    {
+      "index": 144,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/informers/core/v1/namespace.go",
+      "linesOfCode": 177,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 63
+    },
+    {
+      "index": 145,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/informers/flowcontrol/v1beta3/flowschema.go",
+      "linesOfCode": 177,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 63
+    },
+    {
+      "index": 146,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/informers/rbac/v1beta1/role.go",
+      "linesOfCode": 178,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 63
+    },
+    {
+      "index": 147,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/informers/storage/v1/volumeattachment.go",
+      "linesOfCode": 177,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 63
+    },
+    {
+      "index": 148,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/admissionregistration/v1/mutatingwebhookconfiguration.go",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 21
+    },
+    {
+      "index": 149,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/apiserverinternal/v1alpha1/storageversion.go",
+      "linesOfCode": 66,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    },
+    {
+      "index": 150,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/authentication/v1/fake/fake_tokenreview.go",
+      "linesOfCode": 36,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 151,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/authorization/v1beta1/fake/fake_subjectaccessreview.go",
+      "linesOfCode": 36,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 152,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/certificates/v1/fake/doc.go",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 153,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/coordination/v1alpha2/leasecandidate.go",
+      "linesOfCode": 60,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 21
+    },
+    {
+      "index": 154,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/core/v1/node_expansion.go",
+      "linesOfCode": 37,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 155,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/events/v1beta1/fake/fake_event_expansion.go",
+      "linesOfCode": 55,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 18
+    },
+    {
+      "index": 156,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/flowcontrol/v1beta2/fake/fake_flowcontrol_client.go",
+      "linesOfCode": 34,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 157,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/networking/v1beta1/fake/doc.go",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 158,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/policy/v1beta1/eviction_expansion.go",
+      "linesOfCode": 32,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 159,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/rbac/v1beta1/fake/fake_rbac_client.go",
+      "linesOfCode": 40,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 160,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/resource/v1beta1/resource_client.go",
+      "linesOfCode": 96,
+      "functions": 10,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 27
+    },
+    {
+      "index": 161,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/scheduling/v1beta1/fake/fake_priorityclass.go",
+      "linesOfCode": 45,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 162,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/kubernetes/typed/storage/v1beta1/fake/fake_volumeattributesclass.go",
+      "linesOfCode": 45,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 163,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/listers/admissionregistration/v1beta1/validatingadmissionpolicybinding.go",
+      "linesOfCode": 39,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 164,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/listers/certificates/v1/podcertificaterequest.go",
+      "linesOfCode": 58,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 32
+    },
+    {
+      "index": 165,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/listers/events/v1beta1/expansion_generated.go",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 166,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/listers/policy/v1/poddisruptionbudget.go",
+      "linesOfCode": 58,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 32
+    },
+    {
+      "index": 167,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/listers/resource/v1beta2/resourceslice.go",
+      "linesOfCode": 39,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 168,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/metadata/metadatainformer/interface.go",
+      "linesOfCode": 43,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 33
+    },
+    {
+      "index": 169,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/plugin/pkg/client/auth/exec/exec_cache_test.go",
+      "linesOfCode": 90,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 24
+    },
+    {
+      "index": 170,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/scale/interfaces.go",
+      "linesOfCode": 37,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 171,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/tools/auth/exec/exec.go",
+      "linesOfCode": 88,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 37
+    },
+    {
+      "index": 172,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/tools/cache/reflector_metrics.go",
+      "linesOfCode": 76,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 26
+    },
+    {
+      "index": 173,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/tools/clientcmd/api/v1/zz_generated.defaults.go",
+      "linesOfCode": 34,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 21
+    },
+    {
+      "index": 174,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/tools/portforward/fallback_dialer_test.go",
+      "linesOfCode": 65,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 175,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/tools/watch/until_test.go",
+      "linesOfCode": 281,
+      "functions": 42,
+      "maxNesting": 2,
+      "branches": 28,
+      "commentLines": 18
+    },
+    {
+      "index": 176,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/client-go/util/flowcontrol/backoff_test.go",
+      "linesOfCode": 322,
+      "functions": 12,
+      "maxNesting": 2,
+      "branches": 26,
+      "commentLines": 40
+    },
+    {
+      "index": 177,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cloud-provider/app/controllermanager_test.go",
+      "linesOfCode": 44,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 15
+    },
+    {
+      "index": 178,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cloud-provider/controllers/route/metrics.go",
+      "linesOfCode": 51,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 20
+    },
+    {
+      "index": 179,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cloud-provider/service/helpers/helper.go",
+      "linesOfCode": 138,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 16,
+      "commentLines": 35
+    },
+    {
+      "index": 180,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/client-gen/generators/generator_for_group.go",
+      "linesOfCode": 232,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 21
+    },
+    {
+      "index": 181,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/deepcopy-gen/output_tests/wholepkg/deepcopy_test.go",
+      "linesOfCode": 113,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 15
+    },
+    {
+      "index": 182,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/go-to-protobuf/protobuf/tags.go",
+      "linesOfCode": 27,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 18
+    },
+    {
+      "index": 183,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/all_types_match/with_field_validations/zz_generated.validations.go",
+      "linesOfCode": 214,
+      "functions": 18,
+      "maxNesting": 2,
+      "branches": 18,
+      "commentLines": 48
+    },
+    {
+      "index": 184,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/multiple_packages/registered/validation_test.go",
+      "linesOfCode": 25,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 185,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/ratcheting/maps/eachkey/doc_test.go",
+      "linesOfCode": 43,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 186,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/eachval/map_of_struct/zz_generated.validations.go",
+      "linesOfCode": 107,
+      "functions": 10,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 31
+    },
+    {
+      "index": 187,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/format/k8s-prefixed-label-key/doc.go",
+      "linesOfCode": 31,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 24
+    },
+    {
+      "index": 188,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/item/zerorooneof/simple/doc_test.go",
+      "linesOfCode": 47,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 189,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/levels/unions/zz_generated.validations.go",
+      "linesOfCode": 554,
+      "functions": 50,
+      "maxNesting": 3,
+      "branches": 68,
+      "commentLines": 92
+    },
+    {
+      "index": 190,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/minlength/doc_test.go",
+      "linesOfCode": 147,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 191,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/options/lists/doc_test.go",
+      "linesOfCode": 66,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 192,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/supported_resources/root/doc.go",
+      "linesOfCode": 28,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 25
+    },
+    {
+      "index": 193,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/output_tests/tags/update/primitives/doc_test.go",
+      "linesOfCode": 309,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 92
+    },
+    {
+      "index": 194,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/cmd/validation-gen/testscheme/testscheme.go",
+      "linesOfCode": 348,
+      "functions": 27,
+      "maxNesting": 4,
+      "branches": 36,
+      "commentLines": 75
+    },
+    {
+      "index": 195,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/HyphenGroup/applyconfiguration/example/v1/testtypestatus.go",
+      "linesOfCode": 31,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    },
+    {
+      "index": 196,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/MixedCase/clientset/versioned/fake/clientset_generated.go",
+      "linesOfCode": 124,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 39
+    },
+    {
+      "index": 197,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/apiserver/apis/example/v1/conversion.go",
+      "linesOfCode": 33,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 198,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/apiserver/clientset/versioned/typed/example/v1/doc.go",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 199,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/apiserver/listers/example2/v1/expansion_generated.go",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 200,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/crd/applyconfiguration/internal/internal.go",
+      "linesOfCode": 53,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 16
+    },
+    {
+      "index": 201,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/crd/informers/externalversions/conflicting/v1/testtype.go",
+      "linesOfCode": 178,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 63
+    },
+    {
+      "index": 202,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/code-generator/examples/single/clientset/versioned/typed/api/v1/generated_expansion.go",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 203,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-base/cli/flag/map_string_string_test.go",
+      "linesOfCode": 173,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 11,
+      "commentLines": 18
+    },
+    {
+      "index": 204,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-base/config/zz_generated.deepcopy.go",
+      "linesOfCode": 61,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 24
+    },
+    {
+      "index": 205,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-base/logs/klogflags/klogflags.go",
+      "linesOfCode": 34,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 19
+    },
+    {
+      "index": 206,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-base/metrics/prometheus/compatversion/metrics_test.go",
+      "linesOfCode": 33,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 15
+    },
+    {
+      "index": 207,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-base/tracing/api/v1/config.go",
+      "linesOfCode": 78,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 16
+    },
+    {
+      "index": 208,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-helpers/node/util/sysctl/namespace.go",
+      "linesOfCode": 101,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 53
+    },
+    {
+      "index": 209,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/component-helpers/scheduling/corev1/nodeaffinity/nodeaffinity_test.go",
+      "linesOfCode": 1044,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 14,
+      "commentLines": 16
+    },
+    {
+      "index": 210,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/controller-manager/config/v1beta1/zz_generated.deepcopy.go",
+      "linesOfCode": 60,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 23
+    },
+    {
+      "index": 211,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cri-client/pkg/connection_target.go",
+      "linesOfCode": 27,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 19
+    },
+    {
+      "index": 212,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/cri-streaming/pkg/streaming/remotecommand/httpstream_test.go",
+      "linesOfCode": 70,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 15
+    },
+    {
+      "index": 213,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/dynamic-resource-allocation/api/metadata/v1alpha1/types.go",
+      "linesOfCode": 102,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 83
+    },
+    {
+      "index": 214,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/dynamic-resource-allocation/deviceattribute/numa_linux.go",
+      "linesOfCode": 257,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 36,
+      "commentLines": 69
+    },
+    {
+      "index": 215,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/dynamic-resource-allocation/resourceslice/zz_generated.deepcopy.go",
+      "linesOfCode": 124,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 16,
+      "commentLines": 26
+    },
+    {
+      "index": 216,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/endpointslice/topologycache/utils_test.go",
+      "linesOfCode": 351,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 16
+    },
+    {
+      "index": 217,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kube-aggregator/pkg/apis/apiregistration/v1/doc.go",
+      "linesOfCode": 34,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 36
+    },
+    {
+      "index": 218,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kube-aggregator/pkg/client/applyconfiguration/utils.go",
+      "linesOfCode": 56,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 20
+    },
+    {
+      "index": 219,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kube-aggregator/pkg/controllers/openapi/aggregator/downloader_test.go",
+      "linesOfCode": 95,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 20
+    },
+    {
+      "index": 220,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kube-scheduler/doc.go",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 221,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/auth/auth.go",
+      "linesOfCode": 32,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 222,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/config/use_context.go",
+      "linesOfCode": 84,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 16
+    },
+    {
+      "index": 223,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/create/create_secret_tls_test.go",
+      "linesOfCode": 187,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 16
+    },
+    {
+      "index": 224,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/get/get_test.go",
+      "linesOfCode": 2850,
+      "functions": 115,
+      "maxNesting": 4,
+      "branches": 243,
+      "commentLines": 46
+    },
+    {
+      "index": 225,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/rollout/rollout_undo.go",
+      "linesOfCode": 163,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 22
+    },
+    {
+      "index": 226,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/cmd/util/editor/launcher_others.go",
+      "linesOfCode": 59,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 18
+    },
+    {
+      "index": 227,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/config/v1beta1/types.go",
+      "linesOfCode": 159,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 126
+    },
+    {
+      "index": 228,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/explain/v2/templates/plaintext_test.go",
+      "linesOfCode": 1160,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 10,
+      "commentLines": 71
+    },
+    {
+      "index": 229,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/polymorphichelpers/updatepodspec.go",
+      "linesOfCode": 76,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 20,
+      "commentLines": 22
+    },
+    {
+      "index": 230,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubectl/pkg/util/storage/storage_test.go",
+      "linesOfCode": 156,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 15
+    },
+    {
+      "index": 231,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubelet/config/v1beta1/zz_generated.model_name.go",
+      "linesOfCode": 100,
+      "functions": 21,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 39
+    },
+    {
+      "index": 232,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/kubelet/pkg/apis/dra-health/v1/doc.go",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 233,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/metrics/pkg/apis/custom_metrics/register.go",
+      "linesOfCode": 41,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 234,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/metrics/pkg/apis/metrics/v1alpha1/zz_generated.deepcopy.go",
+      "linesOfCode": 165,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 19,
+      "commentLines": 32
+    },
+    {
+      "index": 235,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/metrics/pkg/client/clientset/versioned/typed/metrics/v1beta1/metrics_client.go",
+      "linesOfCode": 88,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 27
+    },
+    {
+      "index": 236,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/pod-security-admission/admission/api/register.go",
+      "linesOfCode": 40,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 237,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/pod-security-admission/api/attributes.go",
+      "linesOfCode": 132,
+      "functions": 20,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 33
+    },
+    {
+      "index": 238,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/pod-security-admission/policy/check_sysctls.go",
+      "linesOfCode": 134,
+      "functions": 8,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 45
+    },
+    {
+      "index": 239,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/sample-apiserver/pkg/admission/wardleinitializer/wardleinitializer.go",
+      "linesOfCode": 34,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 18
+    },
+    {
+      "index": 240,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/sample-apiserver/pkg/generated/clientset/versioned/fake/doc.go",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 241,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/sample-apiserver/pkg/registry/wardle/flunder/strategy.go",
+      "linesOfCode": 83,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 22
+    },
+    {
+      "index": 242,
+      "modulePath": "staging/src",
+      "path": "staging/src/k8s.io/streaming/pkg/httpstream/httpstream_test.go",
+      "linesOfCode": 208,
+      "functions": 12,
+      "maxNesting": 4,
+      "branches": 20,
+      "commentLines": 17
+    },
+    {
+      "index": 243,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/apimachinery/validatingadmissionpolicy.go",
+      "linesOfCode": 991,
+      "functions": 60,
+      "maxNesting": 4,
+      "branches": 73,
+      "commentLines": 85
+    },
+    {
+      "index": 244,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/common/apimachinery/resourceversion_matchers.go",
+      "linesOfCode": 70,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 22
+    },
+    {
+      "index": 245,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/common/node/sysctl.go",
+      "linesOfCode": 201,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 51
+    },
+    {
+      "index": 246,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/framework/endpointslice/ports.go",
+      "linesOfCode": 64,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 10,
+      "commentLines": 19
+    },
+    {
+      "index": 247,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/framework/metrics/api.go",
+      "linesOfCode": 75,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 24
+    },
+    {
+      "index": 248,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/framework/pod/wait_test.go",
+      "linesOfCode": 457,
+      "functions": 12,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 27
+    },
+    {
+      "index": 249,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/framework/util.go",
+      "linesOfCode": 633,
+      "functions": 39,
+      "maxNesting": 4,
+      "branches": 71,
+      "commentLines": 141
+    },
+    {
+      "index": 250,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/network/netpol/model.go",
+      "linesOfCode": 174,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 39
+    },
+    {
+      "index": 251,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/node/pre_stop.go",
+      "linesOfCode": 206,
+      "functions": 10,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 28
+    },
+    {
+      "index": 252,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/storage/csimock/mutable_csinode_allocatable.go",
+      "linesOfCode": 178,
+      "functions": 14,
+      "maxNesting": 3,
+      "branches": 11,
+      "commentLines": 15
+    },
+    {
+      "index": 253,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/storage/podlogs/podlogs.go",
+      "linesOfCode": 419,
+      "functions": 14,
+      "maxNesting": 7,
+      "branches": 59,
+      "commentLines": 109
+    },
+    {
+      "index": 254,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/storage/volume_attachment.go",
+      "linesOfCode": 261,
+      "functions": 18,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 38
+    },
+    {
+      "index": 255,
+      "modulePath": "test/e2e",
+      "path": "test/e2e/windows/security_context.go",
+      "linesOfCode": 262,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 29
+    }
+  ]
+}

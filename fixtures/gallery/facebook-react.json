@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "facebook",
+    "name": "react",
+    "ref": "main",
+    "commitSha": "eb8feb71096eec5c885b2a4c7d8d030d3622f265",
+    "primaryLanguage": "JavaScript",
+    "stars": 247285,
+    "fetchedAt": "2026-08-17T11:49:11Z"
+  },
+  "seed": "eb8feb71",
+  "totals": {
+    "filesScanned": 2000,
+    "filesSkipped": 5202,
+    "linesOfCode": 297593,
+    "functions": 22275,
+    "classes": 887,
+    "imports": 2981
+  },
+  "languages": [
+    {
+      "name": "JavaScript",
+      "share": 0.8765,
+      "files": 1753
+    },
+    {
+      "name": "TypeScript",
+      "share": 0.1235,
+      "files": 247
+    }
+  ],
+  "modules": [
+    {
+      "path": "packages/react-dom",
+      "share": 0.1669,
+      "files": 101,
+      "linesOfCode": 49679,
+      "avgNestingDepth": 0.0916,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 3.0281,
+      "cyclomaticDensity": 0.0037,
+      "commentRatio": 0.0667,
+      "asyncRatio": 0.2308
+    },
+    {
+      "path": "packages/react-reconciler",
+      "share": 0.1661,
+      "files": 79,
+      "linesOfCode": 49421,
+      "avgNestingDepth": 0.2598,
+      "maxNestingDepth": 9,
+      "avgFunctionLength": 3.8528,
+      "cyclomaticDensity": 0.0117,
+      "commentRatio": 0.1247,
+      "asyncRatio": 0.1588
+    },
+    {
+      "path": "compiler/packages",
+      "share": 0.1465,
+      "files": 920,
+      "linesOfCode": 43584,
+      "avgNestingDepth": 0.5379,
+      "maxNestingDepth": 14,
+      "avgFunctionLength": 5.2019,
+      "cyclomaticDensity": 0.0174,
+      "commentRatio": 0.1259,
+      "asyncRatio": 0.011
+    },
+    {
+      "path": "packages/react-devtools-shared",
+      "share": 0.1353,
+      "files": 208,
+      "linesOfCode": 40256,
+      "avgNestingDepth": 0.3136,
+      "maxNestingDepth": 12,
+      "avgFunctionLength": 3.7034,
+      "cyclomaticDensity": 0.0124,
+      "commentRatio": 0.1276,
+      "asyncRatio": 0.099
+    },
+    {
+      "path": "packages/react-server",
+      "share": 0.0377,
+      "files": 39,
+      "linesOfCode": 11234,
+      "avgNestingDepth": 0.6056,
+      "maxNestingDepth": 8,
+      "avgFunctionLength": 5.6725,
+      "cyclomaticDensity": 0.0137,
+      "commentRatio": 0.1764,
+      "asyncRatio": 0.007
+    },
+    {
+      "path": "packages/eslint-plugin-react-hooks",
+      "share": 0.034,
+      "files": 12,
+      "linesOfCode": 10106,
+      "avgNestingDepth": 0.8611,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 5.2639,
+      "cyclomaticDensity": 0.0078,
+      "commentRatio": 0.0732,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler-rust/src/bridge.ts",
+      "linesOfCode": 172,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 24
+    },
+    {
+      "index": 1,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/scripts/jest/makeE2EConfig.js",
+      "linesOfCode": 32,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 8
+    },
+    {
+      "index": 2,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/Entrypoint/Pipeline.ts",
+      "linesOfCode": 535,
+      "functions": 4,
+      "maxNesting": 3,
+      "branches": 25,
+      "commentLines": 22
+    },
+    {
+      "index": 3,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/HIR/AssertValidBlockNesting.ts",
+      "linesOfCode": 165,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 14,
+      "commentLines": 45
+    },
+    {
+      "index": 4,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/HIR/Dominator.ts",
+      "linesOfCode": 262,
+      "functions": 15,
+      "maxNesting": 4,
+      "branches": 26,
+      "commentLines": 52
+    },
+    {
+      "index": 5,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/HIR/TypeSchema.ts",
+      "linesOfCode": 288,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 6,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/Inference/InlineImmediatelyInvokedFunctionExpressions.ts",
+      "linesOfCode": 318,
+      "functions": 5,
+      "maxNesting": 7,
+      "branches": 21,
+      "commentLines": 106
+    },
+    {
+      "index": 7,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/AlignObjectMethodScopes.ts",
+      "linesOfCode": 92,
+      "functions": 2,
+      "maxNesting": 6,
+      "branches": 15,
+      "commentLines": 19
+    },
+    {
+      "index": 8,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/PrintReactiveFunction.ts",
+      "linesOfCode": 433,
+      "functions": 43,
+      "maxNesting": 3,
+      "branches": 41,
+      "commentLines": 8
+    },
+    {
+      "index": 9,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/ReactiveScopes/RenameVariables.ts",
+      "linesOfCode": 179,
+      "functions": 16,
+      "maxNesting": 3,
+      "branches": 13,
+      "commentLines": 26
+    },
+    {
+      "index": 10,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/TypeInference/index.ts",
+      "linesOfCode": 7,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 11,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/Validation/ValidateExhaustiveDependencies.ts",
+      "linesOfCode": 1086,
+      "functions": 27,
+      "maxNesting": 7,
+      "branches": 139,
+      "commentLines": 116
+    },
+    {
+      "index": 12,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/Validation/ValidateNoSetStateInRender.ts",
+      "linesOfCode": 186,
+      "functions": 3,
+      "maxNesting": 7,
+      "branches": 17,
+      "commentLines": 37
+    },
+    {
+      "index": 13,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/e2e/hello.e2e.js",
+      "linesOfCode": 67,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 6
+    },
+    {
+      "index": 14,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/align-scope-starts-within-cond.ts",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 15,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-assigning-ref-accessing-function-to-object-property-if-not-mutated.js",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 16,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-mutating-ref-in-callback-passed-to-jsx.tsx",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 17,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/allow-ref-type-cast-in-render.js",
+      "linesOfCode": 15,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 18,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/array-map-captures-receiver-noAlias.js",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 19,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/array-push-effect.js",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 20,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/await.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 21,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/bug-type-inference-control-flow.ts",
+      "linesOfCode": 38,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 19
+    },
+    {
+      "index": 22,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capture_mutate-across-fns-iife.js",
+      "linesOfCode": 13,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 23,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capturing-func-alias-computed-mutate-iife.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 24,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capturing-func-simple-alias-iife.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 25,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capturing-function-capture-ref-before-rename.js",
+      "linesOfCode": 24,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 26,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/capturing-nested-member-call.js",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 27,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/codegen-nan-infinity-as-identifiers.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 28,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/concise-arrow-expr.js",
+      "linesOfCode": 5,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 29,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/const-propagation-phi-nodes.ts",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 30,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/constant-propagation-unary-number.js",
+      "linesOfCode": 23,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 31,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/context-variable-reassigned-two-lambdas.js",
+      "linesOfCode": 22,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 32,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/deeply-nested-function-expressions-with-params.js",
+      "linesOfCode": 15,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 33,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/destructure-default-array-with-unary.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 34,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/destructuring-array-param-default.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 35,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/destructuring-object-pattern-within-rest.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 36,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/dont-memoize-primitive-function-call-non-escaping.js",
+      "linesOfCode": 26,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 37,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ecma/error.reserved-words.ts",
+      "linesOfCode": 11,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 38,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/effect-derived-computations/effect-contains-prop-function-call-no-error.js",
+      "linesOfCode": 14,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 39,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error._todo.computed-lval-in-destructure.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 40,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.bug-invariant-codegen-methodcall.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 41,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.conditional-hook-unknown-hook-react-namespace.js",
+      "linesOfCode": 7,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 42,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.hook-call-freezes-captured-memberexpr.jsx",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 43,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-assign-hook-to-local.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 44,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-destructure-to-local-global-variables.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 45,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-mutate-after-aliased-freeze.js",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 46,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-nested-function-reassign-local-variable-in-effect.js",
+      "linesOfCode": 37,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 14
+    },
+    {
+      "index": 47,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-read-ref-prop-in-render-destructure.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 48,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-ref-value-as-props.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 49,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-type-provider-hook-name-not-typed-as-hook.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 50,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.invalid-write-but-dont-read-ref-in-render.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 51,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.reassignment-to-global-indirect.js",
+      "linesOfCode": 8,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 52,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.ref-like-name-not-a-ref.js",
+      "linesOfCode": 17,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 53,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.todo-for-of-loop-with-context-variable-iterator.js",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 54,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.todo-hoisting-simple-var-declaration.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 55,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.todo-pattern3_type_to_poly.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 56,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.todo-round2_severity_diff.js",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 5
+    },
+    {
+      "index": 57,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/error.useCallback-accesses-ref-mutated-later-via-function-preserve-memoization.js",
+      "linesOfCode": 20,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 58,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/escape-analysis-non-escaping-interleaved-allocating-dependency.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 59,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/exhaustive-deps/error.invalid-dep-on-ref-current-value.js",
+      "linesOfCode": 8,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 60,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/exhaustive-deps/exhaustive-deps.js",
+      "linesOfCode": 62,
+      "functions": 18,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 61,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/fault-tolerance/error.var-declaration-and-mutation-of-props.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 62,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/fbt/fbt-call-complex-param-value.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 63,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/fbt/fbt-preserve-whitespace.tsx",
+      "linesOfCode": 14,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 64,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/fbt/repro-fbt-param-nested-fbt-jsx.js",
+      "linesOfCode": 40,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 65,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/for-in-statement-body-always-returns.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 66,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/for-multiple-variable-declarations-in-initializer.js",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 67,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/for-return.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 68,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/function-expression-prototype-call.js",
+      "linesOfCode": 10,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 69,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/gating/dynamic-gating-invalid-identifier-nopanic.js",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 70,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/gating/gating-with-hoisted-type-reference.flow.js",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 71,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/global-types/map-constructor.ts",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 72,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/globals-Boolean.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 73,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/hoisting-let-declaration-without-initialization.js",
+      "linesOfCode": 15,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 74,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/hoisting-recursive-call.ts",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 75,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/hook-call-freezes-captured-memberexpr.tsx",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 76,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ignore-inner-interface-types.ts",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 77,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/independent.js",
+      "linesOfCode": 18,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 78,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/infer-functions-component-with-ref-arg.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 79,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/inner-function-param-name-not-scoped.js",
+      "linesOfCode": 6,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 80,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/inner-function/nullable-objects/assume-invoked/jsx-and-passed.ts",
+      "linesOfCode": 15,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 81,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/invalid-jsx-in-try-with-catch.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 82,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/inverted-if-else.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 83,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/jsx-html-entity.js",
+      "linesOfCode": 7,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 84,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/jsx-outlining-child-stored-in-id.js",
+      "linesOfCode": 35,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 85,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/jsx-string-attribute-expression-container.js",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 86,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/lambda-mutated-non-reactive-to-reactive.js",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 87,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/many-scopes-no-stack-overflow.js",
+      "linesOfCode": 809,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 88,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/memoize-value-block-value-logical.js",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 89,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/meta-property.mjs",
+      "linesOfCode": 24,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 90,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/mutable-lifetime-with-aliasing.js",
+      "linesOfCode": 41,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 8
+    },
+    {
+      "index": 91,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/nested-function-discovery-while-test-expr.js",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 92,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/new-mutability/array-map-named-callback-cross-context.js",
+      "linesOfCode": 34,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 93,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/new-mutability/error.invalid-reassign-local-variable-in-jsx-callback.js",
+      "linesOfCode": 29,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 14
+    },
+    {
+      "index": 94,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/new-mutability/mutate-through-identity.js",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 95,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/new-mutability/repro-invalid-function-expression-effects-phi.js",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 96,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/new-mutability/transitivity-createfrom-capture.tsx",
+      "linesOfCode": 25,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 97,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/nonmutated-spread-props-jsx.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 98,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/obj-mutated-after-nested-if-else-with-alias.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 99,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/object-expression-computed-key-object-mutated-later.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 100,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/object-method-shorthand-derived-value.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 101,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/object-values.js",
+      "linesOfCode": 36,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 102,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/optional-computed-member-expression.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 103,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/outlined-destructured-params.js",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 104,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/overlapping-scopes-within-block.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 105,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-deps-conditional-property-chain-less-precise-deps.js",
+      "linesOfCode": 32,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 106,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-validation/error.useCallback-conditional-access-noAlloc.ts",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 107,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-validation/preserve-use-callback-stable-built-ins.ts",
+      "linesOfCode": 30,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 108,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-validation/useCallback-captures-reassigned-context.ts",
+      "linesOfCode": 15,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 109,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-validation/useCallback-reordering-depslist-assignment.tsx",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 110,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/preserve-memo-validation/useMemo-inner-decl.ts",
+      "linesOfCode": 13,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 111,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/prop-capturing-function-1.js",
+      "linesOfCode": 12,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 112,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/propagate-scope-deps-hir-fork/infer-sequential-optional-chain-nonnull.ts",
+      "linesOfCode": 20,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 113,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/propagate-scope-deps-hir-fork/reduce-reactive-deps/infer-function-cond-access-local-var.tsx",
+      "linesOfCode": 30,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 114,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/propagate-scope-deps-hir-fork/reduce-reactive-deps/memberexpr-join-optional-chain.ts",
+      "linesOfCode": 21,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 115,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/propagate-scope-deps-hir-fork/ssa-renaming-ternary.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 116,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/propagate-scope-deps-hir-fork/useMemo-multiple-if-else.js",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 117,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/quoted-strings-in-jsx-attribute.js",
+      "linesOfCode": 10,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 118,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reactive-control-dependency-from-interleaved-reactivity-for-in.js",
+      "linesOfCode": 26,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 10
+    },
+    {
+      "index": 119,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reactive-control-dependency-switch-condition.js",
+      "linesOfCode": 31,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 120,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reactive-scopes-if.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 121,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reanimated-no-memo-arg.js",
+      "linesOfCode": 28,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 122,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reduce-reactive-cond-deps-break-in-scope.ts",
+      "linesOfCode": 20,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 123,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reduce-reactive-deps/conditional-member-expr.js",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 124,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reduce-reactive-deps/jump-poisoned/reduce-if-nonexhaustive-poisoned-deps1.ts",
+      "linesOfCode": 27,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 125,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reduce-reactive-deps/promote-uncond.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 126,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/reduce-reactive-deps/uncond-overlap-descendant.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 127,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ref-current-optional-field-no-added-to-dep.js",
+      "linesOfCode": 7,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 128,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-aliased-capture-mutate.js",
+      "linesOfCode": 32,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 15
+    },
+    {
+      "index": 129,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-duplicate-import-specifier.ts",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 130,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-invalid-destructuring-reassignment-undefined-variable.js",
+      "linesOfCode": 48,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 2
+    },
+    {
+      "index": 131,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-mutate-ref-in-function-passed-to-hook.js",
+      "linesOfCode": 30,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 5
+    },
+    {
+      "index": 132,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-object-pattern.js",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 133,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/repro-returned-inner-fn-reassigns-context.js",
+      "linesOfCode": 33,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 134,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rest-param-with-identifier.js",
+      "linesOfCode": 7,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 135,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/round3_outlined_naming.js",
+      "linesOfCode": 9,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 136,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/error.invalid-hook-as-conditional-test.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 0
+    },
+    {
+      "index": 137,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/error.invalid-rules-of-hooks-1b9527f967f3.js",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 138,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/error.invalid-rules-of-hooks-f3d6c5e9c83d.js",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 139,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/rules-of-hooks-23dc7fffde57.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 140,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/rules-of-hooks-9d7879272ff6.js",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 141,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/todo.bail.rules-of-hooks-28a78701970c.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 142,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/rules-of-hooks/todo.invalid.invalid-rules-of-hooks-191029ac48c8.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 8
+    },
+    {
+      "index": 143,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/same-variable-as-dep-and-redeclare-maybe-frozen.js",
+      "linesOfCode": 36,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 14
+    },
+    {
+      "index": 144,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/should-bailout-without-compilation-infer-mode.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 145,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ssa-complex-single-if.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 146,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ssa-objectexpression.js",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 147,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ssa-reassign-in-rval.js",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 148,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ssa-renaming-with-mutation.js",
+      "linesOfCode": 21,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 149,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/ssa-while.js",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 150,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/switch-non-final-default.js",
+      "linesOfCode": 23,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 151,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/temporary-property-load-accessed-outside-scope.js",
+      "linesOfCode": 5,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 152,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/todo-jsx-intrinsic-tag-matches-local-binding.js",
+      "linesOfCode": 18,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 153,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/try-catch-alias-try-values.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 154,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/try-catch-optional-chaining.js",
+      "linesOfCode": 21,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 155,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/try-catch-within-object-method-returns-caught-value.js",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 156,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/type-alias-used-as-annotation_.flow.js",
+      "linesOfCode": 13,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 157,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/type-inference-array-from.js",
+      "linesOfCode": 40,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 158,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/uid-collision-across-functions.js",
+      "linesOfCode": 12,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 159,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/unused-logical.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 160,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/update-expression.ts",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 161,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/use-no-memo-module-scope-usememo-function-scope.js",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 162,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/useCallback-set-ref-nested-property.js",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 163,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/useEffect-nested-lambdas.js",
+      "linesOfCode": 19,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 164,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/useMemo-logical.js",
+      "linesOfCode": 10,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 165,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/using-declaration-bailout-sibling-compiles.js",
+      "linesOfCode": 8,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 166,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/fixtures/compiler/validate-no-set-state-in-render-uncalled-function-with-mutable-range-is-valid.js",
+      "linesOfCode": 23,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 167,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/babel-plugin-react-compiler/src/__tests__/test-utils/validateNoUseBeforeDefine.ts",
+      "linesOfCode": 38,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 168,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/eslint-plugin-react-compiler/babel.config.js",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 169,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/react-compiler-healthcheck/src/checks/libraryCompat.ts",
+      "linesOfCode": 35,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 6,
+      "commentLines": 6
+    },
+    {
+      "index": 170,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/react-forgive/client/src/mapping.ts",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 171,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/react-mcp-server/src/utils/assertExhaustive.ts",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 172,
+      "modulePath": "compiler/packages",
+      "path": "compiler/packages/snap/src/runner.ts",
+      "linesOfCode": 615,
+      "functions": 21,
+      "maxNesting": 3,
+      "branches": 48,
+      "commentLines": 49
+    },
+    {
+      "index": 173,
+      "modulePath": "packages/eslint-plugin-react-hooks",
+      "path": "packages/eslint-plugin-react-hooks/__tests__/ReactCompilerRuleFlow-test.ts",
+      "linesOfCode": 141,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 20
+    },
+    {
+      "index": 174,
+      "modulePath": "packages/eslint-plugin-react-hooks",
+      "path": "packages/eslint-plugin-react-hooks/src/code-path-analysis/id-generator.js",
+      "linesOfCode": 30,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 16
+    },
+    {
+      "index": 175,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/babel.config.js",
+      "linesOfCode": 48,
+      "functions": 2,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 176,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/__tests__/__serializers__/profilingSerializer.js",
+      "linesOfCode": 21,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 177,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/__tests__/inspectedElement-test.js",
+      "linesOfCode": 2946,
+      "functions": 275,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 134
+    },
+    {
+      "index": 178,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/__tests__/profilingCommitTreeBuilder-test.js",
+      "linesOfCode": 230,
+      "functions": 42,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 21
+    },
+    {
+      "index": 179,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/__tests__/transform-react-version-pragma-test.js",
+      "linesOfCode": 114,
+      "functions": 24,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 30
+    },
+    {
+      "index": 180,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/backend/fiber/renderer.js",
+      "linesOfCode": 7494,
+      "functions": 123,
+      "maxNesting": 12,
+      "branches": 424,
+      "commentLines": 1111
+    },
+    {
+      "index": 181,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/backend/shared/DevToolsComponentStackFrame.js",
+      "linesOfCode": 294,
+      "functions": 8,
+      "maxNesting": 8,
+      "branches": 34,
+      "commentLines": 84
+    },
+    {
+      "index": 182,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/backend/views/Highlighter/Highlighter.js",
+      "linesOfCode": 68,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 8
+    },
+    {
+      "index": 183,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/constants.js",
+      "linesOfCode": 64,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 184,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/store.js",
+      "linesOfCode": 2237,
+      "functions": 47,
+      "maxNesting": 7,
+      "branches": 156,
+      "commentLines": 220
+    },
+    {
+      "index": 185,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/EditableValue.js",
+      "linesOfCode": 104,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 17
+    },
+    {
+      "index": 186,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/InspectedElementContextTree.js",
+      "linesOfCode": 98,
+      "functions": 4,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 15
+    },
+    {
+      "index": 187,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/KeyValue.js",
+      "linesOfCode": 549,
+      "functions": 13,
+      "maxNesting": 6,
+      "branches": 36,
+      "commentLines": 20
+    },
+    {
+      "index": 188,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/OpenInEditorButton.js",
+      "linesOfCode": 51,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 8
+    },
+    {
+      "index": 189,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Components/reach-ui/tooltip.js",
+      "linesOfCode": 33,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 190,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/ErrorBoundary/SearchingGitHubIssues.js",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 191,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/ModalDialog.js",
+      "linesOfCode": 162,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 16
+    },
+    {
+      "index": 192,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Profiler/NoCommitData.js",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 193,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Profiler/SidebarCommitInfo.js",
+      "linesOfCode": 102,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 8
+    },
+    {
+      "index": 194,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Profiler/utils.js",
+      "linesOfCode": 235,
+      "functions": 10,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 15
+    },
+    {
+      "index": 195,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/Settings/SettingsModalContext.js",
+      "linesOfCode": 87,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 8
+    },
+    {
+      "index": 196,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/devtools/views/UnsupportedVersionDialog.js",
+      "linesOfCode": 72,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 8
+    },
+    {
+      "index": 197,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/errors/ElementPollingCancellationError.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 9
+    },
+    {
+      "index": 198,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hookSourceLocation.js",
+      "linesOfCode": 20,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 8
+    },
+    {
+      "index": 199,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/Example.js",
+      "linesOfCode": 18,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 200,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/external/InlineRequire.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 201,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/external/fb-sources-extended/index-map/ComponentUsingHooksIndirectly.js",
+      "linesOfCode": 47,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 7
+    },
+    {
+      "index": 202,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/external/index-map/ComponentWithCustomHook.js",
+      "linesOfCode": 58,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 8
+    },
+    {
+      "index": 203,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/external/react-sources-extended/ComponentUsingHooksIndirectly.js",
+      "linesOfCode": 47,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 7
+    },
+    {
+      "index": 204,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/external/react-sources-extended/index-map/ComponentWithExternalCustomHooks.js",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 205,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/ComponentWithCustomHook.js",
+      "linesOfCode": 58,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 8
+    },
+    {
+      "index": 206,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/fb-sources-extended/ComponentWithMultipleHooksPerLine.js",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 207,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/fb-sources-extended/index-map/ContainingStringSourceMappingURL.js",
+      "linesOfCode": 34,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 5
+    },
+    {
+      "index": 208,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/index-map/ContainingStringSourceMappingURL.js",
+      "linesOfCode": 34,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 5
+    },
+    {
+      "index": 209,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/react-sources-extended/ContainingStringSourceMappingURL.js",
+      "linesOfCode": 34,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 5
+    },
+    {
+      "index": 210,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/inline/react-sources-extended/index-map/InlineRequire.js",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 211,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__compiled__/no-columns/Example.js",
+      "linesOfCode": 33,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 4
+    },
+    {
+      "index": 212,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/__tests__/__source__/__untransformed__/ComponentWithUseReducer.js",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 213,
+      "modulePath": "packages/react-devtools-shared",
+      "path": "packages/react-devtools-shared/src/hooks/getHookNameForLocation.js",
+      "linesOfCode": 246,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 22,
+      "commentLines": 69
+    },
+    {
+      "index": 214,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/npm/client.js",
+      "linesOfCode": 36,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 13
+    },
+    {
+      "index": 215,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/npm/server.react-server.js",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 216,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/server.bun.js",
+      "linesOfCode": 46,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 217,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/InvalidEventListeners-test.js",
+      "linesOfCode": 87,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 218,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMActivity-test.js",
+      "linesOfCode": 502,
+      "functions": 62,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 34
+    },
+    {
+      "index": 219,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMFizzDeferredValue-test.js",
+      "linesOfCode": 174,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 18
+    },
+    {
+      "index": 220,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMForm-test.js",
+      "linesOfCode": 2073,
+      "functions": 352,
+      "maxNesting": 2,
+      "branches": 56,
+      "commentLines": 190
+    },
+    {
+      "index": 221,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMLegacyComponentTree-test.internal.js",
+      "linesOfCode": 56,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 222,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMServerIntegrationAttributes-test.js",
+      "linesOfCode": 688,
+      "functions": 136,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 70
+    },
+    {
+      "index": 223,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMServerIntegrationReconnecting-test.js",
+      "linesOfCode": 391,
+      "functions": 70,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 224,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMServerSelectiveHydrationActivity-test.internal.js",
+      "linesOfCode": 1343,
+      "functions": 144,
+      "maxNesting": 1,
+      "branches": 19,
+      "commentLines": 144
+    },
+    {
+      "index": 225,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactDOMserverIntegrationProgress-test.js",
+      "linesOfCode": 39,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 12
+    },
+    {
+      "index": 226,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactLegacyUpdates-test.js",
+      "linesOfCode": 1446,
+      "functions": 241,
+      "maxNesting": 2,
+      "branches": 22,
+      "commentLines": 91
+    },
+    {
+      "index": 227,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/ReactTestUtilsAct-test.js",
+      "linesOfCode": 697,
+      "functions": 153,
+      "maxNesting": 2,
+      "branches": 17,
+      "commentLines": 69
+    },
+    {
+      "index": 228,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/__tests__/utils/ReactDOMServerIntegrationTestUtils.js",
+      "linesOfCode": 370,
+      "functions": 47,
+      "maxNesting": 4,
+      "branches": 20,
+      "commentLines": 78
+    },
+    {
+      "index": 229,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/events/__tests__/SyntheticEvent-test.js",
+      "linesOfCode": 95,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 230,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/server/ReactDOMFizzServerBrowser.js",
+      "linesOfCode": 223,
+      "functions": 15,
+      "maxNesting": 2,
+      "branches": 25,
+      "commentLines": 21
+    },
+    {
+      "index": 231,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/server/react-dom-server.browser.stable.js",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 232,
+      "modulePath": "packages/react-dom",
+      "path": "packages/react-dom/src/test-utils/FizzTestUtils.js",
+      "linesOfCode": 183,
+      "functions": 6,
+      "maxNesting": 5,
+      "branches": 25,
+      "commentLines": 20
+    },
+    {
+      "index": 233,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/constants.js",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 234,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberAct.js",
+      "linesOfCode": 54,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 19
+    },
+    {
+      "index": 235,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberCommitHostEffects.js",
+      "linesOfCode": 755,
+      "functions": 19,
+      "maxNesting": 3,
+      "branches": 36,
+      "commentLines": 65
+    },
+    {
+      "index": 236,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberConfigWithNoSingletons.js",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 237,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberHostContext.js",
+      "linesOfCode": 150,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 49
+    },
+    {
+      "index": 238,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberRoot.js",
+      "linesOfCode": 211,
+      "functions": 2,
+      "maxNesting": 4,
+      "branches": 21,
+      "commentLines": 24
+    },
+    {
+      "index": 239,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactFiberTreeReflection.js",
+      "linesOfCode": 720,
+      "functions": 19,
+      "maxNesting": 5,
+      "branches": 77,
+      "commentLines": 70
+    },
+    {
+      "index": 240,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/ReactStrictModeWarnings.js",
+      "linesOfCode": 316,
+      "functions": 16,
+      "maxNesting": 3,
+      "branches": 27,
+      "commentLines": 16
+    },
+    {
+      "index": 241,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ErrorBoundaryReconciliation-test.internal.js",
+      "linesOfCode": 73,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 242,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ReactDeferredValue-test.js",
+      "linesOfCode": 1020,
+      "functions": 135,
+      "maxNesting": 2,
+      "branches": 25,
+      "commentLines": 151
+    },
+    {
+      "index": 243,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ReactIncremental-test.js",
+      "linesOfCode": 2546,
+      "functions": 332,
+      "maxNesting": 2,
+      "branches": 16,
+      "commentLines": 228
+    },
+    {
+      "index": 244,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ReactLazy-test.internal.js",
+      "linesOfCode": 1508,
+      "functions": 212,
+      "maxNesting": 2,
+      "branches": 21,
+      "commentLines": 45
+    },
+    {
+      "index": 245,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ReactSuspenseCallback-test.js",
+      "linesOfCode": 229,
+      "functions": 22,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 17
+    },
+    {
+      "index": 246,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/ReactTransition-test.js",
+      "linesOfCode": 1170,
+      "functions": 133,
+      "maxNesting": 2,
+      "branches": 29,
+      "commentLines": 133
+    },
+    {
+      "index": 247,
+      "modulePath": "packages/react-reconciler",
+      "path": "packages/react-reconciler/src/__tests__/useSyncExternalStore-test.js",
+      "linesOfCode": 500,
+      "functions": 69,
+      "maxNesting": 2,
+      "branches": 12,
+      "commentLines": 79
+    },
+    {
+      "index": 248,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/npm/flight.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 249,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/ReactFizzServer.js",
+      "linesOfCode": 6267,
+      "functions": 145,
+      "maxNesting": 8,
+      "branches": 292,
+      "commentLines": 1064
+    },
+    {
+      "index": 250,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/ReactFlightServerConfig.js",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 16
+    },
+    {
+      "index": 251,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/ReactServerStreamConfigEdge.js",
+      "linesOfCode": 167,
+      "functions": 9,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 36
+    },
+    {
+      "index": 252,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/forks/ReactFizzConfig.dom-edge.js",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 9
+    },
+    {
+      "index": 253,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/forks/ReactFlightServerConfig.dom-browser-turbopack.js",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 254,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/forks/ReactFlightServerConfig.noop.js",
+      "linesOfCode": 36,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 255,
+      "modulePath": "packages/react-server",
+      "path": "packages/react-server/src/forks/ReactServerStreamConfig.noop.js",
+      "linesOfCode": 44,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    }
+  ]
+}

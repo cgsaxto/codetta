@@ -1,0 +1,2679 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "microsoft",
+    "name": "vscode",
+    "ref": "main",
+    "commitSha": "156357c8335f00c26e22456cc1bb838357d1cf3f",
+    "primaryLanguage": "TypeScript",
+    "stars": 188792,
+    "fetchedAt": "2026-08-17T11:51:12Z"
+  },
+  "seed": "156357c8",
+  "totals": {
+    "filesScanned": 2000,
+    "filesSkipped": 15925,
+    "linesOfCode": 495973,
+    "functions": 42697,
+    "classes": 5128,
+    "imports": 19354
+  },
+  "languages": [
+    {
+      "name": "TypeScript",
+      "share": 0.9845,
+      "files": 1969
+    },
+    {
+      "name": "JavaScript",
+      "share": 0.009,
+      "files": 18
+    },
+    {
+      "name": "Python",
+      "share": 0.006,
+      "files": 12
+    },
+    {
+      "name": "Go",
+      "share": 0.0005,
+      "files": 1
+    }
+  ],
+  "modules": [
+    {
+      "path": "src/vs",
+      "share": 0.7073,
+      "files": 1315,
+      "linesOfCode": 350820,
+      "avgNestingDepth": 0.3939,
+      "maxNestingDepth": 33,
+      "avgFunctionLength": 4.1562,
+      "cyclomaticDensity": 0.0105,
+      "commentRatio": 0.1086,
+      "asyncRatio": 0.1563
+    },
+    {
+      "path": "extensions/copilot",
+      "share": 0.1978,
+      "files": 450,
+      "linesOfCode": 98097,
+      "avgNestingDepth": 0.3405,
+      "maxNestingDepth": 9,
+      "avgFunctionLength": 4.1242,
+      "cyclomaticDensity": 0.0093,
+      "commentRatio": 0.1012,
+      "asyncRatio": 0.263
+    },
+    {
+      "path": "extensions/terminal-suggest",
+      "share": 0.0342,
+      "files": 29,
+      "linesOfCode": 16966,
+      "avgNestingDepth": 0.48,
+      "maxNestingDepth": 3,
+      "avgFunctionLength": 2.832,
+      "cyclomaticDensity": 0.0017,
+      "commentRatio": 0.0166,
+      "asyncRatio": 0.072
+    },
+    {
+      "path": "extensions/html-language-features",
+      "share": 0.0091,
+      "files": 8,
+      "linesOfCode": 4498,
+      "avgNestingDepth": 0.5274,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 4.3082,
+      "cyclomaticDensity": 0.0083,
+      "commentRatio": 0.5469,
+      "asyncRatio": 0.3836
+    },
+    {
+      "path": "extensions/typescript-language-features",
+      "share": 0.0068,
+      "files": 27,
+      "linesOfCode": 3396,
+      "avgNestingDepth": 0.5368,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 4.0337,
+      "cyclomaticDensity": 0.0143,
+      "commentRatio": 0.0657,
+      "asyncRatio": 0.2086
+    },
+    {
+      "path": "extensions/git",
+      "share": 0.0049,
+      "files": 9,
+      "linesOfCode": 2406,
+      "avgNestingDepth": 0.4809,
+      "maxNestingDepth": 4,
+      "avgFunctionLength": 3.9962,
+      "cyclomaticDensity": 0.0147,
+      "commentRatio": 0.0998,
+      "asyncRatio": 0.1794
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/.eslintplugin/no-missing-linebreak.ts",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 7
+    },
+    {
+      "index": 1,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/agents/vscode-node/githubOrgCustomAgentProvider.ts",
+      "linesOfCode": 188,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 19,
+      "commentLines": 44
+    },
+    {
+      "index": 2,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/byok/vscode-node/test/customEndpointProvider.spec.ts",
+      "linesOfCode": 780,
+      "functions": 54,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 14
+    },
+    {
+      "index": 3,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/chatSessions/copilotcli/node/copilotcliSessionService.ts",
+      "linesOfCode": 1338,
+      "functions": 114,
+      "maxNesting": 3,
+      "branches": 147,
+      "commentLines": 161
+    },
+    {
+      "index": 4,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/chatSessions/copilotcli/vscode-node/diffState.ts",
+      "linesOfCode": 105,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 4
+    },
+    {
+      "index": 5,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/chatSessions/vscode-node/chatSessions.ts",
+      "linesOfCode": 382,
+      "functions": 49,
+      "maxNesting": 4,
+      "branches": 24,
+      "commentLines": 15
+    },
+    {
+      "index": 6,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/chronicle/common/secretFilter.ts",
+      "linesOfCode": 158,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 13,
+      "commentLines": 58
+    },
+    {
+      "index": 7,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/extension/src/constants.ts",
+      "linesOfCode": 35,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 14
+    },
+    {
+      "index": 8,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/extension/src/textDocumentManager.ts",
+      "linesOfCode": 111,
+      "functions": 19,
+      "maxNesting": 3,
+      "branches": 9,
+      "commentLines": 13
+    },
+    {
+      "index": 9,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/ghostText/requestContext.ts",
+      "linesOfCode": 40,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 10,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/completionsPromptFactory/completionsPromptFactory.ts",
+      "linesOfCode": 112,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 10
+    },
+    {
+      "index": 11,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/prompt/recentEdits/test/recentEditsReducer.test.ts",
+      "linesOfCode": 887,
+      "functions": 68,
+      "maxNesting": 3,
+      "branches": 19,
+      "commentLines": 45
+    },
+    {
+      "index": 12,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/lib/src/telemetry.ts",
+      "linesOfCode": 608,
+      "functions": 52,
+      "maxNesting": 5,
+      "branches": 30,
+      "commentLines": 114
+    },
+    {
+      "index": 13,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/prompt/src/components/components.ts",
+      "linesOfCode": 139,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 51
+    },
+    {
+      "index": 14,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/completions-core/vscode-node/prompt/src/tokenization/index.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 15,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/conversation/vscode-node/resolveModelId.ts",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 9
+    },
+    {
+      "index": 16,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/inlineChat/node/promptCraftingTypes.ts",
+      "linesOfCode": 121,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 13
+    },
+    {
+      "index": 17,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/inlineEdits/test/node/nextEditProviderTelemetry.spec.ts",
+      "linesOfCode": 478,
+      "functions": 44,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 52
+    },
+    {
+      "index": 18,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/intents/node/generateNewWorkspaceContent.ts",
+      "linesOfCode": 80,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 6,
+      "commentLines": 6
+    },
+    {
+      "index": 19,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/intents/vscode-node/newWorkspaceTextDocumentProvider.ts",
+      "linesOfCode": 30,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 4
+    },
+    {
+      "index": 20,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/onboardDebug/node/commandToConfigConverter.tsx",
+      "linesOfCode": 104,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 16
+    },
+    {
+      "index": 21,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompt/node/executionSubagentToolCallingLoop.ts",
+      "linesOfCode": 360,
+      "functions": 16,
+      "maxNesting": 4,
+      "branches": 31,
+      "commentLines": 72
+    },
+    {
+      "index": 22,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompt/vscode-node/debugCommands.ts",
+      "linesOfCode": 69,
+      "functions": 5,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 5
+    },
+    {
+      "index": 23,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompts/node/agent/summarizedConversationHistory.tsx",
+      "linesOfCode": 1090,
+      "functions": 53,
+      "maxNesting": 4,
+      "branches": 95,
+      "commentLines": 197
+    },
+    {
+      "index": 24,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompts/node/inline/inlineChatNotebookCommonPromptElements.tsx",
+      "linesOfCode": 500,
+      "functions": 24,
+      "maxNesting": 1,
+      "branches": 9,
+      "commentLines": 16
+    },
+    {
+      "index": 25,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompts/node/panel/promptCategorization.tsx",
+      "linesOfCode": 37,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 26,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/prompts/node/test/fixtures/editorGroupWatermark.summarized.ts",
+      "linesOfCode": 139,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 4
+    },
+    {
+      "index": 27,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/telemetry/common/lifecycleTelemetryContrib.ts",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 28,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/tools/common/virtualTools/toolEmbeddingsComputer.ts",
+      "linesOfCode": 269,
+      "functions": 24,
+      "maxNesting": 2,
+      "branches": 29,
+      "commentLines": 43
+    },
+    {
+      "index": 29,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/tools/node/resolveMemoryFileUriTool.tsx",
+      "linesOfCode": 63,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 8,
+      "commentLines": 4
+    },
+    {
+      "index": 30,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/tools/test/node/virtualTools/testVirtualTools.ts",
+      "linesOfCode": 29,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 5
+    },
+    {
+      "index": 31,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/typescriptContext/serverPlugin/fixtures/context/p14/source/f6.ts",
+      "linesOfCode": 7,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 32,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/typescriptContext/serverPlugin/src/common/utils.ts",
+      "linesOfCode": 444,
+      "functions": 47,
+      "maxNesting": 4,
+      "branches": 48,
+      "commentLines": 19
+    },
+    {
+      "index": 33,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/extension/xtab/node/responseFormatHandlers.ts",
+      "linesOfCode": 175,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 33
+    },
+    {
+      "index": 34,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/chat/common/chatQuotaServiceImpl.ts",
+      "linesOfCode": 188,
+      "functions": 16,
+      "maxNesting": 1,
+      "branches": 20,
+      "commentLines": 9
+    },
+    {
+      "index": 35,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/configuration/vscode/test/configurationServiceImpl.spec.ts",
+      "linesOfCode": 114,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 7
+    },
+    {
+      "index": 36,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/endpoint/common/licenseAgreement.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 37,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/extensions/common/packageJson.ts",
+      "linesOfCode": 28,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 38,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/inlineEdits/common/dataTypes/documentId.ts",
+      "linesOfCode": 41,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 39,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/inlineEdits/test/common/xtabPromptOptions.spec.ts",
+      "linesOfCode": 229,
+      "functions": 49,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 40,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/networking/node/stream.ts",
+      "linesOfCode": 694,
+      "functions": 32,
+      "maxNesting": 9,
+      "branches": 94,
+      "commentLines": 114
+    },
+    {
+      "index": 41,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/otel/common/agentOTelEnv.ts",
+      "linesOfCode": 42,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 19
+    },
+    {
+      "index": 42,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/parser/test/node/findLastTest/ts.spec.ts",
+      "linesOfCode": 112,
+      "functions": 8,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 43,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/proxyModels/test/node/proxyModelsService.spec.ts",
+      "linesOfCode": 74,
+      "functions": 13,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 44,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/telemetry/common/failingTelemetryReporter.ts",
+      "linesOfCode": 16,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 45,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/testing/common/testProvider.ts",
+      "linesOfCode": 28,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 46,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/platform/workspaceRecorder/common/resolvedRecording/sliceRecording.ts",
+      "linesOfCode": 110,
+      "functions": 12,
+      "maxNesting": 3,
+      "branches": 15,
+      "commentLines": 5
+    },
+    {
+      "index": 47,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/util/common/test/async.spec.ts",
+      "linesOfCode": 46,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 4
+    },
+    {
+      "index": 48,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/util/vs/base/common/buffer.ts",
+      "linesOfCode": 422,
+      "functions": 53,
+      "maxNesting": 7,
+      "branches": 49,
+      "commentLines": 58
+    },
+    {
+      "index": 49,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/util/vs/base/common/observableInternal/logging/debugger/debuggerApi.d.ts",
+      "linesOfCode": 121,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 50,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/util/vs/editor/common/core/editOperation.ts",
+      "linesOfCode": 54,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 19
+    },
+    {
+      "index": 51,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/src/util/vs/workbench/api/common/extHostTypes/position.ts",
+      "linesOfCode": 166,
+      "functions": 17,
+      "maxNesting": 4,
+      "branches": 33,
+      "commentLines": 7
+    },
+    {
+      "index": 52,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/e2e/newNotebook.stest.ts",
+      "linesOfCode": 29,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 3,
+      "commentLines": 6
+    },
+    {
+      "index": 53,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/pipeline/cursorJump/cursorJumpResponseStep.ts",
+      "linesOfCode": 67,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 14
+    },
+    {
+      "index": 54,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/scenarios/test-explain/classes.py",
+      "linesOfCode": 13,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 55,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/codeMapper/fibonacci_iterative.ts",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 56,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/editing/math.js",
+      "linesOfCode": 43,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 0
+    },
+    {
+      "index": 57,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/fixing/typescript/eslint_no_negated_condition_2.ts",
+      "linesOfCode": 20,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 5
+    },
+    {
+      "index": 58,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/fixing/typescript/tsc_error_2554/file1.ts",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 0
+    },
+    {
+      "index": 59,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/review/bank-account-1.py",
+      "linesOfCode": 36,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 11,
+      "commentLines": 0
+    },
+    {
+      "index": 60,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/fixtures/tests/ts-another-test-4636/stickyScroll.test.ts",
+      "linesOfCode": 308,
+      "functions": 19,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 61,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/workbench/components/adhocRequestView.tsx",
+      "linesOfCode": 102,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 4
+    },
+    {
+      "index": 62,
+      "modulePath": "extensions/copilot",
+      "path": "extensions/copilot/test/simulation/workbench/utils/utils.ts",
+      "linesOfCode": 135,
+      "functions": 13,
+      "maxNesting": 3,
+      "branches": 18,
+      "commentLines": 11
+    },
+    {
+      "index": 63,
+      "modulePath": "extensions/git",
+      "path": "extensions/git/src/historyProvider.ts",
+      "linesOfCode": 512,
+      "functions": 29,
+      "maxNesting": 4,
+      "branches": 62,
+      "commentLines": 27
+    },
+    {
+      "index": 64,
+      "modulePath": "extensions/html-language-features",
+      "path": "extensions/html-language-features/server/src/modes/cssMode.ts",
+      "linesOfCode": 70,
+      "functions": 18,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 65,
+      "modulePath": "extensions/terminal-suggest",
+      "path": "extensions/terminal-suggest/src/completions/gh.ts",
+      "linesOfCode": 3359,
+      "functions": 13,
+      "maxNesting": 3,
+      "branches": 15,
+      "commentLines": 46
+    },
+    {
+      "index": 66,
+      "modulePath": "extensions/terminal-suggest",
+      "path": "extensions/terminal-suggest/src/completions/upstream/less.ts",
+      "linesOfCode": 625,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 67,
+      "modulePath": "extensions/terminal-suggest",
+      "path": "extensions/terminal-suggest/src/completions/upstream/unzip.ts",
+      "linesOfCode": 47,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 68,
+      "modulePath": "extensions/terminal-suggest",
+      "path": "extensions/terminal-suggest/src/fig/shell-parser/test/parser.test.ts",
+      "linesOfCode": 97,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 4,
+      "commentLines": 51
+    },
+    {
+      "index": 69,
+      "modulePath": "extensions/typescript-language-features",
+      "path": "extensions/typescript-language-features/src/commands/openTsServerLog.ts",
+      "linesOfCode": 16,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 70,
+      "modulePath": "extensions/typescript-language-features",
+      "path": "extensions/typescript-language-features/src/languageFeatures/refactor.ts",
+      "linesOfCode": 687,
+      "functions": 58,
+      "maxNesting": 4,
+      "branches": 72,
+      "commentLines": 31
+    },
+    {
+      "index": 71,
+      "modulePath": "extensions/typescript-language-features",
+      "path": "extensions/typescript-language-features/src/test/unit/requestQueue.test.ts",
+      "linesOfCode": 107,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 72,
+      "modulePath": "extensions/typescript-language-features",
+      "path": "extensions/typescript-language-features/src/utils/lazy.ts",
+      "linesOfCode": 44,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 3,
+      "commentLines": 16
+    },
+    {
+      "index": 73,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/browser/globalPointerMoveMonitor.ts",
+      "linesOfCode": 96,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 22
+    },
+    {
+      "index": 74,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/browser/ui/list/listPaging.ts",
+      "linesOfCode": 238,
+      "functions": 65,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 5
+    },
+    {
+      "index": 75,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/browser/window.ts",
+      "linesOfCode": 24,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 76,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/common/image.ts",
+      "linesOfCode": 143,
+      "functions": 5,
+      "maxNesting": 3,
+      "branches": 23,
+      "commentLines": 32
+    },
+    {
+      "index": 77,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/common/observableInternal/logging/debugger/rpc.ts",
+      "linesOfCode": 94,
+      "functions": 9,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 7
+    },
+    {
+      "index": 78,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/common/stopwatch.ts",
+      "linesOfCode": 32,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 4
+    },
+    {
+      "index": 79,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/parts/ipc/common/ipc.mp.ts",
+      "linesOfCode": 68,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 28
+    },
+    {
+      "index": 80,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/test/browser/markdownRenderer.test.ts",
+      "linesOfCode": 1007,
+      "functions": 158,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 17
+    },
+    {
+      "index": 81,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/test/common/filters.perf.test.ts",
+      "linesOfCode": 66,
+      "functions": 7,
+      "maxNesting": 3,
+      "branches": 7,
+      "commentLines": 6
+    },
+    {
+      "index": 82,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/test/common/prefixTree.test.ts",
+      "linesOfCode": 156,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 83,
+      "modulePath": "src/vs",
+      "path": "src/vs/base/test/node/processes/fixtures/fork_large.ts",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 84,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/browser/controller/editContext/screenReaderUtils.ts",
+      "linesOfCode": 128,
+      "functions": 5,
+      "maxNesting": 4,
+      "branches": 11,
+      "commentLines": 13
+    },
+    {
+      "index": 85,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/browser/services/openerService.ts",
+      "linesOfCode": 219,
+      "functions": 17,
+      "maxNesting": 3,
+      "branches": 31,
+      "commentLines": 27
+    },
+    {
+      "index": 86,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/browser/widget/diffEditor/components/accessibleDiffViewer.ts",
+      "linesOfCode": 632,
+      "functions": 63,
+      "maxNesting": 4,
+      "branches": 51,
+      "commentLines": 20
+    },
+    {
+      "index": 87,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/common/core/2d/dimension.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 88,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/common/cursor/cursorTypeOperations.ts",
+      "linesOfCode": 180,
+      "functions": 11,
+      "maxNesting": 3,
+      "branches": 28,
+      "commentLines": 14
+    },
+    {
+      "index": 89,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/common/languages/supports/inplaceReplaceSupport.ts",
+      "linesOfCode": 83,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 7
+    },
+    {
+      "index": 90,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/common/model/tokens/treeSitter/tokenStore.ts",
+      "linesOfCode": 455,
+      "functions": 41,
+      "maxNesting": 4,
+      "branches": 62,
+      "commentLines": 48
+    },
+    {
+      "index": 91,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/common/tokens/contiguousTokensStore.ts",
+      "linesOfCode": 212,
+      "functions": 15,
+      "maxNesting": 4,
+      "branches": 31,
+      "commentLines": 17
+    },
+    {
+      "index": 92,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/codeAction/common/types.ts",
+      "linesOfCode": 170,
+      "functions": 12,
+      "maxNesting": 2,
+      "branches": 25,
+      "commentLines": 9
+    },
+    {
+      "index": 93,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/dropOrPasteInto/browser/copyPasteController.ts",
+      "linesOfCode": 574,
+      "functions": 62,
+      "maxNesting": 4,
+      "branches": 64,
+      "commentLines": 41
+    },
+    {
+      "index": 94,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/gotoError/browser/markerNavigationService.ts",
+      "linesOfCode": 216,
+      "functions": 23,
+      "maxNesting": 4,
+      "branches": 33,
+      "commentLines": 9
+    },
+    {
+      "index": 95,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/indentation/test/browser/indentationLineProcessor.test.ts",
+      "linesOfCode": 228,
+      "functions": 18,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 4
+    },
+    {
+      "index": 96,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/inlineCompletions/browser/view/inlineEdits/inlineEditsViews/inlineEditsWordReplacementView.ts",
+      "linesOfCode": 371,
+      "functions": 42,
+      "maxNesting": 3,
+      "branches": 26,
+      "commentLines": 10
+    },
+    {
+      "index": 97,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/multicursor/test/browser/multicursor.test.ts",
+      "linesOfCode": 500,
+      "functions": 42,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 98,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/contrib/stickyScroll/browser/stickyScrollWidget.ts",
+      "linesOfCode": 506,
+      "functions": 48,
+      "maxNesting": 2,
+      "branches": 48,
+      "commentLines": 24
+    },
+    {
+      "index": 99,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/editor.main.ts",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 100,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/test/browser/editorTestServices.ts",
+      "linesOfCode": 70,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 4
+    },
+    {
+      "index": 101,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/test/common/model/model.line.test.ts",
+      "linesOfCode": 1188,
+      "functions": 77,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 7
+    },
+    {
+      "index": 102,
+      "modulePath": "src/vs",
+      "path": "src/vs/editor/test/common/viewLayout/lineDecorations.test.ts",
+      "linesOfCode": 112,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 103,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/actions/browser/menuEntryActionViewItem.ts",
+      "linesOfCode": 574,
+      "functions": 64,
+      "maxNesting": 5,
+      "branches": 64,
+      "commentLines": 19
+    },
+    {
+      "index": 104,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/common/agentHostResourceService.ts",
+      "linesOfCode": 137,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 73
+    },
+    {
+      "index": 105,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/common/meta/agentErrorMeta.ts",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 4
+    },
+    {
+      "index": 106,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/common/state/protocol/channels-root/notifications.ts",
+      "linesOfCode": 214,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 192
+    },
+    {
+      "index": 107,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/electron-browser/sshRelayTransport.ts",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 108,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/agentHostManagedSettingsService.ts",
+      "linesOfCode": 66,
+      "functions": 6,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 4
+    },
+    {
+      "index": 109,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/byokLmBridgeRegistry.ts",
+      "linesOfCode": 175,
+      "functions": 17,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 67
+    },
+    {
+      "index": 110,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/claude/customizations/scan/claudeNativePluginScan.ts",
+      "linesOfCode": 253,
+      "functions": 15,
+      "maxNesting": 3,
+      "branches": 30,
+      "commentLines": 75
+    },
+    {
+      "index": 111,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/FuzzyFileSearchResponse.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 112,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/ReasoningItemContent.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 113,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/AnalyticsConfig.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 114,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/CommandExecOutputStream.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 115,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/DynamicToolCallResponse.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 116,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/FileSystemSpecialPath.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 117,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/HookOutputEntryKind.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 118,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/McpElicitationSchema.ts",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 119,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/ModelProviderCapabilitiesReadParams.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 120,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/PluginReadParams.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 121,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/ReasoningSummaryTextDeltaNotification.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 122,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/SkillToolDependency.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 123,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/ThreadGoalClearResponse.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 124,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/ThreadRealtimeStartResponse.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 125,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/codex/protocol/generated/v2/ThreadUnsubscribeResponse.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 126,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/copilot/copilotAttachmentUtils.ts",
+      "linesOfCode": 27,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 4
+    },
+    {
+      "index": 127,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/node/sessionDiffAggregator.ts",
+      "linesOfCode": 460,
+      "functions": 13,
+      "maxNesting": 4,
+      "branches": 48,
+      "commentLines": 144
+    },
+    {
+      "index": 128,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/common/agentHostSchema.test.ts",
+      "linesOfCode": 369,
+      "functions": 53,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 23
+    },
+    {
+      "index": 129,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/electron-browser/remoteAgentHostProtocolClient.test.ts",
+      "linesOfCode": 2392,
+      "functions": 248,
+      "maxNesting": 2,
+      "branches": 32,
+      "commentLines": 106
+    },
+    {
+      "index": 130,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/node/agentHostStorageService.test.ts",
+      "linesOfCode": 43,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 131,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/node/claudeSubagentResolver.test.ts",
+      "linesOfCode": 451,
+      "functions": 56,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 18
+    },
+    {
+      "index": 132,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/node/copilotNonPtyShellTerminals.test.ts",
+      "linesOfCode": 221,
+      "functions": 23,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 133,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/node/e2e/suites/changesetSuite.ts",
+      "linesOfCode": 1284,
+      "functions": 149,
+      "maxNesting": 3,
+      "branches": 26,
+      "commentLines": 66
+    },
+    {
+      "index": 134,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/agentHost/test/node/protocol/turnExecution.integrationTest.ts",
+      "linesOfCode": 212,
+      "functions": 46,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 12
+    },
+    {
+      "index": 135,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/auxiliaryWindow/electron-main/auxiliaryWindowsMainService.ts",
+      "linesOfCode": 169,
+      "functions": 22,
+      "maxNesting": 3,
+      "branches": 21,
+      "commentLines": 13
+    },
+    {
+      "index": 136,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/chat/common/sessionArchiveActions.ts",
+      "linesOfCode": 77,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 8
+    },
+    {
+      "index": 137,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/dialogs/common/dialogs.ts",
+      "linesOfCode": 516,
+      "functions": 9,
+      "maxNesting": 5,
+      "branches": 23,
+      "commentLines": 221
+    },
+    {
+      "index": 138,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/extensionManagement/common/extensionStorage.ts",
+      "linesOfCode": 190,
+      "functions": 20,
+      "maxNesting": 3,
+      "branches": 29,
+      "commentLines": 12
+    },
+    {
+      "index": 139,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/files/browser/htmlFileSystemProvider.ts",
+      "linesOfCode": 418,
+      "functions": 30,
+      "maxNesting": 4,
+      "branches": 69,
+      "commentLines": 48
+    },
+    {
+      "index": 140,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/github/common/githubQueryServiceImpl.ts",
+      "linesOfCode": 1137,
+      "functions": 123,
+      "maxNesting": 5,
+      "branches": 123,
+      "commentLines": 4
+    },
+    {
+      "index": 141,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/instantiation/test/common/graph.test.ts",
+      "linesOfCode": 48,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 142,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/log/browser/log.ts",
+      "linesOfCode": 76,
+      "functions": 6,
+      "maxNesting": 4,
+      "branches": 11,
+      "commentLines": 15
+    },
+    {
+      "index": 143,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/menubar/electron-main/menubarMainService.ts",
+      "linesOfCode": 35,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 144,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/policy/node/nativeManagedSettingsService.ts",
+      "linesOfCode": 150,
+      "functions": 13,
+      "maxNesting": 3,
+      "branches": 16,
+      "commentLines": 11
+    },
+    {
+      "index": 145,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/remote/common/electronRemoteResources.ts",
+      "linesOfCode": 27,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 5
+    },
+    {
+      "index": 146,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/sandbox/common/terminalSandboxRuntimeConfigurationPerOperation.ts",
+      "linesOfCode": 106,
+      "functions": 7,
+      "maxNesting": 3,
+      "branches": 18,
+      "commentLines": 6
+    },
+    {
+      "index": 147,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/telemetry/electron-browser/customEndpointTelemetryService.ts",
+      "linesOfCode": 7,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 148,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/terminal/electron-main/electronPtyHostStarter.ts",
+      "linesOfCode": 108,
+      "functions": 8,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 10
+    },
+    {
+      "index": 149,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/theme/common/theme.ts",
+      "linesOfCode": 25,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 150,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/userDataProfile/electron-browser/userDataProfileStorageService.ts",
+      "linesOfCode": 21,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 151,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/userDataSync/test/common/keybindingsMerge.test.ts",
+      "linesOfCode": 585,
+      "functions": 34,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 152,
+      "modulePath": "src/vs",
+      "path": "src/vs/platform/windows/electron-main/windowsFinder.ts",
+      "linesOfCode": 61,
+      "functions": 9,
+      "maxNesting": 4,
+      "branches": 11,
+      "commentLines": 12
+    },
+    {
+      "index": 153,
+      "modulePath": "src/vs",
+      "path": "src/vs/server/test/node/agentHostChannel.test.ts",
+      "linesOfCode": 191,
+      "functions": 37,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 8
+    },
+    {
+      "index": 154,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/browser/parts/mobile/mobileLayout.ts",
+      "linesOfCode": 30,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 25
+    },
+    {
+      "index": 155,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/accountMenu/test/browser/accountTitleBarState.test.ts",
+      "linesOfCode": 210,
+      "functions": 16,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 156,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/aquarium/browser/fish.ts",
+      "linesOfCode": 262,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 9,
+      "commentLines": 97
+    },
+    {
+      "index": 157,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/changes/browser/sessionChangesEditorInput.ts",
+      "linesOfCode": 114,
+      "functions": 17,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 14
+    },
+    {
+      "index": 158,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/chat/browser/newSessionPromptOptions.ts",
+      "linesOfCode": 221,
+      "functions": 16,
+      "maxNesting": 3,
+      "branches": 15,
+      "commentLines": 8
+    },
+    {
+      "index": 159,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/chat/electron-browser/chat.contribution.ts",
+      "linesOfCode": 212,
+      "functions": 23,
+      "maxNesting": 1,
+      "branches": 17,
+      "commentLines": 31
+    },
+    {
+      "index": 160,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/editor/browser/emptyFileEditor.contribution.ts",
+      "linesOfCode": 44,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 10
+    },
+    {
+      "index": 161,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/github/test/browser/githubReferenceActionViewItems.test.ts",
+      "linesOfCode": 126,
+      "functions": 16,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 162,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/policyBlocked/browser/sessionsPolicyBlocked.ts",
+      "linesOfCode": 146,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 9
+    },
+    {
+      "index": 163,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/providers/agentHost/test/browser/agentHostSettingsFileSystemProvider.test.ts",
+      "linesOfCode": 198,
+      "functions": 18,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 6
+    },
+    {
+      "index": 164,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/providers/remoteAgentHost/browser/webTunnelAgentHostService.contribution.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 165,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/contrib/sessions/test/browser/agentHostShortcutsWidget.test.ts",
+      "linesOfCode": 83,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 166,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/services/sessions/browser/closedItemHistory.ts",
+      "linesOfCode": 149,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 46
+    },
+    {
+      "index": 167,
+      "modulePath": "src/vs",
+      "path": "src/vs/sessions/test/browser/sessionConversationGroups.test.ts",
+      "linesOfCode": 160,
+      "functions": 17,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 168,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/browser/mainThreadConsole.ts",
+      "linesOfCode": 42,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 7
+    },
+    {
+      "index": 169,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/browser/mainThreadProfileContentHandlers.ts",
+      "linesOfCode": 40,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 170,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/common/extHostChatQuota.ts",
+      "linesOfCode": 18,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 171,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/common/extHostMeteredConnection.ts",
+      "linesOfCode": 35,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 172,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/common/extHostTypes/location.ts",
+      "linesOfCode": 42,
+      "functions": 3,
+      "maxNesting": 3,
+      "branches": 5,
+      "commentLines": 5
+    },
+    {
+      "index": 173,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/node/loopbackServer.ts",
+      "linesOfCode": 307,
+      "functions": 16,
+      "maxNesting": 2,
+      "branches": 15,
+      "commentLines": 26
+    },
+    {
+      "index": 174,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/api/test/browser/mainThreadEditorTabs.test.ts",
+      "linesOfCode": 80,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 175,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/browser/parts/auxiliarybar/auxiliaryBarActions.ts",
+      "linesOfCode": 254,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 176,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/browser/parts/editor/multiRowEditorTabsControl.ts",
+      "linesOfCode": 175,
+      "functions": 29,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 8
+    },
+    {
+      "index": 177,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/browser/style.ts",
+      "linesOfCode": 55,
+      "functions": 1,
+      "maxNesting": 3,
+      "branches": 6,
+      "commentLines": 12
+    },
+    {
+      "index": 178,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/accessibility/browser/editorAccessibilityHelp.ts",
+      "linesOfCode": 153,
+      "functions": 9,
+      "maxNesting": 2,
+      "branches": 17,
+      "commentLines": 4
+    },
+    {
+      "index": 179,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/browserView/electron-browser/browserViewCDPService.ts",
+      "linesOfCode": 40,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 180,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/bulkEdit/browser/bulkTextEdits.ts",
+      "linesOfCode": 295,
+      "functions": 26,
+      "maxNesting": 5,
+      "branches": 39,
+      "commentLines": 28
+    },
+    {
+      "index": 181,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/actions/chatToolActions.ts",
+      "linesOfCode": 213,
+      "functions": 15,
+      "maxNesting": 2,
+      "branches": 18,
+      "commentLines": 8
+    },
+    {
+      "index": 182,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/agentSessions/agentHost/agentHostResponseFileChanges.ts",
+      "linesOfCode": 289,
+      "functions": 25,
+      "maxNesting": 3,
+      "branches": 34,
+      "commentLines": 38
+    },
+    {
+      "index": 183,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/agentSessions/experiments/agentTitleBarStatusService.ts",
+      "linesOfCode": 127,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 45
+    },
+    {
+      "index": 184,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/chat.ts",
+      "linesOfCode": 578,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 238
+    },
+    {
+      "index": 185,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/chatEditing/chatEditingOperations.ts",
+      "linesOfCode": 129,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 46
+    },
+    {
+      "index": 186,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/chatSlashCommands.ts",
+      "linesOfCode": 474,
+      "functions": 36,
+      "maxNesting": 3,
+      "branches": 29,
+      "commentLines": 20
+    },
+    {
+      "index": 187,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/promptSyntax/promptFileActions.ts",
+      "linesOfCode": 26,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 188,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/tools/toolSetsContribution.ts",
+      "linesOfCode": 496,
+      "functions": 31,
+      "maxNesting": 4,
+      "branches": 52,
+      "commentLines": 28
+    },
+    {
+      "index": 189,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/chatIncrementalRendering/buffers/bufferRegistry.ts",
+      "linesOfCode": 18,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 190,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/widget/chatContentParts/toolInvocationParts/chatExtensionsInstallToolSubPart.ts",
+      "linesOfCode": 99,
+      "functions": 7,
+      "maxNesting": 2,
+      "branches": 4,
+      "commentLines": 4
+    },
+    {
+      "index": 191,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/widget/chatWidget.ts",
+      "linesOfCode": 3201,
+      "functions": 275,
+      "maxNesting": 5,
+      "branches": 386,
+      "commentLines": 316
+    },
+    {
+      "index": 192,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/browser/widget/input/modelPicker/modelPickerPresentation.ts",
+      "linesOfCode": 76,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 11,
+      "commentLines": 5
+    },
+    {
+      "index": 193,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/common/chatService/chatServiceImpl.ts",
+      "linesOfCode": 2112,
+      "functions": 158,
+      "maxNesting": 5,
+      "branches": 248,
+      "commentLines": 309
+    },
+    {
+      "index": 194,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/common/promptSyntax/config/promptFileLocations.ts",
+      "linesOfCode": 332,
+      "functions": 11,
+      "maxNesting": 2,
+      "branches": 23,
+      "commentLines": 152
+    },
+    {
+      "index": 195,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/common/tools/languageModelToolsConfirmationService.ts",
+      "linesOfCode": 121,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 65
+    },
+    {
+      "index": 196,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/browser/actions/chatExecuteActions.test.ts",
+      "linesOfCode": 380,
+      "functions": 46,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 197,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/browser/agentSessions/agentSessionsModel.test.ts",
+      "linesOfCode": 82,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 198,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/browser/chatPromoNotification.test.ts",
+      "linesOfCode": 379,
+      "functions": 36,
+      "maxNesting": 2,
+      "branches": 5,
+      "commentLines": 21
+    },
+    {
+      "index": 199,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/browser/tools/toolSetsContribution.test.ts",
+      "linesOfCode": 300,
+      "functions": 21,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 6
+    },
+    {
+      "index": 200,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/browser/widget/chatWidget.test.ts",
+      "linesOfCode": 210,
+      "functions": 25,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 201,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/common/chatSideChatService.test.ts",
+      "linesOfCode": 65,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 202,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/chat/test/common/promptSyntax/utils/mock.ts",
+      "linesOfCode": 64,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 28
+    },
+    {
+      "index": 203,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/codeEditor/browser/outline/documentSymbolsTree.ts",
+      "linesOfCode": 309,
+      "functions": 34,
+      "maxNesting": 3,
+      "branches": 30,
+      "commentLines": 9
+    },
+    {
+      "index": 204,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/comments/browser/simpleCommentEditor.ts",
+      "linesOfCode": 154,
+      "functions": 9,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 205,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/debug/browser/debugSessionPicker.ts",
+      "linesOfCode": 104,
+      "functions": 10,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 4
+    },
+    {
+      "index": 206,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/debug/common/replAccessibilityAnnouncer.ts",
+      "linesOfCode": 36,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 207,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/editTelemetry/browser/editStats/aiStatsStatusBar.ts",
+      "linesOfCode": 263,
+      "functions": 22,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 7
+    },
+    {
+      "index": 208,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/extensions/browser/extensionRecommendations.ts",
+      "linesOfCode": 28,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 209,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/externalTerminal/test/electron-browser/externalTerminal.contribution.test.ts",
+      "linesOfCode": 147,
+      "functions": 15,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 210,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/folding/browser/folding.contribution.ts",
+      "linesOfCode": 87,
+      "functions": 6,
+      "maxNesting": 3,
+      "branches": 6,
+      "commentLines": 4
+    },
+    {
+      "index": 211,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/issue/browser/issueQuickAccess.ts",
+      "linesOfCode": 130,
+      "functions": 13,
+      "maxNesting": 2,
+      "branches": 10,
+      "commentLines": 10
+    },
+    {
+      "index": 212,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/localization/browser/localization.contribution.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 213,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/mcp/browser/mcpGatewayToolBrokerContribution.ts",
+      "linesOfCode": 19,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 214,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/mcp/electron-browser/mcpGatewayService.ts",
+      "linesOfCode": 99,
+      "functions": 14,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 10
+    },
+    {
+      "index": 215,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/mergeEditor/browser/view/editors/inputCodeEditorView.ts",
+      "linesOfCode": 440,
+      "functions": 35,
+      "maxNesting": 7,
+      "branches": 44,
+      "commentLines": 15
+    },
+    {
+      "index": 216,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/notebook/browser/contrib/find/notebookFindReplaceWidget.ts",
+      "linesOfCode": 796,
+      "functions": 95,
+      "maxNesting": 3,
+      "branches": 33,
+      "commentLines": 24
+    },
+    {
+      "index": 217,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/notebook/browser/diff/inlineDiff/notebookCellDiffDecorator.ts",
+      "linesOfCode": 297,
+      "functions": 25,
+      "maxNesting": 3,
+      "branches": 39,
+      "commentLines": 12
+    },
+    {
+      "index": 218,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/notebook/browser/services/notebookServiceImpl.ts",
+      "linesOfCode": 828,
+      "functions": 95,
+      "maxNesting": 4,
+      "branches": 74,
+      "commentLines": 26
+    },
+    {
+      "index": 219,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/notebook/browser/viewModel/notebookViewModelImpl.ts",
+      "linesOfCode": 879,
+      "functions": 136,
+      "maxNesting": 3,
+      "branches": 100,
+      "commentLines": 39
+    },
+    {
+      "index": 220,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/notebook/test/browser/cellOperations.test.ts",
+      "linesOfCode": 515,
+      "functions": 53,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 221,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/onboarding/browser/spotlight/spotlightTypes.ts",
+      "linesOfCode": 63,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 38
+    },
+    {
+      "index": 222,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/preferences/browser/preferencesActions.ts",
+      "linesOfCode": 254,
+      "functions": 12,
+      "maxNesting": 4,
+      "branches": 23,
+      "commentLines": 30
+    },
+    {
+      "index": 223,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/remote/browser/remoteIndicator.ts",
+      "linesOfCode": 759,
+      "functions": 59,
+      "maxNesting": 5,
+      "branches": 93,
+      "commentLines": 47
+    },
+    {
+      "index": 224,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/search/browser/anythingQuickAccess.ts",
+      "linesOfCode": 951,
+      "functions": 71,
+      "maxNesting": 3,
+      "branches": 113,
+      "commentLines": 152
+    },
+    {
+      "index": 225,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/search/common/search.ts",
+      "linesOfCode": 214,
+      "functions": 13,
+      "maxNesting": 4,
+      "branches": 23,
+      "commentLines": 17
+    },
+    {
+      "index": 226,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/speech/browser/speechService.ts",
+      "linesOfCode": 354,
+      "functions": 30,
+      "maxNesting": 2,
+      "branches": 33,
+      "commentLines": 11
+    },
+    {
+      "index": 227,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/tasks/test/common/problemMatcher.test.ts",
+      "linesOfCode": 368,
+      "functions": 39,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 228,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminal/browser/terminalStatusList.ts",
+      "linesOfCode": 150,
+      "functions": 12,
+      "maxNesting": 3,
+      "branches": 16,
+      "commentLines": 21
+    },
+    {
+      "index": 229,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminal/test/browser/terminalEvents.test.ts",
+      "linesOfCode": 273,
+      "functions": 34,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 21
+    },
+    {
+      "index": 230,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminalContrib/chat/browser/terminalChatActions.ts",
+      "linesOfCode": 547,
+      "functions": 19,
+      "maxNesting": 4,
+      "branches": 38,
+      "commentLines": 13
+    },
+    {
+      "index": 231,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminalContrib/chatAgentTools/browser/tools/monitoring/utils.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 232,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminalContrib/chatAgentTools/test/browser/terminalCommandParser.test.ts",
+      "linesOfCode": 130,
+      "functions": 31,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 233,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminalContrib/links/test/browser/linkTestUtils.ts",
+      "linesOfCode": 47,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 7
+    },
+    {
+      "index": 234,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/terminalContrib/suggest/common/terminalSuggestConfiguration.ts",
+      "linesOfCode": 244,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 7,
+      "commentLines": 24
+    },
+    {
+      "index": 235,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/testing/browser/testingProgressUiService.ts",
+      "linesOfCode": 71,
+      "functions": 8,
+      "maxNesting": 1,
+      "branches": 7,
+      "commentLines": 6
+    },
+    {
+      "index": 236,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/testing/test/common/testingChatAgentTool.test.ts",
+      "linesOfCode": 639,
+      "functions": 82,
+      "maxNesting": 4,
+      "branches": 10,
+      "commentLines": 6
+    },
+    {
+      "index": 237,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/userDataSync/browser/userDataSync.ts",
+      "linesOfCode": 1168,
+      "functions": 130,
+      "maxNesting": 4,
+      "branches": 93,
+      "commentLines": 12
+    },
+    {
+      "index": 238,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/contrib/welcomeGettingStarted/browser/startupPage.ts",
+      "linesOfCode": 251,
+      "functions": 22,
+      "maxNesting": 5,
+      "branches": 28,
+      "commentLines": 20
+    },
+    {
+      "index": 239,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/accounts/test/browser/managedSettings.test.ts",
+      "linesOfCode": 279,
+      "functions": 28,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 12
+    },
+    {
+      "index": 240,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/authentication/test/browser/authenticationQueryService.test.ts",
+      "linesOfCode": 1004,
+      "functions": 75,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 194
+    },
+    {
+      "index": 241,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/dialogs/electron-browser/fileDialogService.ts",
+      "linesOfCode": 179,
+      "functions": 11,
+      "maxNesting": 2,
+      "branches": 20,
+      "commentLines": 7
+    },
+    {
+      "index": 242,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/extensionManagement/common/webExtensionManagementService.ts",
+      "linesOfCode": 302,
+      "functions": 57,
+      "maxNesting": 2,
+      "branches": 30,
+      "commentLines": 6
+    },
+    {
+      "index": 243,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/extensions/test/common/extensionDescriptionRegistry.test.ts",
+      "linesOfCode": 45,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 244,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/keybinding/browser/keyboardLayouts/en.linux.ts",
+      "linesOfCode": 188,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 245,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/keybinding/test/node/fallbackKeyboardMapper.test.ts",
+      "linesOfCode": 364,
+      "functions": 20,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 246,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/mcp/common/mcpWorkbenchManagementService.ts",
+      "linesOfCode": 607,
+      "functions": 64,
+      "maxNesting": 3,
+      "branches": 79,
+      "commentLines": 4
+    },
+    {
+      "index": 247,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/remote/common/remoteAgentEnvironmentChannel.ts",
+      "linesOfCode": 104,
+      "functions": 7,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 248,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/search/test/node/textSearchManager.test.ts",
+      "linesOfCode": 77,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 249,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/textfile/common/textFileEditorModelManager.ts",
+      "linesOfCode": 505,
+      "functions": 49,
+      "maxNesting": 6,
+      "branches": 60,
+      "commentLines": 107
+    },
+    {
+      "index": 250,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/themes/test/node/tokenStyleResolving.test.ts",
+      "linesOfCode": 299,
+      "functions": 14,
+      "maxNesting": 2,
+      "branches": 12,
+      "commentLines": 4
+    },
+    {
+      "index": 251,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/userDataProfile/common/userDataProfileService.ts",
+      "linesOfCode": 39,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 252,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/services/workingCopy/test/browser/resourceWorkingCopy.test.ts",
+      "linesOfCode": 73,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 253,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/test/browser/componentFixtures/chat/promptFilePickers.fixture.ts",
+      "linesOfCode": 239,
+      "functions": 32,
+      "maxNesting": 2,
+      "branches": 8,
+      "commentLines": 12
+    },
+    {
+      "index": 254,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/test/browser/parts/activitybar/activitybarPart.test.ts",
+      "linesOfCode": 333,
+      "functions": 45,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 30
+    },
+    {
+      "index": 255,
+      "modulePath": "src/vs",
+      "path": "src/vs/workbench/workbench.web.main.ts",
+      "linesOfCode": 152,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 37
+    }
+  ]
+}
