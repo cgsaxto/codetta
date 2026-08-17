@@ -3,11 +3,11 @@
   "repo": {
     "owner": "psf",
     "name": "requests",
-    "ref": "main",
+    "ref": "1f6589ec3a1ee910f9a65cc3ceac60b26677bc0e",
     "commitSha": "1f6589ec3a1ee910f9a65cc3ceac60b26677bc0e",
     "primaryLanguage": "Python",
-    "stars": 54261,
-    "fetchedAt": "2026-08-09T01:55:45Z"
+    "stars": 54243,
+    "fetchedAt": "2026-08-17T11:26:06Z"
   },
   "seed": "1f6589ec",
   "totals": {
@@ -122,6 +122,16 @@
     },
     {
       "index": 2,
+      "modulePath": ".",
+      "path": "setup.py",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 3,
       "modulePath": "src/requests",
       "path": "src/requests/__init__.py",
       "linesOfCode": 184,
@@ -131,7 +141,7 @@
       "commentLines": 21
     },
     {
-      "index": 3,
+      "index": 4,
       "modulePath": "src/requests",
       "path": "src/requests/__version__.py",
       "linesOfCode": 13,
@@ -141,7 +151,7 @@
       "commentLines": 3
     },
     {
-      "index": 4,
+      "index": 5,
       "modulePath": "src/requests",
       "path": "src/requests/_internal_utils.py",
       "linesOfCode": 40,
@@ -151,7 +161,7 @@
       "commentLines": 0
     },
     {
-      "index": 5,
+      "index": 6,
       "modulePath": "src/requests",
       "path": "src/requests/_types.py",
       "linesOfCode": 148,
@@ -161,7 +171,7 @@
       "commentLines": 9
     },
     {
-      "index": 6,
+      "index": 7,
       "modulePath": "src/requests",
       "path": "src/requests/adapters.py",
       "linesOfCode": 634,
@@ -171,7 +181,7 @@
       "commentLines": 21
     },
     {
-      "index": 7,
+      "index": 8,
       "modulePath": "src/requests",
       "path": "src/requests/api.py",
       "linesOfCode": 139,
@@ -181,7 +191,7 @@
       "commentLines": 3
     },
     {
-      "index": 8,
+      "index": 9,
       "modulePath": "src/requests",
       "path": "src/requests/auth.py",
       "linesOfCode": 283,
@@ -191,7 +201,7 @@
       "commentLines": 30
     },
     {
-      "index": 9,
+      "index": 10,
       "modulePath": "src/requests",
       "path": "src/requests/certs.py",
       "linesOfCode": 13,
@@ -201,7 +211,7 @@
       "commentLines": 1
     },
     {
-      "index": 10,
+      "index": 11,
       "modulePath": "src/requests",
       "path": "src/requests/compat.py",
       "linesOfCode": 94,
@@ -211,7 +221,7 @@
       "commentLines": 23
     },
     {
-      "index": 11,
+      "index": 12,
       "modulePath": "src/requests",
       "path": "src/requests/cookies.py",
       "linesOfCode": 503,
@@ -221,7 +231,7 @@
       "commentLines": 26
     },
     {
-      "index": 12,
+      "index": 13,
       "modulePath": "src/requests",
       "path": "src/requests/exceptions.py",
       "linesOfCode": 98,
@@ -231,7 +241,7 @@
       "commentLines": 1
     },
     {
-      "index": 13,
+      "index": 14,
       "modulePath": "src/requests",
       "path": "src/requests/help.py",
       "linesOfCode": 110,
@@ -241,7 +251,7 @@
       "commentLines": 7
     },
     {
-      "index": 14,
+      "index": 15,
       "modulePath": "src/requests",
       "path": "src/requests/hooks.py",
       "linesOfCode": 35,
@@ -251,7 +261,7 @@
       "commentLines": 1
     },
     {
-      "index": 15,
+      "index": 16,
       "modulePath": "src/requests",
       "path": "src/requests/models.py",
       "linesOfCode": 988,
@@ -261,7 +271,7 @@
       "commentLines": 143
     },
     {
-      "index": 16,
+      "index": 17,
       "modulePath": "src/requests",
       "path": "src/requests/packages.py",
       "linesOfCode": 19,
@@ -271,7 +281,7 @@
       "commentLines": 4
     },
     {
-      "index": 17,
+      "index": 18,
       "modulePath": "src/requests",
       "path": "src/requests/sessions.py",
       "linesOfCode": 758,
@@ -281,7 +291,7 @@
       "commentLines": 126
     },
     {
-      "index": 18,
+      "index": 19,
       "modulePath": "src/requests",
       "path": "src/requests/status_codes.py",
       "linesOfCode": 116,
@@ -291,7 +301,7 @@
       "commentLines": 5
     },
     {
-      "index": 19,
+      "index": 20,
       "modulePath": "src/requests",
       "path": "src/requests/structures.py",
       "linesOfCode": 96,
@@ -301,7 +311,7 @@
       "commentLines": 9
     },
     {
-      "index": 20,
+      "index": 21,
       "modulePath": "src/requests",
       "path": "src/requests/utils.py",
       "linesOfCode": 915,
@@ -311,7 +321,7 @@
       "commentLines": 99
     },
     {
-      "index": 21,
+      "index": 22,
       "modulePath": "tests",
       "path": "tests/__init__.py",
       "linesOfCode": 11,
@@ -321,7 +331,7 @@
       "commentLines": 4
     },
     {
-      "index": 22,
+      "index": 23,
       "modulePath": "tests",
       "path": "tests/compat.py",
       "linesOfCode": 19,
@@ -331,7 +341,7 @@
       "commentLines": 0
     },
     {
-      "index": 23,
+      "index": 24,
       "modulePath": "tests",
       "path": "tests/conftest.py",
       "linesOfCode": 48,
@@ -341,7 +351,7 @@
       "commentLines": 4
     },
     {
-      "index": 24,
+      "index": 25,
       "modulePath": "tests",
       "path": "tests/test_adapters.py",
       "linesOfCode": 6,
@@ -351,7 +361,7 @@
       "commentLines": 0
     },
     {
-      "index": 25,
+      "index": 26,
       "modulePath": "tests",
       "path": "tests/test_help.py",
       "linesOfCode": 18,
@@ -361,7 +371,7 @@
       "commentLines": 0
     },
     {
-      "index": 26,
+      "index": 27,
       "modulePath": "tests",
       "path": "tests/test_hooks.py",
       "linesOfCode": 15,
@@ -371,7 +381,7 @@
       "commentLines": 0
     },
     {
-      "index": 27,
+      "index": 28,
       "modulePath": "tests",
       "path": "tests/test_lowlevel.py",
       "linesOfCode": 329,
@@ -381,7 +391,7 @@
       "commentLines": 28
     },
     {
-      "index": 28,
+      "index": 29,
       "modulePath": "tests",
       "path": "tests/test_packages.py",
       "linesOfCode": 7,
@@ -391,7 +401,7 @@
       "commentLines": 0
     },
     {
-      "index": 29,
+      "index": 30,
       "modulePath": "tests",
       "path": "tests/test_requests.py",
       "linesOfCode": 2597,
@@ -401,7 +411,7 @@
       "commentLines": 79
     },
     {
-      "index": 30,
+      "index": 31,
       "modulePath": "tests",
       "path": "tests/test_structures.py",
       "linesOfCode": 71,
@@ -411,7 +421,7 @@
       "commentLines": 0
     },
     {
-      "index": 31,
+      "index": 32,
       "modulePath": "tests",
       "path": "tests/test_testserver.py",
       "linesOfCode": 129,
@@ -421,7 +431,7 @@
       "commentLines": 7
     },
     {
-      "index": 32,
+      "index": 33,
       "modulePath": "tests",
       "path": "tests/test_utils.py",
       "linesOfCode": 875,
@@ -431,7 +441,7 @@
       "commentLines": 15
     },
     {
-      "index": 33,
+      "index": 34,
       "modulePath": "tests/testserver",
       "path": "tests/testserver/__init__.py",
       "linesOfCode": 0,
@@ -441,7 +451,7 @@
       "commentLines": 0
     },
     {
-      "index": 34,
+      "index": 35,
       "modulePath": "tests/testserver",
       "path": "tests/testserver/server.py",
       "linesOfCode": 144,
@@ -451,7 +461,7 @@
       "commentLines": 8
     },
     {
-      "index": 35,
+      "index": 36,
       "modulePath": "tests",
       "path": "tests/utils.py",
       "linesOfCode": 15,

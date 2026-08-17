@@ -296,12 +296,96 @@ func TestRootLevelFilesStillFormAModule(t *testing.T) {
 	if len(features.Modules) != 1 || features.Modules[0].Path != RootModule {
 		t.Fatalf("modules = %v, want one %q", features.Modules, RootModule)
 	}
-	// The timeline's prefix rule cannot hold for root files, so they are left out of it
-	// rather than being attributed to a path they do not sit under.
+}
+
+// attributed reports whether an entry's modulePath is the one its path implies. The rule in
+// full, root included: "." exactly when the path has no directory, and otherwise a prefix.
+func attributed(entry schema.TimelineEntry) bool {
+	if entry.ModulePath == RootModule {
+		return !strings.Contains(entry.Path, "/")
+	}
+	return strings.HasPrefix(entry.Path, entry.ModulePath+"/")
+}
+
+func TestAFlatRepositoryReachesTheTimeline(t *testing.T) {
+	// The regression this exists for. Go projects put a package's files at the repository
+	// root, so `ModulePath` calls them "." — and while root files were dropped from the
+	// timeline to keep a prefix test working, urfave/cli was 97% root files and 97% absent
+	// from the document meant to describe it. The music lost the detail; the visualiser lost
+	// the picture entirely, because it draws the timeline.
+	stats := []parse.FileStats{
+		file("main.go", 40, 4),
+		file("cli.go", 120, 12),
+		file("flag.go", 90, 9),
+		file("context.go", 60, 6),
+	}
+
+	features := build(stats)
+
+	if len(features.Timeline) != len(stats) {
+		t.Fatalf("timeline has %d entries, want %d — the repository is the root",
+			len(features.Timeline), len(stats))
+	}
 	for _, entry := range features.Timeline {
-		if entry.ModulePath == RootModule {
-			t.Errorf("root file %q reached the timeline", entry.Path)
+		if entry.ModulePath != RootModule {
+			t.Errorf("%s attributed to %q, want %q", entry.Path, entry.ModulePath, RootModule)
 		}
+		if !attributed(entry) {
+			t.Errorf("%s does not sit under %q", entry.Path, entry.ModulePath)
+		}
+	}
+}
+
+func TestRootAndNestedPackagesEachClaimTheirOwnFiles(t *testing.T) {
+	// The other half: a repository with both, where the risk is a file counted twice or
+	// claimed by the wrong module. `ModulePath` is a pure function of the path, so this
+	// cannot happen by construction — which is exactly the kind of claim worth a test,
+	// because it stops being true the moment someone makes attribution stateful.
+	stats := []parse.FileStats{
+		file("main.go", 30, 3),
+		file("doc.go", 10, 1),
+		file("internal/cbor/decode.go", 80, 8),
+		file("internal/cbor/encode.go", 70, 7),
+		file("internal/json/parse.go", 60, 6),
+		file("hlog/handler.go", 50, 5),
+	}
+
+	features := build(stats)
+
+	want := map[string]string{
+		"main.go":                 RootModule,
+		"doc.go":                  RootModule,
+		"internal/cbor/decode.go": "internal/cbor",
+		"internal/cbor/encode.go": "internal/cbor",
+		"internal/json/parse.go":  "internal/json",
+		"hlog/handler.go":         "hlog",
+	}
+
+	seen := map[string]int{}
+	for _, entry := range features.Timeline {
+		seen[entry.Path]++
+		if got := entry.ModulePath; got != want[entry.Path] {
+			t.Errorf("%s attributed to %q, want %q", entry.Path, got, want[entry.Path])
+		}
+		if !attributed(entry) {
+			t.Errorf("%s does not sit under %q", entry.Path, entry.ModulePath)
+		}
+	}
+
+	for path := range want {
+		if seen[path] != 1 {
+			t.Errorf("%s appears %d times in the timeline, want exactly 1", path, seen[path])
+		}
+	}
+
+	// And the module list agrees with the timeline about who owns what, rather than the two
+	// being derived independently and drifting.
+	files := 0
+	for _, module := range features.Modules {
+		files += module.Files
+	}
+	if files != len(stats) {
+		t.Errorf("modules account for %d files, want %d", files, len(stats))
 	}
 }
 

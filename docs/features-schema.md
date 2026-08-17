@@ -76,6 +76,21 @@ or volume, it is in the wrong document.
 All ratio fields are 0–1 floats. All counts are non-negative integers. No nulls — omit
 optional objects entirely rather than emitting `null`.
 
+### Attribution
+
+A `timeline` entry's `modulePath` is `"."` exactly when its `path` has no directory, and
+otherwise `path` begins with `modulePath + "/"`. Both halves, always.
+
+Only the prefix half used to hold, because root-level files were dropped from the timeline
+rather than being attributed to a `"."` that is not a prefix of `main.go`. That bought a
+one-line consumer check at a price nobody had measured until the visualiser drew the
+timeline: Go projects put a package's files at the repository root, so `urfave/cli` is 97%
+root files and was 97% absent from the document whose only job is to describe it. `rs/zerolog`
+lost half of itself the same way and `go-chi/chi` two fifths.
+
+A file belongs to exactly one module, because `ModulePath` is a pure function of the path.
+That is worth stating because it stops being true the moment attribution becomes stateful.
+
 ## Determinism requirements
 
 Given the same `commitSha`, the API must emit a byte-identical document. That means:

@@ -91,10 +91,18 @@ describe.each(Object.entries(FIXTURES))('fixtures/%s.json', (_name, features) =>
   });
 
   it('attributes every timeline entry to a declared module', () => {
+    // The rule in full, root included: a file's modulePath is "." exactly when it has no
+    // directory, and otherwise the path begins with it. Root files used to be dropped from
+    // the timeline so that the prefix half could stand alone, which quietly removed 97% of a
+    // repository like urfave/cli from the document meant to describe it.
     const modulePaths = new Set(features.modules.map((m) => m.path));
     for (const entry of features.timeline) {
       expect(modulePaths, `${entry.path}`).toContain(entry.modulePath);
-      expect(entry.path.startsWith(`${entry.modulePath}/`), `${entry.path}`).toBe(true);
+      const sits =
+        entry.modulePath === '.'
+          ? !entry.path.includes('/')
+          : entry.path.startsWith(`${entry.modulePath}/`);
+      expect(sits, `${entry.path} under ${entry.modulePath}`).toBe(true);
     }
   });
 

@@ -11,39 +11,39 @@
   },
   "seed": "7c8e5e7a",
   "totals": {
-    "filesScanned": 5,
+    "filesScanned": 6,
     "filesSkipped": 5,
-    "linesOfCode": 56,
+    "linesOfCode": 59,
     "functions": 7,
     "classes": 5,
     "imports": 4
   },
   "languages": [
     {
-      "name": "TypeScript",
-      "share": 0.4,
+      "name": "Go",
+      "share": 0.3333,
       "files": 2
     },
     {
-      "name": "Go",
-      "share": 0.2,
-      "files": 1
+      "name": "TypeScript",
+      "share": 0.3333,
+      "files": 2
     },
     {
       "name": "JavaScript",
-      "share": 0.2,
+      "share": 0.1667,
       "files": 1
     },
     {
       "name": "Python",
-      "share": 0.2,
+      "share": 0.1667,
       "files": 1
     }
   ],
   "modules": [
     {
       "path": "packages/core",
-      "share": 0.6786,
+      "share": 0.6441,
       "files": 3,
       "linesOfCode": 38,
       "avgNestingDepth": 2,
@@ -55,7 +55,7 @@
     },
     {
       "path": "packages/cli",
-      "share": 0.3214,
+      "share": 0.3051,
       "files": 2,
       "linesOfCode": 18,
       "avgNestingDepth": 1,
@@ -64,11 +64,33 @@
       "cyclomaticDensity": 0.0337,
       "commentRatio": 0.0556,
       "asyncRatio": 0.3333
+    },
+    {
+      "path": ".",
+      "share": 0.0508,
+      "files": 1,
+      "linesOfCode": 3,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 0,
+      "avgFunctionLength": 0,
+      "cyclomaticDensity": 0,
+      "commentRatio": 0.3333,
+      "asyncRatio": 0
     }
   ],
   "timeline": [
     {
       "index": 0,
+      "modulePath": ".",
+      "path": "doc.go",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 1,
       "modulePath": "packages/cli",
       "path": "packages/cli/main.go",
       "linesOfCode": 12,
@@ -78,7 +100,7 @@
       "commentLines": 1
     },
     {
-      "index": 1,
+      "index": 2,
       "modulePath": "packages/cli",
       "path": "packages/cli/tool.py",
       "linesOfCode": 6,
@@ -88,7 +110,7 @@
       "commentLines": 0
     },
     {
-      "index": 2,
+      "index": 3,
       "modulePath": "packages/core",
       "path": "packages/core/src/index.ts",
       "linesOfCode": 12,
@@ -98,7 +120,7 @@
       "commentLines": 0
     },
     {
-      "index": 3,
+      "index": 4,
       "modulePath": "packages/core",
       "path": "packages/core/src/legacy.js",
       "linesOfCode": 22,
@@ -108,7 +130,7 @@
       "commentLines": 2
     },
     {
-      "index": 4,
+      "index": 5,
       "modulePath": "packages/core",
       "path": "packages/core/src/util.ts",
       "linesOfCode": 4,

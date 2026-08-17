@@ -259,6 +259,19 @@ func mean(sum, count int) float64 {
 //
 // Only those modules: the timeline exists so a voice can follow its own module's files, and
 // an entry pointing at a directory that produced no voice has nothing to drive.
+//
+// Root-level files used to be dropped here, so that every entry's `path` began with its
+// `modulePath` and a consumer could check attribution with a prefix test. That was a cheap
+// convenience bought at a price nobody had measured: `ModulePath` calls the repository root
+// ".", "." is not a prefix of "main.go", and Go projects conventionally put a package's
+// files at the root. urfave/cli is 97% root files, so 97% of it was missing from a document
+// whose entire job is to describe it — and rs/zerolog and go-chi/chi lost half and two
+// fifths the same way. The note left here said the cost was "the file-driven detail in the
+// peak and nothing else", which was true only while nothing but the music read this.
+//
+// The prefix rule is now stated properly instead of enforced by omission: an entry's
+// modulePath is "." exactly when its path has no directory, and otherwise path begins with
+// modulePath + "/". See docs/features-schema.md.
 func buildTimeline(files []parse.FileStats, modules []schema.RepoModule) []schema.TimelineEntry {
 	included := make(map[string]bool, len(modules))
 	for _, module := range modules {
@@ -269,14 +282,6 @@ func buildTimeline(files []parse.FileStats, modules []schema.RepoModule) []schem
 	for _, file := range files {
 		module := ModulePath(file.Path)
 		if !included[module] {
-			continue
-		}
-		// Root-level files are left out. Every timeline entry's path sits under its
-		// modulePath, which is what lets apps/web check attribution without reimplementing
-		// the module rule — and "." is not a prefix of "main.go". A flat repository loses
-		// its timeline as a result, which costs it the file-driven detail in the peak and
-		// nothing else; it still has a module, and therefore still has voices.
-		if module == RootModule {
 			continue
 		}
 		candidates = append(candidates, file)

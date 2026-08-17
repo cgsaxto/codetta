@@ -90,6 +90,14 @@ class Tool:
             for arg in sys.argv:
                 await self.handle(arg)`,
 
+	// At the repository root, which Go projects do as a matter of convention. It has to reach
+	// the timeline attributed to ".", and dropping files like this is what made urfave/cli
+	// 97% absent from its own document.
+	"doc.go": `// Package fixture is the whole point of this file: it sits at the root.
+package fixture
+
+const Version = "1"`,
+
 	// None of the following may reach the document.
 	"node_modules/dep/index.js": "module.exports = {}",
 	"packages/core/dist/out.js": "var a=1",
@@ -214,8 +222,8 @@ func TestPipelineCountsWhatItKept(t *testing.T) {
 		t.Fatalf("unmarshal: %v", err)
 	}
 
-	if parsed.Totals.FilesScanned != 5 {
-		t.Errorf("FilesScanned = %d, want 5", parsed.Totals.FilesScanned)
+	if parsed.Totals.FilesScanned != 6 {
+		t.Errorf("FilesScanned = %d, want 6", parsed.Totals.FilesScanned)
 	}
 	// The five files that were seen and rejected. Skipping is a counted outcome, not a
 	// silent one — the totals still add up to what the archive contained.
@@ -232,10 +240,48 @@ func TestPipelineCountsWhatItKept(t *testing.T) {
 	for _, module := range parsed.Modules {
 		paths = append(paths, module.Path)
 	}
-	// Two segments of directory, so the monorepo splits where a reader would split it.
-	want := "packages/core packages/cli"
-	if got := strings.Join(paths, " "); got != want && got != "packages/cli packages/core" {
-		t.Errorf("modules = %q, want the two packages", got)
+	// Two segments of directory, so the monorepo splits where a reader would split it, plus
+	// the repository root as a module of its own — a file at the top level belongs to the
+	// repository rather than to nothing.
+	sort.Strings(paths)
+	want := []string{".", "packages/cli", "packages/core"}
+	if got := strings.Join(paths, " "); got != strings.Join(want, " ") {
+		t.Errorf("modules = %q, want %q", got, strings.Join(want, " "))
+	}
+}
+
+func TestRootLevelFilesReachTheTimeline(t *testing.T) {
+	// End to end, through the real walker and the real parser. The unit-level version of this
+	// lives in aggregate; this is the one that would have caught urfave/cli, where 97% of the
+	// repository sits at the root and 97% of it was missing from the document.
+	var parsed struct {
+		Timeline []struct {
+			Path       string `json:"path"`
+			ModulePath string `json:"modulePath"`
+		} `json:"timeline"`
+	}
+	if err := json.Unmarshal([]byte(run(t, fixtureRepo)), &parsed); err != nil {
+		t.Fatalf("unmarshal: %v", err)
+	}
+
+	var root int
+	for _, entry := range parsed.Timeline {
+		// The attribution rule in full: "." exactly when the path has no directory, and a
+		// prefix otherwise.
+		if entry.ModulePath == "." {
+			root++
+			if strings.Contains(entry.Path, "/") {
+				t.Errorf("%s is attributed to the root but sits in a directory", entry.Path)
+			}
+			continue
+		}
+		if !strings.HasPrefix(entry.Path, entry.ModulePath+"/") {
+			t.Errorf("%s does not sit under %q", entry.Path, entry.ModulePath)
+		}
+	}
+
+	if root != 1 {
+		t.Errorf("%d root files in the timeline, want the 1 the fixture has", root)
 	}
 }
 

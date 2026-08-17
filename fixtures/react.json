@@ -3,11 +3,11 @@
   "repo": {
     "owner": "facebook",
     "name": "react",
-    "ref": "main",
+    "ref": "2042572329425f9ebf35ae6287ea5bab72b2c497",
     "commitSha": "2042572329425f9ebf35ae6287ea5bab72b2c497",
     "primaryLanguage": "JavaScript",
-    "stars": 247137,
-    "fetchedAt": "2026-08-09T01:52:40Z"
+    "stars": 247284,
+    "fetchedAt": "2026-08-17T11:24:34Z"
   },
   "seed": "20425723",
   "totals": {
