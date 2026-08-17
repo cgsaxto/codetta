@@ -81,15 +81,34 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
     return Math.min(6, Math.max(1.5, (height / count) * 0.55));
   }, [features.timeline.length, height]);
 
+  /**
+   * The last frame drawn, so a resize can put it back.
+   *
+   * Setting `canvas.width` or `canvas.height` resets the bitmap to transparent — that is what
+   * the attributes do, not just what they describe. A ResizeObserver delivers its first
+   * callback asynchronously after `observe`, which lands after the still-frame effect below
+   * has already painted, so the paint was being wiped and the canvas left transparent over a
+   * white page. It only showed while stopped: during playback the next animation frame
+   * repaints within milliseconds and hides it entirely.
+   */
+  const lastFrame = useRef<{ tick: number; delta: number }>({ tick: 0, delta: 0 });
+
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
     const resize = () => {
       const ratio = window.devicePixelRatio || 1;
-      canvas.width = Math.round(canvas.clientWidth * ratio);
-      canvas.height = Math.round(height * ratio);
+      const nextWidth = Math.round(canvas.clientWidth * ratio);
+      const nextHeight = Math.round(height * ratio);
+      // Assigning the same value still clears, so the guard is what keeps a resize
+      // notification that changed nothing from blanking a good frame.
+      if (canvas.width !== nextWidth || canvas.height !== nextHeight) {
+        canvas.width = nextWidth;
+        canvas.height = nextHeight;
+      }
       canvas.getContext('2d')?.setTransform(ratio, 0, 0, ratio, 0, 0);
+      paintRef.current(lastFrame.current.tick, [], lastFrame.current.delta);
     };
 
     resize();
@@ -98,7 +117,14 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
     return () => observer.disconnect();
   }, [height]);
 
+  // Declared before the effects that call it, and held in a ref so they depend on the data
+  // they draw rather than on a function rebuilt every render.
+  const paintRef = useRef<
+    (tick: number, onsets: readonly { voice: VoiceId }[], delta: number) => void
+  >(() => {});
+
   const paint = (tick: number, onsets: readonly { voice: VoiceId }[], delta: number) => {
+    lastFrame.current = { tick, delta };
     const canvas = canvasRef.current;
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
@@ -168,12 +194,9 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
     context.globalAlpha = 1;
   };
 
-  useTransportFrame(player, score, ({ tick, onsets, delta }) => paint(tick, onsets, delta));
-
-  // Held in a ref so the still frame below depends on the data it draws rather than on the
-  // function, which is rebuilt every render and would re-run the effect constantly.
-  const paintRef = useRef(paint);
   paintRef.current = paint;
+
+  useTransportFrame(player, score, ({ tick, onsets, delta }) => paint(tick, onsets, delta));
 
   // Paint once while stopped, so the repository's structure is on screen before anything
   // plays rather than the field being an empty rectangle until you press a button.
