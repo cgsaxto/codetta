@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
 import type { Player } from '../audio/player';
-import { barToTick, type Score, type VoiceId } from '../music/score';
+import { barToTick, scoreDurationSeconds, type Score, type VoiceId } from '../music/score';
 import { fieldFor } from './layout';
 import { paletteFor } from './palette';
 import { useTransportFrame } from './useTransportFrame';
@@ -11,26 +11,41 @@ import { useTransportFrame } from './useTransportFrame';
  *
  * A column per module, as wide as that module is large; inside it the module's files, each a
  * rule as long as it has lines and indented as deep as it nests. A line descends the field
- * over the piece, in the repository's own traversal order, and everything it has passed
- * stays lit. When a voice plays, the column it belongs to answers.
+ * over the piece, in the repository's own traversal order, and the part of the repository it
+ * has passed stays lit. When a voice plays, the column it belongs to answers.
  *
- * ## Why not a waveform
+ * ## What the first version got wrong
  *
- * Because a waveform would be true of any audio and say nothing about this repository, and
- * the whole claim of this project is that the structure became the music. Indentation is
- * what code looks like once you are far enough away to lose the letters, which makes this
- * the vernacular a developer already reads rather than an abstraction invented for the
- * occasion — and six forms stay legible at the size a clip is actually watched, where two
- * hundred and fifty-six file dots would be texture at best.
+ * The concept read as "a progress line sweeping a black player" rather than as a repository,
+ * and every reason was the same reason: the picture was almost entirely ground, and the
+ * ground carried nothing.
  *
- * The one deliberate extravagance is the trail: a note leaves its column glowing and the
- * glow decays over about a second. Everything else holds still.
+ * Columns had no body, only the gap between their marks, so their boundaries were invisible
+ * and the width-to-loudness mapping — the thing that makes the picture and the music agree —
+ * could not be seen at all. Unread files sat at 16% of a neutral grey, so before pressing
+ * play there was no structure on screen to recognise. And the colour lived only in the marks
+ * and the read line, so repositories with genuinely different hues all reduced to near-black
+ * plus one neon hairline once the image was small.
+ *
+ * So the palette now runs the whole surface: the ground, each column's own body, the unread
+ * files, the read files and the voice that is sounding. And the read region of every column
+ * is tinted more strongly than the unread region, which makes progress through the repository
+ * legible as an area rather than as the position of a line — the one reading that survives
+ * being watched at thumbnail size.
+ *
+ * The event is a file being read, not a line moving. A mark the read line has just crossed
+ * flares and settles, so what you watch is the parser meeting files one after another; the
+ * line itself is deliberately quiet, because a bright full-width hairline is a playhead and
+ * says nothing about code.
  */
 
 /** How fast a column's flare fades, per second. Slow enough to leave a trail, not a strobe. */
 const FLARE_DECAY = 1.6;
 
-/** Room at the edges, as a fraction of the field, so marks never touch the frame. */
+/** How long a file stays lit after the read line crosses it. */
+const FRESH_SECONDS = 0.55;
+
+/** Room at the edges, as a fraction of the smaller side, so marks never touch the frame. */
 const INSET = 0.04;
 
 export interface FieldProps {
@@ -48,6 +63,23 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
   const columns = useMemo(() => fieldFor(features), [features]);
   const palette = useMemo(() => paletteFor(score.seed), [score.seed]);
   const totalTicks = useMemo(() => barToTick(score.bars), [score.bars]);
+  const duration = useMemo(() => scoreDurationSeconds(score), [score]);
+
+  // The motion is the content here, so this does not disable it — it stops the flaring and
+  // leaves the reading, which is the part that carries meaning rather than energy.
+  const calm = useMemo(
+    () =>
+      typeof window !== 'undefined' &&
+      window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    [],
+  );
+
+  // One mark per file, so a repository of forty files needs thicker rules than one of two
+  // hundred and fifty to occupy the same field.
+  const markHeight = useMemo(() => {
+    const count = Math.max(1, features.timeline.length);
+    return Math.min(6, Math.max(1.5, (height / count) * 0.55));
+  }, [features.timeline.length, height]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -83,47 +115,55 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
 
     const read = totalTicks > 0 ? tick / totalTicks : 0;
     const readY = inset + read * innerHeight;
+    const readSeconds = read * duration;
 
     for (const column of columns) {
       const x = inset + column.x * innerWidth;
-      const columnWidth = column.width * innerWidth;
+      const columnWidth = Math.max(1, column.width * innerWidth);
       const colour = palette.modules[column.rank] ?? palette.quiet;
 
-      // Time-based, so a trail looks the same at 30 fps and at 120.
-      const flare = Math.max(0, (flares.current.get(column.voice) ?? 0) - delta * FLARE_DECAY);
+      const flare = calm
+        ? 0
+        : Math.max(0, (flares.current.get(column.voice) ?? 0) - delta * FLARE_DECAY);
       flares.current.set(column.voice, flare);
 
-      // The column's own ground, lifted while its voice is sounding. This is what makes a
-      // note read as belonging to a module rather than to the piece in general.
-      if (flare > 0) {
-        context.globalAlpha = flare * 0.14;
-        context.fillStyle = colour;
-        context.fillRect(x, inset, columnWidth, innerHeight);
-        context.globalAlpha = 1;
-      }
+      // The column's own body. Always drawn, which is what gives it an edge and makes its
+      // width — and so the loudness of the voice it belongs to — something you can see.
+      context.fillStyle = colour;
+      context.globalAlpha = 0.07 + flare * 0.1;
+      context.fillRect(x, inset, columnWidth, innerHeight);
+
+      // The part already read, tinted harder. Progress becomes an area rather than the
+      // position of a line, which is the only reading that survives a small screen.
+      context.globalAlpha = 0.16 + flare * 0.14;
+      context.fillRect(x, inset, columnWidth, Math.max(0, readY - inset));
 
       for (const mark of column.marks) {
         const y = inset + mark.y * innerHeight;
+        const age = readSeconds - mark.y * duration;
+        const fresh = !calm && age >= 0 && age < FRESH_SECONDS ? 1 - age / FRESH_SECONDS : 0;
         const passed = y <= readY;
 
-        // Read and unread rather than on and off: the part of the repository already heard
-        // stays visible, so the picture accumulates instead of merely blinking.
-        context.globalAlpha = passed ? 0.55 + flare * 0.45 : 0.16;
-        context.fillStyle = passed ? colour : palette.quiet;
+        // Unread files are the repository's structure, visible before a note is played.
+        // Read files are brighter; a file the line has just crossed is brightest, because
+        // the event worth watching is a file being read rather than a line moving.
+        context.globalAlpha = passed ? 0.62 + flare * 0.2 + fresh * 0.38 : 0.3;
+        context.fillStyle = colour;
         context.fillRect(
           x + mark.indent * columnWidth,
-          y,
+          y - markHeight / 2,
           Math.max(1, mark.length * columnWidth),
-          1.5,
+          markHeight * (1 + fresh * 0.9),
         );
       }
 
       context.globalAlpha = 1;
     }
 
-    // The read line: hairline, full width, the one thing that moves continuously.
+    // Quiet on purpose. The files carry the reading; a bright hairline across everything is
+    // a playhead, and a playhead is the one thing this is trying not to be.
     context.fillStyle = palette.modules[0] ?? palette.quiet;
-    context.globalAlpha = 0.9;
+    context.globalAlpha = 0.42;
     context.fillRect(inset, readY, innerWidth, 1);
     context.globalAlpha = 1;
   };
@@ -135,11 +175,11 @@ export function Field({ player, score, features, height = 300 }: FieldProps) {
   const paintRef = useRef(paint);
   paintRef.current = paint;
 
-  // Paint once while stopped, so the repository is visible before anything plays rather than
-  // the field being an empty rectangle until you press a button.
+  // Paint once while stopped, so the repository's structure is on screen before anything
+  // plays rather than the field being an empty rectangle until you press a button.
   useEffect(() => {
     if (!player) paintRef.current(0, [], 0);
-  }, [player, columns, palette, height]);
+  }, [player, columns, palette, markHeight, height]);
 
   return (
     <canvas

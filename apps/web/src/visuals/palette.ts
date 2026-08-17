@@ -53,10 +53,16 @@ export function paletteFor(seed: string): Palette {
   const hue = createRng(seed, PALETTE_STREAM)() * 360;
 
   return {
-    // Not black. A near-black carrying a trace of the repository's own hue ties the image
-    // together, and reads as a considered ground rather than as an absence of one.
-    ground: oklch(0.17, 0.022, hue + 210),
-    quiet: oklch(0.34, 0.02, hue + 210),
+    // Not black, and not a trace of hue either.
+    //
+    // This was 0.022 chroma, which is technically a tint and perceptually nothing: with the
+    // colour confined to the marks and the read line, three repositories with quite
+    // different hues all read as "near-black with a neon line", and the palette was doing
+    // its work in the one part of the image nobody looks at. The ground is the largest
+    // surface there is, so it is where a repository's colour has to live if it is going to
+    // be visible at the size a clip is watched.
+    ground: oklch(0.19, 0.05, hue + 210),
+    quiet: oklch(0.4, 0.035, hue + 210),
     modules: ROTATIONS.map((rotation, rank) =>
       oklch(LIGHTNESS[rank] ?? 0.64, CHROMA[rank] ?? 0.1, hue + rotation),
     ),
