@@ -2,7 +2,8 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
 import { startPlayback, type Player } from './audio/player';
 import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
-import { FIXTURES, type FixtureName } from './features/fixture';
+import { FIXTURES } from './features/fixture';
+import { GALLERY } from './features/gallery';
 import { generateScore } from './music/generate';
 import { scoreDurationSeconds, type Score } from './music/score';
 import { Field } from './visuals/Field';
@@ -17,9 +18,6 @@ function leadSummary(score: Score): string {
   if (midi.length === 0) return 'silent';
   return `${midi.length} notes · ${Math.max(...midi) - Math.min(...midi)} semitone span`;
 }
-
-/** The two committed fixtures, playable with no service running. */
-const EXAMPLES = Object.keys(FIXTURES) as FixtureName[];
 
 export default function App() {
   const [features, setFeatures] = useState<RepoFeatures>(FIXTURES.react);
@@ -133,21 +131,22 @@ export default function App() {
         </button>
       </form>
 
-      {/* The committed fixtures. They need no service, and they sit at opposite ends of the
-          calibration, which is what makes them worth keeping as the first thing heard. */}
-      <div className="flex gap-2 text-xs">
-        {EXAMPLES.map((option) => (
+      {/* Pre-rendered, so every one plays instantly and none of them needs the service.
+          Two of them could not use it in any case: kubernetes and vscode both take longer to
+          fetch and parse than the 25-second budget a served request is allowed. */}
+      <div className="flex flex-wrap gap-1.5 text-xs">
+        {GALLERY.map((entry) => (
           <button
-            key={option}
+            key={entry.repo.commitSha}
             type="button"
-            onClick={() => show(FIXTURES[option])}
+            onClick={() => show(entry)}
             className={`rounded border px-2 py-1 ${
-              FIXTURES[option].repo.commitSha === repo.commitSha
+              entry.repo.commitSha === repo.commitSha
                 ? 'border-neutral-900 bg-neutral-900 text-white'
                 : 'border-neutral-300 text-neutral-500 hover:border-neutral-900'
             }`}
           >
-            {FIXTURES[option].repo.name}
+            {entry.repo.name}
           </button>
         ))}
       </div>
