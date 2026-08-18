@@ -1,0 +1,2669 @@
+{
+  "schemaVersion": 1,
+  "repo": {
+    "owner": "microsoft",
+    "name": "TypeScript",
+    "ref": "main",
+    "commitSha": "b465fdbfe175304d9b977da137b2c178ae1091d3",
+    "primaryLanguage": "TypeScript",
+    "stars": 110187,
+    "fetchedAt": "2026-08-18T12:09:53Z"
+  },
+  "seed": "b465fdbf",
+  "totals": {
+    "filesScanned": 2000,
+    "filesSkipped": 79368,
+    "linesOfCode": 145942,
+    "functions": 7408,
+    "classes": 2585,
+    "imports": 741
+  },
+  "languages": [
+    {
+      "name": "TypeScript",
+      "share": 0.5385,
+      "files": 1077
+    },
+    {
+      "name": "JavaScript",
+      "share": 0.4615,
+      "files": 923
+    }
+  ],
+  "modules": [
+    {
+      "path": "tests/baselines",
+      "share": 0.7314,
+      "files": 984,
+      "linesOfCode": 106744,
+      "avgNestingDepth": 0.189,
+      "maxNestingDepth": 14,
+      "avgFunctionLength": 1.6146,
+      "cyclomaticDensity": 0.0038,
+      "commentRatio": 0.1564,
+      "asyncRatio": 0.037
+    },
+    {
+      "path": "tests/cases",
+      "share": 0.1484,
+      "files": 977,
+      "linesOfCode": 21665,
+      "avgNestingDepth": 0.1581,
+      "maxNestingDepth": 5,
+      "avgFunctionLength": 1.552,
+      "cyclomaticDensity": 0.0058,
+      "commentRatio": 0.3647,
+      "asyncRatio": 0.0424
+    },
+    {
+      "path": "src/server",
+      "share": 0.0253,
+      "files": 1,
+      "linesOfCode": 3691,
+      "avgNestingDepth": 0.4472,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 2.9919,
+      "cyclomaticDensity": 0.0134,
+      "commentRatio": 0.0948,
+      "asyncRatio": 0
+    },
+    {
+      "path": "src/services",
+      "share": 0.0234,
+      "files": 8,
+      "linesOfCode": 3421,
+      "avgNestingDepth": 0.9618,
+      "maxNestingDepth": 7,
+      "avgFunctionLength": 4.5347,
+      "cyclomaticDensity": 0.0293,
+      "commentRatio": 0.102,
+      "asyncRatio": 0
+    },
+    {
+      "path": "tests/lib",
+      "share": 0.021,
+      "files": 1,
+      "linesOfCode": 3069,
+      "avgNestingDepth": 0,
+      "maxNestingDepth": 0,
+      "avgFunctionLength": 0,
+      "cyclomaticDensity": 0,
+      "commentRatio": 0.2815,
+      "asyncRatio": 0
+    },
+    {
+      "path": "src/compiler",
+      "share": 0.0207,
+      "files": 4,
+      "linesOfCode": 3026,
+      "avgNestingDepth": 0.8947,
+      "maxNestingDepth": 6,
+      "avgFunctionLength": 5.7251,
+      "cyclomaticDensity": 0.0269,
+      "commentRatio": 0.1794,
+      "asyncRatio": 0
+    }
+  ],
+  "timeline": [
+    {
+      "index": 0,
+      "modulePath": "src/compiler",
+      "path": "src/compiler/_namespaces/ts.ts",
+      "linesOfCode": 78,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 1,
+      "modulePath": "src/services",
+      "path": "src/services/codefixes/fixExpectedComma.ts",
+      "linesOfCode": 55,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 0
+    },
+    {
+      "index": 2,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/ES3For-ofTypeCheck1(target=es2015).js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 3,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/FunctionDeclaration4.js",
+      "linesOfCode": 7,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 4,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/accessorsEmit.js",
+      "linesOfCode": 31,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 5,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/anonymousClassAccessorsDeclarationEmit1.js",
+      "linesOfCode": 58,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 6,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/arrayLiteralInference.js",
+      "linesOfCode": 59,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 7,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/assignmentCompatWithStringIndexer.js",
+      "linesOfCode": 74,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 27
+    },
+    {
+      "index": 8,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/asyncFunctionDeclaration10_es6.js",
+      "linesOfCode": 10,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 9,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/autoAccessor5(target=es2022).js",
+      "linesOfCode": 34,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 10,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/awaitUsingDeclarationsInForAwaitOf(target=esnext).js",
+      "linesOfCode": 12,
+      "functions": 6,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 11,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/builtinIterator.js",
+      "linesOfCode": 117,
+      "functions": 22,
+      "maxNesting": 1,
+      "branches": 8,
+      "commentLines": 7
+    },
+    {
+      "index": 12,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/checkInfiniteExpansionTermination2.js",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 13,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/classExpression5.js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 14,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/classStaticBlock2(target=es5).js",
+      "linesOfCode": 35,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 15,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/collisionRestParameterFunction.js",
+      "linesOfCode": 48,
+      "functions": 12,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 27
+    },
+    {
+      "index": 16,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/commentsOnJSXExpressionsArePreserved(jsx=react,module=system,moduledetection=force).js",
+      "linesOfCode": 38,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 12
+    },
+    {
+      "index": 17,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/computedPropertyNames1_ES6.js",
+      "linesOfCode": 12,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 18,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/computedPropertyNamesContextualType5_ES6.js",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 19,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/config/commandLineParsing/parseCommandLine/option of type string errors if non null value is passed.js",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 20,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/config/matchFiles/same named declarations with include ts dts with json api.js",
+      "linesOfCode": 52,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 12
+    },
+    {
+      "index": 21,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/constDeclarations-invalidContexts(alwaysstrict=true).js",
+      "linesOfCode": 46,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 14,
+      "commentLines": 7
+    },
+    {
+      "index": 22,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/contextualSignatureInstantiationWithTypeParameterConstrainedToOuterTypeParameter.js",
+      "linesOfCode": 16,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 23,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/controlFlowFinallyNoCatchAssignments.js",
+      "linesOfCode": 32,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 24,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/convertToAsyncFunction/convertToAsyncFunction_callbackReturnsRejectedPromiseInTryBlock.js",
+      "linesOfCode": 15,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 4
+    },
+    {
+      "index": 25,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/declFileTypeAnnotationTypeLiteral(target=es2015).js",
+      "linesOfCode": 73,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 13
+    },
+    {
+      "index": 26,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/declarationEmitExportDeclaration(target=es2015).js",
+      "linesOfCode": 33,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 27,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/declarationEmitTypeParameterNameReusedInOverloads.js",
+      "linesOfCode": 48,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 28,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/decoratorOnClass4(target=es5).js",
+      "linesOfCode": 22,
+      "functions": 3,
+      "maxNesting": 5,
+      "branches": 7,
+      "commentLines": 4
+    },
+    {
+      "index": 29,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/deeplyNestedConstraints.js",
+      "linesOfCode": 26,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 30,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/destructuringInVariableDeclarations4.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 31,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/downlevelIterationDeprecated(downleveliteration=true).js",
+      "linesOfCode": 34,
+      "functions": 3,
+      "maxNesting": 2,
+      "branches": 9,
+      "commentLines": 3
+    },
+    {
+      "index": 32,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/emitArrowFunctionWhenUsingArguments04(alwaysstrict=false,target=es2015).js",
+      "linesOfCode": 11,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 33,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/emitDefaultParametersFunctionExpression(target=es2015).js",
+      "linesOfCode": 18,
+      "functions": 14,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 34,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/emptyVariableDeclarationBindingPatterns02_ES5iterable(target=es5).js",
+      "linesOfCode": 37,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 5,
+      "commentLines": 4
+    },
+    {
+      "index": 35,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/es5-asyncFunctionIfStatements(target=es2015).js",
+      "linesOfCode": 44,
+      "functions": 9,
+      "maxNesting": 1,
+      "branches": 6,
+      "commentLines": 3
+    },
+    {
+      "index": 36,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/es6ImportDefaultBindingFollowedWithNamespaceBindingDts.js",
+      "linesOfCode": 58,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 7
+    },
+    {
+      "index": 37,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/esDecorators-classDeclaration-fields-nonStatic(target=es2022,usedefineforclassfields=true).js",
+      "linesOfCode": 39,
+      "functions": 11,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 38,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/esDecorators-emitDecoratorMetadata(target=es2015).js",
+      "linesOfCode": 142,
+      "functions": 54,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 3
+    },
+    {
+      "index": 39,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/exportAsNamespace4(module=amd).js",
+      "linesOfCode": 128,
+      "functions": 23,
+      "maxNesting": 3,
+      "branches": 25,
+      "commentLines": 13
+    },
+    {
+      "index": 40,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/exportNamespace11.js",
+      "linesOfCode": 56,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 7
+    },
+    {
+      "index": 41,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/extendsTagEmit.js",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 42,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/extractFunction/extractFunction_VariableDeclaration_DeclaredTwice.ts",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 43,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/forInStatement7.js",
+      "linesOfCode": 12,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 44,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/functionWithDefaultParameterWithNoStatements12.js",
+      "linesOfCode": 12,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 45,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/genericArrayMethods1.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 46,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/genericReversingTypeParameters2.js",
+      "linesOfCode": 19,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 47,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/implicitAnyWidenToAny.js",
+      "linesOfCode": 50,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 48,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/importDeclWithExportModifier.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 49,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/importTsBeforeDTs.js",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 50,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/inferenceLimit.js",
+      "linesOfCode": 75,
+      "functions": 24,
+      "maxNesting": 1,
+      "branches": 4,
+      "commentLines": 5
+    },
+    {
+      "index": 51,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/instanceofOperatorWithInvalidOperands.es2015.js",
+      "linesOfCode": 80,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 52,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/intersectionAsWeakTypeSource.js",
+      "linesOfCode": 22,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 53,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/isolatedModulesExportImportUninstantiatedNamespace.js",
+      "linesOfCode": 22,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 54,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/jsDeclarationsExportFormsErr(target=es5).js",
+      "linesOfCode": 104,
+      "functions": 15,
+      "maxNesting": 3,
+      "branches": 19,
+      "commentLines": 21
+    },
+    {
+      "index": 55,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/jsdocTwoLineTypedef.js",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 56,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/labeledStatementDeclarationListInLoopNoCrash2(target=es2015).js",
+      "linesOfCode": 14,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 57,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/localTypes2.js",
+      "linesOfCode": 87,
+      "functions": 17,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 58,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/mergeSymbolRexportFunction.js",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 59,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/moduleAugmentationDisallowedExtensions.js",
+      "linesOfCode": 64,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 60,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/moduleResolution/typeReferenceDirective-is-relative-and-in-a-sibling-folder.js",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 61,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/namedTupleMembers.js",
+      "linesOfCode": 107,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 9
+    },
+    {
+      "index": 62,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/noCollisionThisExpressionAndLocalVarInProperty.js",
+      "linesOfCode": 42,
+      "functions": 11,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 63,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/nodeModulesAllowJsPackageImports(module=node16).js",
+      "linesOfCode": 102,
+      "functions": 9,
+      "maxNesting": 3,
+      "branches": 12,
+      "commentLines": 17
+    },
+    {
+      "index": 64,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/nodeModulesImportModeDeclarationEmit1(module=nodenext).js",
+      "linesOfCode": 37,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 65,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/nonInstantiatedModule.js",
+      "linesOfCode": 71,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 66,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/objectLiteralMemberWithModifiers2.js",
+      "linesOfCode": 6,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 67,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/optionalChainingInArrow(target=es2015).js",
+      "linesOfCode": 12,
+      "functions": 4,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 7
+    },
+    {
+      "index": 68,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/overloadOnConstAsTypeAnnotation.js",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 69,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parseTypes.js",
+      "linesOfCode": 28,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 70,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parserCommaInTypeMemberList1.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 71,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parserEnum3.js",
+      "linesOfCode": 8,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 72,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parserGenericsInTypeContexts1.js",
+      "linesOfCode": 26,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 73,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parserObjectCreationArrayLiteral2.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 74,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/parserTypeQuery1.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 75,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/preserveUnusedImports.js",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 76,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/privateNameAndAny.js",
+      "linesOfCode": 65,
+      "functions": 10,
+      "maxNesting": 3,
+      "branches": 6,
+      "commentLines": 7
+    },
+    {
+      "index": 77,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/privateWriteOnlyAccessorRead.js",
+      "linesOfCode": 80,
+      "functions": 18,
+      "maxNesting": 3,
+      "branches": 17,
+      "commentLines": 21
+    },
+    {
+      "index": 78,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/jsFileCompilationSameNameFilesNotSpecifiedWithAllowJs/node/SameNameFilesNotSpecifiedWithAllowJs/a.d.ts",
+      "linesOfCode": 1,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 79,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/mapRootAbsolutePathSingleFileSpecifyOutputDirectory/node/outdir/simple/test.d.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 80,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/mapRootRelativePathMultifolderSpecifyOutputDirectory/amd/outdir/simple/outputdir_multifolder_ref/m2.js",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 81,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/maprootUrlMultifolderNoOutdir/amd/diskFile2.d.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 82,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/maprootUrlsourcerootUrlModuleSubfolderNoOutdir/amd/test.d.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 83,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/outModuleMultifolderNoOutdir/node/ref/m1.js",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 84,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/projectOptionTest/node/Test/a.js",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 85,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/sourceRootAbsolutePathModuleSubfolderSpecifyOutputDirectory/amd/outdir/simple/test.d.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 86,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/sourceRootRelativePathModuleSimpleSpecifyOutputDirectory/amd/outdir/simple/test.js",
+      "linesOfCode": 17,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 87,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/sourcemapModuleMultifolderNoOutdir/amd/diskFile2.d.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 88,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/sourcerootUrlMixedSubfolderSpecifyOutputDirectory/amd/outdir/simple/test.d.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 89,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/project/sourcerootUrlSubfolderSpecifyOutputFile/node/bin/test.js",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 90,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/reExportGlobalDeclaration4.js",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 91,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/redeclareParameterInCatchBlock.js",
+      "linesOfCode": 51,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 10,
+      "commentLines": 3
+    },
+    {
+      "index": 92,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/returnInfiniteIntersection.js",
+      "linesOfCode": 14,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 93,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/sideEffectImports3(moduledetection=auto,nouncheckedsideeffectimports=true).js",
+      "linesOfCode": 12,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 94,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/specializationsShouldNotAffectEachOther.js",
+      "linesOfCode": 23,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 95,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/strictNullNotNullIndexTypeShouldWork.js",
+      "linesOfCode": 45,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 96,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/superCallBeforeThisAccessing2.js",
+      "linesOfCode": 21,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 97,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/symbolProperty5.js",
+      "linesOfCode": 18,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 98,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/templateLiteralTypes1.js",
+      "linesOfCode": 224,
+      "functions": 6,
+      "maxNesting": 14,
+      "branches": 27,
+      "commentLines": 63
+    },
+    {
+      "index": 99,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/templateStringWithEmbeddedObjectLiteral.js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 100,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/thisKeyword.js",
+      "linesOfCode": 11,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 101,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/transpile/Elides import equals referenced only by type only export specifier.js",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 102,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/transpile/Supports setting module.js",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 103,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/transpile/Uses correct newLine character (verbatimModuleSyntax=true).js",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 104,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsbuild/noCheck/multiFile/semantic-errors-discrepancies.js",
+      "linesOfCode": 45,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 105,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsbuild/sample1/building-using-buildReferencedProject.js",
+      "linesOfCode": 258,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 26
+    },
+    {
+      "index": 106,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsc/ignoreConfig/mixing-project-and-files.js",
+      "linesOfCode": 31,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 107,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsc/noEmitOnError/outFile/dts-errors-with-declaration-with-incremental.js",
+      "linesOfCode": 263,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 108,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tscWatch/incremental/module-compilation/own-file-emit-without-errors-incremental.js",
+      "linesOfCode": 192,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 109,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tscWatch/resolutionCache/scoped-package-installation.js",
+      "linesOfCode": 526,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 110,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/compileOnSave/dtsFileChange-in-global-file-with-decorator-emit.js",
+      "linesOfCode": 314,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 111,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/events/projectUpdatedInBackground/when-event-handler-is-set-in-the-session-and-should-be-up-to-date-with-deleted-files.js",
+      "linesOfCode": 357,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 237
+    },
+    {
+      "index": 112,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/fourslashServer/autoImportProvider5.js",
+      "linesOfCode": 757,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 113,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/fourslashServer/pasteEdits_multiplePastes4.js",
+      "linesOfCode": 379,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 114,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/moduleResolution/package-json-file-is-edited.js",
+      "linesOfCode": 1224,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 115,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/projectReferences/find-refs-to-decl-in-other-proj-when-proj-is-loaded-and-refd-proj-loading-is-disabled-and-proj-ref-redirects-are-enabled-and-a-decl-map-is-missing.js",
+      "linesOfCode": 572,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 174
+    },
+    {
+      "index": 116,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/projectReferencesSourcemap/dependencyAndUsage/configHasNoReference/dependency-dts-change-as-rename-no-timeout.js",
+      "linesOfCode": 1452,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 747
+    },
+    {
+      "index": 117,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/projectReferencesSourcemap/usageProject/disabledSourceRef/dependency-dts-changes-with-timeout-before-request.js",
+      "linesOfCode": 1110,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 195
+    },
+    {
+      "index": 118,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsserver/skipLibCheck/jsonly-external-project-with-skipLibCheck-as-false.js",
+      "linesOfCode": 266,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 119,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsxAttributeResolution15.js",
+      "linesOfCode": 30,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 120,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/tsxTypeArgumentPartialDefinitionStillErrors.js",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 121,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/typeGuardsInClassMethods.js",
+      "linesOfCode": 116,
+      "functions": 10,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 77
+    },
+    {
+      "index": 122,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/typeParameterDirectlyConstrainedToItself.js",
+      "linesOfCode": 27,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 123,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/typesWithProtectedConstructor.js",
+      "linesOfCode": 36,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 124,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/unicodeExtendedEscapesInStrings22(target=es6).js",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 125,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/unusedFunctionsinNamespaces5.js",
+      "linesOfCode": 28,
+      "functions": 9,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 126,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/unusedVariablesinNamespaces3.js",
+      "linesOfCode": 26,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 127,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/usingDeclarationsWithESClassDecorators.5(module=commonjs,target=es2015).js",
+      "linesOfCode": 42,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 3,
+      "commentLines": 3
+    },
+    {
+      "index": 128,
+      "modulePath": "tests/baselines",
+      "path": "tests/baselines/reference/validMultipleVariableDeclarations.js",
+      "linesOfCode": 67,
+      "functions": 0,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 3
+    },
+    {
+      "index": 129,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/TransportStream.ts",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 130,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/anyIdenticalToItself.ts",
+      "linesOfCode": 13,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 131,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/assignmentCompatability27.ts",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 132,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/binopAssignmentShouldHaveType.ts",
+      "linesOfCode": 18,
+      "functions": 2,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 3
+    },
+    {
+      "index": 133,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/checkJsdocTypeTagOnExportAssignment8.ts",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 134,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/classPropertyInferenceFromBroaderTypeConst.ts",
+      "linesOfCode": 24,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 9
+    },
+    {
+      "index": 135,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/commentOnElidedModule1.ts",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 136,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/constDeclarationShadowedByVarDeclaration3.ts",
+      "linesOfCode": 9,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 137,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/contextualTyping27.ts",
+      "linesOfCode": 2,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 138,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/crashInEmitTokenWithComment.ts",
+      "linesOfCode": 7,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 139,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/declarationEmitDefaultExportWithStaticAssignment.ts",
+      "linesOfCode": 27,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 140,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/declarationEmitShadowingInferNotRenamed.ts",
+      "linesOfCode": 22,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 141,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/deleteReadonly.ts",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 142,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/downlevelLetConst17.ts",
+      "linesOfCode": 56,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 13,
+      "commentLines": 3
+    },
+    {
+      "index": 143,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/enumBasics2.ts",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 144,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/es6ClassTest7.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 145,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/exhaustiveSwitchWithWideningLiteralTypes.ts",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 146,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/extendPrivateConstructorClass.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 147,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/functionOverloads24.ts",
+      "linesOfCode": 5,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 148,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/genericDerivedTypeWithSpecializedBase.ts",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 149,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/globalThisDeclarationEmit3.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 150,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/importedEnumMemberMergedWithExportedAliasIsError.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 151,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/infinitelyExpandingTypeAssignability.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 152,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/internalAliasFunction.ts",
+      "linesOfCode": 12,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 153,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/isolatedModules_resolveJsonModule_strict_outDir_commonJs.ts",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 154,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/jsxChildWrongType.tsx",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 155,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/library_DatePrototypeProperties.ts",
+      "linesOfCode": 47,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 156,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/modifiersInObjectLiterals.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 157,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/moduleResolutionWithExtensions_withPaths.ts",
+      "linesOfCode": 33,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 158,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/narrowingWithNonNullExpression.ts",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 159,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/noParameterReassignmentJSIIFE.ts",
+      "linesOfCode": 11,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 160,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/omitTypeHelperModifiers01.ts",
+      "linesOfCode": 18,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 161,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/parenthesisDoesNotBlockAliasSymbolCreation.ts",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 162,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/privateFieldsInClassExpressionDeclaration.ts",
+      "linesOfCode": 13,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 163,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/recursiveConditionalCrash4.ts",
+      "linesOfCode": 18,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 164,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/restIntersection.ts",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 165,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/sourceMapForFunctionWithCommentPrecedingStatement01.ts",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 166,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/staticPrototypePropertyOnClass.ts",
+      "linesOfCode": 19,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 167,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/systemModule3.ts",
+      "linesOfCode": 10,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 168,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/tsxAttributesHasInferrableIndex.tsx",
+      "linesOfCode": 18,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 169,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/typeParameterListWithTrailingComma1.ts",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 170,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/unknownSymbolOffContextualType1.ts",
+      "linesOfCode": 23,
+      "functions": 5,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 2
+    },
+    {
+      "index": 171,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/compiler/unusedTypeParametersCheckedByNoUnusedParameters.ts",
+      "linesOfCode": 9,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 172,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/async/es2017/asyncArrowFunction/arrowFunctionWithParameterNameAsync_es2017.ts",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 173,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/async/es6/awaitCallExpression/awaitCallExpression5_es6.ts",
+      "linesOfCode": 15,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 174,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/classes/constructorDeclarations/classConstructorOverloadsAccessibility.ts",
+      "linesOfCode": 27,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 175,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/classes/members/privateNames/privateNameLateSuper.ts",
+      "linesOfCode": 10,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 176,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/classes/propertyMemberDeclarations/memberFunctionDeclarations/instanceMemberAssignsToClassPrototype.ts",
+      "linesOfCode": 12,
+      "functions": 6,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 177,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/decorators/class/decoratorInstantiateModulesInFunctionBodies.ts",
+      "linesOfCode": 19,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 178,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/enums/enumConstantMemberWithStringEmitDeclaration.ts",
+      "linesOfCode": 25,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 179,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/Symbols/symbolProperty9.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 180,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/computedProperties/computedPropertyNames23_ES6.ts",
+      "linesOfCode": 9,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 181,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/destructuring/destructuringObjectBindingPatternAndAssignment9SiblingInitializer.ts",
+      "linesOfCode": 23,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 182,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/for-ofStatements/for-of40.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 1,
+      "branches": 1,
+      "commentLines": 1
+    },
+    {
+      "index": 183,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/spread/iteratorSpreadInCall4.ts",
+      "linesOfCode": 14,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 184,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/templates/templateStringWithBackslashEscapes01_ES6.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 185,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/es6/yieldExpressions/generatorOverloads4.ts",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 186,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/esDecorators/classDeclaration/fields/esDecorators-classDeclaration-fields-nonStaticAbstract.ts",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 187,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/expressions/commaOperator/commaOperatorInvalidAssignmentType.ts",
+      "linesOfCode": 15,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 188,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/expressions/thisKeyword/thisInInvalidContextsExternalModule.ts",
+      "linesOfCode": 37,
+      "functions": 4,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 189,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/externalModules/es6/es6modulekindExportClassNameWithObject.ts",
+      "linesOfCode": 3,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 190,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/externalModules/typeOnly/importClause_namedImports.ts",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 191,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/interfaces/interfaceDeclarations/asiPreventsParsingAsInterface04.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 192,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/jsdoc/checkJsdocSatisfiesTag15.ts",
+      "linesOfCode": 41,
+      "functions": 7,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 33
+    },
+    {
+      "index": 193,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/jsdoc/importTag5.ts",
+      "linesOfCode": 17,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 194,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/jsdoc/typedefTagTypeResolution.ts",
+      "linesOfCode": 29,
+      "functions": 3,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 195,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/jsx/tsxReactEmitNesting.tsx",
+      "linesOfCode": 35,
+      "functions": 3,
+      "maxNesting": 1,
+      "branches": 2,
+      "commentLines": 5
+    },
+    {
+      "index": 196,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/node/nodeModulesCjsFormatFileAlwaysHasDefault.ts",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 197,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/parser/ecmascript5/ArrowFunctionExpressions/parserArrowFunctionExpression6.ts",
+      "linesOfCode": 4,
+      "functions": 2,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 1
+    },
+    {
+      "index": 198,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/parser/ecmascript5/ErrorRecovery/parserModifierOnPropertySignature2.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 199,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/parser/ecmascript5/MemberAccessorDeclarations/parserMemberAccessorDeclaration3.ts",
+      "linesOfCode": 4,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 200,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/parser/ecmascript5/SkippedTokens/parserSkippedTokens18.ts",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 201,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/parser/ecmascript5/VariableDeclarations/parserVariableDeclaration10.ts",
+      "linesOfCode": 2,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 202,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/references/library-reference-12.ts",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 203,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/salsa/thisPropertyAssignmentComputed.ts",
+      "linesOfCode": 7,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 204,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/statements/VariableStatements/usingDeclarations/usingDeclarationsInForIn.ts",
+      "linesOfCode": 7,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 205,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/conditional/conditionalTypes1.ts",
+      "linesOfCode": 284,
+      "functions": 24,
+      "maxNesting": 2,
+      "branches": 2,
+      "commentLines": 111
+    },
+    {
+      "index": 206,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/members/objectTypeHidingMembersOfExtendedObject.ts",
+      "linesOfCode": 47,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 207,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/primitives/undefined/invalidUndefinedValues.ts",
+      "linesOfCode": 25,
+      "functions": 2,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 1
+    },
+    {
+      "index": 208,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/tuple/readonlyArraysAndTuples2.ts",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 209,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/typeRelationships/bestCommonType/bestCommonTypeOfTuple2.ts",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 210,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/conformance/types/typeRelationships/typeInference/genericCallWithObjectTypeArgsAndConstraints5.ts",
+      "linesOfCode": 19,
+      "functions": 5,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 211,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/asConstRefsNoErrors3.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 212,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/breakpointValidationImports.ts",
+      "linesOfCode": 10,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 213,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixAddMissingFunctionDeclaration26.ts",
+      "linesOfCode": 24,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 214,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixAddParameterNames6.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 215,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixClassImplementInterfaceHeritageClauseAlreadyHaveMember.ts",
+      "linesOfCode": 35,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 17
+    },
+    {
+      "index": 216,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixDeleteUnmatchedParameter2.ts",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 217,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixInferFromUsageStringIndexSignature.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 218,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixRemoveUnnecessaryAwait_notAvailableOnReturn.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 219,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/codeFixUnusedIdentifier_destructure_allUnused.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 220,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/completionForStringLiteralImport1.ts",
+      "linesOfCode": 20,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 14
+    },
+    {
+      "index": 221,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/completionListInClassExpressionWithTypeParameter.ts",
+      "linesOfCode": 12,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 222,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/completionListInstanceProtectedMembers4.ts",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 22
+    },
+    {
+      "index": 223,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/completionsECMAPrivateMemberTriggerCharacter.ts",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 224,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/completionsMergedDeclarations1.ts",
+      "linesOfCode": 22,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 18
+    },
+    {
+      "index": 225,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/contextuallyTypedParameters.ts",
+      "linesOfCode": 58,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 38
+    },
+    {
+      "index": 226,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/extendsKeywordCompletion1.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 227,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/findAllReferencesJSDocFunctionNew.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 228,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/findAllRefsThisKeywordMultipleFiles.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 10
+    },
+    {
+      "index": 229,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/formatTemplateStringOnPaste.ts",
+      "linesOfCode": 4,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 230,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/functionTypePredicateFormatting.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 231,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/getJavaScriptSyntacticDiagnostics9.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 232,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/goToDefinitionConstructorOfClassExpression01.ts",
+      "linesOfCode": 24,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 23
+    },
+    {
+      "index": 233,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/goToDefinition_mappedType.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 234,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/importNameCodeFixExistingImport12.ts",
+      "linesOfCode": 9,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 8
+    },
+    {
+      "index": 235,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/importNameCodeFix_types_classic.ts",
+      "linesOfCode": 19,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 236,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/inlineVariableMultipleDeclarations.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 237,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/jsdocDeprecated_suggestion17.ts",
+      "linesOfCode": 29,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 14
+    },
+    {
+      "index": 238,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/memberListInsideObjectLiterals.ts",
+      "linesOfCode": 30,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 26
+    },
+    {
+      "index": 239,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/moveToNewFile_requireImport1.ts",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 240,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/organizeImports21.ts",
+      "linesOfCode": 24,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 13
+    },
+    {
+      "index": 241,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/quickInfoDisplayPartsFunctionIncomplete.ts",
+      "linesOfCode": 6,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 5
+    },
+    {
+      "index": 242,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/quickInfoJsdocEnum.ts",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 14
+    },
+    {
+      "index": 243,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/refactorAddOrRemoveBracesToArrowFunction1.ts",
+      "linesOfCode": 11,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 2
+    },
+    {
+      "index": 244,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/refactorConvertParamsToDestructuredObject_inheritedMethod.ts",
+      "linesOfCode": 23,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 9
+    },
+    {
+      "index": 245,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/refactorConvertToGetAccessAndSetAccess_js_9.ts",
+      "linesOfCode": 21,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 246,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/refactorExtractType9.ts",
+      "linesOfCode": 14,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 247,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/removeVarFromModuleWithReopenedEnums.ts",
+      "linesOfCode": 13,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 11
+    },
+    {
+      "index": 248,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/scopeOfUnionProperties.ts",
+      "linesOfCode": 5,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 4
+    },
+    {
+      "index": 249,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/server/importFixes_ambientCircularDefaultCrash.ts",
+      "linesOfCode": 16,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 15
+    },
+    {
+      "index": 250,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/signatureHelpEmptyList.ts",
+      "linesOfCode": 17,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 7
+    },
+    {
+      "index": 251,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/smartIndentTemplateLiterals.ts",
+      "linesOfCode": 16,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 252,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/toggleDuplicateFunctionDeclaration.ts",
+      "linesOfCode": 8,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 3
+    },
+    {
+      "index": 253,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/fourslash/unusedImportDeclaration_withEmptyPath4.ts",
+      "linesOfCode": 31,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 6
+    },
+    {
+      "index": 254,
+      "modulePath": "tests/cases",
+      "path": "tests/cases/projects/declarations_CascadingImports/m4.ts",
+      "linesOfCode": 6,
+      "functions": 1,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 0
+    },
+    {
+      "index": 255,
+      "modulePath": "tests/lib",
+      "path": "tests/lib/react18/react18.d.ts",
+      "linesOfCode": 3069,
+      "functions": 0,
+      "maxNesting": 0,
+      "branches": 0,
+      "commentLines": 864
+    }
+  ]
+}
