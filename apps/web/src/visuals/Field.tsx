@@ -4,7 +4,7 @@ import type { Player } from '../audio/player';
 import { barToTick, scoreDurationSeconds, type Score, type VoiceId } from '../music/score';
 import { adjustDetail, smoothFps, stride } from './budget';
 import { fieldFor } from './layout';
-import { paletteFor } from './palette';
+import { paletteFor, type Palette } from './palette';
 import { useTransportFrame } from './useTransportFrame';
 
 /**
@@ -68,9 +68,24 @@ export interface FieldProps {
   height?: number;
   /** Smoothed frames per second, reported so a machine can be checked rather than assumed. */
   onFrameRate?: (fps: number) => void;
+  /**
+   * Overrides the colour this repository would pick alone.
+   *
+   * A gallery resolves collisions across the whole set — see palettesFor — so the tile has
+   * to be told which hue it ended up with rather than deriving one that a neighbour has
+   * already claimed.
+   */
+  palette?: Palette;
 }
 
-export function Field({ player, score, features, height = 300, onFrameRate }: FieldProps) {
+export function Field({
+  player,
+  score,
+  features,
+  height = 300,
+  onFrameRate,
+  palette: given,
+}: FieldProps) {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const flares = useRef(new Map<VoiceId, number>());
 
@@ -81,7 +96,7 @@ export function Field({ player, score, features, height = 300, onFrameRate }: Fi
   const reported = useRef(0);
 
   const columns = useMemo(() => fieldFor(features), [features]);
-  const palette = useMemo(() => paletteFor(score.seed), [score.seed]);
+  const palette = useMemo(() => given ?? paletteFor(score.seed), [given, score.seed]);
   const totalTicks = useMemo(() => barToTick(score.bars), [score.bars]);
   const duration = useMemo(() => scoreDurationSeconds(score), [score]);
 

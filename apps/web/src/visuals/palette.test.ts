@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { oklch, paletteFor } from './palette';
+import { oklch, paletteFor, palettesFor } from './palette';
 
 /** sRGB hex → relative luminance, the quantity WCAG contrast is built on. */
 function luminance(hex: string): number {
@@ -117,5 +117,106 @@ describe('paletteFor', () => {
         expect(contrast(ground, colour), `${seed} rank ${rank}`).toBeGreaterThan(4.5);
       }
     }
+  });
+});
+
+describe('palettesFor', () => {
+  /** OKLab coordinates recovered from a rendered colour, by inverting what palette.ts did. */
+  function oklab(hex: string): [number, number, number] {
+    const [r, g, b] = [1, 3, 5].map((at) => {
+      const value = parseInt(hex.slice(at, at + 2), 16) / 255;
+      return value <= 0.04045 ? value / 12.92 : ((value + 0.055) / 1.055) ** 2.4;
+    }) as [number, number, number];
+
+    const l = Math.cbrt(0.4122214708 * r + 0.5363325363 * g + 0.0514459929 * b);
+    const m = Math.cbrt(0.2119034982 * r + 0.6806995451 * g + 0.1073969566 * b);
+    const s = Math.cbrt(0.0883024619 * r + 0.2817188376 * g + 0.6299787005 * b);
+
+    return [
+      0.2104542553 * l + 0.793617785 * m - 0.0040720468 * s,
+      1.9779984951 * l - 2.428592205 * m + 0.4505937099 * s,
+      0.0259040371 * l + 0.7827717662 * m - 0.808675766 * s,
+    ];
+  }
+
+  /**
+   * Perceived difference between two rendered colours.
+   *
+   * Distance in OKLab rather than an angle between hues, which is what this measured first
+   * and got wrong twice over. A hue angle says nothing about how far apart two colours look
+   * once one of them has been desaturated to fit in sRGB, and it is numerically unstable at
+   * low chroma — it reported a correct 45-degree layout as 28 degrees and failed a passing
+   * implementation. Distance is the quantity the claim is actually about: whether a person
+   * can tell two tiles apart.
+   */
+  function apartInLab(a: string, b: string): number {
+    const [al, aa, ab] = oklab(a);
+    const [bl, ba, bb] = oklab(b);
+    return Math.hypot(al - bl, aa - ba, ab - bb);
+  }
+
+  const gallery = [
+    '20425723',
+    '1f6589ec',
+    '8b258c7b',
+    'cbd7a410',
+    '13073f1e',
+    '0ed457cf',
+    'a3714473',
+    'deadbeef',
+  ];
+
+  it('pulls a set apart that would otherwise clump', () => {
+    // Independent draws from a circle do not spread out. Two of the real gallery seeds landed
+    // on neighbouring hues, and the page read as about five colour families rather than
+    // eight. A just-noticeable difference in OKLab is around 0.02; this asks for several
+    // times that, because the claim is that a tile is recognisable at a glance rather than
+    // distinguishable side by side.
+    const colours = palettesFor(gallery).map((palette) => palette.modules[0] ?? '');
+
+    for (let i = 0; i < colours.length; i++) {
+      for (let j = i + 1; j < colours.length; j++) {
+        expect(
+          apartInLab(colours[i] ?? '', colours[j] ?? ''),
+          `${i} vs ${j}: ${colours[i]} and ${colours[j]}`,
+        ).toBeGreaterThan(0.06);
+      }
+    }
+  });
+
+  it('gives each repository its own ground, which is most of the tile', () => {
+    const grounds = palettesFor(gallery).map((palette) => palette.ground);
+    expect(new Set(grounds).size).toBe(gallery.length);
+  });
+
+  it('leaves the first of a set exactly where it asked to be', () => {
+    // Nothing has claimed anything yet, so the preference is honoured outright. Only a later
+    // one ever moves — the same rule, and the same reason, as resolving a unison.
+    expect(palettesFor(gallery)[0]).toStrictEqual(paletteFor(gallery[0] ?? ''));
+    for (const seed of gallery) {
+      expect(palettesFor([seed])[0]).toStrictEqual(paletteFor(seed));
+    }
+  });
+
+  it('is stable for a set, in the order it is given', () => {
+    expect(palettesFor(gallery)).toStrictEqual(palettesFor(gallery));
+  });
+
+  it('places every seed, at any size, without giving up', () => {
+    // Convergence is the property worth pinning. The first attempt nudged a hue past whatever
+    // blocked it, which can drop a third seed exactly where the second already sits and only
+    // terminates by luck; a fixed number of slots and a linear probe cannot fail.
+    for (const size of [1, 2, 8, 12, 20]) {
+      const seeds = Array.from({ length: size }, (_, n) =>
+        (n * 2654435761).toString(16).padStart(8, '0').slice(-8),
+      );
+      const palettes = palettesFor(seeds);
+      expect(palettes).toHaveLength(size);
+      expect(new Set(palettes.map((p) => p.ground)).size, `${size} seeds`).toBe(size);
+    }
+  });
+
+  it('returns nothing for nothing', () => {
+    expect(palettesFor([])).toStrictEqual([]);
   });
 });

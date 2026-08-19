@@ -6,7 +6,7 @@ import { GALLERY } from './features/gallery';
 import { generateScore } from './music/generate';
 import type { Score } from './music/score';
 import { Field } from './visuals/Field';
-import { paletteFor } from './visuals/palette';
+import { palettesFor, type Palette } from './visuals/palette';
 
 /**
  * The gallery is the page.
@@ -35,13 +35,14 @@ function shortLines(count: number): string {
 interface TileProps {
   features: RepoFeatures;
   score: Score;
+  palette: Palette;
   playing: boolean;
   player: Player | null;
   onToggle: () => void;
 }
 
-function Tile({ features, score, playing, player, onToggle }: TileProps) {
-  const accent = paletteFor(score.seed).modules[0] ?? '#888';
+function Tile({ features, score, palette, playing, player, onToggle }: TileProps) {
+  const accent = palette.modules[0] ?? '#888';
   const { repo } = features;
 
   return (
@@ -59,7 +60,13 @@ function Tile({ features, score, playing, player, onToggle }: TileProps) {
           ['--tw-ring-color' as string]: playing ? accent : '#dfe2e6',
         }}
       >
-        <Field player={player} score={score} features={features} height={172} />
+        <Field
+          player={player}
+          score={score}
+          features={features}
+          palette={palette}
+          height={172}
+        />
       </div>
 
       <div className="mt-2.5 flex items-baseline gap-1.5">
@@ -94,6 +101,7 @@ export default function App() {
 
   const pending = useRef<AbortController | null>(null);
   const heardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const inputSection = useRef<HTMLElement | null>(null);
 
   // Smallest first, so the grid reads slowest to fastest. A repository the visitor loaded
   // goes last, where it is the newest thing rather than buried among the eight.
@@ -106,6 +114,36 @@ export default function App() {
     () => new Map(entries.map((entry) => [entry.repo.commitSha, generateScore(entry)])),
     [entries],
   );
+
+  // Resolved across the whole set rather than one repository at a time: eight independent
+  // draws from a hue circle clump, and the gallery's entire claim is that each one looks
+  // like itself.
+  const palettes = useMemo(() => {
+    const resolved = palettesFor(entries.map((entry) => entry.seed));
+    return new Map(entries.map((entry, at) => [entry.repo.commitSha, resolved[at]!]));
+  }, [entries]);
+
+  /**
+   * Bring the input into view when it appears.
+   *
+   * It was revealed correctly and nobody could tell: in a 536px window its top sits around
+   * 740px down the page, so it arrived a couple of hundred pixels below the fold and the
+   * visitor had no reason to scroll and find out. A reveal nobody sees is the same as no
+   * reveal, and the fix belongs here rather than in the timing, which was right.
+   *
+   * Only when it is actually off-screen, and instantly rather than smoothly for anyone who
+   * has asked for less motion.
+   */
+  useEffect(() => {
+    const section = inputSection.current;
+    if (!heard || !section) return;
+
+    const box = section.getBoundingClientRect();
+    if (box.top < window.innerHeight - 40) return;
+
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    section.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'end' });
+  }, [heard]);
 
   useEffect(() => () => player?.stop(), [player]);
   useEffect(
@@ -198,12 +236,14 @@ export default function App() {
           {entries.map((entry) => {
             const sha = entry.repo.commitSha;
             const score = scores.get(sha);
-            if (!score) return null;
+            const palette = palettes.get(sha);
+            if (!score || !palette) return null;
             return (
               <li key={sha}>
                 <Tile
                   features={entry}
                   score={score}
+                  palette={palette}
                   playing={playingSha === sha}
                   player={playingSha === sha ? player : null}
                   onToggle={() => void play(entry)}
@@ -222,7 +262,7 @@ export default function App() {
         {/* Held back until the visitor has heard something. A repository box is a question,
             and asking it before showing what the answer sounds like gets no answer. */}
         {heard && (
-          <section className="mt-16 border-t border-[#dfe2e6] pt-8 sm:mt-20">
+          <section ref={inputSection} className="mt-16 border-t border-[#dfe2e6] pt-8 sm:mt-20">
             <h2 className="text-[10px] tracking-[0.18em] text-[#767c86] uppercase">
               Play your own
             </h2>
