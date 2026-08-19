@@ -273,7 +273,29 @@ in a file that is the first thing a stranger reads.
   sampling eight tiles for fifteen seconds each is hearing plenty and would otherwise show
   nothing.
 
-**Phase 3 is complete.**
+  The timing was right first time and the reveal was invisible anyway: in a 536px window the
+  section's top sits around 740px down the page, so it appeared below the fold with nothing
+  to say it had. A reveal nobody sees is the same as no reveal.
+
+**Phase 3 is complete.** Two findings worth carrying, both about colour.
+
+**Independent draws do not spread out.** Eight seed-derived hues clumped into about five
+colour families, the way eight coin flips are rarely four and four. A set is now laid out on
+a wheel anchored on the first seed's own hue, so eight tiles sit 45 degrees apart and each
+later seed takes the free slot nearest what it wanted. Slots rather than nudging a hue past
+whatever blocks it — that was the first attempt and it can drop a third seed exactly where
+the second already sits.
+
+**Clipping sRGB channels changes the hue.** Not every OKLCH colour exists in sRGB, and
+clamping each channel independently bends the colour, because the three clip by different
+amounts. Eight hues laid out exactly 45 degrees apart came back 28 degrees apart once
+rendered — most of the separation thrown away, and the whole reason for working in a
+perceptually uniform space defeated. Out-of-gamut colours now lose chroma instead.
+
+The README was corrected at the same time, since the gallery is what made it possible: its
+table of keys and tempos was hand-written fiction, and four of the six repositories it
+listed are in languages the parser cannot read. It is now generated output, and
+`gallery.test.ts` fails if it drifts.
 
 ---
 

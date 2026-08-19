@@ -15,7 +15,7 @@
 
 https://github.com/USER/codetta/assets/PLACEHOLDER/clip.mp4
 
-<sub>↑ `facebook/react`, 232k stars, 268,430 lines, in D Dorian at 104 BPM</sub>
+<sub>↑ `facebook/react` — 297,593 lines, F Lydian at 120 BPM</sub>
 
 </div>
 
@@ -23,16 +23,20 @@ https://github.com/USER/codetta/assets/PLACEHOLDER/clip.mp4
 
 ## Listen to a few
 
-| Repository                                               |                        |                    |
-| -------------------------------------------------------- | ---------------------- | ------------------ |
-| [facebook/react](https://codetta.dev/r/facebook/react)   | D Dorian · 104 BPM     | dense, restless    |
-| [torvalds/linux](https://codetta.dev/r/torvalds/linux)   | A Aeolian · 88 BPM     | vast, slow-moving  |
-| [bitcoin/bitcoin](https://codetta.dev/r/bitcoin/bitcoin) | C Aeolian · 76 BPM     | sparse, deliberate |
-| [redis/redis](https://codetta.dev/r/redis/redis)         | G Mixolydian · 120 BPM | tight, percussive  |
-| [vuejs/core](https://codetta.dev/r/vuejs/core)           | F Lydian · 112 BPM     | bright, airy       |
-| [neovim/neovim](https://codetta.dev/r/neovim/neovim)     | Eb Aeolian · 96 BPM    | layered, deep      |
+Ordered by size, which is what sets the tempo. Every key and tempo below is generated output,
+not description — `apps/web/src/features/gallery.test.ts` fails if this table drifts from what
+the code actually produces.
 
-<!-- TODO: fill in the real key/tempo/feel once the gallery is rendered. -->
+| Repository                                                        | Language   | Lines   | Key · Tempo             |
+| ----------------------------------------------------------------- | ---------- | ------- | ----------------------- |
+| [psf/requests](https://github.com/psf/requests)                   | Python     | 9,841   | A Aeolian · 92 BPM      |
+| [expressjs/express](https://github.com/expressjs/express)         | JavaScript | 17,541  | G Aeolian · 96 BPM      |
+| [gin-gonic/gin](https://github.com/gin-gonic/gin)                 | Go         | 20,156  | D Aeolian · 96 BPM      |
+| [vuejs/core](https://github.com/vuejs/core)                       | TypeScript | 143,315 | Eb Aeolian · 112 BPM    |
+| [microsoft/TypeScript](https://github.com/microsoft/TypeScript)   | TypeScript | 145,942 | G Mixolydian · 112 BPM  |
+| [facebook/react](https://github.com/facebook/react)               | JavaScript | 297,593 | F Lydian · 120 BPM      |
+| [django/django](https://github.com/django/django)                 | Python     | 312,754 | A Dorian · 120 BPM      |
+| [kubernetes/kubernetes](https://github.com/kubernetes/kubernetes) | Go         | 503,617 | Eb Mixolydian · 124 BPM |
 
 ## What it does
 
@@ -55,8 +59,9 @@ tempo between 72 and 128 BPM, a four-bar chord loop drawn from six curated progr
 so any combination is consonant by construction.
 
 Only then does the code get a say. The largest module becomes the lead voice; average nesting
-depth picks an octave; branching density sets how often a sixteenth slot fires (capped at 0.75,
-because a wall of sound always sounds bad); comment ratio opens the filter and the reverb. The
+depth places it in its register; branching density picks one of eight curated rhythms, none of
+which fills every sixteenth, because a wall of sound always sounds bad; comment ratio opens the
+filter and the reverb. The
 song structure — intro, build, peak, break, return, outro — is a fixed template that the
 repository fills in rather than reshapes.
 
@@ -75,9 +80,13 @@ make api-dev                   # :8080
 pnpm dev                       # :5173
 ```
 
-No API key is required for public repositories, though setting `GITHUB_TOKEN` raises the rate
-limit considerably. There are no accounts, no database, and nothing is stored — Redis only
-caches parsed output, keyed by commit SHA.
+`GITHUB_TOKEN` is required, and the service refuses to start without one. Anonymous GitHub
+allows sixty requests an hour, which is enough to look like it works and then fail in the
+middle of a demo — better refused at boot than at request time. A token with no scopes is
+enough; create one at <https://github.com/settings/tokens>.
+
+There are no accounts, no database, and nothing is stored — Redis only caches parsed output,
+keyed by commit SHA, and the app works correctly without it.
 
 ## How it's put together
 
@@ -94,9 +103,10 @@ hundred times, and it should never require re-parsing anything.
 
 Currently supported: TypeScript, JavaScript, Python, Go.
 
-Adding one means supplying a tree-sitter grammar and a small adapter that maps its node types
-onto the four things Codetta counts — functions, classes, branches, comments. No aggregation or
-music code needs to change. See [CONTRIBUTING.md](CONTRIBUTING.md).
+Adding one means supplying a tree-sitter grammar and a small adapter: seven lists of node
+kinds — functions, classes, branches, comments, imports, statements, and whatever marks a
+function asynchronous. No aggregation or music code changes. See
+[CONTRIBUTING.md](CONTRIBUTING.md).
 
 <!-- TODO: write CONTRIBUTING.md before launch. Language support is the natural
      first contribution and the cheapest way to get outside commits. -->
