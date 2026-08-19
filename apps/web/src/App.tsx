@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
-import { startPlayback, type Player } from './audio/player';
+import { renderWav, startPlayback, wavFilename, type Player } from './audio/player';
 import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
 import { GALLERY } from './features/gallery';
 import { generateScore } from './music/generate';
@@ -94,6 +94,7 @@ export default function App() {
   const [starting, setStarting] = useState<string | null>(null);
   const [heard, setHeard] = useState(false);
 
+  const [saving, setSaving] = useState(false);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -109,6 +110,11 @@ export default function App() {
     const ordered = [...GALLERY].sort((a, b) => a.totals.linesOfCode - b.totals.linesOfCode);
     return custom ? [...ordered, custom] : ordered;
   }, [custom]);
+
+  const playing = useMemo(
+    () => entries.find((entry) => entry.repo.commitSha === playingSha) ?? null,
+    [entries, playingSha],
+  );
 
   const scores = useMemo(
     () => new Map(entries.map((entry) => [entry.repo.commitSha, generateScore(entry)])),
@@ -195,6 +201,36 @@ export default function App() {
     }
   }
 
+  /**
+   * Render the piece that is playing to a file.
+   *
+   * Offered only while something is playing, because the thing being saved is the thing being
+   * heard — a download button on a tile nobody has listened to is asking someone to take a
+   * file on trust.
+   */
+  async function save(entry: RepoFeatures) {
+    const sha = entry.repo.commitSha;
+    const score = scores.get(sha) ?? generateScore(entry);
+
+    setSaving(true);
+    setError(null);
+    try {
+      const blob = await renderWav(score);
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = wavFilename(score, entry.repo.owner, entry.repo.name);
+      link.click();
+      // Released on the next tick rather than immediately: revoking before the browser has
+      // taken the URL cancels the download in some of them.
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+    } finally {
+      setSaving(false);
+    }
+  }
+
   async function load(text: string) {
     const repo = parseRepoRef(text);
     if (!repo) {
@@ -252,6 +288,22 @@ export default function App() {
             );
           })}
         </ul>
+
+        {playing && (
+          <div className="mt-8 flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => void save(playing)}
+              disabled={saving}
+              className="rounded-[3px] border border-[#0e1013] px-3 py-1.5 text-[11px] tracking-[0.12em] uppercase hover:bg-[#0e1013] hover:text-[#f2f3f5] disabled:opacity-40"
+            >
+              {saving ? 'Rendering' : `Save ${playing.repo.name}.wav`}
+            </button>
+            <span className="text-[11px] text-[#767c86]">
+              {saving ? 'Faster than real time' : 'The whole piece, exactly as you hear it'}
+            </span>
+          </div>
+        )}
 
         {starting && (
           <p className="mt-8 text-[11px] tracking-[0.16em] text-[#767c86] uppercase">

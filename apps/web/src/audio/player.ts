@@ -6,8 +6,10 @@ import {
   type NoteEvent,
   type Score,
 } from '../music/score';
+import { scoreDurationSeconds } from '../music/score';
 import { masterBus } from './engine';
 import { KITS, type Waveform } from './kits';
+import { encodeWav } from './wav';
 
 /**
  * Tone types a synth's oscillator options as a discriminated union covering FM, AM and Fat
@@ -69,13 +71,27 @@ export interface PlaybackOptions {
   loop?: boolean;
 }
 
-export async function startPlayback(
-  score: Score,
-  options: PlaybackOptions = {},
-): Promise<Player> {
-  const { loop = true } = options;
+/** Everything one performance of a Score owns, live or offline. */
+interface Rig {
+  part: Tone.Part<ScheduledNote>;
+  pad: Tone.PolySynth;
+  dispose(): void;
+}
 
-  await Tone.start();
+/**
+ * Build the instruments and place every note on the transport, in whatever context is
+ * current.
+ *
+ * Extracted so that rendering a file and playing one out loud are the same code rather than
+ * two implementations that agree until they do not. A separate offline graph would be a
+ * second copy of every envelope, every cutoff and every gain that Phase 0 found by ear, and
+ * the first divergence would show up as a downloaded file that sounds unlike the thing the
+ * visitor pressed play on — which is the one property the share artifact cannot lose.
+ *
+ * It does not start anything. The caller owns the transport, because live playback loops and
+ * a render must not.
+ */
+async function buildRig(score: Score): Promise<Rig> {
   const master = masterBus();
 
   // Envelope times are fractions of a bar, not fixed seconds. Tempo is repo-dependent, so
@@ -284,35 +300,10 @@ export async function startPlayback(
     score.events.map((event) => ({ ...event, time: ticksToTransportTime(event.tick) })),
   );
 
-  const transport = Tone.getTransport();
-  transport.stop();
-  transport.cancel();
-  transport.position = 0;
-  transport.bpm.value = score.bpm;
-  transport.loop = loop;
-  transport.loopStart = 0;
-  transport.loopEnd = `${score.bars}:0:0`;
-
-  part.start(0);
-  transport.start();
-
-  let stopped = false;
   return {
-    positionSeconds() {
-      if (stopped) return 0;
-      // Negative for the instant between starting the transport and the context reaching it.
-      return Math.max(0, transport.getSecondsAtTime(Tone.getContext().currentTime));
-    },
-
-    stop() {
-      if (stopped) return;
-      stopped = true;
-
-      transport.stop();
-      transport.cancel();
-      transport.loop = false;
-      transport.position = 0;
-
+    part,
+    pad,
+    dispose() {
       pad.releaseAll();
       part.dispose();
       for (const node of [
@@ -342,4 +333,118 @@ export async function startPlayback(
       }
     },
   };
+}
+
+export async function startPlayback(
+  score: Score,
+  options: PlaybackOptions = {},
+): Promise<Player> {
+  const { loop = true } = options;
+
+  await Tone.start();
+  const rig = await buildRig(score);
+
+  const transport = Tone.getTransport();
+  transport.stop();
+  transport.cancel();
+  transport.position = 0;
+  transport.bpm.value = score.bpm;
+  transport.loop = loop;
+  transport.loopStart = 0;
+  transport.loopEnd = `${score.bars}:0:0`;
+
+  rig.part.start(0);
+  transport.start();
+
+  let stopped = false;
+  return {
+    positionSeconds() {
+      if (stopped) return 0;
+      // Negative for the instant between starting the transport and the context reaching it.
+      return Math.max(0, transport.getSecondsAtTime(Tone.getContext().currentTime));
+    },
+
+    stop() {
+      if (stopped) return;
+      stopped = true;
+
+      transport.stop();
+      transport.cancel();
+      transport.loop = false;
+      transport.position = 0;
+
+      rig.dispose();
+    },
+  };
+}
+
+export interface RenderOptions {
+  /**
+   * Seconds of silence kept after the last note, so the tails that Phase 0 spent four rounds
+   * tuning are in the file rather than cut off by it. A reverb whose decay is a fraction of a
+   * bar needs about that long to finish.
+   */
+  tailSeconds?: number;
+}
+
+/**
+ * Render a Score to a WAV file, faster than real time.
+ *
+ * The same `buildRig` the speakers get, in an OfflineAudioContext. That is the whole design:
+ * a render is not a second implementation that agrees with playback until it does not, it is
+ * the same graph asked to run without a clock. The file is what the visitor heard, or the
+ * share artifact is a different piece of music wearing its name.
+ *
+ * Not looped and not started from the middle. `Tone.Offline` gives the callback its own
+ * transport, so the loop that live playback wants — and which would otherwise render the
+ * piece twice into a buffer sized for one — is simply never switched on.
+ */
+export async function renderWav(score: Score, options: RenderOptions = {}): Promise<Blob> {
+  const { tailSeconds = 3 } = options;
+  const duration = scoreDurationSeconds(score) + tailSeconds;
+
+  const buffer = await Tone.Offline(async () => {
+    const rig = await buildRig(score);
+    const transport = Tone.getTransport();
+
+    transport.bpm.value = score.bpm;
+    transport.position = 0;
+    rig.part.start(0);
+    transport.start();
+  }, duration);
+
+  // Tone hands back its own wrapper; the channel data underneath is what the encoder wants.
+  const channels = Array.from({ length: buffer.numberOfChannels }, (_, at) =>
+    buffer.getChannelData(at),
+  );
+
+  /*
+   * A silent render is the failure this is most likely to have, and the one it would hide
+   * best: every promise resolves, the encoder writes a perfectly valid header, and the
+   * visitor gets fourteen megabytes of nothing with no way to tell whose fault it is. It
+   * would happen if the graph were ever built against the wrong context — the exact mistake
+   * the per-context limiter exists to prevent — so the check is here rather than trusted.
+   */
+  let peak = 0;
+  for (const channel of channels) {
+    for (const sample of channel) peak = Math.max(peak, Math.abs(sample));
+  }
+  if (peak < 1e-4) {
+    throw new Error('The render came out silent. Nothing was saved.');
+  }
+
+  return new Blob([encodeWav({ sampleRate: buffer.sampleRate, channels })], {
+    type: 'audio/wav',
+  });
+}
+
+/**
+ * What to call the file.
+ *
+ * The commit is in the name because the music is a function of it: two files from the same
+ * repository at different commits are different pieces, and a name that hid that would put
+ * the burden of noticing on whoever had already downloaded one.
+ */
+export function wavFilename(score: Score, owner: string, name: string): string {
+  return `codetta-${owner}-${name}-${score.seed}.wav`;
 }
