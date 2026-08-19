@@ -49,6 +49,17 @@ const FRESH_SECONDS = 0.55;
 /** Room at the edges, as a fraction of the smaller side, so marks never touch the frame. */
 const INSET = 0.04;
 
+/**
+ * The least vertical room a file mark may have before the field stops drawing all of them.
+ *
+ * Detail is bounded by two separate things, and only one of them was here before. The frame
+ * budget asks what this machine can afford; this asks what the space can hold. Two hundred
+ * and fifty-six marks in a tile two hundred pixels tall overlap into a solid block — every
+ * frame drawn on time, and nothing legible in any of them. A gallery of eight tiles is
+ * exactly where that happens, so the thinning is by whichever constraint binds harder.
+ */
+const MIN_MARK_SPACING = 2.2;
+
 export interface FieldProps {
   player: Player | null;
   score: Score;
@@ -151,7 +162,12 @@ export function Field({ player, score, features, height = 300, onFrameRate }: Fi
     const read = totalTicks > 0 ? tick / totalTicks : 0;
     const readY = inset + read * innerHeight;
     const readSeconds = read * duration;
-    const step = stride(detail.current);
+    const affordable = stride(detail.current);
+    const fits = Math.max(
+      1,
+      Math.ceil((features.timeline.length * MIN_MARK_SPACING) / Math.max(1, innerHeight)),
+    );
+    const step = Math.max(affordable, fits);
 
     for (const column of columns) {
       const x = inset + column.x * innerWidth;

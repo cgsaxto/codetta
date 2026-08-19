@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 3**
+**Current phase: 4**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -250,8 +250,30 @@ in a file that is the first thing a stranger reads.
   — those exist so a change in the music is detectable, and a gallery that is refreshed would
   destroy that the first time it moved.
 
-- [ ] Landing page **is** the gallery, playable in one click
-- [ ] **No URL input box above the fold.** Input appears after the first playthrough.
+- [x] Landing page **is** the gallery, playable in one click
+
+  Eight tiles, each the repository drawn, each one click from playing. The page itself
+  contributes no colour — every hue on screen comes from a commit — because a dark page
+  would have merged the tiles into it and spent the contrast that makes eight repositories
+  look like eight repositories.
+
+  The order encodes something: smallest first, so reading the grid is reading it slowest to
+  fastest, since size is what sets tempo. The largest type on the page is 15px, which is the
+  one real risk taken here — the eight pictures are the headline, and no sentence above them
+  would have carried it better.
+
+  It also forced a second detail bound on the visualiser. The frame budget asks what a
+  machine can afford; a tile 172px tall holding 256 files asks what the space can hold, and
+  without the second one every frame arrives on time with nothing legible in it.
+
+- [x] **No URL input box above the fold.** Input appears after the first playthrough.
+
+  Revealed after twenty seconds of playback, or immediately when someone stops a piece —
+  nobody stops something they have not listened to. Started once and never restarted, since
+  sampling eight tiles for fifteen seconds each is hearing plenty and would otherwise show
+  nothing.
+
+**Phase 3 is complete.**
 
 ---
 
