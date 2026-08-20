@@ -303,11 +303,34 @@ listed are in languages the parser cannot read. It is now generated output, and
 
 This phase is the growth loop. It is not polish, and it is not optional.
 
-- [ ] `OfflineAudioContext` render → WAV download
+- [x] `OfflineAudioContext` render → WAV download
+
+  The decision is the split, not the encoder. `buildRig` is extracted so that rendering a
+  file and playing one out loud are the same code in a different context — a separate
+  offline graph would be a second copy of every envelope and gain Phase 0 found by ear, and
+  the first divergence would arrive as a download that sounds unlike what the visitor
+  pressed play on.
+
+  That made the master limiter one-per-context: a node belongs to the context that made it,
+  so handing the offline graph the live limiter renders to the speakers and saves silence.
+  A silent render now throws rather than saving, because it is the likeliest failure and the
+  best hidden — every promise resolves and the header is valid.
+
+- [x] Clip is 30 s, starting at the peak section, not the intro
+
+  Taken out of order, before the video, because it is a property of the artifacts rather
+  than an artifact: defining the window once means the recorder inherits it, and two
+  artifacts of different moments would be a pairing that lies.
+
+  The whole piece is rendered and then sliced, rather than starting the transport at an
+  offset. The reverb tails and the pad still ringing from the bars before the peak are part
+  of what the peak sounds like; a clip that began in an empty room would not be the moment
+  it claims to be. Twenty milliseconds of fade in, because a clip starts mid-note and a step
+  is a click; a second and a half out, because stopping dead reads as truncation.
+
 - [ ] `MediaRecorder` + `canvas.captureStream()` → square and vertical MP4/WebM
 - [ ] Permalink per repo: `/r/{owner}/{name}`
 - [ ] Per-repo OG image generated server-side so links unfurl with the repo's waveform
-- [ ] Clip is 30 s, starting at the peak section, not the intro
 
 ---
 

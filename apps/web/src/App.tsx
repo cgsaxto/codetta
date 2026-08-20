@@ -94,7 +94,7 @@ export default function App() {
   const [starting, setStarting] = useState<string | null>(null);
   const [heard, setHeard] = useState(false);
 
-  const [saving, setSaving] = useState(false);
+  const [saving, setSaving] = useState<'clip' | 'full' | null>(null);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -208,18 +208,18 @@ export default function App() {
    * heard — a download button on a tile nobody has listened to is asking someone to take a
    * file on trust.
    */
-  async function save(entry: RepoFeatures) {
+  async function save(entry: RepoFeatures, clip: boolean) {
     const sha = entry.repo.commitSha;
     const score = scores.get(sha) ?? generateScore(entry);
 
-    setSaving(true);
+    setSaving(clip ? 'clip' : 'full');
     setError(null);
     try {
-      const blob = await renderWav(score);
+      const blob = await renderWav(score, { clip });
       const url = URL.createObjectURL(blob);
       const link = document.createElement('a');
       link.href = url;
-      link.download = wavFilename(score, entry.repo.owner, entry.repo.name);
+      link.download = wavFilename(score, entry.repo.owner, entry.repo.name, clip);
       link.click();
       // Released on the next tick rather than immediately: revoking before the browser has
       // taken the URL cancels the download in some of them.
@@ -227,7 +227,7 @@ export default function App() {
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
-      setSaving(false);
+      setSaving(null);
     }
   }
 
@@ -290,17 +290,25 @@ export default function App() {
         </ul>
 
         {playing && (
-          <div className="mt-8 flex items-center gap-3">
+          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
             <button
               type="button"
-              onClick={() => void save(playing)}
-              disabled={saving}
-              className="rounded-[3px] border border-[#0e1013] px-3 py-1.5 text-[11px] tracking-[0.12em] uppercase hover:bg-[#0e1013] hover:text-[#f2f3f5] disabled:opacity-40"
+              onClick={() => void save(playing, true)}
+              disabled={saving !== null}
+              className="rounded-[3px] bg-[#0e1013] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#f2f3f5] uppercase disabled:opacity-40"
             >
-              {saving ? 'Rendering' : `Save ${playing.repo.name}.wav`}
+              {saving === 'clip' ? 'Rendering' : `Save 30s of ${playing.repo.name}`}
+            </button>
+            <button
+              type="button"
+              onClick={() => void save(playing, false)}
+              disabled={saving !== null}
+              className="text-[11px] text-[#575d66] underline underline-offset-4 hover:text-[#0e1013] disabled:opacity-40"
+            >
+              {saving === 'full' ? 'Rendering the whole piece' : 'or the whole piece'}
             </button>
             <span className="text-[11px] text-[#767c86]">
-              {saving ? 'Faster than real time' : 'The whole piece, exactly as you hear it'}
+              From the peak, where every voice is playing
             </span>
           </div>
         )}

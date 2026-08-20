@@ -3,13 +3,14 @@ import {
   BEATS_PER_BAR,
   TICKS_PER_BAR,
   TICKS_PER_BEAT,
+  scoreDurationSeconds,
   type NoteEvent,
   type Score,
 } from '../music/score';
-import { scoreDurationSeconds } from '../music/score';
+import { clipWindow } from '../music/clip';
 import { masterBus } from './engine';
 import { KITS, type Waveform } from './kits';
-import { encodeWav } from './wav';
+import { encodeWav, sliceWithFades } from './wav';
 
 /**
  * Tone types a synth's oscillator options as a discriminated union covering FM, AM and Fat
@@ -385,6 +386,15 @@ export interface RenderOptions {
    * bar needs about that long to finish.
    */
   tailSeconds?: number;
+  /**
+   * Cut the shareable window out of the piece instead of keeping all of it.
+   *
+   * The whole piece is still rendered either way, and then sliced. Starting the transport at
+   * an offset would be cheaper and would be wrong: the reverb tails and the pad still ringing
+   * from the bars before the peak are part of what the peak sounds like, and a clip that
+   * began with an empty room would not be the moment it claims to be.
+   */
+  clip?: boolean;
 }
 
 /**
@@ -400,7 +410,7 @@ export interface RenderOptions {
  * piece twice into a buffer sized for one — is simply never switched on.
  */
 export async function renderWav(score: Score, options: RenderOptions = {}): Promise<Blob> {
-  const { tailSeconds = 3 } = options;
+  const { tailSeconds = 3, clip = false } = options;
   const duration = scoreDurationSeconds(score) + tailSeconds;
 
   const buffer = await Tone.Offline(async () => {
@@ -414,9 +424,21 @@ export async function renderWav(score: Score, options: RenderOptions = {}): Prom
   }, duration);
 
   // Tone hands back its own wrapper; the channel data underneath is what the encoder wants.
-  const channels = Array.from({ length: buffer.numberOfChannels }, (_, at) =>
+  const rendered = Array.from({ length: buffer.numberOfChannels }, (_, at) =>
     buffer.getChannelData(at),
   );
+
+  const window = clipWindow(score);
+  const channels = clip
+    ? sliceWithFades(
+        rendered,
+        buffer.sampleRate,
+        window.startSeconds,
+        // The tail is kept past the window's end so the fade has real music to fade, rather
+        // than fading a silence that was already there.
+        window.durationSeconds,
+      )
+    : rendered;
 
   /*
    * A silent render is the failure this is most likely to have, and the one it would hide
@@ -445,6 +467,6 @@ export async function renderWav(score: Score, options: RenderOptions = {}): Prom
  * repository at different commits are different pieces, and a name that hid that would put
  * the burden of noticing on whoever had already downloaded one.
  */
-export function wavFilename(score: Score, owner: string, name: string): string {
-  return `codetta-${owner}-${name}-${score.seed}.wav`;
+export function wavFilename(score: Score, owner: string, name: string, clip = false): string {
+  return `codetta-${owner}-${name}-${score.seed}${clip ? '-clip' : ''}.wav`;
 }

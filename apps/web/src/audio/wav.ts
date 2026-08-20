@@ -83,3 +83,51 @@ export function encodeWav({ sampleRate, channels }: WavOptions): ArrayBuffer {
 
   return buffer;
 }
+
+/**
+ * Cut a window out of rendered channels, with the edges eased.
+ *
+ * Both fades earn their place and they are not the same length.
+ *
+ * A clip starts in the middle of the piece, which means it starts in the middle of whatever
+ * notes were sounding. Beginning at a non-zero sample is a step discontinuity, and a step is
+ * a click — the loudest, least musical sound the file can contain, right where a listener's
+ * attention is highest. Twenty milliseconds removes it and is far too short to hear as a
+ * fade.
+ *
+ * The end is a different problem. Stopping dead is not a click, because a reverb tail is near
+ * silence by then, but it is not an ending either — it reads as the file being truncated,
+ * which is exactly what it is. A second and a half reads as a decision.
+ */
+export function sliceWithFades(
+  channels: readonly Float32Array[],
+  sampleRate: number,
+  startSeconds: number,
+  durationSeconds: number,
+  fadeInSeconds = 0.02,
+  fadeOutSeconds = 1.5,
+): Float32Array[] {
+  const available = channels[0]?.length ?? 0;
+  const from = Math.max(0, Math.min(available, Math.round(startSeconds * sampleRate)));
+  const frames = Math.max(
+    0,
+    Math.min(available - from, Math.round(durationSeconds * sampleRate)),
+  );
+
+  // A fade cannot be longer than what it is fading, and the two together cannot overlap —
+  // otherwise the ramps multiply and the middle of a short clip comes out quieter than it is.
+  const fadeIn = Math.min(Math.round(fadeInSeconds * sampleRate), Math.floor(frames / 2));
+  const fadeOut = Math.min(Math.round(fadeOutSeconds * sampleRate), Math.floor(frames / 2));
+
+  return channels.map((channel) => {
+    const out = new Float32Array(frames);
+    for (let at = 0; at < frames; at++) {
+      let gain = 1;
+      if (at < fadeIn) gain = at / fadeIn;
+      const remaining = frames - 1 - at;
+      if (remaining < fadeOut) gain = Math.min(gain, remaining / fadeOut);
+      out[at] = (channel[from + at] ?? 0) * gain;
+    }
+    return out;
+  });
+}
