@@ -1,5 +1,5 @@
 // Package api is the HTTP surface: one endpoint that turns a repository reference into a
-// RepoFeatures document.
+// RepoFeatures document, and one that turns a username into the repository to ask about.
 //
 // It holds no logic of its own beyond the order things happen in and what each failure looks
 // like from outside. The caps live in archive, the language knowledge in parse, the
@@ -67,6 +67,7 @@ func Handler(deps Deps) http.Handler {
 		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 	mux.HandleFunc("GET /v1/features/{owner}/{name}", deps.featuresHandler)
+	mux.HandleFunc("GET /v1/users/{login}", deps.userHandler)
 
 	// Registered last and matching everything left over, so the API's own routes always win.
 	// A repository called `v1` cannot shadow the endpoint, whatever else it does.
@@ -117,7 +118,7 @@ func (deps Deps) featuresHandler(w http.ResponseWriter, r *http.Request) {
 	// seed. Branches move; the music must not.
 	repo, err := deps.GitHub.Resolve(ctx, owner, name, ref)
 	if err != nil {
-		deps.fail(w, r, "resolving", owner, name, err)
+		deps.fail(w, "resolving", owner, name, err)
 		return
 	}
 
@@ -130,14 +131,14 @@ func (deps Deps) featuresHandler(w http.ResponseWriter, r *http.Request) {
 
 	tarball, err := deps.GitHub.Tarball(ctx, repo.Owner, repo.Name, repo.CommitSHA)
 	if err != nil {
-		deps.fail(w, r, "fetching the archive", owner, name, err)
+		deps.fail(w, "fetching the archive", owner, name, err)
 		return
 	}
 	defer tarball.Close()
 
 	document, err := features.FromTarball(ctx, repo, tarball, time.Now())
 	if err != nil {
-		deps.fail(w, r, "parsing", owner, name, err)
+		deps.fail(w, "parsing", owner, name, err)
 		return
 	}
 
@@ -151,14 +152,18 @@ func (deps Deps) featuresHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 /*
-fail turns an error from anywhere in the pipeline into a status and a sentence.
+fail turns an error from anywhere in the repository pipeline into a status and a sentence.
 
 The sentences are for a person looking at a repository that did not play, so they say what
 happened and, where there is one, what would have worked. The distinction that matters is
 whose problem it is: a repository we cannot read is the visitor's to fix by picking another,
 a spent rate limit or a rejected token is ours and must not be dressed up as theirs.
+
+Only the first two cases are about a repository. Everything below them is about the exchange
+with GitHub and reads the same whatever was being asked for, which is why it lives in
+failUpstream and is shared with the username lookup.
 */
-func (deps Deps) fail(w http.ResponseWriter, r *http.Request, stage, owner, name string, err error) {
+func (deps Deps) fail(w http.ResponseWriter, stage, owner, name string, err error) {
 	repo := owner + "/" + name
 
 	switch {
@@ -172,17 +177,25 @@ func (deps Deps) fail(w http.ResponseWriter, r *http.Request, stage, owner, name
 		// a bare "unsupported" leaves the reader guessing at what would have worked.
 		writeError(w, http.StatusUnprocessableEntity, features.NoSupportedFilesMessage())
 
+	default:
+		deps.failUpstream(w, stage, repo, err)
+	}
+}
+
+// failUpstream covers everything that is about GitHub rather than about what was asked for.
+func (deps Deps) failUpstream(w http.ResponseWriter, stage, subject string, err error) {
+	switch {
 	case errors.Is(err, context.DeadlineExceeded) || errors.Is(err, context.Canceled):
 		// The client going away lands here too. Nobody reads that response, and writing it
 		// costs nothing, so it is not worth a branch of its own.
-		deps.Logger.Warn("gave up", "repo", repo, "stage", stage, "error", err)
+		deps.Logger.Warn("gave up", "subject", subject, "stage", stage, "error", err)
 		writeError(w, http.StatusGatewayTimeout,
-			repo+" took longer than Codetta waits. Very large repositories can do this — "+
+			subject+" took longer than Codetta waits. Very large repositories can do this — "+
 				"try again, or try a smaller one.")
 
 	case errors.Is(err, github.ErrRateLimited):
 		// Ours, not theirs. GitHub's hourly budget is spent for everyone until it resets.
-		deps.Logger.Error("github rate limit exhausted", "repo", repo, "error", err)
+		deps.Logger.Error("github rate limit exhausted", "subject", subject, "error", err)
 		w.Header().Set("Retry-After", "300")
 		writeError(w, http.StatusServiceUnavailable,
 			"Codetta has run out of GitHub requests for the moment. Try again shortly.")
@@ -190,7 +203,7 @@ func (deps Deps) fail(w http.ResponseWriter, r *http.Request, stage, owner, name
 	case errors.Is(err, github.ErrUnauthorized):
 		// A misconfigured or expired token. Never described to the caller as their mistake,
 		// and never with any detail that hints at the credential.
-		deps.Logger.Error("github rejected the token", "repo", repo, "stage", stage)
+		deps.Logger.Error("github rejected the token", "subject", subject, "stage", stage)
 		writeError(w, http.StatusInternalServerError,
 			"Codetta cannot talk to GitHub right now. This one is on us.")
 
@@ -203,13 +216,13 @@ func (deps Deps) fail(w http.ResponseWriter, r *http.Request, stage, owner, name
 		// button again is the difference between a bug report and a retry.
 		var transport *url.Error
 		if errors.As(err, &transport) {
-			deps.Logger.Warn("could not reach github", "repo", repo, "stage", stage, "error", err)
+			deps.Logger.Warn("could not reach github", "subject", subject, "stage", stage, "error", err)
 			writeError(w, http.StatusBadGateway,
 				"Codetta could not reach GitHub just then. Try again.")
 			return
 		}
 
-		deps.Logger.Error("request failed", "repo", repo, "stage", stage, "error", err)
-		writeError(w, http.StatusInternalServerError, "something went wrong "+stage+" "+repo+".")
+		deps.Logger.Error("request failed", "subject", subject, "stage", stage, "error", err)
+		writeError(w, http.StatusInternalServerError, "something went wrong "+stage+" "+subject+".")
 	}
 }

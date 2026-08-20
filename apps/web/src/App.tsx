@@ -1,12 +1,14 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
 import { renderClip, renderWav, startPlayback, wavFilename, type Player } from './audio/player';
-import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
+import { ApiError, fetchFeatures, parseTarget, type RepoRef } from './features/api';
+import { fetchUserPick, pickSummary, type UserPick } from './features/user';
 import { GALLERY } from './features/gallery';
 import { pathForRepo, repoFromPath } from './features/route';
 import { generateScore } from './music/generate';
 import type { Score } from './music/score';
 import { Field } from './visuals/Field';
+import { cardFilename, loadAvatar, renderCard, shortLines } from './visuals/card';
 import { palettesFor, type Palette } from './visuals/palette';
 import { recordClip, supportedVideoType, videoFilename, type Shape } from './visuals/record';
 
@@ -29,10 +31,6 @@ import { recordClip, supportedVideoType, videoFilename, type Shape } from './vis
 
 /** Seconds of playback after which someone has heard enough to be offered the input. */
 const HEARD_AFTER = 20;
-
-function shortLines(count: number): string {
-  return count >= 1000 ? `${Math.round(count / 1000)}k lines` : `${count} lines`;
-}
 
 interface TileProps {
   buttonRef?: (node: HTMLButtonElement | null) => void;
@@ -98,13 +96,15 @@ export default function App() {
   const [starting, setStarting] = useState<string | null>(null);
   const [heard, setHeard] = useState(false);
 
-  const [saving, setSaving] = useState<'clip' | 'full' | Shape | null>(null);
+  const [saving, setSaving] = useState<'clip' | 'full' | 'card' | Shape | null>(null);
   const [recorded, setRecorded] = useState(0);
   /** The tile a shared link named, so arriving on one lands on it rather than on the grid. */
   const [focusSha, setFocusSha] = useState<string | null>(null);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
+  /** The account a username resolved to, when that is how the visitor got here. */
+  const [pick, setPick] = useState<UserPick | null>(null);
   const [input, setInput] = useState('');
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<'user' | 'repo' | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const pending = useRef<AbortController | null>(null);
@@ -338,10 +338,58 @@ export default function App() {
     }
   }
 
+  /**
+   * Save the card: the repository drawn, its name, and — when a username chose it — the face
+   * of whoever it belongs to.
+   *
+   * The same drawing the link previews use, through the same function, so what a visitor
+   * downloads is what a timeline shows rather than something that resembles it.
+   */
+  async function saveCard(entry: RepoFeatures) {
+    const sha = entry.repo.commitSha;
+    const score = scores.get(sha) ?? generateScore(entry);
+    const palette = palettes.get(sha);
+    if (!palette) return;
+
+    setSaving('card');
+    setError(null);
+    try {
+      const blob = await renderCard({
+        features: entry,
+        score,
+        palette,
+        avatar: await loadAvatar(avatarFor(entry)),
+      });
+      offer(blob, cardFilename(entry.repo.owner, entry.repo.name));
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+    } finally {
+      setSaving(null);
+    }
+  }
+
+  /** The face for a repository, which is only ever the one an account was asked for. */
+  function avatarFor(entry: RepoFeatures): string | undefined {
+    if (!pick) return undefined;
+    const same =
+      pick.repo.owner.toLowerCase() === entry.repo.owner.toLowerCase() &&
+      pick.repo.name.toLowerCase() === entry.repo.name.toLowerCase();
+    return same ? pick.avatar : undefined;
+  }
+
+  /**
+   * Play whatever the visitor typed — a username or a repository.
+   *
+   * A username is two requests, deliberately: the first answers "which repository", which is
+   * the thing to show immediately, and the second is the slow one. Combining them would leave
+   * the page silent through both.
+   */
   async function load(text: string, autoplay = true) {
-    const repo = parseRepoRef(text);
-    if (!repo) {
-      setError('That does not look like a repository. Try facebook/react.');
+    const target = parseTarget(text);
+    if (!target) {
+      setError(
+        'That does not look like a username or a repository. Try torvalds, or facebook/react.',
+      );
       return;
     }
 
@@ -350,9 +398,20 @@ export default function App() {
     pending.current = controller;
 
     stop();
-    setLoading(true);
+    setPick(null);
+    setLoading(target.kind === 'user' ? 'user' : 'repo');
     setError(null);
     try {
+      let repo: RepoRef;
+      if (target.kind === 'user') {
+        const picked = await fetchUserPick(target.login, controller.signal);
+        setPick(picked);
+        setLoading('repo');
+        repo = { owner: picked.repo.owner, name: picked.repo.name };
+      } else {
+        repo = target.repo;
+      }
+
       const loaded = await fetchFeatures(repo, controller.signal);
       setCustom(loaded);
       setFocusSha(loaded.repo.commitSha);
@@ -361,7 +420,7 @@ export default function App() {
       if (controller.signal.aborted) return;
       setError(cause instanceof ApiError ? cause.message : String(cause));
     } finally {
-      if (!controller.signal.aborted) setLoading(false);
+      if (!controller.signal.aborted) setLoading(null);
     }
   }
 
@@ -437,6 +496,14 @@ export default function App() {
                     : `${shape} video`}
                 </button>
               ))}
+              <button
+                type="button"
+                onClick={() => void saveCard(playing)}
+                disabled={saving !== null}
+                className="rounded-[3px] border border-[#dfe2e6] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#575d66] uppercase hover:border-[#0e1013] hover:text-[#0e1013] disabled:opacity-40"
+              >
+                {saving === 'card' ? 'Drawing' : 'Card'}
+              </button>
               <span className="text-[11px] text-[#767c86]">
                 {saving === 'square' || saving === 'vertical'
                   ? 'Recording happens in real time — thirty seconds'
@@ -457,7 +524,7 @@ export default function App() {
         {heard && (
           <section ref={inputSection} className="mt-16 border-t border-[#dfe2e6] pt-8 sm:mt-20">
             <h2 className="text-[10px] tracking-[0.18em] text-[#767c86] uppercase">
-              Play your own
+              Hear your own
             </h2>
             <form
               className="mt-3 flex max-w-[420px] gap-2"
@@ -469,25 +536,43 @@ export default function App() {
               <input
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
-                placeholder="owner/repo"
+                placeholder="your-username"
                 spellCheck={false}
                 autoCapitalize="off"
                 autoCorrect="off"
-                aria-label="Repository to play"
+                aria-label="GitHub username, or a repository"
                 className="min-w-0 flex-1 rounded-[3px] border border-[#dfe2e6] bg-white px-3 py-2 text-[13px] outline-none placeholder:text-[#9aa1ab] focus:border-[#0e1013]"
               />
               <button
                 type="submit"
-                disabled={loading}
+                disabled={loading !== null}
                 className="rounded-[3px] bg-[#0e1013] px-4 py-2 text-[12px] tracking-[0.1em] text-[#f2f3f5] uppercase disabled:opacity-40"
               >
-                {loading ? 'Reading' : 'Play'}
+                {loading === 'user' ? 'Looking up' : loading === 'repo' ? 'Reading' : 'Play'}
               </button>
             </form>
+            {/* Said before the answer arrives, because a box that silently accepts two
+                different things is a box nobody tries the second thing in. */}
             <p className="mt-3 max-w-[46ch] text-[12px] leading-relaxed text-[#767c86]">
-              Public repositories in TypeScript, JavaScript, Python or Go. Large ones take a few
-              seconds the first time.
+              A username plays that account&rsquo;s most-starred repository. An{' '}
+              <span className="text-[#575d66]">owner/repo</span> plays exactly that one. Public,
+              and in TypeScript, JavaScript, Python or Go.
             </p>
+
+            {pick && (
+              <div className="mt-5 flex items-center gap-3">
+                {pick.avatar && (
+                  <img
+                    src={pick.avatar}
+                    alt=""
+                    className="size-9 shrink-0 rounded-full ring-1 ring-[#dfe2e6]"
+                  />
+                )}
+                <p className="max-w-[46ch] text-[12px] leading-relaxed text-[#575d66]">
+                  {pickSummary(pick)}
+                </p>
+              </div>
+            )}
           </section>
         )}
 

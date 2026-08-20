@@ -29,8 +29,36 @@ var ErrNoSupportedFiles = errors.New("no files in a supported language")
 func NoSupportedFilesMessage() string {
 	return fmt.Sprintf(
 		"this repository has no files in a language Codetta can read. Supported: %s",
-		strings.Join(parse.Names(), ", "),
+		SupportedLanguages(),
 	)
+}
+
+// SupportedLanguages is the same list, as a sentence fragment, for callers whose subject is
+// not one repository. A username whose every repository is unreadable needs the four names
+// and not the sentence around them.
+func SupportedLanguages() string {
+	return strings.Join(parse.Names(), ", ")
+}
+
+/*
+ChooseRepo picks the first repository in a ranked list that this service can actually read.
+
+The first rather than the best: the list arrives most-starred first, so this keeps that order
+and only skips what would come back as the 422 above. A visitor typing their username and
+being handed a language we cannot parse is technically the right answer to "your most-starred
+repository" and the wrong answer to the question they were actually asking, which was to hear
+something.
+
+It lives here because this is where "a language Codetta can read" is already defined, and
+because the caller that needs it wants exactly the same error when nothing qualifies.
+*/
+func ChooseRepo(candidates []github.Repo) (github.Repo, error) {
+	for _, candidate := range candidates {
+		if parse.SupportedName(candidate.PrimaryLanguage) {
+			return candidate, nil
+		}
+	}
+	return github.Repo{}, ErrNoSupportedFiles
 }
 
 // FromTarball walks the archive, counts what it finds, and aggregates the result.

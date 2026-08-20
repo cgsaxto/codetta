@@ -2,7 +2,7 @@
 
 # Codetta
 
-**Every repository has a sound. Paste a GitHub URL and hear yours.**
+**Every repository has a sound. Type your GitHub username and hear yours.**
 
 [**Try it →**](https://codetta.dev) &nbsp;·&nbsp; [How it works](#why-it-doesnt-sound-like-noise) &nbsp;·&nbsp; [Run it locally](#run-it-locally)
 
@@ -43,6 +43,9 @@ the code actually produces.
 Codetta fetches a repository, parses it with [tree-sitter](https://tree-sitter.github.io/),
 and turns the shape of the code — module sizes, nesting depth, branching density, how much of
 it is comments — into a 60–90 second piece of music.
+
+Give it a username instead of a repository and it plays that account's most-starred
+repository — the most-starred one it can read, and it says so when those differ.
 
 The same commit always produces the same music. Forever. It's a fingerprint you can listen to.
 

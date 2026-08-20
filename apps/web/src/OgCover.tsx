@@ -7,7 +7,7 @@ import { ticksAtSeconds } from './visuals/clock';
 import { drawField } from './visuals/draw';
 import { fieldFor } from './visuals/layout';
 import { palettesFor } from './visuals/palette';
-import { OG_HEIGHT, OG_WIDTH } from './OgCard';
+import { CARD_HEIGHT, CARD_WIDTH } from './visuals/card';
 
 /**
  * The card a link unfurls with when it is not about one repository.
@@ -31,8 +31,8 @@ export function OgCover() {
   const ref = useRef<HTMLDivElement | null>(null);
   const palettes = palettesFor(GALLERY.map((entry) => entry.seed));
 
-  const tileWidth = (OG_WIDTH - MARGIN * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
-  const tileHeight = (OG_HEIGHT - MARGIN * 2 - CAPTION - GAP * (ROWS - 1)) / ROWS;
+  const tileWidth = (CARD_WIDTH - MARGIN * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
+  const tileHeight = (CARD_HEIGHT - MARGIN * 2 - CAPTION - GAP * (ROWS - 1)) / ROWS;
 
   useEffect(() => {
     const host = ref.current;
@@ -74,8 +74,8 @@ export function OgCover() {
     <div
       ref={ref}
       style={{
-        width: OG_WIDTH,
-        height: OG_HEIGHT,
+        width: CARD_WIDTH,
+        height: CARD_HEIGHT,
         padding: MARGIN,
         boxSizing: 'border-box',
         background: '#f2f3f5',

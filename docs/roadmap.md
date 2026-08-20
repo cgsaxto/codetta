@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 5**
+**Current phase: Launch**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -406,8 +406,58 @@ check, for the same reason. It cannot check the pictures; those are looked at by
 
 ## Phase 5 — Make it about the visitor
 
-- [ ] Username input → most-starred repo → its song
-- [ ] Shareable card: waveform art + repo name + avatar
+- [x] Username input → most-starred repo → its song
+
+  One box, not two. `owner/repo` and `owner` are unambiguous shapes, so the box can tell them
+  apart and the visitor is never asked to classify their own input before typing it.
+
+  **Most-starred goes through the search endpoint**, because `/users/{login}/repos` cannot
+  sort by stars at all — it offers created, updated, pushed and full_name, so the alternative
+  is paging an entire account in order to sort it here. Search has its own much tighter rate
+  limit, which is not the drawback it looks like: it is a _separate_ budget, so a burst of
+  username lookups cannot spend the requests that fetching and parsing need.
+
+  **The most-starred repository and the most-starred repository we can read are different
+  answers**, and only the second one is useful. So the search returns thirty and the first
+  readable one wins. `torvalds` is the case that proves it matters in the other direction: all
+  thirty are C, so that account gets a 422 naming the four languages rather than a repository
+  that cannot play. The page says how many were passed over, because "your most-starred
+  repository" is a claim the response often cannot support.
+
+  Two calls, not one combined. The first answers "which repository", which is the thing to
+  show immediately; the second is the slow one. Combined, the page would sit silent through
+  both, and the moment a visitor most needs to be told that what they typed was understood is
+  exactly the fifteen seconds a large repository takes.
+
+  The login is validated against GitHub's own rule before it is sent, on both sides. Not
+  pedantry: it lands inside a `user:` search qualifier, so an unchecked space would let a
+  visitor append qualifiers to a query the service makes with its own token.
+
+- [x] Shareable card: waveform art + repo name + avatar
+
+  `visuals/card.ts` is one drawing with two consumers — the link-unfurl cards Playwright
+  screenshots at build time, and the PNG a visitor downloads. Two existed for about an hour:
+  the unfurl card built its text out of DOM because a screenshot could capture that, and the
+  downloadable one would have had to build the same text out of canvas calls, since a
+  screenshot is not available to a visitor. The same refusal as everywhere in Phase 4, and the
+  drift it avoids would have been a downloaded card subtly unlike the one in a timeline.
+
+  **The avatar is inlined by the API as a data URI**, which looks like an odd choice until the
+  two constraints meet: the browser still never talks to GitHub, _and_ a cross-origin image
+  taints a canvas — a tainted canvas cannot be turned into a file at all, so linking the
+  avatar would have quietly made the card unsaveable rather than differently coloured. Never
+  an error either: a card without a face is a card.
+
+  It also gained a scrim, which the two-line version did not need. A third line put the
+  caption straight through the file marks of whichever module sits at the bottom left —
+  legible in isolation, and not at the size a link preview is actually looked at.
+
+**Phase 5 is complete.** One thing not built and worth recording as a decision rather than an
+omission: **the username lookup is not cached.** A cache keyed on a login has to be
+short-lived, since stars move and accounts gain repositories, and the requests it would save
+are the repeat ones — which is not the shape of this traffic, because every visitor types a
+different name. The protection that matters is the rate limit in the Launch list below, and
+the search endpoint's separate budget already keeps this away from the parsing path.
 
 ---
 

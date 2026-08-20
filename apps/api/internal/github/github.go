@@ -53,8 +53,10 @@ type Repo struct {
 
 type Client struct {
 	baseURL string
-	token   string
-	http    *http.Client
+	// avatarHost is the only host outside baseURL this client will fetch from. See user.go.
+	avatarHost string
+	token      string
+	http       *http.Client
 }
 
 type Option func(*Client)
@@ -68,10 +70,16 @@ func WithHTTPClient(h *http.Client) Option {
 	return func(c *Client) { c.http = h }
 }
 
+// WithAvatarHost points avatar fetches at another host. Tests use it; production does not.
+func WithAvatarHost(host string) Option {
+	return func(c *Client) { c.avatarHost = host }
+}
+
 func New(token string, opts ...Option) *Client {
 	client := &Client{
-		baseURL: DefaultBaseURL,
-		token:   token,
+		baseURL:    DefaultBaseURL,
+		avatarHost: DefaultAvatarHost,
+		token:      token,
 		// No Timeout on the client, deliberately.
 		//
 		// http.Client.Timeout covers the whole exchange including reading the body, so a

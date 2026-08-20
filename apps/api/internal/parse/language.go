@@ -100,6 +100,21 @@ func Supported(name string) bool {
 	return ok
 }
 
+// SupportedName reports whether a language, named the way GitHub names it, is one we parse.
+//
+// By name rather than by extension because this answers a different question from Supported:
+// that one is asked of a path inside an archive we already have, this one is asked of a
+// repository we have not fetched, where all we know is the one language GitHub calls its
+// primary. Same table behind both.
+func SupportedName(name string) bool {
+	for _, supported := range Names() {
+		if strings.EqualFold(supported, name) {
+			return true
+		}
+	}
+	return false
+}
+
 // Names lists every supported language, deduplicated and in a stable order. A repository
 // with none of them gets a 422 naming these.
 func Names() []string {

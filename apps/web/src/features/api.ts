@@ -83,6 +83,46 @@ export function parseRepoRef(input: string): RepoRef | undefined {
   return ref ? { owner, name, ref } : { owner, name };
 }
 
+/**
+ * GitHub's own rule for an account name, and the same one apps/api enforces before the name
+ * reaches a query string.
+ */
+const LOGIN = /^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$/;
+
+/** Parses a bare username, with the same tolerance for a pasted profile URL. */
+export function parseLogin(input: string): string | undefined {
+  const text = input
+    .trim()
+    .replace(/^@/, '')
+    .replace(/^https?:\/\//i, '')
+    .replace(/^(www\.)?github\.com\//i, '')
+    .replace(/[?#].*$/, '')
+    .replace(/\/+$/, '');
+
+  return LOGIN.test(text) ? text : undefined;
+}
+
+/** What a visitor typed, once. */
+export type Target = { kind: 'repo'; repo: RepoRef } | { kind: 'user'; login: string };
+
+/**
+ * One box, two things it might hold.
+ *
+ * Two boxes was the obvious alternative and it asks the visitor to classify their own input
+ * before they have typed it, which is a question they should never be shown: `owner/repo` and
+ * `owner` are unambiguous, so the box can simply tell.
+ *
+ * A repository first, because it is the stricter shape — anything with two segments cannot be
+ * a username, and anything with one cannot be a repository.
+ */
+export function parseTarget(input: string): Target | undefined {
+  const repo = parseRepoRef(input);
+  if (repo) return { kind: 'repo', repo };
+
+  const login = parseLogin(input);
+  return login ? { kind: 'user', login } : undefined;
+}
+
 async function messageFrom(response: Response): Promise<string> {
   try {
     const body: unknown = await response.json();

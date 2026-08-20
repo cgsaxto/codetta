@@ -338,3 +338,34 @@ func TestDocumentConformsToTheSchema(t *testing.T) {
 		t.Error("seed is not the first eight characters of the commit sha")
 	}
 }
+
+func TestChooseRepoTakesTheFirstOneWeCanRead(t *testing.T) {
+	// Most-starred first, which is how the search endpoint returns them. The top two are
+	// languages this service has no grammar for, so the answer is the third.
+	candidates := []github.Repo{
+		{Owner: "torvalds", Name: "linux", PrimaryLanguage: "C", Stars: 190000},
+		{Owner: "torvalds", Name: "subsurface", PrimaryLanguage: "C++", Stars: 900},
+		{Owner: "torvalds", Name: "pesconvert", PrimaryLanguage: "Go", Stars: 60},
+		{Owner: "torvalds", Name: "test-tlb", PrimaryLanguage: "Python", Stars: 10},
+	}
+
+	chosen, err := ChooseRepo(candidates)
+	if err != nil {
+		t.Fatalf("ChooseRepo: %v", err)
+	}
+	if chosen.Name != "pesconvert" {
+		t.Errorf("chose %q, want the most-starred one in a language we parse", chosen.Name)
+	}
+}
+
+func TestChooseRepoRefusesWhenNothingIsReadable(t *testing.T) {
+	// The same error a repository of C files produces, because it is the same answer, and the
+	// caller turns both into the same 422.
+	_, err := ChooseRepo([]github.Repo{
+		{Name: "linux", PrimaryLanguage: "C"},
+		{Name: "unset", PrimaryLanguage: ""},
+	})
+	if !errors.Is(err, ErrNoSupportedFiles) {
+		t.Errorf("error = %v, want ErrNoSupportedFiles", err)
+	}
+}
