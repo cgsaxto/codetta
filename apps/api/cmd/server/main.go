@@ -19,6 +19,7 @@ import (
 	"codetta.dev/api/internal/cache"
 	"codetta.dev/api/internal/config"
 	"codetta.dev/api/internal/github"
+	"codetta.dev/api/internal/site"
 )
 
 func main() {
@@ -52,9 +53,23 @@ func run(logger *slog.Logger) error {
 		return fmt.Errorf("configuring the cache: %w", err)
 	}
 
+	// Fails the boot rather than the unfurl. A missing manifest or an index without its
+	// marker is a broken build, and the only person who would notice it later is whoever
+	// shared a link that came back generic.
+	var pages http.Handler
+	if cfg.SiteDir != "" {
+		pages, err = site.Handler(os.DirFS(cfg.SiteDir))
+		if err != nil {
+			return fmt.Errorf("serving %s: %w", cfg.SiteDir, err)
+		}
+		logger.Info("serving the web app", "dir", cfg.SiteDir)
+	}
+
 	server := &http.Server{
-		Addr:    cfg.Addr,
-		Handler: api.Handler(api.Deps{GitHub: client, Cache: store, Logger: logger}),
+		Addr: cfg.Addr,
+		Handler: api.Handler(
+			api.Deps{GitHub: client, Cache: store, Logger: logger, Site: pages},
+		),
 		// Comfortably past the 25 s fetch budget, so a slow repository is cut off by its own
 		// deadline with a friendly message rather than by the socket closing underneath it.
 		ReadHeaderTimeout: 5 * time.Second,

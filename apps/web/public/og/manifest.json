@@ -1,0 +1,58 @@
+[
+  {
+    "owner": "django",
+    "name": "django",
+    "title": "django/django — Codetta",
+    "description": "Python, 312,754 lines, played as A Dorian at 120 BPM.",
+    "image": "/og/django-django.png"
+  },
+  {
+    "owner": "expressjs",
+    "name": "express",
+    "title": "expressjs/express — Codetta",
+    "description": "JavaScript, 17,541 lines, played as G Aeolian at 96 BPM.",
+    "image": "/og/expressjs-express.png"
+  },
+  {
+    "owner": "facebook",
+    "name": "react",
+    "title": "facebook/react — Codetta",
+    "description": "JavaScript, 297,593 lines, played as F Lydian at 120 BPM.",
+    "image": "/og/facebook-react.png"
+  },
+  {
+    "owner": "gin-gonic",
+    "name": "gin",
+    "title": "gin-gonic/gin — Codetta",
+    "description": "Go, 20,156 lines, played as D Aeolian at 96 BPM.",
+    "image": "/og/gin-gonic-gin.png"
+  },
+  {
+    "owner": "kubernetes",
+    "name": "kubernetes",
+    "title": "kubernetes/kubernetes — Codetta",
+    "description": "Go, 503,617 lines, played as Eb Mixolydian at 124 BPM.",
+    "image": "/og/kubernetes-kubernetes.png"
+  },
+  {
+    "owner": "microsoft",
+    "name": "TypeScript",
+    "title": "microsoft/TypeScript — Codetta",
+    "description": "TypeScript, 145,942 lines, played as G Mixolydian at 112 BPM.",
+    "image": "/og/microsoft-typescript.png"
+  },
+  {
+    "owner": "psf",
+    "name": "requests",
+    "title": "psf/requests — Codetta",
+    "description": "Python, 9,841 lines, played as A Aeolian at 92 BPM.",
+    "image": "/og/psf-requests.png"
+  },
+  {
+    "owner": "vuejs",
+    "name": "core",
+    "title": "vuejs/core — Codetta",
+    "description": "TypeScript, 143,315 lines, played as Eb Aeolian at 112 BPM.",
+    "image": "/og/vuejs-core.png"
+  }
+]

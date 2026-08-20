@@ -10,7 +10,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
-    "fixtures:update": "vitest run -u"
+    "fixtures:update": "vitest run -u",
+    "og": "tsx scripts/og.ts"
   },
   "dependencies": {
     "@codetta/schema": "workspace:*",
@@ -23,6 +24,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.0.5",
+    "playwright": "^1.62.1",
     "tailwindcss": "^4.3.3",
     "typescript": "~6.0.3",
     "vite": "^8.2.1",

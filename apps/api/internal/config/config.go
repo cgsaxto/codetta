@@ -21,6 +21,9 @@ type Config struct {
 	// RedisURL is optional by design. docs/features-schema.md: the app must work with Redis
 	// down, and a cache that is required at boot is not a cache — it is a dependency.
 	RedisURL string
+	// SiteDir is apps/web's build output, when this process is also serving it. Empty means
+	// API only — which is the development setup, where Vite serves the app.
+	SiteDir string
 }
 
 // Load reads the environment, failing if the token is absent.
@@ -44,5 +47,10 @@ func Load() (Config, error) {
 		addr = defaultAddr
 	}
 
-	return Config{GitHubToken: token, Addr: addr, RedisURL: os.Getenv("REDIS_URL")}, nil
+	return Config{
+		GitHubToken: token,
+		Addr:        addr,
+		RedisURL:    os.Getenv("REDIS_URL"),
+		SiteDir:     os.Getenv("SITE_DIR"),
+	}, nil
 }

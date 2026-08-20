@@ -29,6 +29,9 @@ type Deps struct {
 	Logger *slog.Logger
 	// Budget is the wall clock from docs/features-schema.md. Zero means the default.
 	Budget time.Duration
+	// Site serves the built web app, if this deployment carries one. Nil means API only,
+	// which is what `make api-dev` runs against a Vite dev server.
+	Site http.Handler
 }
 
 type errorBody struct {
@@ -64,6 +67,12 @@ func Handler(deps Deps) http.Handler {
 		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
 	mux.HandleFunc("GET /v1/features/{owner}/{name}", deps.featuresHandler)
+
+	// Registered last and matching everything left over, so the API's own routes always win.
+	// A repository called `v1` cannot shadow the endpoint, whatever else it does.
+	if deps.Site != nil {
+		mux.Handle("/", deps.Site)
+	}
 
 	return withCORS(mux)
 }

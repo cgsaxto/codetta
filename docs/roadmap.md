@@ -1,6 +1,6 @@
 # Roadmap
 
-**Current phase: 4**
+**Current phase: 5**
 
 Only work on the current phase. Later phases are recorded so scope is visible, not so it
 can be pulled forward. When a phase completes, update the line above and say so explicitly.
@@ -361,7 +361,46 @@ This phase is the growth loop. It is not polish, and it is not optional.
   anywhere. A gallery repository is matched to its own tile rather than appended as a custom
   one, which would have listed it twice.
 
-- [ ] Per-repo OG image generated server-side so links unfurl with the repo's waveform
+- [x] Per-repo OG image generated server-side so links unfurl with the repo's waveform
+
+  Not generated per request. The eight gallery repositories have their cards screenshotted at
+  build time by Playwright, from the site's own `drawField` through `?og=owner/name`, and
+  everything else unfurls with a cover showing all eight. A live renderer would mean a
+  headless browser in the deployment and a slow first unfurl for a repository nobody has
+  shared yet; a card is a picture of a fixed commit, so there is nothing to recompute.
+
+  The alternative was drawing it in Go, and the cost was never the porting — it is that two
+  implementations of a deterministic picture have to agree forever, and a drift would surface
+  as an unfurl whose colours are slightly wrong, invisible in review because each looks right
+  alone. So `apps/api` gained `internal/site`, which serves the built app and substitutes one
+  block of its `<head>` from `og/manifest.json`. It carries no music knowledge: the sentence
+  "F Lydian at 120 BPM" is written where the key is known and arrives there as a string.
+
+  Two things worth keeping:
+
+  **A card drawn at tick 0 is a dark rectangle.** It was the obvious frame — the same one the
+  gallery tile shows before anything plays — and at tile size it reads as structure. At
+  1200×630 it does not, because the entire legibility of this picture is the contrast between
+  the part of the repository that has been read and the part that has not, and at tick 0 there
+  is no read part. The cards are the clip's last frame now, which is also the honest one: the
+  still is of the thing being shared.
+
+  **The generic fallback is the gallery, not a logo.** A wordmark on a coloured ground is true
+  of any project and evidence of nothing. Eight visibly different repositories is the whole
+  claim this project makes, and it is the one image a designer who had not built it could not
+  produce.
+
+**Phase 4 is complete.** The artifacts are the same moment three times — the WAV, the video and
+the card all come from the peak, from one offline render, through one drawing function — and
+every one of those "one"s was a deliberate refusal to write a second implementation of
+something already working. The pattern held across the whole phase: each time the fast path was
+a separate copy (an offline audio graph, a canvas the recorder drew itself, a Go image
+renderer), the copy would have diverged silently and been findable only by putting both side by
+side.
+
+`pnpm og` re-renders the cards and `apps/web/src/features/og.test.ts` fails when the manifest
+stops describing the music — the same arrangement as `pnpm fixtures:update` and the README
+check, for the same reason. It cannot check the pictures; those are looked at by a person.
 
 ---
 

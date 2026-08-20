@@ -1,5 +1,8 @@
 packages:
   - 'apps/*'
   - 'packages/*'
+allowBuilds:
+  # tsx's bundler. Needed to run the OG screenshot script as TypeScript.
+  esbuild: true
 minimumReleaseAgeExclude:
   - vite@8.2.1

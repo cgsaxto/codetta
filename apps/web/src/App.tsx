@@ -224,7 +224,6 @@ export default function App() {
     window.addEventListener('popstate', open);
     return () => window.removeEventListener('popstate', open);
     // Once, on mount, plus whenever the visitor moves through their own history.
-    // eslint-disable-next-line
   }, []);
 
   async function play(entry: RepoFeatures) {
