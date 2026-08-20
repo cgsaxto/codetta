@@ -409,7 +409,19 @@ export interface RenderOptions {
  * transport, so the loop that live playback wants — and which would otherwise render the
  * piece twice into a buffer sized for one — is simply never switched on.
  */
-export async function renderWav(score: Score, options: RenderOptions = {}): Promise<Blob> {
+export interface Rendered {
+  sampleRate: number;
+  channels: Float32Array[];
+}
+
+/**
+ * Render a Score offline and return the samples.
+ *
+ * Separated from the encoder so the WAV and the video are the same audio rather than two
+ * renders that agree. The recorder plays these samples back; writing them to a file and
+ * playing them into a video are two things done with one result.
+ */
+export async function renderClip(score: Score, options: RenderOptions = {}): Promise<Rendered> {
   const { tailSeconds = 3, clip = false } = options;
   const duration = scoreDurationSeconds(score) + tailSeconds;
 
@@ -429,7 +441,7 @@ export async function renderWav(score: Score, options: RenderOptions = {}): Prom
   );
 
   const window = clipWindow(score);
-  const channels = clip
+  const channels: Float32Array[] = clip
     ? sliceWithFades(
         rendered,
         buffer.sampleRate,
@@ -438,7 +450,7 @@ export async function renderWav(score: Score, options: RenderOptions = {}): Prom
         // than fading a silence that was already there.
         window.durationSeconds,
       )
-    : rendered;
+    : rendered.map((channel) => Float32Array.from(channel));
 
   /*
    * A silent render is the failure this is most likely to have, and the one it would hide
@@ -455,9 +467,13 @@ export async function renderWav(score: Score, options: RenderOptions = {}): Prom
     throw new Error('The render came out silent. Nothing was saved.');
   }
 
-  return new Blob([encodeWav({ sampleRate: buffer.sampleRate, channels })], {
-    type: 'audio/wav',
-  });
+  return { sampleRate: buffer.sampleRate, channels };
+}
+
+/** The rendered samples as a WAV file. */
+export async function renderWav(score: Score, options: RenderOptions = {}): Promise<Blob> {
+  const { sampleRate, channels } = await renderClip(score, options);
+  return new Blob([encodeWav({ sampleRate, channels })], { type: 'audio/wav' });
 }
 
 /**

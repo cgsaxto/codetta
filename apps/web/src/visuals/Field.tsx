@@ -3,6 +3,7 @@ import type { RepoFeatures } from '@codetta/schema';
 import type { Player } from '../audio/player';
 import { barToTick, scoreDurationSeconds, type Score, type VoiceId } from '../music/score';
 import { adjustDetail, smoothFps, stride } from './budget';
+import { drawField } from './draw';
 import { fieldFor } from './layout';
 import { paletteFor, type Palette } from './palette';
 import { useTransportFrame } from './useTransportFrame';
@@ -39,26 +40,6 @@ import { useTransportFrame } from './useTransportFrame';
  * line itself is deliberately quiet, because a bright full-width hairline is a playhead and
  * says nothing about code.
  */
-
-/** How fast a column's flare fades, per second. Slow enough to leave a trail, not a strobe. */
-const FLARE_DECAY = 1.6;
-
-/** How long a file stays lit after the read line crosses it. */
-const FRESH_SECONDS = 0.55;
-
-/** Room at the edges, as a fraction of the smaller side, so marks never touch the frame. */
-const INSET = 0.04;
-
-/**
- * The least vertical room a file mark may have before the field stops drawing all of them.
- *
- * Detail is bounded by two separate things, and only one of them was here before. The frame
- * budget asks what this machine can afford; this asks what the space can hold. Two hundred
- * and fifty-six marks in a tile two hundred pixels tall overlap into a solid block — every
- * frame drawn on time, and nothing legible in any of them. A gallery of eight tiles is
- * exactly where that happens, so the thinning is by whichever constraint binds harder.
- */
-const MIN_MARK_SPACING = 2.2;
 
 export interface FieldProps {
   player: Player | null;
@@ -109,13 +90,6 @@ export function Field({
     [],
   );
 
-  // One mark per file, so a repository of forty files needs thicker rules than one of two
-  // hundred and fifty to occupy the same field.
-  const markHeight = useMemo(() => {
-    const count = Math.max(1, features.timeline.length);
-    return Math.min(6, Math.max(1.5, (height / count) * 0.55));
-  }, [features.timeline.length, height]);
-
   /**
    * The last frame drawn, so a resize can put it back.
    *
@@ -164,77 +138,21 @@ export function Field({
     const context = canvas?.getContext('2d');
     if (!canvas || !context) return;
 
-    const width = canvas.clientWidth;
-    const inset = Math.min(width, height) * INSET;
-    const innerWidth = width - inset * 2;
-    const innerHeight = height - inset * 2;
-
-    for (const onset of onsets) flares.current.set(onset.voice, 1);
-
-    context.fillStyle = palette.ground;
-    context.fillRect(0, 0, width, height);
-
-    const read = totalTicks > 0 ? tick / totalTicks : 0;
-    const readY = inset + read * innerHeight;
-    const readSeconds = read * duration;
-    const affordable = stride(detail.current);
-    const fits = Math.max(
-      1,
-      Math.ceil((features.timeline.length * MIN_MARK_SPACING) / Math.max(1, innerHeight)),
+    drawField(
+      context,
+      canvas.clientWidth,
+      height,
+      {
+        columns,
+        palette,
+        fileCount: features.timeline.length,
+        durationSeconds: duration,
+        totalTicks,
+        calm,
+      },
+      { tick, onsets, delta, stride: stride(detail.current) },
+      flares.current,
     );
-    const step = Math.max(affordable, fits);
-
-    for (const column of columns) {
-      const x = inset + column.x * innerWidth;
-      const columnWidth = Math.max(1, column.width * innerWidth);
-      const colour = palette.modules[column.rank] ?? palette.quiet;
-
-      const flare = calm
-        ? 0
-        : Math.max(0, (flares.current.get(column.voice) ?? 0) - delta * FLARE_DECAY);
-      flares.current.set(column.voice, flare);
-
-      // The column's own body. Always drawn, which is what gives it an edge and makes its
-      // width — and so the loudness of the voice it belongs to — something you can see.
-      context.fillStyle = colour;
-      context.globalAlpha = 0.07 + flare * 0.1;
-      context.fillRect(x, inset, columnWidth, innerHeight);
-
-      // The part already read, tinted harder. Progress becomes an area rather than the
-      // position of a line, which is the only reading that survives a small screen.
-      context.globalAlpha = 0.16 + flare * 0.14;
-      context.fillRect(x, inset, columnWidth, Math.max(0, readY - inset));
-
-      for (const [index, mark] of column.marks.entries()) {
-        // Thinned only when the machine cannot keep up; a no-op at full detail.
-        if (index % step !== 0) continue;
-        const y = inset + mark.y * innerHeight;
-        const age = readSeconds - mark.y * duration;
-        const fresh = !calm && age >= 0 && age < FRESH_SECONDS ? 1 - age / FRESH_SECONDS : 0;
-        const passed = y <= readY;
-
-        // Unread files are the repository's structure, visible before a note is played.
-        // Read files are brighter; a file the line has just crossed is brightest, because
-        // the event worth watching is a file being read rather than a line moving.
-        context.globalAlpha = passed ? 0.62 + flare * 0.2 + fresh * 0.38 : 0.3;
-        context.fillStyle = colour;
-        context.fillRect(
-          x + mark.indent * columnWidth,
-          y - markHeight / 2,
-          Math.max(1, mark.length * columnWidth),
-          markHeight * (1 + fresh * 0.9),
-        );
-      }
-
-      context.globalAlpha = 1;
-    }
-
-    // Quiet on purpose. The files carry the reading; a bright hairline across everything is
-    // a playhead, and a playhead is the one thing this is trying not to be.
-    context.fillStyle = palette.modules[0] ?? palette.quiet;
-    context.globalAlpha = 0.42;
-    context.fillRect(inset, readY, innerWidth, 1);
-    context.globalAlpha = 1;
   };
 
   paintRef.current = paint;
@@ -261,7 +179,7 @@ export function Field({
   // plays rather than the field being an empty rectangle until you press a button.
   useEffect(() => {
     if (!player) paintRef.current(0, [], 0);
-  }, [player, columns, palette, markHeight, height]);
+  }, [player, columns, palette, features.timeline.length, height]);
 
   return (
     <canvas

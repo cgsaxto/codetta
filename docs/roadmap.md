@@ -328,7 +328,23 @@ This phase is the growth loop. It is not polish, and it is not optional.
   it claims to be. Twenty milliseconds of fade in, because a clip starts mid-note and a step
   is a click; a second and a half out, because stopping dead reads as truncation.
 
-- [ ] `MediaRecorder` + `canvas.captureStream()` → square and vertical MP4/WebM
+- [x] `MediaRecorder` + `canvas.captureStream()` → square and vertical MP4/WebM
+
+  `MediaRecorder` captures in real time and has no offline equivalent, which leaves two
+  obvious approaches and both are wrong. Playing the whole piece to capture the peak costs a
+  minute of waiting for thirty seconds of video. Starting the transport at the peak is fast
+  and produces a different clip from the WAV, missing exactly the tails the audio clip is
+  careful to keep.
+
+  So the audio is rendered offline first, as the WAV is, and the recording plays that back:
+  thirty seconds of real time, and the sound in the video is the sound in the file rather
+  than a second performance resembling it. The canvas follows the buffer's own progress
+  through its context, so a dropped frame moves the picture and never the sound.
+
+  Drawing had to leave React for this — an offscreen canvas at 1080 square or 1080×1920 and
+  the one on the page now share `visuals/draw.ts`. Two implementations would have meant the
+  video was a picture of a slightly different piece, findable only by watching both.
+
 - [ ] Permalink per repo: `/r/{owner}/{name}`
 - [ ] Per-repo OG image generated server-side so links unfurl with the repo's waveform
 

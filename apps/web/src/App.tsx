@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
-import { renderWav, startPlayback, wavFilename, type Player } from './audio/player';
+import { renderClip, renderWav, startPlayback, wavFilename, type Player } from './audio/player';
 import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
 import { GALLERY } from './features/gallery';
 import { generateScore } from './music/generate';
 import type { Score } from './music/score';
 import { Field } from './visuals/Field';
 import { palettesFor, type Palette } from './visuals/palette';
+import { recordClip, supportedVideoType, videoFilename, type Shape } from './visuals/record';
 
 /**
  * The gallery is the page.
@@ -94,7 +95,8 @@ export default function App() {
   const [starting, setStarting] = useState<string | null>(null);
   const [heard, setHeard] = useState(false);
 
-  const [saving, setSaving] = useState<'clip' | 'full' | null>(null);
+  const [saving, setSaving] = useState<'clip' | 'full' | Shape | null>(null);
+  const [recorded, setRecorded] = useState(0);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -216,18 +218,61 @@ export default function App() {
     setError(null);
     try {
       const blob = await renderWav(score, { clip });
-      const url = URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = wavFilename(score, entry.repo.owner, entry.repo.name, clip);
-      link.click();
-      // Released on the next tick rather than immediately: revoking before the browser has
-      // taken the URL cancels the download in some of them.
-      setTimeout(() => URL.revokeObjectURL(url), 1000);
+      offer(blob, wavFilename(score, entry.repo.owner, entry.repo.name, clip));
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
       setSaving(null);
+    }
+  }
+
+  /** Hand a blob to the browser as a download. */
+  function offer(blob: Blob, filename: string) {
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.click();
+    // Released on the next tick rather than immediately: revoking before the browser has
+    // taken the URL cancels the download in some of them.
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+  }
+
+  /**
+   * Record the clip as a video, which takes the thirty seconds it lasts.
+   *
+   * The audio is rendered offline first and played into the recording, so the sound in the
+   * video is the sound in the WAV rather than a second performance that resembles it.
+   */
+  async function record(entry: RepoFeatures, shape: Shape) {
+    const sha = entry.repo.commitSha;
+    const score = scores.get(sha) ?? generateScore(entry);
+    const type = supportedVideoType();
+    if (!type) {
+      setError('This browser cannot record video. The audio download still works.');
+      return;
+    }
+
+    stop();
+    setSaving(shape);
+    setRecorded(0);
+    setError(null);
+    try {
+      const audio = await renderClip(score, { clip: true });
+      const blob = await recordClip({
+        score,
+        features: entry,
+        audio,
+        shape,
+        palette: palettes.get(sha),
+        onProgress: setRecorded,
+      });
+      offer(blob, videoFilename(score, entry.repo.owner, entry.repo.name, shape, type));
+    } catch (cause) {
+      setError(cause instanceof Error ? cause.message : String(cause));
+    } finally {
+      setSaving(null);
+      setRecorded(0);
     }
   }
 
@@ -310,6 +355,27 @@ export default function App() {
             <span className="text-[11px] text-[#767c86]">
               From the peak, where every voice is playing
             </span>
+
+            <div className="flex w-full items-center gap-3">
+              {(['square', 'vertical'] as const).map((shape) => (
+                <button
+                  key={shape}
+                  type="button"
+                  onClick={() => void record(playing, shape)}
+                  disabled={saving !== null}
+                  className="rounded-[3px] border border-[#dfe2e6] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#575d66] uppercase hover:border-[#0e1013] hover:text-[#0e1013] disabled:opacity-40"
+                >
+                  {saving === shape
+                    ? `Recording ${Math.round(recorded * 100)}%`
+                    : `${shape} video`}
+                </button>
+              ))}
+              <span className="text-[11px] text-[#767c86]">
+                {saving === 'square' || saving === 'vertical'
+                  ? 'Recording happens in real time — thirty seconds'
+                  : 'Same thirty seconds, with the picture'}
+              </span>
+            </div>
           </div>
         )}
 
