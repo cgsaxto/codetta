@@ -345,7 +345,22 @@ This phase is the growth loop. It is not polish, and it is not optional.
   the one on the page now share `visuals/draw.ts`. Two implementations would have meant the
   video was a picture of a slightly different piece, findable only by watching both.
 
-- [ ] Permalink per repo: `/r/{owner}/{name}`
+- [x] Permalink per repo: `/r/{owner}/{name}`
+
+  Hand-rolled, not routed: there are two paths and one of them is `/`, so a router would be
+  a dependency, a provider and a mental model in exchange for fifteen lines.
+
+  The address is replaced rather than pushed, because the gallery never leaves the screen —
+  playing a repository is not navigation, and eight tiles sampled in a row would otherwise
+  leave eight entries to press back through to escape a page nobody left.
+
+  Arriving on a link focuses and scrolls to the tile rather than autoplaying it. Browsers
+  refuse audio without a gesture, and a link that appears to fail is worse than one that
+  asks for a click; focus rather than only scroll, so the keyboard can start it, and because
+  a link that lands on a grid of eight without saying which one it meant has not arrived
+  anywhere. A gallery repository is matched to its own tile rather than appended as a custom
+  one, which would have listed it twice.
+
 - [ ] Per-repo OG image generated server-side so links unfurl with the repo's waveform
 
 ---

@@ -27,6 +27,19 @@ import { paletteFor, type Palette } from './palette';
  * The same rule as the page: the frame decides when to paint, never what time it is. Here the
  * clock is the buffer source's own progress through the context, offset by where the clip
  * starts, so a dropped frame moves the picture and never the sound.
+ *
+ * ## The offset that is left, and why it stays
+ *
+ * Measured against the WAV, the audio in a recorded mp4 begins about 49 ms late. That is not
+ * drift and not a mistake here: AAC reserves priming samples at the head of a stream, 1024 to
+ * 2112 of them, and 49 ms at 44.1 kHz is squarely inside that range. The encoder is doing what
+ * the format requires.
+ *
+ * It is left alone deliberately. Fifty milliseconds is three frames at 60 fps, which moves the
+ * read line 0.6 px in a square clip and 1.1 px in a vertical one — below anything visible on a
+ * picture with no sharp transient to anchor against. And compensating would mean delaying the
+ * video by a constant, which is right for AAC and wrong for Opus in the WebM path, so the fix
+ * would be correct in one container and would introduce the very error it removes in the other.
  */
 
 export type Shape = 'square' | 'vertical';

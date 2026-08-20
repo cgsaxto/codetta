@@ -3,6 +3,7 @@ import type { RepoFeatures } from '@codetta/schema';
 import { renderClip, renderWav, startPlayback, wavFilename, type Player } from './audio/player';
 import { ApiError, fetchFeatures, parseRepoRef } from './features/api';
 import { GALLERY } from './features/gallery';
+import { pathForRepo, repoFromPath } from './features/route';
 import { generateScore } from './music/generate';
 import type { Score } from './music/score';
 import { Field } from './visuals/Field';
@@ -34,6 +35,7 @@ function shortLines(count: number): string {
 }
 
 interface TileProps {
+  buttonRef?: (node: HTMLButtonElement | null) => void;
   features: RepoFeatures;
   score: Score;
   palette: Palette;
@@ -42,16 +44,17 @@ interface TileProps {
   onToggle: () => void;
 }
 
-function Tile({ features, score, palette, playing, player, onToggle }: TileProps) {
+function Tile({ buttonRef, features, score, palette, playing, player, onToggle }: TileProps) {
   const accent = palette.modules[0] ?? '#888';
   const { repo } = features;
 
   return (
     <button
+      ref={buttonRef}
       type="button"
       onClick={onToggle}
       aria-pressed={playing}
-      className="group block w-full text-left focus:outline-none"
+      className="group block w-full rounded-[4px] text-left outline-offset-4 focus-visible:outline-2 focus-visible:outline-[#0e1013]"
     >
       <div
         className="overflow-hidden rounded-[3px] ring-1 transition-[box-shadow,transform] duration-200 group-focus-visible:ring-2"
@@ -97,6 +100,8 @@ export default function App() {
 
   const [saving, setSaving] = useState<'clip' | 'full' | Shape | null>(null);
   const [recorded, setRecorded] = useState(0);
+  /** The tile a shared link named, so arriving on one lands on it rather than on the grid. */
+  const [focusSha, setFocusSha] = useState<string | null>(null);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);
@@ -105,6 +110,7 @@ export default function App() {
   const pending = useRef<AbortController | null>(null);
   const heardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputSection = useRef<HTMLElement | null>(null);
+  const tiles = useRef(new Map<string, HTMLButtonElement>());
 
   // Smallest first, so the grid reads slowest to fastest. A repository the visitor loaded
   // goes last, where it is the newest thing rather than buried among the eight.
@@ -153,6 +159,23 @@ export default function App() {
     section.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'end' });
   }, [heard]);
 
+  /**
+   * Put the tile a link named in front of the visitor, and under their cursor.
+   *
+   * Focus rather than only scroll, so the keyboard can play it immediately — and because a
+   * link that lands on a grid of eight with no indication of which one it meant has not
+   * really arrived anywhere.
+   */
+  useEffect(() => {
+    if (!focusSha) return;
+    const tile = tiles.current.get(focusSha);
+    if (!tile) return;
+
+    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    tile.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' });
+    tile.focus({ preventScroll: true });
+  }, [focusSha, entries]);
+
   useEffect(() => () => player?.stop(), [player]);
   useEffect(
     () => () => {
@@ -167,6 +190,42 @@ export default function App() {
     setPlayer(null);
     setPlayingSha(null);
   }
+
+  /**
+   * Play whatever the address names, on arrival and on back or forward.
+   *
+   * A shared link has to land on the thing it promised. Autoplay will be refused without a
+   * gesture in most browsers, so this loads and selects the repository and leaves pressing
+   * play to the visitor — the tile is there, drawn in its own colours, which is the promise
+   * kept even when the sound cannot start by itself.
+   */
+  useEffect(() => {
+    const open = () => {
+      const wanted = repoFromPath(window.location.pathname);
+      if (!wanted) return;
+
+      const already = GALLERY.find(
+        (entry) =>
+          entry.repo.owner.toLowerCase() === wanted.owner.toLowerCase() &&
+          entry.repo.name.toLowerCase() === wanted.name.toLowerCase(),
+      );
+      // Never through `custom` for one of the eight: that list is appended to the gallery,
+      // so a repository already in it would appear twice.
+      if (already) {
+        setFocusSha(already.repo.commitSha);
+        return;
+      }
+      // Without autoplay. Browsers refuse to start audio without a gesture, and a link that
+      // appears to fail is worse than one that asks for a click.
+      void load(`${wanted.owner}/${wanted.name}`, false);
+    };
+
+    open();
+    window.addEventListener('popstate', open);
+    return () => window.removeEventListener('popstate', open);
+    // Once, on mount, plus whenever the visitor moves through their own history.
+    // eslint-disable-next-line
+  }, []);
 
   async function play(entry: RepoFeatures) {
     const sha = entry.repo.commitSha;
@@ -187,6 +246,10 @@ export default function App() {
       setPlayer(await startPlayback(score));
       setPlayingSha(sha);
       setError(null);
+      // Replaced rather than pushed. The gallery never leaves the screen, so playing a
+      // repository is not navigation — this is a label for what is sounding, and eight tiles
+      // sampled in a row would otherwise leave eight entries to press back through.
+      history.replaceState(null, '', pathForRepo(entry.repo.owner, entry.repo.name));
       // Not audio timing — the transport owns that. This only decides when to offer the
       // input, and offering it before the visitor has heard anything is the thing the
       // roadmap is explicit about avoiding.
@@ -276,7 +339,7 @@ export default function App() {
     }
   }
 
-  async function load(text: string) {
+  async function load(text: string, autoplay = true) {
     const repo = parseRepoRef(text);
     if (!repo) {
       setError('That does not look like a repository. Try facebook/react.');
@@ -293,7 +356,8 @@ export default function App() {
     try {
       const loaded = await fetchFeatures(repo, controller.signal);
       setCustom(loaded);
-      void play(loaded);
+      setFocusSha(loaded.repo.commitSha);
+      if (autoplay) void play(loaded);
     } catch (cause) {
       if (controller.signal.aborted) return;
       setError(cause instanceof ApiError ? cause.message : String(cause));
@@ -322,6 +386,10 @@ export default function App() {
             return (
               <li key={sha}>
                 <Tile
+                  buttonRef={(node) => {
+                    if (node) tiles.current.set(sha, node);
+                    else tiles.current.delete(sha);
+                  }}
                   features={entry}
                   score={score}
                   palette={palette}
