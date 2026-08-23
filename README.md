@@ -133,9 +133,6 @@ kinds — functions, classes, branches, comments, imports, statements, and whate
 function asynchronous. No aggregation or music code changes. See
 [CONTRIBUTING.md](CONTRIBUTING.md).
 
-<!-- TODO: write CONTRIBUTING.md before launch. Language support is the natural
-     first contribution and the cheapest way to get outside commits. -->
-
 ## FAQ
 
 **Does the music actually mean anything?**

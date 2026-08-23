@@ -1,0 +1,6 @@
+# Blank issues stay on. The forms exist to make the common reports easy, not to refuse
+# anything that does not fit one of them.
+#
+# No contact_links: they take absolute URLs, and the docs worth pointing at are in this repo,
+# where the templates already link to them relatively and cannot rot when the repo moves.
+blank_issues_enabled: true

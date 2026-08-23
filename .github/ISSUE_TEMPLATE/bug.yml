@@ -1,0 +1,51 @@
+name: Something is broken
+description: A repository will not play, the page misbehaves, or the service returns an error.
+labels: ['bug']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        For output that plays but sounds bad, use **It sounds wrong** instead — that is a
+        different kind of problem and it gets read differently.
+
+  - type: input
+    id: repo
+    attributes:
+      label: What you typed
+      description: The repository or username you gave it.
+      placeholder: facebook/react
+    validations:
+      required: true
+
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened
+      description: >-
+        Including the message on screen, if there was one. Codetta tries to say what went
+        wrong and what would have worked, so the exact sentence is useful.
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: What you expected instead
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: Chrome 140, Windows 11
+    validations:
+      required: false
+
+  - type: textarea
+    id: console
+    attributes:
+      label: Anything in the browser console
+      render: text
+    validations:
+      required: false

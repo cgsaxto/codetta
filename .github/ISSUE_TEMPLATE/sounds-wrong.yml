@@ -1,0 +1,79 @@
+name: It sounds wrong
+description: A repository produces music that is unpleasant, empty, muddy, or out of tune.
+labels: ['sounds wrong']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This is the highest-priority class of bug in this project. Musical output can be
+        legal by every test in the suite and still be bad — the whole test suite passing is
+        not evidence that it sounds right, so a report like this is the only way some of
+        these are ever found.
+
+  - type: input
+    id: permalink
+    attributes:
+      label: The permalink
+      description: >-
+        The address while it was playing, which looks like `/r/owner/name`. Or just
+        `owner/name` if you did not keep it.
+      placeholder: /r/facebook/react
+    validations:
+      required: true
+
+  - type: input
+    id: sha
+    attributes:
+      label: Commit SHA
+      description: >-
+        The one thing that makes this reproducible. The same commit always produces the same
+        audio, so without the SHA we may be listening to a different piece than you were —
+        a branch moves, and the music moves with it. Find it in the network response, or
+        paste the branch you played and we will resolve it.
+    validations:
+      required: false
+
+  - type: dropdown
+    id: section
+    attributes:
+      label: Where in the piece
+      description: The arrangement runs intro → build → peak → break → return → outro.
+      options:
+        - The peak (where the shareable clip is cut from)
+        - The intro
+        - The build
+        - The break
+        - The return
+        - The outro
+        - All of it
+    validations:
+      required: true
+
+  - type: textarea
+    id: what
+    attributes:
+      label: What you heard
+      description: >-
+        In whatever words you have. "Muddy", "empty", "it drags", "a note that does not
+        belong", "the bell goes out of tune as the chords move" are all useful and none of
+        them needs to be precise.
+    validations:
+      required: true
+
+  - type: textarea
+    id: clip
+    attributes:
+      label: A clip, if you have one
+      description: >-
+        There is a **square video** button while a repository is playing. Drag the file in
+        here. Thirty seconds of the actual sound is worth more than any description.
+    validations:
+      required: false
+
+  - type: input
+    id: browser
+    attributes:
+      label: Browser and OS
+      placeholder: Safari 18, macOS 15
+    validations:
+      required: false

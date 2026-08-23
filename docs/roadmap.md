@@ -472,7 +472,23 @@ the search endpoint's separate budget already keeps this away from the parsing p
 ## Launch
 
 - [ ] README with the GIF/clip in the first screen, above everything else
-- [ ] MIT licence, CONTRIBUTING, issue templates
+- [x] MIT licence, CONTRIBUTING, issue templates
+
+  The one template worth having written is **"It sounds wrong"**, and it asks for a commit
+  SHA. That is not form-filling: the same commit always produces the same audio, so without
+  the SHA a report and the person reading it are listening to different pieces the moment the
+  branch moves. It also asks for a clip, because there is a button that makes one and thirty
+  seconds of the actual sound outruns any description of it.
+
+  CONTRIBUTING leads with the two ways to evaluate a change, because they answer different
+  questions and only one of them is automatable. It also says plainly what will be turned
+  down — the fixed voice budget, direct feature-to-pitch mapping, unseeded randomness — with
+  the reason attached, since a rule whose reason is missing gets argued with rather than
+  followed.
+
+  The licence says "Codetta contributors" rather than a name, which is the honest placeholder
+  until the repository has an owner on GitHub.
+
 - [ ] Hosted demo that survives a front-page spike (rate limit + cache warm the gallery)
 
   The build half is done: `Dockerfile` and an `api` service in `docker-compose.yml`, one

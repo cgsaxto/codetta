@@ -1,0 +1,55 @@
+name: Add a language
+description: Codetta cannot read a language you want to hear.
+labels: ['language']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Currently supported: TypeScript, JavaScript, Python, Go. Anything else counts toward
+        `filesSkipped` and a repository made entirely of it returns a 422 naming the four.
+
+        This is the cheapest contribution there is: an adapter is one table of node kinds
+        plus one line in a registry, and no aggregation, music, or frontend code moves. See
+        [CONTRIBUTING.md](../../CONTRIBUTING.md#adding-a-language) — and please claim the
+        issue if you intend to write it, so two people do not do it twice.
+
+  - type: input
+    id: language
+    attributes:
+      label: Which language
+      placeholder: Rust
+    validations:
+      required: true
+
+  - type: input
+    id: grammar
+    attributes:
+      label: A tree-sitter grammar for it
+      description: >-
+        It needs Go bindings, since the parser is cgo. Most of the tree-sitter org's grammars
+        ship them.
+      placeholder: https://github.com/tree-sitter/tree-sitter-rust
+    validations:
+      required: false
+
+  - type: textarea
+    id: repos
+    attributes:
+      label: Two or three repositories worth hearing in it
+      description: >-
+        Used to check the result sounds like something. A language that only ever produces
+        one kind of module is worth knowing about before the work starts, not after.
+    validations:
+      required: false
+
+  - type: textarea
+    id: missing
+    attributes:
+      label: What the language does not have
+      description: >-
+        Of the seven things an adapter counts — functions, classes, branches, comments,
+        imports, statements, and whatever marks a function asynchronous — which ones have no
+        honest answer? Go has no async at all, so its `asyncRatio` is zero rather than being
+        made up out of goroutines. Naming the gaps early is most of the design.
+    validations:
+      required: false
