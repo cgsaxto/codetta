@@ -56,7 +56,7 @@ func run(logger *slog.Logger) error {
 	// Fails the boot rather than the unfurl. A missing manifest or an index without its
 	// marker is a broken build, and the only person who would notice it later is whoever
 	// shared a link that came back generic.
-	var pages http.Handler
+	var pages *site.Site
 	if cfg.SiteDir != "" {
 		pages, err = site.Handler(os.DirFS(cfg.SiteDir))
 		if err != nil {
@@ -65,11 +65,25 @@ func run(logger *slog.Logger) error {
 		logger.Info("serving the web app", "dir", cfg.SiteDir)
 	}
 
+	caller, global := api.DefaultLimits()
+	deps := api.Deps{
+		GitHub:     client,
+		Cache:      store,
+		Logger:     logger,
+		Caller:     caller,
+		Global:     global,
+		TrustProxy: cfg.TrustProxy,
+	}
+	if pages != nil {
+		// Typed nil is why this is a branch rather than an assignment: a nil *site.Site in an
+		// http.Handler field is not a nil interface, and the router would register it and then
+		// panic on the first request for anything that is not an endpoint.
+		deps.Site = pages
+	}
+
 	server := &http.Server{
-		Addr: cfg.Addr,
-		Handler: api.Handler(
-			api.Deps{GitHub: client, Cache: store, Logger: logger, Site: pages},
-		),
+		Addr:    cfg.Addr,
+		Handler: api.Handler(deps),
 		// Comfortably past the 25 s fetch budget, so a slow repository is cut off by its own
 		// deadline with a friendly message rather than by the socket closing underneath it.
 		ReadHeaderTimeout: 5 * time.Second,
@@ -86,6 +100,22 @@ func run(logger *slog.Logger) error {
 			errs <- err
 		}
 	}()
+
+	// After the listener is up, never before it. The warm is the least urgent work this
+	// process does and it takes minutes; a boot that waited for it would fail every health
+	// check it was given in the meantime and be restarted into doing it again.
+	if cfg.WarmGallery && pages != nil {
+		go func() {
+			repos := make([]api.RepoRef, 0, len(pages.Cards()))
+			for _, card := range pages.Cards() {
+				repos = append(repos, api.RepoRef{Owner: card.Owner, Name: card.Name})
+			}
+			// api.Handler fills the Deps defaults; this copy has not been through it.
+			warm := deps
+			warm.Budget = github.DefaultTimeout
+			warm.WarmGallery(ctx, repos)
+		}()
+	}
 
 	select {
 	case err := <-errs:

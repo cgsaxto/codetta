@@ -490,7 +490,44 @@ the search endpoint's separate budget already keeps this away from the parsing p
   No Playwright in the image and no browser download, which is the second thing Phase 4's
   pre-rendered cards bought.
 
-  Still to do: the rate limit and the gallery warm.
+  **Two rate limits, not one.** A per-caller bucket stops one script holding the service open.
+  A single bucket shared by everybody is the one that matters the day a link goes around,
+  because a thousand visitors are a thousand addresses and no per-caller limit sees them as
+  related — what they share is GitHub's hourly budget, and nothing else was bounding it. The
+  caller's own allowance is checked first, so the script this is meant to stop cannot spend
+  everyone else's turn on its way to being refused. 429 for the caller, 503 for the shared
+  one, because whose problem it is differs and that is the distinction `fail` already makes.
+
+  In memory, per process. A Redis-backed limiter has to decide what to do when Redis is
+  unavailable and every answer is wrong here: failing open removes the limit exactly when
+  things are worst, and failing closed makes the cache a dependency, which
+  @docs/features-schema.md forbids in the same breath as it forbids a database.
+
+  `TRUST_PROXY` has to be stated rather than sniffed. Trusting `X-Forwarded-For` with nothing
+  in front lets any caller pick their own bucket by sending the header; not trusting it behind
+  a load balancer puts the entire internet in one bucket. Both failures are total rather than
+  partial, which is why it is a deployment decision and not a default.
+
+  **The gallery warm is not about the gallery.** The eight tiles are committed documents
+  inside the web bundle — playing one costs this service nothing and works with the API
+  switched off. What a spike actually produces is people _pasting_ those same eight
+  repositories, and that is a full fetch and parse each, repeated per visitor until one of
+  them finishes. Measured: `facebook/react` pasted cold is about twenty seconds; warmed it is
+  2.5 s, and every bit of that 2.5 s is resolving the ref, because the cache is keyed on the
+  commit SHA and the SHA is not known until GitHub has been asked twice. The warm removes the
+  parse, not the resolve, and no cache design in this project can remove the resolve — that is
+  what "never key on the repo URL, branches move" costs.
+
+  It is the same `Load` a request runs, extracted rather than reimplemented. A warm that
+  resolved or keyed differently would fill the cache with entries no request ever reads, and
+  it would look like it was working: the log line it writes is about the warm, not about the
+  hit that never happens.
+
+  The list comes from `og/manifest.json` — already generated from the gallery, already in the
+  image, already read at boot for the unfurls. The alternative was a second list of eight
+  repositories in Go, correct until the day the gallery changed and nobody remembered.
+
+  Still to do: the hosting itself.
 
 - [ ] Post the gallery repos one at a time over several weeks, not all at once
 

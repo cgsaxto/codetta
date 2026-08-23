@@ -91,6 +91,12 @@ enough; create one at <https://github.com/settings/tokens>.
 There are no accounts, no database, and nothing is stored — Redis only caches parsed output,
 keyed by commit SHA, and the app works correctly without it.
 
+Two rate limits protect the one thing the service cannot make more of, which is GitHub
+requests: one per caller, and one across everybody. The second is the one that matters when a
+link goes around, because a thousand visitors are a thousand addresses and only the shared
+budget notices that they are related. Behind a proxy, set `TRUST_PROXY=1` — otherwise every
+request arrives wearing the proxy's address and they all share one bucket.
+
 ### Or in Docker
 
 ```bash

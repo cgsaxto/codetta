@@ -13,11 +13,14 @@ import (
 	"log/slog"
 	"net/http"
 	"net/url"
+	"strconv"
 	"time"
 
 	"codetta.dev/api/internal/cache"
 	"codetta.dev/api/internal/features"
 	"codetta.dev/api/internal/github"
+	"codetta.dev/api/internal/ratelimit"
+	"codetta.dev/schema"
 )
 
 // Deps is what the handler cannot build for itself. Constructed once at startup so
@@ -32,6 +35,15 @@ type Deps struct {
 	// Site serves the built web app, if this deployment carries one. Nil means API only,
 	// which is what `make api-dev` runs against a Vite dev server.
 	Site http.Handler
+	// Caller and Global bound how fast the two expensive routes may be asked for work. Nil
+	// means no limit, which is what tests and `make api-dev` run with — a limiter in a test
+	// is a source of flakiness in exchange for nothing.
+	Caller *ratelimit.Limiter
+	Global *ratelimit.Limiter
+	// TrustProxy decides whether X-Forwarded-For is evidence. See ratelimit.ClientKey: it
+	// has to be a deployment decision, because getting it wrong in either direction breaks
+	// the limiter completely rather than partially.
+	TrustProxy bool
 }
 
 type errorBody struct {
@@ -66,8 +78,11 @@ func Handler(deps Deps) http.Handler {
 	mux.HandleFunc("GET /healthz", func(w http.ResponseWriter, _ *http.Request) {
 		writeJSON(w, http.StatusOK, map[string]string{"status": "ok"})
 	})
-	mux.HandleFunc("GET /v1/features/{owner}/{name}", deps.featuresHandler)
-	mux.HandleFunc("GET /v1/users/{login}", deps.userHandler)
+	// Limited, and only these two. /healthz is what a platform calls to decide whether this
+	// process is alive, and rate-limiting the question "are you alive" gets the answer wrong;
+	// the site's static files cost nothing that GitHub meters.
+	mux.HandleFunc("GET /v1/features/{owner}/{name}", deps.limited(deps.featuresHandler))
+	mux.HandleFunc("GET /v1/users/{login}", deps.limited(deps.userHandler))
 
 	// Registered last and matching everything left over, so the API's own routes always win.
 	// A repository called `v1` cannot shadow the endpoint, whatever else it does.
@@ -102,6 +117,56 @@ func withCORS(next http.Handler) http.Handler {
 	})
 }
 
+/*
+limited refuses work this service cannot afford to do.
+
+Two limits in a deliberate order. The caller's own allowance is checked first, so that one
+script cannot spend the shared budget on its way to being told no — checking the global one
+first would let exactly the caller this is meant to stop take everybody else's turn.
+
+The statuses differ because whose problem it is differs, the same distinction fail() makes.
+429 is "you are going faster than we serve"; 503 is "everyone is, and that is ours".
+*/
+func (deps Deps) limited(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		if deps.Caller != nil {
+			if ok, wait := deps.Caller.Allow(ratelimit.ClientKey(r, deps.TrustProxy)); !ok {
+				retryAfter(w, wait)
+				writeError(w, http.StatusTooManyRequests,
+					"that is faster than Codetta reads. Each repository is fetched and parsed "+
+						"from scratch — give it a moment and try again.")
+				return
+			}
+		}
+
+		// One bucket for every caller together, because a thousand people arriving from a
+		// front page are a thousand addresses and no per-caller limit sees them as related.
+		// What they share is GitHub's hourly budget, and this is the only thing that bounds it.
+		if deps.Global != nil {
+			if ok, wait := deps.Global.Allow("everyone"); !ok {
+				retryAfter(w, wait)
+				deps.Logger.Warn("shedding load", "path", r.URL.Path, "retryAfter", wait)
+				writeError(w, http.StatusServiceUnavailable,
+					"Codetta is reading as fast as it can just now. Try again shortly — the "+
+						"eight on the front page play without waiting for anything.")
+				return
+			}
+		}
+
+		next(w, r)
+	}
+}
+
+// retryAfter states the wait in the header the client already knows how to read. A number
+// someone can wait out is the difference between a retry and a refresh loop.
+func retryAfter(w http.ResponseWriter, wait time.Duration) {
+	seconds := int(wait.Seconds())
+	if wait > 0 && seconds < 1 {
+		seconds = 1
+	}
+	w.Header().Set("Retry-After", strconv.Itoa(seconds))
+}
+
 func (deps Deps) featuresHandler(w http.ResponseWriter, r *http.Request) {
 	// One budget for the whole exchange, shared by resolving, downloading and parsing. The
 	// client's own disconnect cancels it too, so an abandoned request stops costing anything.
@@ -110,45 +175,88 @@ func (deps Deps) featuresHandler(w http.ResponseWriter, r *http.Request) {
 
 	owner := r.PathValue("owner")
 	name := r.PathValue("name")
-	ref := r.URL.Query().Get("ref")
-
 	started := time.Now()
 
+	document, cached, err := deps.Load(ctx, owner, name, r.URL.Query().Get("ref"))
+	if err != nil {
+		deps.fail(w, owner, name, err)
+		return
+	}
+
+	if cached {
+		deps.Logger.Info("served from cache",
+			"repo", owner+"/"+name, "took", time.Since(started))
+	} else {
+		deps.Logger.Info("parsed", "repo", owner+"/"+name,
+			"scanned", document.Totals.FilesScanned, "skipped", document.Totals.FilesSkipped,
+			"took", time.Since(started))
+	}
+
+	writeJSON(w, http.StatusOK, document)
+}
+
+/*
+Load is the whole pipeline behind the features endpoint, with no HTTP in it.
+
+Extracted so the cache warm below can be the same code rather than a second copy of it. A
+warm that resolved or keyed differently from a request would fill the cache with entries no
+request ever looks up — and it would look like it was working, because the log line it writes
+is about the warm and not about the hit that never happens.
+
+The bool is whether the answer came from the cache.
+*/
+func (deps Deps) Load(
+	ctx context.Context,
+	owner, name, ref string,
+) (schema.RepoFeatures, bool, error) {
 	// The ref is resolved before anything else because the SHA is the cache key and the
 	// seed. Branches move; the music must not.
 	repo, err := deps.GitHub.Resolve(ctx, owner, name, ref)
 	if err != nil {
-		deps.fail(w, "resolving", owner, name, err)
-		return
+		return schema.RepoFeatures{}, false, stepError{"resolving", err}
 	}
 
 	if document, found := deps.Cache.Get(ctx, repo.CommitSHA); found {
-		deps.Logger.Info("served from cache",
-			"repo", owner+"/"+name, "sha", repo.CommitSHA[:8], "took", time.Since(started))
-		writeJSON(w, http.StatusOK, document)
-		return
+		return document, true, nil
 	}
 
 	tarball, err := deps.GitHub.Tarball(ctx, repo.Owner, repo.Name, repo.CommitSHA)
 	if err != nil {
-		deps.fail(w, "fetching the archive", owner, name, err)
-		return
+		return schema.RepoFeatures{}, false, stepError{"fetching the archive", err}
 	}
 	defer tarball.Close()
 
 	document, err := features.FromTarball(ctx, repo, tarball, time.Now())
 	if err != nil {
-		deps.fail(w, "parsing", owner, name, err)
-		return
+		return schema.RepoFeatures{}, false, stepError{"parsing", err}
 	}
 
 	deps.Cache.Put(ctx, repo.CommitSHA, document)
-	deps.Logger.Info("parsed",
-		"repo", owner+"/"+name, "sha", repo.CommitSHA[:8],
-		"scanned", document.Totals.FilesScanned, "skipped", document.Totals.FilesSkipped,
-		"took", time.Since(started))
+	return document, false, nil
+}
 
-	writeJSON(w, http.StatusOK, document)
+/*
+stepError says where in the pipeline something went wrong.
+
+Carried rather than logged at the point of failure, because the sentence a person reads and
+the line an operator reads are decided in one place — fail — and it needs to be able to say
+whether GitHub was slow or the repository was simply enormous. Those look identical as a
+deadline and are different problems.
+*/
+type stepError struct {
+	step string
+	err  error
+}
+
+func (e stepError) Error() string { return e.step + ": " + e.err.Error() }
+func (e stepError) Unwrap() error { return e.err }
+
+func stepOf(err error) string {
+	var step stepError
+	if errors.As(err, &step) {
+		return step.step
+	}
+	return "reading"
 }
 
 /*
@@ -163,7 +271,7 @@ Only the first two cases are about a repository. Everything below them is about 
 with GitHub and reads the same whatever was being asked for, which is why it lives in
 failUpstream and is shared with the username lookup.
 */
-func (deps Deps) fail(w http.ResponseWriter, stage, owner, name string, err error) {
+func (deps Deps) fail(w http.ResponseWriter, owner, name string, err error) {
 	repo := owner + "/" + name
 
 	switch {
@@ -178,7 +286,7 @@ func (deps Deps) fail(w http.ResponseWriter, stage, owner, name string, err erro
 		writeError(w, http.StatusUnprocessableEntity, features.NoSupportedFilesMessage())
 
 	default:
-		deps.failUpstream(w, stage, repo, err)
+		deps.failUpstream(w, stepOf(err), repo, err)
 	}
 }
 
@@ -225,4 +333,21 @@ func (deps Deps) failUpstream(w http.ResponseWriter, stage, subject string, err 
 		deps.Logger.Error("request failed", "subject", subject, "stage", stage, "error", err)
 		writeError(w, http.StatusInternalServerError, "something went wrong "+stage+" "+subject+".")
 	}
+}
+
+/*
+DefaultLimits are the allowances a deployment gets unless it says otherwise.
+
+The numbers come from GitHub's budget rather than from taste. A token allows 5,000 requests
+an hour; a repository costs three of them (metadata, commit, tarball) and a username costs
+two plus a thumbnail. Twenty a minute across everybody is 1,200 an hour at three requests
+each — comfortably inside the budget with room for the retries a spike produces, and inside
+the search endpoint's much tighter separate limit as well, which the username path needs.
+
+The caller's own allowance is set by what a person does rather than by arithmetic: ten a
+minute is faster than anyone can listen, and a burst of five covers arriving on a link,
+mistyping, and trying again without ever being told to wait.
+*/
+func DefaultLimits() (caller, global *ratelimit.Limiter) {
+	return ratelimit.New(10, 5), ratelimit.New(20, 40)
 }

@@ -63,3 +63,64 @@ func TestLoadHonoursAnExplicitAddress(t *testing.T) {
 		t.Errorf("Addr = %q", cfg.Addr)
 	}
 }
+
+func TestFlagsTakeTheirDefaultsWhenUnset(t *testing.T) {
+	t.Setenv("GITHUB_TOKEN", "t")
+	t.Setenv("TRUST_PROXY", "")
+	t.Setenv("WARM_GALLERY", "")
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	// Not trusting a forwarded header is the safe default: trusting one with nothing in front
+	// lets any caller choose their own rate-limit bucket.
+	if cfg.TrustProxy {
+		t.Error("TrustProxy defaulted to true")
+	}
+	if !cfg.WarmGallery {
+		t.Error("WarmGallery defaulted to false; it should be on and skip itself when useless")
+	}
+}
+
+func TestFlagsReadTheWayPeopleWriteThem(t *testing.T) {
+	t.Setenv("GITHUB_TOKEN", "t")
+
+	for _, on := range []string{"1", "true", "TRUE", "yes", "on", " true "} {
+		t.Setenv("TRUST_PROXY", on)
+		cfg, err := Load()
+		if err != nil {
+			t.Fatalf("Load: %v", err)
+		}
+		if !cfg.TrustProxy {
+			t.Errorf("TRUST_PROXY=%q was not read as true", on)
+		}
+	}
+
+	for _, off := range []string{"0", "false", "no", "off"} {
+		t.Setenv("WARM_GALLERY", off)
+		cfg, err := Load()
+		if err != nil {
+			t.Fatalf("Load: %v", err)
+		}
+		if cfg.WarmGallery {
+			t.Errorf("WARM_GALLERY=%q was not read as false", off)
+		}
+	}
+}
+
+func TestAMistypedFlagTakesTheDefaultRatherThanTheOpposite(t *testing.T) {
+	// Someone who meant to say something and misspelled it should get the safe answer, not
+	// the inverse of what they asked for.
+	t.Setenv("GITHUB_TOKEN", "t")
+	t.Setenv("TRUST_PROXY", "ture")
+	t.Setenv("WARM_GALLERY", "nope")
+
+	cfg, err := Load()
+	if err != nil {
+		t.Fatalf("Load: %v", err)
+	}
+	if cfg.TrustProxy || !cfg.WarmGallery {
+		t.Errorf("mistyped flags changed the defaults: %+v", cfg)
+	}
+}

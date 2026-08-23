@@ -19,6 +19,14 @@ services:
       # a token baked into a compose file is a token in someone's git history.
       GITHUB_TOKEN: ${GITHUB_TOKEN:?set GITHUB_TOKEN in your environment or a .env file}
       REDIS_URL: redis://redis:6379
+      # On, because this is the production shape and warming is part of it. Set it to 0 while
+      # working on something else: it parses the eight front-page repositories at startup,
+      # which is a couple of minutes and two dozen GitHub requests you did not ask for.
+      WARM_GALLERY: '1'
+      # Nothing is in front of this container here. Behind a load balancer it must be 1, or
+      # every request arrives wearing the balancer's address and the whole internet shares one
+      # rate-limit bucket.
+      TRUST_PROXY: '0'
     depends_on:
       redis:
         condition: service_healthy

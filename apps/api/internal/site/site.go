@@ -33,12 +33,14 @@ const (
 	closeTag     = "<!--og:end-->"
 )
 
-type site struct {
+type Site struct {
 	files http.Handler
 	// The index split around the block to replace, so a request is two writes and a lookup
 	// rather than a search through the document.
 	head, tail string
 	cards      map[string]Card
+	// In the manifest's order, for Cards. The map above cannot answer that question.
+	listed []Card
 }
 
 /*
@@ -49,7 +51,7 @@ is missing or the index has lost its marker, that is a broken build and the righ
 say so is startup. A permalink that silently unfurls as the generic card would otherwise look
 fine to everyone except the person who shared it.
 */
-func Handler(dist fs.FS) (http.Handler, error) {
+func Handler(dist fs.FS) (*Site, error) {
 	index, err := fs.ReadFile(dist, indexPath)
 	if err != nil {
 		return nil, fmt.Errorf("reading %s: %w", indexPath, err)
@@ -77,12 +79,25 @@ func Handler(dist fs.FS) (http.Handler, error) {
 		cards[key(card.Owner, card.Name)] = card
 	}
 
-	return &site{
-		files: http.FileServerFS(dist),
-		head:  document[:open],
-		tail:  document[end+len(closeTag):],
-		cards: cards,
+	return &Site{
+		files:  http.FileServerFS(dist),
+		head:   document[:open],
+		tail:   document[end+len(closeTag):],
+		cards:  cards,
+		listed: listed,
 	}, nil
+}
+
+/*
+Cards lists the repositories this deployment's front page shows, in the manifest's order.
+
+It exists so the cache warm has somewhere honest to get that list. The alternative was a
+second list of eight repositories in Go, which would be right until the day the gallery
+changed and nobody remembered — and this one is already in the image, already generated from
+the gallery, and already read at boot.
+*/
+func (s *Site) Cards() []Card {
+	return s.listed
 }
 
 // key folds case, because GitHub does: github.com/PSF/Requests is the same repository, and a
@@ -91,7 +106,7 @@ func key(owner, name string) string {
 	return strings.ToLower(owner) + "/" + strings.ToLower(name)
 }
 
-func (s *site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
+func (s *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	owner, name, ok := permalink(r.URL.Path)
 	if !ok {
 		s.files.ServeHTTP(w, r)
