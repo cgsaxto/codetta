@@ -41,7 +41,11 @@ pnpm lint                 # eslint + prettier check
 make api-dev              # go run ./cmd/server, :8080
 make api-test             # go test, every module in go.work
 docker compose up redis   # local cache
+docker compose up         # the production shape: one image serving API + web on :8080
 ```
+
+`Dockerfile` is the source of truth for building the Go half — tree-sitter is cgo, so the
+build needs a C toolchain. Build for the host you deploy to: `--platform linux/amd64`.
 
 Before finishing any task: `pnpm typecheck && pnpm test` (and `make api-test` if Go changed).
 

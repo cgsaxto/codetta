@@ -1,7 +1,28 @@
-# Local cache only. Redis holds computed RepoFeatures documents keyed by commit SHA, and
-# nothing else — there is no database in this project and the app runs correctly without
-# this container. Bring it up to stop re-parsing the same repository during development.
+# Two services, and only one of them is ever required.
+#
+# `docker compose up redis` is still the development gesture: Redis holds computed
+# RepoFeatures documents keyed by commit SHA and nothing else, there is no database in this
+# project, and the app runs correctly without this container. Bring it up to stop re-parsing
+# the same repository while working on the music.
+#
+# `docker compose up` adds the built image, which is the production shape — one process
+# serving the API and the web app, which is the only arrangement where a permalink unfurls
+# with its own card. Use it to check the Dockerfile, not to develop against: it has no hot
+# reload and every change means a rebuild.
 services:
+  api:
+    build: .
+    ports:
+      - '8080:8080'
+    environment:
+      # Required, and deliberately not defaulted: the service refuses to boot without it, and
+      # a token baked into a compose file is a token in someone's git history.
+      GITHUB_TOKEN: ${GITHUB_TOKEN:?set GITHUB_TOKEN in your environment or a .env file}
+      REDIS_URL: redis://redis:6379
+    depends_on:
+      redis:
+        condition: service_healthy
+
   redis:
     image: redis:7-alpine
     ports:

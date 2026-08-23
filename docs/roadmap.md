@@ -167,6 +167,14 @@ Note: tree-sitter's Go bindings need cgo, which complicates builds. Keep the Doc
 the source of truth for building the API. If cgo becomes a real drag, swapping the API to
 Node + `web-tree-sitter` requires zero frontend changes — that is what the contract buys.
 
+**Settled during Launch, and it was not a drag.** The Dockerfile exists and cgo built first
+try on both architectures. Worth recording what the check actually proved, because it is a
+stronger claim than "it compiles": the same commit parsed inside a linux/arm64 container and
+inside an emulated linux/amd64 one produces byte-identical documents, `fetchedAt` and `stars`
+aside. Determinism was only ever asserted against one machine before that, and it is the
+promise the whole project rests on — the same commit sounds the same, forever, including on
+whatever the demo ends up hosted on.
+
 ---
 
 ## Phase 2 — Visuals ✅
@@ -466,6 +474,24 @@ the search endpoint's separate budget already keeps this away from the parsing p
 - [ ] README with the GIF/clip in the first screen, above everything else
 - [ ] MIT licence, CONTRIBUTING, issue templates
 - [ ] Hosted demo that survives a front-page spike (rate limit + cache warm the gallery)
+
+  The build half is done: `Dockerfile` and an `api` service in `docker-compose.yml`, one
+  image serving the API and the web app from one process. That arrangement is not a
+  convenience — `internal/site` substitutes a block of the app's `<head>`, and it can only do
+  that for a page it is serving, so a split deployment loses per-repository unfurls.
+
+  Three things in it are load-bearing and none is obvious. `CGO_ENABLED=1`, because every
+  grammar is C and cgo off fails rather than degrading. `GOWORK=off`, because `go.work` is a
+  developer convenience and the module resolves the schema package through its own `replace`.
+  And `ca-certificates` in the runtime image, because every outbound call is https to GitHub
+  and without roots they all fail at the handshake — the one omission that would look like a
+  network bug rather than a missing package.
+
+  No Playwright in the image and no browser download, which is the second thing Phase 4's
+  pre-rendered cards bought.
+
+  Still to do: the rate limit and the gallery warm.
+
 - [ ] Post the gallery repos one at a time over several weeks, not all at once
 
 ---

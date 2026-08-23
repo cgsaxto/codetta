@@ -91,6 +91,22 @@ enough; create one at <https://github.com/settings/tokens>.
 There are no accounts, no database, and nothing is stored — Redis only caches parsed output,
 keyed by commit SHA, and the app works correctly without it.
 
+### Or in Docker
+
+```bash
+GITHUB_TOKEN=... docker compose up
+```
+
+One image, one process, serving the API and the built web app together on :8080. That is the
+production shape and the only one where a permalink unfurls with its own card, because the
+substitution happens in the page the service is serving. The two commands above are the
+development shape instead: the app is a Vite server that reloads, and nothing rewrites the
+`<head>`.
+
+`Dockerfile` is the source of truth for building the Go half. tree-sitter's bindings are cgo,
+so the build needs a C toolchain and produces a dynamically linked binary — worth having that
+recipe in a file rather than in somebody's shell history.
+
 ## How it's put together
 
 ```

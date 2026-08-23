@@ -1,0 +1,20 @@
+# The two directories that would dominate the build context, and both are rebuilt inside the
+# image anyway. node_modules is also platform-specific: copying a macOS tree into a Linux
+# build is how you get a binary that will not load.
+node_modules
+**/node_modules
+apps/web/dist
+
+.git
+.github
+
+# Nothing in the image reads these, and a stray .env is the one file that must never end up
+# in a layer — an image is copied around far more casually than a working tree.
+.env
+.env.*
+*.log
+
+# Developer tooling that has no counterpart in a container.
+.vscode
+.idea
+.DS_Store
