@@ -543,7 +543,14 @@ the search endpoint's separate budget already keeps this away from the parsing p
   image, already read at boot for the unfurls. The alternative was a second list of eight
   repositories in Go, correct until the day the gallery changed and nobody remembered.
 
-  Still to do: the hosting itself.
+  The repository is `lduo8438-max/codetta`, and it is **private until the demo is up**. That
+  is not a retreat from "public from day one" in @CLAUDE.md, which is about how the code is
+  written — assume strangers read it — rather than about when it is published. What a stranger
+  would find today is a README whose first link goes nowhere and whose hero slot is empty,
+  because the clip is recorded from the deployed site. Public is one switch, and it is worth
+  spending it on a page that is finished.
+
+  Still to do: the hosting itself, then the clip, then flip it public.
 
 - [ ] Post the gallery repos one at a time over several weeks, not all at once
 
