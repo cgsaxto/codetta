@@ -8,14 +8,20 @@
 
 <!--
   THE CLIP GOES HERE AND NOTHING GOES ABOVE IT.
-  Upload a 30s MP4 by dragging it into a GitHub issue comment, then paste the
-  resulting URL on its own line — GitHub renders it as an inline player.
+
+  Record it from the deployed site: play a repository, press "square video", and
+  drag the file into a GitHub issue comment. That produces a URL — paste it on
+  its own line below this comment, uncomment the caption, and delete these
+  instructions.
+
   Use the peak section, not the intro. Square or 16:9. Under 10 MB.
+
+  Commented out rather than left as a placeholder URL: a dead embed at the top
+  of the page reads as a broken project, and this is the first thing anybody
+  sees.
+
+  <sub>↑ `facebook/react` — 297,593 lines, F Lydian at 120 BPM</sub>
 -->
-
-https://github.com/USER/codetta/assets/PLACEHOLDER/clip.mp4
-
-<sub>↑ `facebook/react` — 297,593 lines, F Lydian at 120 BPM</sub>
 
 </div>
 
@@ -74,7 +80,7 @@ list of things that are explicitly forbidden. It's the most opinionated file in 
 ## Run it locally
 
 ```bash
-git clone https://github.com/USER/codetta
+git clone https://github.com/lduo8438-max/codetta
 cd codetta
 pnpm install
 
@@ -145,7 +151,7 @@ Codetta only touches the public tarball endpoint and never clones. Self-host it 
 you want to point it at something private.
 
 **Can I get the MIDI / the stems?**
-Not yet. [Open an issue](https://github.com/USER/codetta/issues) if you'd use it.
+Not yet. [Open an issue](https://github.com/lduo8438-max/codetta/issues) if you'd use it.
 
 **The name?**
 A _codetta_ is a short closing passage in music. It also has "code" in it.
