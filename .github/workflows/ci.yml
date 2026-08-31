@@ -1,0 +1,82 @@
+# The checks CLAUDE.md asks for before finishing any task, run on every push.
+#
+# Two jobs rather than one, because the halves of this repo share nothing but a JSON
+# document: a Go change cannot break the music and a music change cannot break the parser,
+# so there is no reason for either to wait for the other's toolchain to install.
+#
+# The one worth understanding is the web job. `pnpm test` renders every fixture and compares
+# the result against the recorded score in fixtures/*.expected.json, which is the only
+# automated check in this project that can notice the music changed. It will not tell you the
+# output got worse — nothing can, that is what ears are for — but it makes a change nobody
+# intended impossible to merge silently.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+# Least privilege. Nothing here writes to the repository.
+permissions:
+  contents: read
+
+# A second push supersedes the first. Nothing here is worth finishing for a commit that has
+# already been replaced.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web:
+    name: web — typecheck, test, lint
+    runs-on: ubuntu-latest
+    env:
+      # Playwright is a devDependency for the build-time OG screenshots, which CI never runs:
+      # the eight cards are committed PNGs. Without this, every job downloads three browsers
+      # to use none of them.
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: '1'
+    steps:
+      - uses: actions/checkout@v4
+
+      # Corepack reads the pinned pnpm version out of package.json, so CI, the Dockerfile and
+      # a laptop all resolve the same one. It has to run before setup-node, which needs pnpm
+      # on PATH to find the store it is caching.
+      - name: Enable corepack
+        run: corepack enable
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm typecheck
+
+      # Fails when a generated score differs from the one recorded in fixtures/. Most changes
+      # to this project move those numbers on purpose — when they do, `pnpm fixtures:update`
+      # belongs in the same commit that justifies it.
+      - run: pnpm test
+
+      - run: pnpm lint
+
+  api:
+    name: api — go test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version-file: apps/api/go.mod
+          cache-dependency-path: apps/api/go.sum
+
+      # cgo, because every tree-sitter grammar is C. ubuntu-latest already has the toolchain;
+      # this is here to fail loudly rather than mysteriously if that ever stops being true.
+      - name: Check the C toolchain
+        run: cc --version
+
+      # Offline, all of it. httptest stands in for GitHub and miniredis for Redis, so this
+      # never spends a rate limit — which matters for a service whose entire job is calling a
+      # rate-limited API.
+      - run: make api-test
