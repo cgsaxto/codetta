@@ -15,14 +15,17 @@
   },
   "dependencies": {
     "@codetta/schema": "workspace:*",
+    "@react-three/fiber": "^9.7.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
+    "three": "^0.185.1",
     "tone": "^15.1.22"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.3.3",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.4",
+    "@types/three": "^0.185.4",
     "@vitejs/plugin-react": "^6.0.5",
     "playwright": "^1.62.1",
     "tailwindcss": "^4.3.3",

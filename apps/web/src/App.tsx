@@ -1,16 +1,34 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { lazy, memo, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import type { RepoFeatures } from '@codetta/schema';
-import { renderClip, renderWav, startPlayback, wavFilename, type Player } from './audio/player';
+import type * as AudioPlayer from './audio/player';
+import type { Player } from './audio/player';
 import { ApiError, fetchFeatures, parseTarget, type RepoRef } from './features/api';
 import { fetchUserPick, pickSummary, type UserPick } from './features/user';
 import { GALLERY } from './features/gallery';
 import { pathForRepo, repoFromPath } from './features/route';
 import { generateScore } from './music/generate';
 import type { Score } from './music/score';
-import { Field } from './visuals/Field';
 import { cardFilename, loadAvatar, renderCard, shortLines } from './visuals/card';
 import { palettesFor, type Palette } from './visuals/palette';
 import { recordClip, supportedVideoType, videoFilename, type Shape } from './visuals/record';
+import type { SpectrumBands, ViewMode } from './visuals/SpatialField';
+
+const SpatialField = memo(
+  lazy(() =>
+    import('./visuals/SpatialField').then((module) => ({ default: module.SpatialField })),
+  ),
+);
+
+const EMPTY_SPECTRUM: SpectrumBands = { low: 0, mid: 0, high: 0, energy: 0, progress: 0 };
+const SPECTRUM_KEYS = ['low', 'mid', 'high'] as const;
+
+let audioModulePromise: Promise<typeof AudioPlayer> | null = null;
+
+/** Load Tone only when an audio action is imminent; hovering the main control hides the wait. */
+function audioModule() {
+  audioModulePromise ??= import('./audio/player');
+  return audioModulePromise;
+}
 
 /**
  * The gallery is the page.
@@ -33,58 +51,47 @@ import { recordClip, supportedVideoType, videoFilename, type Shape } from './vis
 const HEARD_AFTER = 20;
 
 interface TileProps {
-  buttonRef?: (node: HTMLButtonElement | null) => void;
   features: RepoFeatures;
   score: Score;
   palette: Palette;
   playing: boolean;
-  player: Player | null;
+  selected: boolean;
   onToggle: () => void;
 }
 
-function Tile({ buttonRef, features, score, palette, playing, player, onToggle }: TileProps) {
+function Tile({ features, score, palette, playing, selected, onToggle }: TileProps) {
   const accent = palette.modules[0] ?? '#888';
   const { repo } = features;
 
   return (
     <button
-      ref={buttonRef}
       type="button"
       onClick={onToggle}
       aria-pressed={playing}
-      className="group block w-full rounded-[4px] text-left outline-offset-4 focus-visible:outline-2 focus-visible:outline-[#0e1013]"
+      aria-current={selected ? 'true' : undefined}
+      title={`${repo.owner}/${repo.name}`}
+      className="group min-w-[190px] flex-1 rounded-2xl border px-4 py-3 text-left transition duration-300"
+      style={{
+        borderColor: selected ? `${accent}70` : 'var(--border-quiet)',
+        background: selected ? `${accent}12` : 'var(--surface-tile)',
+        ['--focus-ring' as string]: accent,
+      }}
     >
-      <div
-        className="overflow-hidden rounded-[3px] ring-1 transition-[box-shadow,transform] duration-200 group-focus-visible:ring-2"
-        style={{
-          boxShadow: playing ? `0 0 0 1.5px ${accent}` : undefined,
-          // Hairline by default; the repository's own colour on hover and while playing.
-          ['--tw-ring-color' as string]: playing ? accent : '#dfe2e6',
-        }}
-      >
-        <Field
-          player={player}
-          score={score}
-          features={features}
-          palette={palette}
-          height={172}
-        />
-      </div>
-
-      <div className="mt-2.5 flex items-baseline gap-1.5">
+      <div className="flex items-center gap-2">
         <span
           aria-hidden
-          className="size-[7px] shrink-0 rounded-[1px] transition-opacity"
-          style={{ background: accent, opacity: playing ? 1 : 0.28 }}
+          className={`size-1.5 shrink-0 rounded-full ${playing ? 'animate-pulse' : ''}`}
+          style={{ background: accent, opacity: playing || selected ? 1 : 0.38 }}
         />
-        <span className="truncate text-[15px] leading-none font-medium text-[#0e1013]">
+        <span className="truncate text-[13px] leading-none font-medium text-white">
           {repo.name}
         </span>
-        <span className="truncate text-[11px] leading-none text-[#9aa1ab]">{repo.owner}</span>
+        <span className="text-ui-muted ml-auto text-[9px] tracking-[0.14em] uppercase">
+          {playing ? 'live' : score.bpm}
+        </span>
       </div>
-
-      <div className="mt-1.5 text-[10px] tracking-[0.16em] text-[#767c86] uppercase">
-        {repo.primaryLanguage} · {shortLines(features.totals.linesOfCode)} · {score.bpm} bpm
+      <div className="text-ui-muted mt-2 text-[9px] tracking-[0.14em] uppercase">
+        {repo.owner} / {repo.primaryLanguage} / {shortLines(features.totals.linesOfCode)}
       </div>
     </button>
   );
@@ -95,6 +102,7 @@ export default function App() {
   const [playingSha, setPlayingSha] = useState<string | null>(null);
   const [starting, setStarting] = useState<string | null>(null);
   const [heard, setHeard] = useState(false);
+  const [viewMode, setViewMode] = useState<ViewMode>('pillars');
 
   const [saving, setSaving] = useState<'clip' | 'full' | 'card' | Shape | null>(null);
   const [recorded, setRecorded] = useState(0);
@@ -110,7 +118,7 @@ export default function App() {
   const pending = useRef<AbortController | null>(null);
   const heardTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputSection = useRef<HTMLElement | null>(null);
-  const tiles = useRef(new Map<string, HTMLButtonElement>());
+  const stage = useRef<HTMLElement | null>(null);
 
   // Smallest first, so the grid reads slowest to fastest. A repository the visitor loaded
   // goes last, where it is the newest thing rather than buried among the eight.
@@ -122,6 +130,11 @@ export default function App() {
   const playing = useMemo(
     () => entries.find((entry) => entry.repo.commitSha === playingSha) ?? null,
     [entries, playingSha],
+  );
+
+  const active = useMemo(
+    () => entries.find((entry) => entry.repo.commitSha === focusSha) ?? playing ?? entries[0]!,
+    [entries, focusSha, playing],
   );
 
   const scores = useMemo(
@@ -158,23 +171,6 @@ export default function App() {
     const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     section.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'end' });
   }, [heard]);
-
-  /**
-   * Put the tile a link named in front of the visitor, and under their cursor.
-   *
-   * Focus rather than only scroll, so the keyboard can play it immediately — and because a
-   * link that lands on a grid of eight with no indication of which one it meant has not
-   * really arrived anywhere.
-   */
-  useEffect(() => {
-    if (!focusSha) return;
-    const tile = tiles.current.get(focusSha);
-    if (!tile) return;
-
-    const calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    tile.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'center' });
-    tile.focus({ preventScroll: true });
-  }, [focusSha, entries]);
 
   useEffect(() => () => player?.stop(), [player]);
   useEffect(
@@ -228,6 +224,7 @@ export default function App() {
 
   async function play(entry: RepoFeatures) {
     const sha = entry.repo.commitSha;
+    setFocusSha(sha);
     if (playingSha === sha) {
       // Stopping counts as having heard it: nobody stops a piece they have not listened to.
       setHeard(true);
@@ -242,6 +239,7 @@ export default function App() {
       // loaded is not in `scores` yet, because that memo is derived from state set in the
       // same tick. Looking it up alone made the load succeed and then play nothing.
       const score = scores.get(sha) ?? generateScore(entry);
+      const { startPlayback } = await audioModule();
       setPlayer(await startPlayback(score));
       setPlayingSha(sha);
       setError(null);
@@ -279,6 +277,7 @@ export default function App() {
     setSaving(clip ? 'clip' : 'full');
     setError(null);
     try {
+      const { renderWav, wavFilename } = await audioModule();
       const blob = await renderWav(score, { clip });
       offer(blob, wavFilename(score, entry.repo.owner, entry.repo.name, clip));
     } catch (cause) {
@@ -320,6 +319,7 @@ export default function App() {
     setRecorded(0);
     setError(null);
     try {
+      const { renderClip } = await audioModule();
       const audio = await renderClip(score, { clip: true });
       const blob = await recordClip({
         score,
@@ -424,49 +424,288 @@ export default function App() {
     }
   }
 
+  const activeScore = scores.get(active.repo.commitSha) ?? generateScore(active);
+  const activePalette = palettes.get(active.repo.commitSha) ?? palettesFor([active.seed])[0]!;
+  const activeAccent = activePalette.modules[0] ?? '#8cecff';
+  const activeIsPlaying = playingSha === active.repo.commitSha;
+  const activePlayer = activeIsPlaying ? player : null;
+
+  /**
+   * FFT values change ten times a second, but they do not change application state. Updating
+   * the small HUD directly keeps the gallery, score generation and lazy 3D boundary out of
+   * React's render path while the geometry itself continues to read the analyser every frame.
+   */
+  const reportSpectrum = useCallback((next: SpectrumBands) => {
+    const root = stage.current;
+    if (!root) return;
+
+    root.dataset.fftLow = next.low.toFixed(3);
+    root.dataset.fftMid = next.mid.toFixed(3);
+    root.dataset.fftHigh = next.high.toFixed(3);
+    root.dataset.fftEnergy = next.energy.toFixed(3);
+    root.style.setProperty('--spectrum-progress', String(next.progress));
+
+    for (const band of SPECTRUM_KEYS) {
+      const value = next[band];
+      const output = root.querySelector<HTMLElement>(`[data-spectrum-value="${band}"]`);
+      if (output) output.textContent = String(Math.round(value * 100));
+      root.querySelectorAll<HTMLElement>(`[data-spectrum-bar="${band}"]`).forEach((bar) => {
+        const gate = Number(bar.dataset.gate ?? 0);
+        bar.style.opacity = String(value >= gate ? 0.9 : 0.13);
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!activeIsPlaying) reportSpectrum(EMPTY_SPECTRUM);
+  }, [active.repo.commitSha, activeIsPlaying, reportSpectrum]);
+
   return (
-    <main className="min-h-dvh bg-[#f2f3f5] px-5 py-10 font-mono text-[#0e1013] sm:px-8 sm:py-14">
-      <div className="mx-auto max-w-[1180px]">
-        <header className="mb-9 sm:mb-12">
-          <h1 className="text-[12px] tracking-[0.32em] uppercase">Codetta</h1>
-          <p className="mt-3 max-w-[46ch] text-[13px] leading-relaxed text-[#575d66]">
-            Eight repositories, played as they are written. Ordered by size, which is what sets
-            the tempo.
-          </p>
+    <main className="min-h-dvh overflow-hidden bg-[var(--surface-page)] px-3 py-4 font-mono text-white sm:px-6 sm:py-6">
+      <div className="mx-auto max-w-[1540px]">
+        <header className="mb-4 flex items-center justify-between px-2 sm:mb-5">
+          <div className="flex items-center gap-4">
+            <h1 className="text-[12px] tracking-[0.34em] uppercase">Codetta</h1>
+            <span className="hidden h-3 w-px bg-white/15 sm:block" />
+            <p className="text-ui-muted hidden text-[10px] tracking-[0.14em] uppercase sm:block">
+              Repository sonification instrument
+            </p>
+          </div>
+          <div className="text-ui-muted flex items-center gap-2 text-[9px] tracking-[0.16em] uppercase">
+            <span
+              className={`size-1.5 rounded-full ${activeIsPlaying ? 'animate-pulse' : ''}`}
+              style={{ background: activeIsPlaying ? activeAccent : 'var(--status-idle)' }}
+            />
+            {activeIsPlaying ? 'FFT live' : 'Ready'}
+          </div>
         </header>
 
-        <ul className="grid grid-cols-1 gap-x-5 gap-y-8 sm:grid-cols-2 lg:grid-cols-4">
-          {entries.map((entry) => {
-            const sha = entry.repo.commitSha;
-            const score = scores.get(sha);
-            const palette = palettes.get(sha);
-            if (!score || !palette) return null;
-            return (
-              <li key={sha}>
-                <Tile
-                  buttonRef={(node) => {
-                    if (node) tiles.current.set(sha, node);
-                    else tiles.current.delete(sha);
+        <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">
+          {starting
+            ? `Starting audio for ${active.repo.name}`
+            : saving
+              ? saving === 'square' || saving === 'vertical'
+                ? `Recording ${saving} video, ${Math.round(recorded * 100)} percent complete`
+                : `Preparing ${saving}`
+              : ''}
+        </div>
+
+        <section
+          ref={stage}
+          className="spatial-stage relative h-[74svh] min-h-[480px] max-h-[680px] overflow-hidden rounded-[26px] border border-white/10 bg-[var(--surface-stage)] shadow-2xl shadow-black/60 sm:h-[calc(100svh-78px)] sm:min-h-[460px] sm:max-h-[820px]"
+          style={{
+            ['--stage-accent' as string]: activeAccent,
+            ['--spectrum-progress' as string]: 0,
+          }}
+          data-fft-low="0.000"
+          data-fft-mid="0.000"
+          data-fft-high="0.000"
+          data-fft-energy="0.000"
+        >
+          <div className="absolute inset-0">
+            <Suspense
+              fallback={
+                <div className="grid size-full place-items-center">
+                  <div className="text-ui-subtle flex items-center gap-2 text-[9px] tracking-[0.2em] uppercase">
+                    <span
+                      className="size-1.5 animate-pulse rounded-full"
+                      style={{ background: activeAccent }}
+                    />
+                    Initialising space
+                  </div>
+                </div>
+              }
+            >
+              <SpatialField
+                features={active}
+                score={activeScore}
+                palette={activePalette}
+                player={activePlayer}
+                mode={viewMode}
+                onSpectrum={reportSpectrum}
+              />
+            </Suspense>
+          </div>
+
+          <div className="stage-vignette pointer-events-none absolute inset-0" />
+          <div className="stage-top-fade pointer-events-none absolute inset-x-0 top-0 h-40" />
+
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4 sm:p-7">
+            <div className="min-w-0">
+              <p
+                className="text-ui-muted max-w-[120px] truncate text-[9px] tracking-[0.14em] uppercase sm:max-w-none sm:tracking-[0.22em]"
+                title={`${active.repo.owner} / ${active.repo.primaryLanguage}`}
+              >
+                {active.repo.owner} / {active.repo.primaryLanguage}
+              </p>
+              <h2
+                className="mt-2 max-w-[108px] truncate text-[24px] leading-none font-light tracking-[-0.04em] sm:max-w-none sm:text-[clamp(24px,4vw,50px)]"
+                title={active.repo.name}
+              >
+                {active.repo.name}
+              </h2>
+              <p className="text-ui-muted mt-3 text-[9px] tracking-[0.08em] uppercase sm:text-[10px] sm:tracking-[0.14em]">
+                {active.repo.commitSha.slice(0, 7)}
+                <span className="hidden sm:inline">
+                  {' '}
+                  · {activeScore.root} {activeScore.mode}
+                </span>{' '}
+                · {activeScore.bpm} BPM
+              </p>
+            </div>
+
+            <div className="pointer-events-auto flex shrink-0 rounded-full border border-white/10 bg-black/25 p-1 shadow-lg backdrop-blur-xl">
+              {(['pillars', 'nodes'] as const).map((mode) => (
+                <button
+                  key={mode}
+                  type="button"
+                  onClick={() => setViewMode(mode)}
+                  aria-pressed={viewMode === mode}
+                  className="min-h-11 whitespace-nowrap rounded-full px-2.5 py-2 text-[9px] tracking-[0.1em] uppercase transition sm:px-4 sm:tracking-[0.12em]"
+                  style={{
+                    color: viewMode === mode ? 'var(--text-primary)' : 'var(--text-secondary)',
+                    background: viewMode === mode ? `${activeAccent}22` : 'transparent',
+                    boxShadow:
+                      viewMode === mode ? `inset 0 0 0 1px ${activeAccent}40` : undefined,
                   }}
-                  features={entry}
-                  score={score}
-                  palette={palette}
-                  playing={playingSha === sha}
-                  player={playingSha === sha ? player : null}
-                  onToggle={() => void play(entry)}
-                />
-              </li>
-            );
-          })}
-        </ul>
+                >
+                  {mode === 'pillars' ? (
+                    'Pillars'
+                  ) : (
+                    <>
+                      <span className="sm:hidden">Nodes</span>
+                      <span className="hidden sm:inline">Node sphere</span>
+                    </>
+                  )}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="pointer-events-none absolute top-1/2 left-5 hidden -translate-y-1/2 sm:block">
+            <div className="w-[122px] rounded-2xl border border-white/9 bg-black/18 px-4 py-4 backdrop-blur-xl">
+              <p className="text-ui-subtle text-[9px] tracking-[0.2em] uppercase">Repository</p>
+              {[
+                ['LOC', shortLines(active.totals.linesOfCode)],
+                ['Files', active.totals.filesScanned.toLocaleString('en-US')],
+                ['Modules', active.modules.length],
+                ['Tempo', `${activeScore.bpm}`],
+              ].map(([label, value]) => (
+                <div key={label} className="mt-3 flex items-baseline justify-between gap-4">
+                  <span className="text-ui-subtle text-[9px] tracking-[0.12em] uppercase">
+                    {label}
+                  </span>
+                  <span className="text-ui-secondary text-[11px] tabular-nums">{value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <div className="text-ui-subtle pointer-events-none absolute right-5 bottom-28 hidden text-right text-[9px] leading-relaxed tracking-[0.14em] uppercase sm:block">
+            <p>Drag · orbit</p>
+            <p>Wheel · zoom</p>
+            <p>Arrows · orbit</p>
+          </div>
+
+          <div className="pointer-events-none absolute inset-x-3 bottom-3 sm:inset-x-5 sm:bottom-5">
+            <div className="pointer-events-auto mx-auto flex max-w-[980px] items-center gap-3 rounded-[20px] border border-white/10 bg-[var(--surface-hud)] p-3 shadow-2xl backdrop-blur-2xl sm:gap-5 sm:px-5 sm:py-4">
+              <button
+                type="button"
+                onClick={() => void play(active)}
+                onPointerEnter={() => void audioModule()}
+                onFocus={() => void audioModule()}
+                disabled={starting === active.repo.commitSha}
+                className="grid size-11 shrink-0 place-items-center rounded-full text-[var(--surface-stage)] transition hover:scale-105 disabled:opacity-50"
+                style={{ background: activeAccent, boxShadow: `0 0 28px ${activeAccent}45` }}
+                aria-label={
+                  activeIsPlaying ? `Stop ${active.repo.name}` : `Play ${active.repo.name}`
+                }
+              >
+                {activeIsPlaying ? (
+                  <span className="block size-3 rounded-[2px] bg-[var(--surface-stage)]" />
+                ) : (
+                  <span className="ml-0.5 block h-0 w-0 border-y-[7px] border-l-[11px] border-y-transparent border-l-[var(--surface-stage)]" />
+                )}
+              </button>
+
+              <div className="min-w-0 flex-1">
+                <div className="flex items-center justify-between gap-3">
+                  <p className="text-ui-strong truncate text-[10px]">
+                    {active.repo.owner}/{active.repo.name}
+                  </p>
+                  <span className="text-ui-subtle text-[9px] tracking-[0.12em] uppercase">
+                    {activeIsPlaying ? 'Audio reactive' : 'Press play'}
+                  </span>
+                </div>
+                <div className="mt-3 h-px overflow-hidden bg-white/10">
+                  <div
+                    className="spectrum-progress h-full transition-transform duration-100"
+                    style={{ background: activeAccent }}
+                  />
+                </div>
+              </div>
+
+              <div className="hidden w-[190px] grid-cols-3 gap-3 sm:grid">
+                {SPECTRUM_KEYS.map((band) => (
+                  <div key={band}>
+                    <div className="flex h-6 items-end gap-px" aria-hidden>
+                      {[0.03, 0.08, 0.16, 0.28, 0.42].map((gate) => (
+                        <span
+                          key={gate}
+                          data-spectrum-bar={band}
+                          data-gate={gate}
+                          className="w-full rounded-[1px] transition-opacity duration-100"
+                          style={{
+                            height: `${30 + gate * 70}%`,
+                            background: activeAccent,
+                            opacity: 0.13,
+                          }}
+                        />
+                      ))}
+                    </div>
+                    <p className="text-ui-subtle mt-1 flex justify-between text-[8px] tracking-[0.1em] uppercase">
+                      <span>{band}</span>
+                      <span data-spectrum-value={band} className="tabular-nums">
+                        0
+                      </span>
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <div className="repo-rail mt-4 overflow-x-auto pb-2">
+          <ul className="flex min-w-max snap-x snap-mandatory gap-2 sm:min-w-0 sm:snap-none">
+            {entries.map((entry) => {
+              const sha = entry.repo.commitSha;
+              const score = scores.get(sha);
+              const palette = palettes.get(sha);
+              if (!score || !palette) return null;
+              return (
+                <li key={sha} className="flex min-w-[190px] flex-1 snap-start">
+                  <Tile
+                    features={entry}
+                    score={score}
+                    palette={palette}
+                    selected={active.repo.commitSha === sha}
+                    playing={playingSha === sha}
+                    onToggle={() => void play(entry)}
+                  />
+                </li>
+              );
+            })}
+          </ul>
+        </div>
 
         {playing && (
-          <div className="mt-8 flex flex-wrap items-center gap-x-4 gap-y-2">
+          <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-white/8 px-2 pt-5">
             <button
               type="button"
               onClick={() => void save(playing, true)}
               disabled={saving !== null}
-              className="rounded-[3px] bg-[#0e1013] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#f2f3f5] uppercase disabled:opacity-40"
+              className="text-ui-secondary min-h-11 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-[9px] tracking-[0.14em] uppercase hover:bg-white/12 disabled:opacity-40"
             >
               {saving === 'clip' ? 'Rendering' : `Save 30s of ${playing.repo.name}`}
             </button>
@@ -474,22 +713,22 @@ export default function App() {
               type="button"
               onClick={() => void save(playing, false)}
               disabled={saving !== null}
-              className="text-[11px] text-[#575d66] underline underline-offset-4 hover:text-[#0e1013] disabled:opacity-40"
+              className="text-ui-muted min-h-11 rounded-full px-3 text-[9px] tracking-[0.1em] uppercase hover:bg-white/8 hover:text-white disabled:opacity-40"
             >
               {saving === 'full' ? 'Rendering the whole piece' : 'or the whole piece'}
             </button>
-            <span className="text-[11px] text-[#767c86]">
+            <span className="text-ui-subtle text-[9px]">
               From the peak, where every voice is playing
             </span>
 
-            <div className="flex w-full items-center gap-3">
+            <div className="flex w-full flex-wrap items-center gap-2">
               {(['square', 'vertical'] as const).map((shape) => (
                 <button
                   key={shape}
                   type="button"
                   onClick={() => void record(playing, shape)}
                   disabled={saving !== null}
-                  className="rounded-[3px] border border-[#dfe2e6] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#575d66] uppercase hover:border-[#0e1013] hover:text-[#0e1013] disabled:opacity-40"
+                  className="text-ui-muted min-h-11 rounded-full border border-white/10 px-3 py-2 text-[9px] tracking-[0.12em] uppercase hover:border-white/25 hover:text-white disabled:opacity-40"
                 >
                   {saving === shape
                     ? `Recording ${Math.round(recorded * 100)}%`
@@ -500,11 +739,11 @@ export default function App() {
                 type="button"
                 onClick={() => void saveCard(playing)}
                 disabled={saving !== null}
-                className="rounded-[3px] border border-[#dfe2e6] px-3 py-1.5 text-[11px] tracking-[0.12em] text-[#575d66] uppercase hover:border-[#0e1013] hover:text-[#0e1013] disabled:opacity-40"
+                className="text-ui-muted min-h-11 rounded-full border border-white/10 px-3 py-2 text-[9px] tracking-[0.12em] uppercase hover:border-white/25 hover:text-white disabled:opacity-40"
               >
                 {saving === 'card' ? 'Drawing' : 'Card'}
               </button>
-              <span className="text-[11px] text-[#767c86]">
+              <span className="text-ui-subtle text-[9px]">
                 {saving === 'square' || saving === 'vertical'
                   ? 'Recording happens in real time — thirty seconds'
                   : 'Same thirty seconds, with the picture'}
@@ -514,7 +753,7 @@ export default function App() {
         )}
 
         {starting && (
-          <p className="mt-8 text-[11px] tracking-[0.16em] text-[#767c86] uppercase">
+          <p className="text-ui-muted mt-5 px-2 text-[9px] tracking-[0.16em] uppercase">
             Starting audio
           </p>
         )}
@@ -522,8 +761,11 @@ export default function App() {
         {/* Held back until the visitor has heard something. A repository box is a question,
             and asking it before showing what the answer sounds like gets no answer. */}
         {heard && (
-          <section ref={inputSection} className="mt-16 border-t border-[#dfe2e6] pt-8 sm:mt-20">
-            <h2 className="text-[10px] tracking-[0.18em] text-[#767c86] uppercase">
+          <section
+            ref={inputSection}
+            className="mt-12 border-t border-white/8 px-2 pt-8 sm:mt-16"
+          >
+            <h2 className="text-ui-muted text-[10px] tracking-[0.18em] uppercase">
               Hear your own
             </h2>
             <form
@@ -537,26 +779,32 @@ export default function App() {
                 value={input}
                 onChange={(event) => setInput(event.target.value)}
                 placeholder="your-username"
+                maxLength={200}
                 spellCheck={false}
                 autoCapitalize="off"
                 autoCorrect="off"
                 aria-label="GitHub username, or a repository"
-                className="min-w-0 flex-1 rounded-[3px] border border-[#dfe2e6] bg-white px-3 py-2 text-[13px] outline-none placeholder:text-[#9aa1ab] focus:border-[#0e1013]"
+                aria-describedby="repo-input-hint"
+                className="min-h-11 min-w-0 flex-1 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-[16px] text-white placeholder:text-[var(--text-subtle)] focus:border-white/25 sm:text-[12px]"
               />
               <button
                 type="submit"
                 disabled={loading !== null}
-                className="rounded-[3px] bg-[#0e1013] px-4 py-2 text-[12px] tracking-[0.1em] text-[#f2f3f5] uppercase disabled:opacity-40"
+                aria-busy={loading !== null}
+                className="min-h-11 rounded-full bg-white px-5 py-2 text-[10px] tracking-[0.12em] text-[var(--surface-stage)] uppercase disabled:opacity-40"
               >
                 {loading === 'user' ? 'Looking up' : loading === 'repo' ? 'Reading' : 'Play'}
               </button>
             </form>
             {/* Said before the answer arrives, because a box that silently accepts two
                 different things is a box nobody tries the second thing in. */}
-            <p className="mt-3 max-w-[46ch] text-[12px] leading-relaxed text-[#767c86]">
+            <p
+              id="repo-input-hint"
+              className="text-ui-subtle mt-3 max-w-[58ch] text-[10px] leading-relaxed"
+            >
               A username plays that account&rsquo;s most-starred repository. An{' '}
-              <span className="text-[#575d66]">owner/repo</span> plays exactly that one. Public,
-              and in TypeScript, JavaScript, Python or Go.
+              <span className="text-ui-secondary">owner/repo</span> plays exactly that one.
+              Public, and in TypeScript, JavaScript, Python or Go.
             </p>
 
             {pick && (
@@ -565,10 +813,10 @@ export default function App() {
                   <img
                     src={pick.avatar}
                     alt=""
-                    className="size-9 shrink-0 rounded-full ring-1 ring-[#dfe2e6]"
+                    className="size-9 shrink-0 rounded-full ring-1 ring-white/10"
                   />
                 )}
-                <p className="max-w-[46ch] text-[12px] leading-relaxed text-[#575d66]">
+                <p className="text-ui-muted max-w-[46ch] text-[10px] leading-relaxed">
                   {pickSummary(pick)}
                 </p>
               </div>
@@ -577,9 +825,20 @@ export default function App() {
         )}
 
         {error && (
-          <p className="mt-5 max-w-[46ch] text-[12px] leading-relaxed text-[#a1201a]">
-            {error}
-          </p>
+          <div
+            id="codetta-error"
+            role="alert"
+            className="mt-5 flex max-w-[68ch] items-center gap-3 px-2 text-[11px] leading-relaxed text-[var(--text-error)]"
+          >
+            <p className="min-w-0 flex-1">{error}</p>
+            <button
+              type="button"
+              onClick={() => setError(null)}
+              className="text-ui-secondary min-h-11 shrink-0 rounded-full px-3 text-[9px] tracking-[0.12em] uppercase hover:bg-white/8"
+            >
+              Dismiss
+            </button>
+          </div>
         )}
       </div>
     </main>

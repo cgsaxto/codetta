@@ -65,6 +65,14 @@ export interface Player {
    * Asking for the position at the context's actual current time removes it.
    */
   positionSeconds(): number;
+  /**
+   * The spectrum currently reaching the master limiter, normalised to 0–1.
+   *
+   * Read directly from the Web Audio graph on a render frame. The visual never estimates
+   * loudness from scheduled notes, so an envelope, filter or reverb tail is visible for
+   * exactly as long as it is audible.
+   */
+  spectrum(): Float32Array;
 }
 
 export interface PlaybackOptions {
@@ -344,6 +352,12 @@ export async function startPlayback(
 
   await Tone.start();
   const rig = await buildRig(score);
+  const analyser = new Tone.FFT({ size: 128, smoothing: 0.82, normalRange: true });
+  // Keep the exact live bus. Tone.Offline temporarily swaps the global context, so looking
+  // the bus up again during stop could otherwise try to disconnect this analyser from an
+  // offline limiter it was never connected to and throw InvalidAccessError.
+  const liveMaster = masterBus();
+  liveMaster.connect(analyser);
 
   const transport = Tone.getTransport();
   transport.stop();
@@ -365,6 +379,10 @@ export async function startPlayback(
       return Math.max(0, transport.getSecondsAtTime(Tone.getContext().currentTime));
     },
 
+    spectrum() {
+      return stopped ? new Float32Array(128) : analyser.getValue();
+    },
+
     stop() {
       if (stopped) return;
       stopped = true;
@@ -374,6 +392,8 @@ export async function startPlayback(
       transport.loop = false;
       transport.position = 0;
 
+      liveMaster.disconnect(analyser);
+      analyser.dispose();
       rig.dispose();
     },
   };
