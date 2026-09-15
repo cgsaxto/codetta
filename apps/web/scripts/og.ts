@@ -63,13 +63,10 @@ async function main(): Promise<void> {
   // The fallback first, so a failure here is visible before eight slower captures rather
   // than after them.
   await page.goto(`${BASE}/?og=cover`, { waitUntil: 'networkidle' });
-  await page.waitForFunction(() => {
-    const canvases = document.querySelectorAll('canvas[data-og-canvas]');
-    return (
-      canvases.length > 0 &&
-      [...canvases].every((canvas) => (canvas as HTMLCanvasElement).dataset['ready'] === 'true')
-    );
-  });
+  // One marker on the root rather than one per canvas. The cover is eight WebGL scenes that
+  // report in any order, and a check over whichever canvases exist so far can pass while the
+  // last few have not mounted yet.
+  await page.waitForSelector('[data-og-ready="true"]', { timeout: 60_000 });
   await page.screenshot({ path: `${OUT}cover.png` });
   process.stdout.write('cover\n');
 
@@ -80,9 +77,9 @@ async function main(): Promise<void> {
     const file = `${slug}.png`;
 
     await page.goto(`${BASE}/?og=${repo.owner}/${repo.name}`, { waitUntil: 'networkidle' });
-    // The canvas sets this once its paint has landed. Waiting on a selector rather than a
+    // Set once both the scene and the text have landed. Waiting on a selector rather than a
     // timeout, so a slow machine produces the same image as a fast one instead of a blank.
-    await page.waitForSelector('canvas[data-og-canvas][data-ready="true"]');
+    await page.waitForSelector('[data-og-ready="true"]', { timeout: 60_000 });
     await page.screenshot({ path: `${OUT}${file}` });
 
     manifest.push({

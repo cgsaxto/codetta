@@ -1,10 +1,13 @@
-import { StrictMode } from 'react';
+import { lazy, StrictMode, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import App from './App';
-import { OgCard } from './OgCard';
-import { OgCover } from './OgCover';
 import { GALLERY } from './features/gallery';
 import './index.css';
+
+// Lazy, because both cards draw the 3D scene and a static import here would put three.js in
+// the bundle every visitor downloads, for a page only the screenshot script ever opens.
+const OgCard = lazy(() => import('./OgCard').then((module) => ({ default: module.OgCard })));
+const OgCover = lazy(() => import('./OgCover').then((module) => ({ default: module.OgCover })));
 
 const root = document.getElementById('root');
 if (!root) throw new Error('#root is missing from index.html');
@@ -22,8 +25,20 @@ const card = wanted
   : undefined;
 
 function page() {
-  if (wanted === 'cover') return <OgCover />;
-  if (card) return <OgCard features={card} />;
+  if (wanted === 'cover') {
+    return (
+      <Suspense fallback={null}>
+        <OgCover />
+      </Suspense>
+    );
+  }
+  if (card) {
+    return (
+      <Suspense fallback={null}>
+        <OgCard features={card} />
+      </Suspense>
+    );
+  }
   return <App />;
 }
 

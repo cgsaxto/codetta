@@ -1,9 +1,17 @@
 import { describe, expect, it } from 'vitest';
-import { GALLERY } from '../features/gallery';
+import { GALLERY, GALLERY_BY_SIZE } from '../features/gallery';
 import { generateScore } from '../music/generate';
 import { barToTick } from '../music/score';
-import { CARD_HEIGHT, CARD_WIDTH, cardCaption, cardFilename, cardTick, drawCard } from './card';
-import { paletteFor } from './palette';
+import {
+  CARD_HEIGHT,
+  CARD_WIDTH,
+  cardCaption,
+  cardFilename,
+  cardPalette,
+  cardTick,
+  drawCard,
+} from './card';
+import { paletteFor, palettesFor } from './palette';
 
 /**
  * There is no canvas here, so the context is a recorder: every call is kept and nothing is
@@ -129,5 +137,23 @@ describe('cardCaption', () => {
 describe('cardFilename', () => {
   it('is lowercase, like the other artifacts', () => {
     expect(cardFilename('PSF', 'Requests')).toBe('codetta-psf-requests-card.png');
+  });
+});
+
+describe('cardPalette', () => {
+  it('gives every gallery card the colour its tile wears on the page', () => {
+    // The page resolves the gallery smallest first. The cards used to resolve it in the order
+    // the files are listed, and palettesFor lays colours around the wheel in the order it is
+    // handed seeds — so all eight cards wore a colour the site never showed.
+    const onPage = palettesFor(GALLERY_BY_SIZE.map((entry) => entry.seed));
+    GALLERY_BY_SIZE.forEach((entry, index) => {
+      expect(cardPalette(entry), entry.repo.name).toStrictEqual(onPage[index]);
+    });
+  });
+
+  it('resolves a repository outside the gallery the way the page resolves a loaded one', () => {
+    const loaded = { ...features, seed: 'feedbeef' };
+    const onPage = palettesFor([...GALLERY_BY_SIZE.map((entry) => entry.seed), loaded.seed]);
+    expect(cardPalette(loaded)).toStrictEqual(onPage[GALLERY_BY_SIZE.length]);
   });
 });

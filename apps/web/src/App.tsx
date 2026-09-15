@@ -4,7 +4,7 @@ import type * as AudioPlayer from './audio/player';
 import type { Player } from './audio/player';
 import { ApiError, fetchFeatures, parseTarget, type RepoRef } from './features/api';
 import { fetchUserPick, pickSummary, type UserPick } from './features/user';
-import { GALLERY } from './features/gallery';
+import { GALLERY, GALLERY_BY_SIZE } from './features/gallery';
 import { pathForRepo, repoFromPath } from './features/route';
 import { generateScore } from './music/generate';
 import { barToTick, type Score } from './music/score';
@@ -124,8 +124,7 @@ export default function App() {
   // Smallest first, so the grid reads slowest to fastest. A repository the visitor loaded
   // goes last, where it is the newest thing rather than buried among the eight.
   const entries = useMemo(() => {
-    const ordered = [...GALLERY].sort((a, b) => a.totals.linesOfCode - b.totals.linesOfCode);
-    return custom ? [...ordered, custom] : ordered;
+    return custom ? [...GALLERY_BY_SIZE, custom] : [...GALLERY_BY_SIZE];
   }, [custom]);
 
   const playing = useMemo(

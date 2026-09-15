@@ -13,6 +13,7 @@ import {
   pillarGlow,
   pillarHeight,
   pillarsFor,
+  SCENE_BACKGROUND,
   sceneFrame,
   sphereNodesFor,
   type SceneFrame,
@@ -41,7 +42,15 @@ interface SpatialFieldProps {
    * frames, and MediaRecorder turns no frames into a zero-byte file without an error.
    */
   frameloop?: 'always' | 'demand' | 'never';
+  /** Device pixel ratio. The page caps it for speed; a screenshot wants every pixel. */
+  dpr?: number | [number, number];
   onSpectrum?: (bands: SpectrumBands) => void;
+  /**
+   * Called once, after the scene has drawn with the inputs it was given. Exists for the
+   * screenshot script, which would otherwise capture whatever the canvas held when the page
+   * finished loading — on a cold start, nothing.
+   */
+  onReady?: () => void;
 }
 
 interface SceneProps extends SpatialFieldProps {
@@ -50,7 +59,6 @@ interface SceneProps extends SpatialFieldProps {
 
 type FrameRef = RefObject<SceneFrame>;
 
-const SCENE_BACKGROUND = '#050810';
 const FALLBACK_ACCENT = '#9be7ff';
 const WHITE = new THREE.Color('#ffffff');
 
@@ -230,6 +238,28 @@ function ParticleField({ palette, frame }: { palette: Palette; frame: FrameRef }
   );
 }
 
+function ReadySignal({ onReady }: { onReady?: (() => void) | undefined }) {
+  const invalidate = useThree((state) => state.invalidate);
+  const frames = useRef(0);
+  const fired = useRef(false);
+
+  useFrame(() => {
+    if (!onReady || fired.current) return;
+    frames.current += 1;
+    // A frame callback runs before that frame is drawn, so the first one cannot be the signal:
+    // it would report a canvas that is still empty. Ask for one more frame and report from
+    // inside it, by which point the first has been drawn. Asking works under `demand` too,
+    // where nothing else would ever schedule a second frame.
+    if (frames.current === 1) {
+      invalidate();
+      return;
+    }
+    fired.current = true;
+    onReady();
+  });
+  return null;
+}
+
 function SpectrumReporter({
   frame,
   onSpectrum,
@@ -375,7 +405,7 @@ function CanvasAccessibility({
 }
 
 function Scene(props: SceneProps) {
-  const { features, mode, onSpectrum, palette, position, reduceMotion, score } = props;
+  const { features, mode, onReady, onSpectrum, palette, position, reduceMotion, score } = props;
   const reader = useMemo(() => prepareActivity(score), [score]);
   const invalidate = useThree((state) => state.invalidate);
   const frame = useRef<SceneFrame>(sceneFrame(reader, score, null, reduceMotion));
@@ -417,6 +447,7 @@ function Scene(props: SceneProps) {
         <NodeSphere features={features} palette={palette} frame={frame} />
       )}
       <SpectrumReporter frame={frame} onSpectrum={onSpectrum} />
+      <ReadySignal onReady={onReady} />
       <CameraRig />
     </>
   );
@@ -447,7 +478,7 @@ export function SpatialField(props: SpatialFieldProps) {
       </p>
       <Canvas
         camera={{ position: [8.4, 5.2, 10.2], fov: 42, near: 0.1, far: 80 }}
-        dpr={[1, 1.5]}
+        dpr={props.dpr ?? [1, 1.5]}
         frameloop={props.frameloop ?? 'demand'}
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         aria-label={label}

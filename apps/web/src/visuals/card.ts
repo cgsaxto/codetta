@@ -1,10 +1,11 @@
 import type { RepoFeatures } from '@codetta/schema';
+import { GALLERY_BY_SIZE } from '../features/gallery';
 import { clipWindow } from '../music/clip';
 import { barToTick, scoreDurationSeconds, type Score } from '../music/score';
 import { ticksAtSeconds } from './clock';
 import { drawField } from './draw';
 import { fieldFor } from './layout';
-import type { Palette } from './palette';
+import { palettesFor, type Palette } from './palette';
 
 /**
  * The card: the repository drawn, with its name and — when the visitor arrived by typing
@@ -28,6 +29,21 @@ import type { Palette } from './palette';
  * because the whole legibility of this picture is the contrast between the region that has
  * been read and the region that has not, and at tick 0 there is no read region at all.
  */
+
+/**
+ * The palette a repository wears on its card, which has to be the one it wears on the page.
+ *
+ * Resolved against the gallery in the page's own order. A gallery repository gets the colour
+ * of its tile; anything else is resolved as the page resolves a repository a visitor loaded —
+ * appended after the eight — so a card and the screen it was shared from agree.
+ */
+export function cardPalette(features: RepoFeatures): Palette {
+  const seeds = GALLERY_BY_SIZE.map((entry) => entry.seed);
+  const at = seeds.indexOf(features.seed);
+  return at >= 0
+    ? palettesFor(seeds)[at]!
+    : palettesFor([...seeds, features.seed])[seeds.length]!;
+}
 
 /** What every platform crops a link preview to, and so what every card is. */
 export const CARD_WIDTH = 1200;
@@ -122,7 +138,7 @@ export function drawCard(
   height: number,
   subject: CardSubject,
 ): void {
-  const { features, score, palette, avatar } = subject;
+  const { features, score, palette } = subject;
   const totalTicks = barToTick(score.bars);
 
   drawField(
@@ -142,6 +158,31 @@ export function drawCard(
     new Map(),
   );
 
+  drawCardOverlay(context, width, height, subject, palette.ground);
+}
+
+/**
+ * Everything on a card that is not the picture: the scrim, the face if there is one, and the
+ * three lines of text.
+ *
+ * Split out so the picture underneath can change without the text being written twice. The
+ * link-unfurl card is a 3D scene now and the downloadable one is still the 2D field, and both
+ * wear exactly this — a second copy of the layout would put the name a few pixels somewhere
+ * else on one of them, which is the kind of drift nobody catches until two cards sit side by
+ * side in a timeline.
+ *
+ * `ground` is what the scrim fades into, and it has to be whatever is actually behind the text
+ * or the fade reads as a grey band.
+ */
+export function drawCardOverlay(
+  context: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  subject: CardSubject,
+  ground: string,
+): void {
+  const { features, score, palette, avatar } = subject;
+
   // Every measurement below is in card units and scaled, so one layout serves the 1200×630
   // this is normally drawn at and any other size someone hands it.
   const unit = width / CARD_WIDTH;
@@ -160,9 +201,9 @@ export function drawCard(
    */
   const scrimHeight = 250 * unit;
   const scrim = context.createLinearGradient(0, height - scrimHeight, 0, height);
-  scrim.addColorStop(0, withAlpha(palette.ground, 0));
-  scrim.addColorStop(0.55, withAlpha(palette.ground, 0.78));
-  scrim.addColorStop(1, withAlpha(palette.ground, 0.94));
+  scrim.addColorStop(0, withAlpha(ground, 0));
+  scrim.addColorStop(0.55, withAlpha(ground, 0.78));
+  scrim.addColorStop(1, withAlpha(ground, 0.94));
   context.fillStyle = scrim;
   context.fillRect(0, height - scrimHeight, width, scrimHeight);
 

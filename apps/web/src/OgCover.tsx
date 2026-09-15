@@ -1,109 +1,131 @@
-import { useEffect, useRef } from 'react';
-import { GALLERY } from './features/gallery';
+import { useCallback, useMemo, useRef } from 'react';
+import { GALLERY_BY_SIZE } from './features/gallery';
 import { generateScore } from './music/generate';
-import { clipWindow } from './music/clip';
-import { barToTick, scoreDurationSeconds } from './music/score';
-import { ticksAtSeconds } from './visuals/clock';
-import { drawField } from './visuals/draw';
-import { fieldFor } from './visuals/layout';
-import { palettesFor } from './visuals/palette';
-import { CARD_HEIGHT, CARD_WIDTH } from './visuals/card';
+import { CARD_HEIGHT, CARD_WIDTH, cardPalette, cardTick } from './visuals/card';
+import type { Palette } from './visuals/palette';
+import { SpatialField } from './visuals/SpatialField';
+import { SCENE_BACKGROUND } from './visuals/spatial';
 
 /**
  * The card a link unfurls with when it is not about one repository.
  *
- * The eight gallery repositories at once, in the order the landing page puts them — smallest
- * first, which is slowest first. It is the page, as a picture. The alternative was a wordmark
- * on a coloured ground, and that would have been a logo: true of any project, and evidence of
- * nothing. Eight different-looking repositories is the entire claim this project makes, and
- * it is the one thing that cannot be faked by a designer who has not built it.
+ * The eight gallery repositories at once, smallest first, each the page's own 3D scene at the
+ * frame its own card uses. The alternative was a wordmark on a coloured ground, and that would
+ * have been a logo: true of any project, and evidence of nothing. Eight different-looking
+ * repositories is the entire claim this project makes, and it is the one thing that cannot be
+ * faked by a designer who has not built it.
  *
- * Every tile is drawn by the same drawField as the page, at the same frame the individual
- * cards use, so this is not an illustration of the site — it is eight small copies of it.
+ * Eight WebGL contexts on one page, which is heavy for a page and irrelevant for a screenshot
+ * taken once at build time — browsers allow sixteen before they start dropping the oldest.
  */
 const COLUMNS = 4;
 const ROWS = 2;
-const GAP = 14;
-const MARGIN = 40;
-const CAPTION = 92;
+const GAP = 12;
+const MARGIN = 36;
+const CAPTION = 88;
 
-export function OgCover() {
-  const ref = useRef<HTMLDivElement | null>(null);
-  const palettes = palettesFor(GALLERY.map((entry) => entry.seed));
-
-  const tileWidth = (CARD_WIDTH - MARGIN * 2 - GAP * (COLUMNS - 1)) / COLUMNS;
-  const tileHeight = (CARD_HEIGHT - MARGIN * 2 - CAPTION - GAP * (ROWS - 1)) / ROWS;
-
-  useEffect(() => {
-    const host = ref.current;
-    if (!host) return;
-
-    GALLERY.forEach((features, index) => {
-      const canvas = host.querySelector<HTMLCanvasElement>(`canvas[data-tile="${index}"]`);
-      const context = canvas?.getContext('2d');
-      if (!canvas || !context) return;
-
-      const score = generateScore(features);
-      const clip = clipWindow(score);
-      const totalTicks = barToTick(score.bars);
-
-      drawField(
-        context,
-        tileWidth,
-        tileHeight,
-        {
-          columns: fieldFor(features),
-          palette: palettes[index]!,
-          fileCount: features.timeline.length,
-          durationSeconds: scoreDurationSeconds(score),
-          totalTicks,
-        },
-        {
-          tick: ticksAtSeconds(clip.startSeconds + clip.durationSeconds, score.bpm, totalTicks),
-          onsets: [],
-          delta: 0,
-        },
-        new Map(),
-      );
-
-      canvas.dataset['ready'] = 'true';
-    });
-  }, [palettes, tileHeight, tileWidth]);
+function Tile({
+  index,
+  palette,
+  onReady,
+}: {
+  index: number;
+  palette: Palette;
+  onReady: (index: number) => void;
+}) {
+  const features = GALLERY_BY_SIZE[index]!;
+  const score = useMemo(() => generateScore(features), [features]);
+  const tick = useMemo(() => cardTick(score), [score]);
+  const position = useCallback(() => tick, [tick]);
+  const ready = useCallback(() => onReady(index), [index, onReady]);
+  const dpr = typeof window === 'undefined' ? 1 : window.devicePixelRatio || 1;
 
   return (
     <div
-      ref={ref}
+      style={{
+        position: 'relative',
+        overflow: 'hidden',
+        borderRadius: 8,
+        border: '1px solid rgb(255 255 255 / 10%)',
+        background: SCENE_BACKGROUND,
+      }}
+    >
+      <SpatialField
+        features={features}
+        score={score}
+        palette={palette}
+        mode="pillars"
+        position={position}
+        frameloop="demand"
+        dpr={dpr}
+        onReady={ready}
+      />
+      <div
+        style={{
+          position: 'absolute',
+          left: 12,
+          bottom: 10,
+          fontSize: 13,
+          color: palette.modules[0],
+          textShadow: `0 0 12px ${SCENE_BACKGROUND}`,
+        }}
+      >
+        {features.repo.name}
+      </div>
+    </div>
+  );
+}
+
+export function OgCover() {
+  const root = useRef<HTMLDivElement | null>(null);
+  const ready = useRef(new Set<number>());
+  // Each tile in the colour it wears on the page, in the order the page shows them.
+  const palettes = useMemo(() => GALLERY_BY_SIZE.map((entry) => cardPalette(entry)), []);
+
+  const onTileReady = useCallback((index: number) => {
+    ready.current.add(index);
+    if (ready.current.size === GALLERY_BY_SIZE.length && root.current) {
+      root.current.dataset['ogReady'] = 'true';
+    }
+  }, []);
+
+  const tileHeight = (CARD_HEIGHT - MARGIN * 2 - CAPTION - GAP * (ROWS - 1)) / ROWS;
+
+  return (
+    <div
+      ref={root}
       style={{
         width: CARD_WIDTH,
         height: CARD_HEIGHT,
         padding: MARGIN,
         boxSizing: 'border-box',
-        background: '#f2f3f5',
+        background: '#04060a',
         fontFamily: 'ui-monospace, SFMono-Regular, Menlo, monospace',
-        color: '#16181c',
+        color: '#ffffff',
       }}
     >
       <div
         style={{
           display: 'grid',
-          gridTemplateColumns: `repeat(${COLUMNS}, ${tileWidth}px)`,
+          gridTemplateColumns: `repeat(${COLUMNS}, 1fr)`,
+          gridAutoRows: tileHeight,
           gap: GAP,
         }}
       >
-        {GALLERY.map((features, index) => (
-          <canvas
-            key={features.seed}
-            data-tile={index}
-            data-og-canvas
-            width={tileWidth}
-            height={tileHeight}
-            style={{ width: tileWidth, height: tileHeight, borderRadius: 4 }}
+        {GALLERY_BY_SIZE.map((entry, index) => (
+          <Tile
+            key={entry.seed}
+            index={index}
+            palette={palettes[index]!}
+            onReady={onTileReady}
           />
         ))}
       </div>
-      <div style={{ marginTop: 34, display: 'flex', alignItems: 'baseline', gap: 22 }}>
-        <div style={{ fontSize: 34, fontWeight: 500, letterSpacing: '-0.01em' }}>Codetta</div>
-        <div style={{ fontSize: 19, opacity: 0.62 }}>
+      <div style={{ marginTop: 30, display: 'flex', alignItems: 'baseline', gap: 22 }}>
+        <div style={{ fontSize: 15, letterSpacing: '0.34em', textTransform: 'uppercase' }}>
+          Codetta
+        </div>
+        <div style={{ fontSize: 18, color: 'rgb(255 255 255 / 62%)' }}>
           Paste a GitHub repository. Hear what it sounds like.
         </div>
       </div>

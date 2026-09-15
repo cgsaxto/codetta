@@ -20,6 +20,13 @@ import { fieldFor } from './layout';
 
 export type ViewMode = 'pillars' | 'nodes';
 
+/**
+ * The colour behind the scene. Here rather than beside the three.js code, because the card
+ * draws a scrim that has to fade into exactly this and the card has no business importing a
+ * renderer to find out what it is.
+ */
+export const SCENE_BACKGROUND = '#050810';
+
 /** What the HUD shows. The same shape the analyser used to report, so the HUD did not change. */
 export interface SpectrumBands {
   low: number;
