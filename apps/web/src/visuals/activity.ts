@@ -55,7 +55,17 @@ const TAIL_TICKS = RELEASE_TICKS * 7;
  * nothing there; C5 and above is a register this music actually uses.
  */
 export interface Activity {
-  /** 0–1 per voice. Every voice in VOICE_ORDER is present, silent ones at 0. */
+  /**
+   * 0–1 per voice, where 1 is that voice's own loudest note. Every voice in VOICE_ORDER is
+   * present, silent ones at 0.
+   *
+   * Relative to the voice rather than to the mix, because velocity in a Score already carries
+   * the voice's gain: a texture peaks at about a fifth of a lead. Read as absolute levels, a
+   * texture could never light more than a fifth of whatever it drives, and the quiet voices
+   * would look permanently silent while being plainly audible. The question a visual asks is
+   * whether this voice is sounding, and how hard by its own standard — accents within a voice
+   * survive, because they are ratios to the same peak.
+   */
   voices: Readonly<Record<VoiceId, number>>;
   /** Below C3. Bass, the pad's lower voicings, the kick. */
   low: number;
@@ -171,6 +181,16 @@ export function prepareActivity(score: Score): ActivityReader {
     events.sort((a, b) => a.tick - b.tick);
   }
 
+  // Zero for a voice with no notes at all — percussion is assigned ranks and never generated
+  // — and such a voice stays at zero rather than dividing by it.
+  const peaks = new Map<VoiceId, number>();
+  for (const [voice, events] of byVoice) {
+    peaks.set(
+      voice,
+      events.reduce((loudest, event) => Math.max(loudest, event.velocity), 0),
+    );
+  }
+
   // How many voices the piece actually uses, so `energy` reaches 1 on a piece with four
   // voices as well as on one with six. A repository with two modules is not perpetually
   // quiet — that is the safety net working, not a dynamic.
@@ -187,6 +207,8 @@ export function prepareActivity(score: Score): ActivityReader {
 
       for (const [voice, events] of byVoice) {
         let level = 0;
+        const peak = peaks.get(voice) ?? 0;
+        if (peak <= 0) continue;
 
         // Backwards from the last note that has started. The first note too old to matter
         // ends the walk: everything before it is older still.
@@ -197,7 +219,7 @@ export function prepareActivity(score: Score): ActivityReader {
           const age = tick - event.tick;
           if (age > event.durationTicks + TAIL_TICKS) break;
 
-          const contribution = envelope(age, event.durationTicks, event.velocity);
+          const contribution = envelope(age, event.durationTicks, event.velocity / peak);
           if (contribution <= 0) continue;
 
           // The loudest note wins rather than the sum. Two notes of a chord are one voice

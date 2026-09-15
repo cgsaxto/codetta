@@ -7,8 +7,9 @@ import { fetchUserPick, pickSummary, type UserPick } from './features/user';
 import { GALLERY } from './features/gallery';
 import { pathForRepo, repoFromPath } from './features/route';
 import { generateScore } from './music/generate';
-import type { Score } from './music/score';
+import { barToTick, type Score } from './music/score';
 import { cardFilename, loadAvatar, renderCard, shortLines } from './visuals/card';
+import { ticksAtSeconds } from './visuals/clock';
 import { palettesFor, type Palette } from './visuals/palette';
 import { recordClip, supportedVideoType, videoFilename, type Shape } from './visuals/record';
 import type { SpectrumBands, ViewMode } from './visuals/SpatialField';
@@ -429,20 +430,36 @@ export default function App() {
   const activeAccent = activePalette.modules[0] ?? '#8cecff';
   const activeIsPlaying = playingSha === active.repo.commitSha;
   const activePlayer = activeIsPlaying ? player : null;
+  const activeTotalTicks = barToTick(activeScore.bars);
 
   /**
-   * FFT values change ten times a second, but they do not change application state. Updating
+   * The scene's clock, which is the audio transport's.
+   *
+   * A function rather than a number so that React is not asked to render sixty times a
+   * second: the scene calls it once a frame. Null while nothing is playing puts the scene at
+   * rest, which is different from tick zero — tick zero is the pad and bass striking.
+   */
+  const activePosition = useCallback(
+    () =>
+      activePlayer
+        ? ticksAtSeconds(activePlayer.positionSeconds(), activeScore.bpm, activeTotalTicks)
+        : null,
+    [activePlayer, activeScore.bpm, activeTotalTicks],
+  );
+
+  /**
+   * The bands change ten times a second, but they do not change application state. Updating
    * the small HUD directly keeps the gallery, score generation and lazy 3D boundary out of
-   * React's render path while the geometry itself continues to read the analyser every frame.
+   * React's render path while the geometry itself reads the score every frame.
    */
   const reportSpectrum = useCallback((next: SpectrumBands) => {
     const root = stage.current;
     if (!root) return;
 
-    root.dataset.fftLow = next.low.toFixed(3);
-    root.dataset.fftMid = next.mid.toFixed(3);
-    root.dataset.fftHigh = next.high.toFixed(3);
-    root.dataset.fftEnergy = next.energy.toFixed(3);
+    root.dataset.bandLow = next.low.toFixed(3);
+    root.dataset.bandMid = next.mid.toFixed(3);
+    root.dataset.bandHigh = next.high.toFixed(3);
+    root.dataset.bandEnergy = next.energy.toFixed(3);
     root.style.setProperty('--spectrum-progress', String(next.progress));
 
     for (const band of SPECTRUM_KEYS) {
@@ -476,7 +493,7 @@ export default function App() {
               className={`size-1.5 rounded-full ${activeIsPlaying ? 'animate-pulse' : ''}`}
               style={{ background: activeIsPlaying ? activeAccent : 'var(--status-idle)' }}
             />
-            {activeIsPlaying ? 'FFT live' : 'Ready'}
+            {activeIsPlaying ? 'Live' : 'Ready'}
           </div>
         </header>
 
@@ -497,10 +514,10 @@ export default function App() {
             ['--stage-accent' as string]: activeAccent,
             ['--spectrum-progress' as string]: 0,
           }}
-          data-fft-low="0.000"
-          data-fft-mid="0.000"
-          data-fft-high="0.000"
-          data-fft-energy="0.000"
+          data-band-low="0.000"
+          data-band-mid="0.000"
+          data-band-high="0.000"
+          data-band-energy="0.000"
         >
           <div className="absolute inset-0">
             <Suspense
@@ -520,7 +537,8 @@ export default function App() {
                 features={active}
                 score={activeScore}
                 palette={activePalette}
-                player={activePlayer}
+                position={activePosition}
+                frameloop={activePlayer ? 'always' : 'demand'}
                 mode={viewMode}
                 onSpectrum={reportSpectrum}
               />

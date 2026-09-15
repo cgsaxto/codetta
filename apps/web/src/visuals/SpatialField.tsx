@@ -1,28 +1,46 @@
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState, type RefObject } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import type { RepoFeatures } from '@codetta/schema';
-import type { Player } from '../audio/player';
-import { scoreDurationSeconds, type Score } from '../music/score';
+import type { Score } from '../music/score';
+import { prepareActivity } from './activity';
 import type { Palette } from './palette';
+import {
+  bandsOf,
+  nodeGlow,
+  nodeScale,
+  pillarGlow,
+  pillarHeight,
+  pillarsFor,
+  sceneFrame,
+  sphereNodesFor,
+  type SceneFrame,
+  type SpectrumBands,
+  type ViewMode,
+} from './spatial';
 
-export type ViewMode = 'pillars' | 'nodes';
-
-export interface SpectrumBands {
-  low: number;
-  mid: number;
-  high: number;
-  energy: number;
-  progress: number;
-}
+export type { SpectrumBands, ViewMode } from './spatial';
 
 interface SpatialFieldProps {
   features: RepoFeatures;
   mode: ViewMode;
   palette: Palette;
-  player: Player | null;
   score: Score;
+  /**
+   * Where the piece is, in ticks, or null when nothing is playing. Called once a frame and
+   * never stored, so whoever owns the clock decides what time it is — the page's audio
+   * transport today, and a recorder's buffer or a card's fixed frame once those draw this
+   * scene too.
+   */
+  position: () => number | null;
+  /**
+   * Passed in rather than inferred from whether something is playing, because the case where
+   * inferring it goes wrong is the one that matters most. A recording stops live playback
+   * first; a scene that switched to `demand` when playback stopped would give the recorder no
+   * frames, and MediaRecorder turns no frames into a zero-byte file without an error.
+   */
+  frameloop?: 'always' | 'demand' | 'never';
   onSpectrum?: (bands: SpectrumBands) => void;
 }
 
@@ -30,145 +48,46 @@ interface SceneProps extends SpatialFieldProps {
   reduceMotion: boolean;
 }
 
-interface PillarDatum {
-  baseHeight: number;
-  module: number;
-  x: number;
-  z: number;
-}
+type FrameRef = RefObject<SceneFrame>;
 
-interface NodeDatum {
-  module: number;
-  position: THREE.Vector3;
-}
-
-const SILENCE = new Float32Array(128);
-const VISUAL_SPECTRUM = new Float32Array(128);
 const SCENE_BACKGROUND = '#050810';
 const FALLBACK_ACCENT = '#9be7ff';
 const WHITE = new THREE.Color('#ffffff');
-let lastSpectrumAt = -1;
-let lastSpectrumPlayer: Player | null = null;
-let lastSpectrum = {
-  values: SILENCE,
-  bands: { low: 0, mid: 0, high: 0, energy: 0, progress: 0 },
-};
 
-function average(values: Float32Array, from: number, to: number): number {
-  const end = Math.min(values.length, to);
-  if (from >= end) return 0;
-  let sum = 0;
-  for (let index = from; index < end; index++) sum += values[index] ?? 0;
-  return sum / (end - from);
-}
-
-/** Lift quieter musical detail without letting a transient pin the geometry at full scale. */
-function visualLevel(value: number): number {
-  return Math.min(1, Math.max(0, value) ** 0.42 * 2.1);
-}
-
-function spectrumFor(player: Player | null): { values: Float32Array; bands: SpectrumBands } {
-  const now = performance.now();
-  if (player === lastSpectrumPlayer && now - lastSpectrumAt < 6) return lastSpectrum;
-
-  const raw = player?.spectrum() ?? SILENCE;
-  const values = player ? VISUAL_SPECTRUM : SILENCE;
-  if (player) {
-    const end = Math.min(values.length, raw.length);
-    for (let index = 0; index < end; index++) values[index] = visualLevel(raw[index] ?? 0);
-    values.fill(0, end);
-  }
-  const low = average(values, 0, 8);
-  const mid = average(values, 8, 32);
-  const high = average(values, 32, 72);
-  const energy = low * 0.46 + mid * 0.38 + high * 0.16;
-  lastSpectrumAt = now;
-  lastSpectrumPlayer = player;
-  lastSpectrum = { values, bands: { low, mid, high, energy, progress: 0 } };
-  return lastSpectrum;
+function moduleColour(palette: Palette, module: number): string {
+  return (
+    palette.modules[module % palette.modules.length] ?? palette.modules[0] ?? FALLBACK_ACCENT
+  );
 }
 
 function Pillars({
   features,
   palette,
-  player,
-  reduceMotion,
-}: Pick<SceneProps, 'features' | 'palette' | 'player' | 'reduceMotion'>) {
+  frame,
+}: {
+  features: RepoFeatures;
+  palette: Palette;
+  frame: FrameRef;
+}) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const colour = useMemo(() => new THREE.Color(), []);
-  const heights = useRef<Float32Array>(new Float32Array(0));
+  const pillars = useMemo(() => pillarsFor(features), [features]);
 
-  const data = useMemo<PillarDatum[]>(() => {
-    const moduleNames = features.modules.map((module) => module.path);
-    // A large repository can put nearly all 256 timeline entries in one module. Drawing
-    // every one makes that lane dozens of world-units long and forces the useful geometry
-    // out of frame. Keep evenly spaced representatives rather than a prefix, so the whole
-    // module remains legible while every lane stays within one shared spatial budget.
-    const timeline = moduleNames.flatMap((path) => {
-      const entries = features.timeline.filter((entry) => entry.modulePath === path);
-      const limit = 18;
-      if (entries.length <= limit) return entries;
-      return Array.from({ length: limit }, (_, index) => {
-        const at = Math.round((index / (limit - 1)) * (entries.length - 1));
-        return entries[at]!;
-      });
-    });
-    const longest = Math.max(1, ...timeline.map((entry) => entry.linesOfCode));
-    const moduleCounts = new Map(
-      moduleNames.map((path) => [
-        path,
-        timeline.filter((entry) => entry.modulePath === path).length,
-      ]),
-    );
-    const perModule = new Map<string, number>();
-
-    return timeline.map((entry) => {
-      const module = Math.max(0, moduleNames.indexOf(entry.modulePath));
-      const row = perModule.get(entry.modulePath) ?? 0;
-      perModule.set(entry.modulePath, row + 1);
-      const rows = moduleCounts.get(entry.modulePath) ?? 1;
-      const x = (module - (Math.max(1, moduleNames.length) - 1) / 2) * 1.08;
-      const z = (row - (rows - 1) / 2) * 0.46 + ((module % 2) * 0.16 - 0.08);
-      const baseHeight = 0.35 + Math.sqrt(entry.linesOfCode / longest) * 2.65;
-      return { baseHeight, module, x, z };
-    });
-  }, [features]);
-
-  useEffect(() => {
-    heights.current = Float32Array.from(data, (item) => item.baseHeight);
-  }, [data]);
-
-  useFrame(({ clock }, delta) => {
+  useFrame(() => {
     const current = mesh.current;
     if (!current) return;
-    const { values } = spectrumFor(player);
-    const idle = reduceMotion ? 0 : (Math.sin(clock.elapsedTime * 0.72) + 1) * 0.025;
+    const now = frame.current;
 
-    data.forEach((item, index) => {
-      const bin = values[(index * 3 + item.module * 5) % Math.max(1, values.length)] ?? 0;
-      const target = item.baseHeight * (1 + bin * 2.35 + idle);
-      const height = THREE.MathUtils.damp(
-        heights.current[index] ?? item.baseHeight,
-        target,
-        10,
-        delta,
-      );
-      heights.current[index] = height;
-
-      dummy.position.set(item.x, height / 2 - 1.2, item.z);
+    pillars.forEach((pillar, index) => {
+      const height = pillarHeight(pillar, now);
+      dummy.position.set(pillar.x, height / 2 - 1.2, pillar.z);
       dummy.scale.set(0.25, height, 0.25);
-      dummy.rotation.y = (item.module % 3) * 0.08;
+      dummy.rotation.y = (pillar.module % 3) * 0.08;
       dummy.updateMatrix();
       current.setMatrixAt(index, dummy.matrix);
 
-      colour
-        .set(
-          palette.modules[item.module % palette.modules.length] ??
-            palette.modules[0] ??
-            FALLBACK_ACCENT,
-        )
-        .lerp(WHITE, Math.min(0.68, bin * 0.75));
+      colour.set(moduleColour(palette, pillar.module)).lerp(WHITE, pillarGlow(pillar, now));
       current.setColorAt(index, colour);
     });
 
@@ -178,7 +97,7 @@ function Pillars({
 
   return (
     <group rotation={[0, -0.12, 0]}>
-      <instancedMesh ref={mesh} args={[undefined, undefined, data.length]}>
+      <instancedMesh ref={mesh} args={[undefined, undefined, pillars.length]}>
         <boxGeometry args={[1, 1, 1]} />
         <meshStandardMaterial
           roughness={0.23}
@@ -206,79 +125,46 @@ function Pillars({
 function NodeSphere({
   features,
   palette,
-  player,
-  reduceMotion,
-}: Pick<SceneProps, 'features' | 'palette' | 'player' | 'reduceMotion'>) {
+  frame,
+}: {
+  features: RepoFeatures;
+  palette: Palette;
+  frame: FrameRef;
+}) {
   const mesh = useRef<THREE.InstancedMesh>(null);
   const group = useRef<THREE.Group>(null);
   const dummy = useMemo(() => new THREE.Object3D(), []);
   const colour = useMemo(() => new THREE.Color(), []);
-  const scales = useRef<Float32Array>(new Float32Array(0));
-
-  const data = useMemo<NodeDatum[]>(() => {
-    const count = Math.min(72, Math.max(28, features.timeline.length));
-    const modules = Math.max(1, features.modules.length);
-    const golden = Math.PI * (3 - Math.sqrt(5));
-    return Array.from({ length: count }, (_, index) => {
-      const y = 1 - (index / Math.max(1, count - 1)) * 2;
-      const radial = Math.sqrt(Math.max(0, 1 - y * y));
-      const angle = index * golden;
-      const radius = 3.65 + ((index % 5) - 2) * 0.07;
-      return {
-        module: index % modules,
-        position: new THREE.Vector3(
-          Math.cos(angle) * radial * radius,
-          y * radius,
-          Math.sin(angle) * radial * radius,
-        ),
-      };
-    });
-  }, [features]);
+  const nodes = useMemo(() => sphereNodesFor(features), [features]);
 
   const edgePositions = useMemo(() => {
     const positions: number[] = [];
-    data.forEach((node, index) => {
+    nodes.forEach((node, index) => {
       for (const offset of [1, 3]) {
-        const next = data[(index + offset) % data.length];
+        const next = nodes[(index + offset) % nodes.length];
         if (!next) continue;
-        positions.push(...node.position.toArray(), ...next.position.toArray());
+        positions.push(...node.position, ...next.position);
       }
     });
     return new Float32Array(positions);
-  }, [data]);
+  }, [nodes]);
 
-  useEffect(() => {
-    scales.current = new Float32Array(data.length).fill(1);
-  }, [data.length]);
-
-  useFrame(({ clock }, delta) => {
+  useFrame(() => {
     const current = mesh.current;
     if (!current) return;
-    const { values, bands } = spectrumFor(player);
+    const now = frame.current;
 
-    data.forEach((item, index) => {
-      const bin = values[(index * 2 + 4) % Math.max(1, values.length)] ?? 0;
-      const target = 0.7 + bin * 1.95;
-      const scale = THREE.MathUtils.damp(scales.current[index] ?? 1, target, 11, delta);
-      scales.current[index] = scale;
-      dummy.position.copy(item.position);
-      dummy.scale.setScalar(scale);
+    nodes.forEach((node, index) => {
+      dummy.position.set(...node.position);
+      dummy.scale.setScalar(nodeScale(node, now));
       dummy.updateMatrix();
       current.setMatrixAt(index, dummy.matrix);
-      colour
-        .set(
-          palette.modules[item.module % palette.modules.length] ??
-            palette.modules[0] ??
-            FALLBACK_ACCENT,
-        )
-        .lerp(WHITE, Math.min(0.72, bin * 0.8));
+
+      colour.set(moduleColour(palette, node.module)).lerp(WHITE, nodeGlow(node, now));
       current.setColorAt(index, colour);
     });
 
-    if (group.current && !reduceMotion) {
-      group.current.rotation.y += delta * (0.025 + bands.energy * 0.12);
-      group.current.rotation.x = Math.sin(clock.elapsedTime * 0.12) * 0.035;
-    }
+    group.current?.rotation.set(now.sphereTilt, now.sphereYaw, 0);
     current.instanceMatrix.needsUpdate = true;
     if (current.instanceColor) current.instanceColor.needsUpdate = true;
   });
@@ -291,7 +177,7 @@ function NodeSphere({
         </bufferGeometry>
         <lineBasicMaterial color={palette.quiet} transparent opacity={0.2} />
       </lineSegments>
-      <instancedMesh ref={mesh} args={[undefined, undefined, data.length]}>
+      <instancedMesh ref={mesh} args={[undefined, undefined, nodes.length]}>
         <sphereGeometry args={[0.105, 18, 18]} />
         <meshStandardMaterial
           roughness={0.18}
@@ -304,11 +190,7 @@ function NodeSphere({
   );
 }
 
-function ParticleField({
-  player,
-  palette,
-  reduceMotion,
-}: Pick<SceneProps, 'player' | 'palette' | 'reduceMotion'>) {
+function ParticleField({ palette, frame }: { palette: Palette; frame: FrameRef }) {
   const points = useRef<THREE.Points>(null);
   const material = useRef<THREE.PointsMaterial>(null);
   const positions = useMemo(() => {
@@ -320,25 +202,12 @@ function ParticleField({
     return Float32Array.from({ length: 360 * 3 }, () => (random() - 0.5) * 22);
   }, [palette]);
 
-  useFrame((_, delta) => {
-    const { bands } = spectrumFor(player);
-    if (points.current && !reduceMotion) {
-      points.current.rotation.y += delta * (0.006 + bands.high * 0.045);
-      points.current.rotation.x += delta * 0.002;
-    }
+  useFrame(() => {
+    const now = frame.current;
+    if (points.current) points.current.rotation.y = now.particleYaw;
     if (material.current) {
-      material.current.opacity = THREE.MathUtils.damp(
-        material.current.opacity,
-        0.22 + bands.energy * 0.55,
-        7,
-        delta,
-      );
-      material.current.size = THREE.MathUtils.damp(
-        material.current.size,
-        0.024 + bands.high * 0.055,
-        7,
-        delta,
-      );
+      material.current.opacity = now.particleOpacity;
+      material.current.size = now.particleSize;
     }
   });
 
@@ -350,10 +219,10 @@ function ParticleField({
       <pointsMaterial
         ref={material}
         color={palette.modules[1] ?? palette.modules[0] ?? FALLBACK_ACCENT}
-        size={0.026}
+        size={0.024}
         sizeAttenuation
         transparent
-        opacity={0.24}
+        opacity={0.22}
         depthWrite={false}
         blending={THREE.AdditiveBlending}
       />
@@ -362,21 +231,22 @@ function ParticleField({
 }
 
 function SpectrumReporter({
-  player,
-  score,
+  frame,
   onSpectrum,
-}: Pick<SceneProps, 'player' | 'score' | 'onSpectrum'>) {
-  const lastReport = useRef(0);
-  const duration = useMemo(() => scoreDurationSeconds(score), [score]);
+}: {
+  frame: FrameRef;
+  onSpectrum?: SceneProps['onSpectrum'];
+}) {
+  const lastReport = useRef(-Infinity);
 
-  useFrame(({ clock }) => {
-    if (!onSpectrum || clock.elapsedTime - lastReport.current < 0.1) return;
-    lastReport.current = clock.elapsedTime;
-    const { bands } = spectrumFor(player);
-    onSpectrum({
-      ...bands,
-      progress: player ? (player.positionSeconds() % duration) / duration : 0,
-    });
+  useFrame(() => {
+    if (!onSpectrum) return;
+    // Wall-clock throttling is fine here and nowhere else in this file: it decides how often
+    // the HUD is told, never what the scene looks like.
+    const now = performance.now();
+    if (now - lastReport.current < 100) return;
+    lastReport.current = now;
+    onSpectrum(bandsOf(frame.current));
   });
   return null;
 }
@@ -505,6 +375,25 @@ function CanvasAccessibility({
 }
 
 function Scene(props: SceneProps) {
+  const { features, mode, onSpectrum, palette, position, reduceMotion, score } = props;
+  const reader = useMemo(() => prepareActivity(score), [score]);
+  const invalidate = useThree((state) => state.invalidate);
+  const frame = useRef<SceneFrame>(sceneFrame(reader, score, null, reduceMotion));
+
+  // Read once per frame, before anything draws, so every part of the scene is looking at the
+  // same instant rather than each asking the audio clock for itself a few microseconds apart.
+  // Negative priority on purpose: in react-three-fiber a positive one takes over rendering.
+  useFrame(() => {
+    frame.current = sceneFrame(reader, score, position(), reduceMotion);
+  }, -2);
+
+  // A scene on `demand` only draws when told to. Stopping playback swaps `position` for one
+  // that answers null, and without this the canvas would keep the last frame of the piece
+  // rather than coming to rest.
+  useEffect(() => {
+    invalidate();
+  }, [invalidate, position, mode, reduceMotion, reader]);
+
   return (
     <>
       <color attach="background" args={[SCENE_BACKGROUND]} />
@@ -513,17 +402,21 @@ function Scene(props: SceneProps) {
       <directionalLight
         position={[5, 8, 7]}
         intensity={2.1}
-        color={props.palette.modules[0] ?? FALLBACK_ACCENT}
+        color={palette.modules[0] ?? FALLBACK_ACCENT}
       />
       <pointLight
         position={[-6, 1, -4]}
         intensity={30}
         distance={14}
-        color={props.palette.modules[2] ?? props.palette.modules[0] ?? FALLBACK_ACCENT}
+        color={palette.modules[2] ?? palette.modules[0] ?? FALLBACK_ACCENT}
       />
-      <ParticleField {...props} />
-      {props.mode === 'pillars' ? <Pillars {...props} /> : <NodeSphere {...props} />}
-      <SpectrumReporter {...props} />
+      <ParticleField palette={palette} frame={frame} />
+      {mode === 'pillars' ? (
+        <Pillars features={features} palette={palette} frame={frame} />
+      ) : (
+        <NodeSphere features={features} palette={palette} frame={frame} />
+      )}
+      <SpectrumReporter frame={frame} onSpectrum={onSpectrum} />
       <CameraRig />
     </>
   );
@@ -555,7 +448,7 @@ export function SpatialField(props: SpatialFieldProps) {
       <Canvas
         camera={{ position: [8.4, 5.2, 10.2], fov: 42, near: 0.1, far: 80 }}
         dpr={[1, 1.5]}
-        frameloop={props.player ? 'always' : 'demand'}
+        frameloop={props.frameloop ?? 'demand'}
         gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
         aria-label={label}
       >
