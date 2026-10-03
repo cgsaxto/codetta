@@ -6,6 +6,9 @@ coverage/
 .DS_Store
 .vite/
 
+# Local design-review reports.
+.impeccable/
+
 # Go build cache lives outside the repo; nothing to ignore yet beyond the workspace sum.
 go.work.sum
 

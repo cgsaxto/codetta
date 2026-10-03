@@ -1,10 +1,8 @@
 import type { RepoFeatures } from '@codetta/schema';
 import { GALLERY_BY_SIZE } from '../features/gallery';
 import { clipWindow } from '../music/clip';
-import { barToTick, scoreDurationSeconds, type Score } from '../music/score';
+import { barToTick, type Score } from '../music/score';
 import { ticksAtSeconds } from './clock';
-import { drawField } from './draw';
-import { fieldFor } from './layout';
 import { palettesFor, type Palette } from './palette';
 
 /**
@@ -196,41 +194,12 @@ export function cardTick(score: Score): number {
   );
 }
 
-export function drawCard(
-  context: CanvasRenderingContext2D,
-  width: number,
-  height: number,
-  subject: CardSubject,
-): void {
-  const { features, score, palette } = subject;
-  const totalTicks = barToTick(score.bars);
-
-  drawField(
-    context,
-    width,
-    height,
-    {
-      columns: fieldFor(features),
-      palette,
-      fileCount: features.timeline.length,
-      durationSeconds: scoreDurationSeconds(score),
-      totalTicks,
-      // Nothing is playing into a still, so a flare would be an invented one.
-      calm: true,
-    },
-    { tick: cardTick(score), onsets: [], delta: 0 },
-    new Map(),
-  );
-
-  drawCardOverlay(context, width, height, subject, palette.ground);
-}
-
 /**
  * Everything on a card that is not the picture: the scrim, the face if there is one, and the
  * three lines of text.
  *
  * Split out so the picture underneath can change without the text being written twice. The
- * link-unfurl card is a 3D scene now and the downloadable one is still the 2D field, and both
+ * link-unfurl card and the downloadable one both use the same 3D scene, and both
  * wear exactly this — a second copy of the layout would put the name a few pixels somewhere
  * else on one of them, which is the kind of drift nobody catches until two cards sit side by
  * side in a timeline.
@@ -361,25 +330,15 @@ export function loadAvatar(
  * up is a retina timeline and the whole picture is thin marks on a dark ground.
  */
 export async function renderCard(subject: CardSubject, scale = 2): Promise<Blob> {
-  const canvas = document.createElement('canvas');
-  canvas.width = CARD_WIDTH * scale;
-  canvas.height = CARD_HEIGHT * scale;
-
-  const context = canvas.getContext('2d');
-  if (!context) throw new Error('This browser would not give Codetta a canvas to draw on.');
+  if (!Number.isFinite(scale) || scale <= 0 || scale > 4) {
+    throw new Error('The card scale must be greater than zero and no more than four.');
+  }
 
   // Fonts have to be resident before the first fillText, or the card is set in whatever the
   // browser had lying around. The screenshot path waits for the same thing.
   if (document.fonts?.ready) await document.fonts.ready;
 
-  drawCard(context, canvas.width, canvas.height, subject);
-
-  return new Promise((resolve, reject) => {
-    canvas.toBlob((blob) => {
-      if (blob) resolve(blob);
-      // The one realistic cause is a tainted canvas, which is exactly what inlining the
-      // avatar prevents — so if this ever fires, that is the thing to look at.
-      else reject(new Error('Codetta could not turn the card into an image.'));
-    }, 'image/png');
-  });
+  // Keep three.js out of the initial chunk; saving loads the same renderer as the stage.
+  const { renderSpatialCard } = await import('./render-card');
+  return renderSpatialCard(subject, scale);
 }

@@ -443,12 +443,12 @@ check, for the same reason. It cannot check the pictures; those are looked at by
 
 - [x] Shareable card: waveform art + repo name + avatar
 
-  `visuals/card.ts` is one drawing with two consumers — the link-unfurl cards Playwright
-  screenshots at build time, and the PNG a visitor downloads. Two existed for about an hour:
-  the unfurl card built its text out of DOM because a screenshot could capture that, and the
-  downloadable one would have had to build the same text out of canvas calls, since a
-  screenshot is not available to a visitor. The same refusal as everywhere in Phase 4, and the
-  drift it avoids would have been a downloaded card subtly unlike the one in a timeline.
+  The link-unfurl card and the downloaded PNG now use `SpatialField` at the same `cardTick`,
+  in the page's palette, with the same `drawCardOverlay` for text and avatars. The download
+  mounts its own offscreen scene at 2400×1260, so saving neither changes the visitor's orbit
+  nor stops the music. It copies the frame immediately after WebGL draws, before the drawing
+  buffer can be cleared, then removes the scene on success, error, or timeout. The renderer
+  loads only when saving; three.js stays outside the initial chunk.
 
   **The avatar is inlined by the API as a data URI**, which looks like an odd choice until the
   two constraints meet: the browser still never talks to GitHub, _and_ a cross-origin image

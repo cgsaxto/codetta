@@ -59,6 +59,9 @@ interface SpatialFieldProps {
    * finished loading — on a cold start, nothing.
    */
   onReady?: () => void;
+  /** Copy the rendered frame before WebGL releases its drawing buffer. */
+  onCapture?: (canvas: HTMLCanvasElement) => void;
+  onCaptureError?: (cause: Error) => void;
 }
 
 interface SceneProps extends SpatialFieldProps {
@@ -267,6 +270,21 @@ function ReadySignal({ onReady }: { onReady?: (() => void) | undefined }) {
   return null;
 }
 
+function FrameCapture({ capture }: { capture: (canvas: HTMLCanvasElement) => void }) {
+  const frames = useRef(0);
+
+  useFrame(({ gl, scene, camera, invalidate }) => {
+    // Positive priority owns the draw, so the copy happens synchronously after it. Waiting
+    // for a timer or an effect instead can read a cleared WebGL buffer and save a black card.
+    gl.render(scene, camera);
+    frames.current += 1;
+    if (frames.current === 1) invalidate();
+    else if (frames.current === 2) capture(gl.domElement);
+  }, 1);
+
+  return null;
+}
+
 function SpectrumReporter({
   frame,
   onSpectrum,
@@ -456,6 +474,7 @@ function Scene(props: SceneProps) {
       <SpectrumReporter frame={frame} onSpectrum={onSpectrum} />
       <ReadySignal onReady={onReady} />
       <CameraRig distance={props.cameraDistance ?? 1} />
+      {props.onCapture && <FrameCapture capture={props.onCapture} />}
     </>
   );
 }
@@ -479,18 +498,43 @@ export function SpatialField(props: SpatialFieldProps) {
 
   return (
     <>
-      <p id={descriptionId} className="sr-only">
-        Interactive repository topology. Drag to orbit, use the mouse wheel or plus and minus
-        keys to zoom, arrow keys to rotate, and Home to reset the view.
-      </p>
+      {!props.onCapture && (
+        <p id={descriptionId} className="sr-only">
+          Interactive repository topology. Drag to orbit, use the mouse wheel or plus and minus
+          keys to zoom, arrow keys to rotate, and Home to reset the view.
+        </p>
+      )}
       <Canvas
         camera={{ position: [8.4, 5.2, 10.2], fov: 42, near: 0.1, far: 80 }}
         dpr={props.dpr ?? [1, 1.5]}
         frameloop={props.frameloop ?? 'demand'}
-        gl={{ antialias: true, alpha: false, powerPreference: 'high-performance' }}
+        gl={
+          props.onCaptureError
+            ? (
+                defaults: Omit<THREE.WebGLRendererParameters, 'canvas'> & { canvas: unknown },
+              ) => {
+                try {
+                  return new THREE.WebGLRenderer({
+                    ...defaults,
+                    canvas: defaults.canvas as HTMLCanvasElement,
+                    antialias: true,
+                    alpha: false,
+                    powerPreference: 'high-performance',
+                  });
+                } catch (cause) {
+                  props.onCaptureError?.(
+                    cause instanceof Error ? cause : new Error(String(cause)),
+                  );
+                  throw cause;
+                }
+              }
+            : { antialias: true, alpha: false, powerPreference: 'high-performance' }
+        }
         aria-label={label}
       >
-        <CanvasAccessibility label={label} descriptionId={descriptionId} />
+        {!props.onCapture && (
+          <CanvasAccessibility label={label} descriptionId={descriptionId} />
+        )}
         <Scene {...props} reduceMotion={reduceMotion} />
       </Canvas>
     </>

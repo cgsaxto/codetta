@@ -9,10 +9,11 @@ import {
   cardFilename,
   cardPalette,
   cardTick,
-  drawCard,
+  drawCardOverlay,
   fitCardTitle,
 } from './card';
 import { paletteFor, palettesFor } from './palette';
+import { SCENE_BACKGROUND } from './spatial';
 
 /**
  * There is no canvas here, so the context is a recorder: every call is kept and nothing is
@@ -70,10 +71,19 @@ describe('cardTick', () => {
   });
 });
 
-describe('drawCard', () => {
+function drawOverlay(
+  context: CanvasRenderingContext2D,
+  width: number,
+  height: number,
+  subject: Parameters<typeof drawCardOverlay>[3],
+) {
+  drawCardOverlay(context, width, height, subject, SCENE_BACKGROUND);
+}
+
+describe('drawCardOverlay', () => {
   it('puts the repository’s name and what it sounds like on the card', () => {
     const { context, texts } = recorder();
-    drawCard(context, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
+    drawOverlay(context, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
 
     const written = texts()
       .map((call) => String(call.args[0]))
@@ -85,9 +95,9 @@ describe('drawCard', () => {
     expect(written).toContain('CODETTA');
   });
 
-  it('draws the field before the text, so nothing is painted over', () => {
+  it('draws the scrim before the text, so nothing is painted over', () => {
     const { context, calls } = recorder();
-    drawCard(context, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
+    drawOverlay(context, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
 
     const methods = calls.map((call) => call.method);
     const lastRect = methods.lastIndexOf('fillRect');
@@ -97,10 +107,10 @@ describe('drawCard', () => {
 
   it('moves the text aside for a face rather than under it', () => {
     const { context: bare, texts: bareTexts } = recorder();
-    drawCard(bare, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
+    drawOverlay(bare, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
 
     const { context, texts, calls } = recorder();
-    drawCard(context, CARD_WIDTH, CARD_HEIGHT, {
+    drawOverlay(context, CARD_WIDTH, CARD_HEIGHT, {
       features,
       score,
       palette,
@@ -114,10 +124,10 @@ describe('drawCard', () => {
   it('scales with the surface it is given', () => {
     // Drawn at twice the size for a retina timeline, and the layout has to come with it.
     const { context: small, texts: smallTexts } = recorder();
-    drawCard(small, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
+    drawOverlay(small, CARD_WIDTH, CARD_HEIGHT, { features, score, palette });
 
     const { context: large, texts: largeTexts } = recorder();
-    drawCard(large, CARD_WIDTH * 2, CARD_HEIGHT * 2, { features, score, palette });
+    drawOverlay(large, CARD_WIDTH * 2, CARD_HEIGHT * 2, { features, score, palette });
 
     expect(Number(largeTexts()[0]?.args[1])).toBeCloseTo(
       Number(smallTexts()[0]?.args[1]) * 2,
