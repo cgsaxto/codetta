@@ -4,30 +4,22 @@
 
 **Every repository has a sound. Type your GitHub username and hear yours.**
 
-[**Try it →**](https://codetta.dev) &nbsp;·&nbsp; [How it works](#why-it-doesnt-sound-like-noise) &nbsp;·&nbsp; [Run it locally](#run-it-locally)
+[**Try it →**](https://codetta.onrender.com) &nbsp;·&nbsp; [How it works](#why-it-doesnt-sound-like-noise) &nbsp;·&nbsp; [Run it locally](#run-it-locally)
 
-<!--
-  THE CLIP GOES HERE AND NOTHING GOES ABOVE IT.
+https://github.com/user-attachments/assets/20002ead-2b7a-4d1c-b843-bb5c4ea9faa7
 
-  Record it from the deployed site: play a repository, press "square video", and
-  drag the file into a GitHub issue comment. That produces a URL — paste it on
-  its own line below this comment, uncomment the caption, and delete these
-  instructions.
-
-  Use the peak section, not the intro. Square or 16:9. Under 10 MB.
-
-  Commented out rather than left as a placeholder URL: a dead embed at the top
-  of the page reads as a broken project, and this is the first thing anybody
-  sees.
-
-  <sub>↑ `facebook/react` — 297,593 lines, F Lydian at 120 BPM</sub>
--->
+<sub>↑ <code>facebook/react</code> — 297,593 lines, F Lydian at 120 BPM. Recorded from the live demo.</sub>
 
 </div>
 
 ---
 
 ## Listen to a few
+
+The hosted demo runs on [Render Free](https://render.com/docs/free). After 15 minutes of
+inactivity, the first visit can take about a minute to wake it. The built-in gallery plays
+without parsing a repository; large custom repositories can exceed the API's 25-second
+parsing budget on the free instance.
 
 Ordered by size, which is what sets the tempo. Every key and tempo below is generated output,
 not description — `apps/web/src/features/gallery.test.ts` fails if this table drifts from what
@@ -80,7 +72,7 @@ list of things that are explicitly forbidden. It's the most opinionated file in 
 ## Run it locally
 
 ```bash
-git clone https://github.com/lduo8438-max/codetta
+git clone https://github.com/cgsaxto/codetta
 cd codetta
 pnpm install
 
@@ -151,7 +143,7 @@ Codetta only touches the public tarball endpoint and never clones. Self-host it 
 you want to point it at something private.
 
 **Can I get the MIDI / the stems?**
-Not yet. [Open an issue](https://github.com/lduo8438-max/codetta/issues) if you'd use it.
+Not yet. [Open an issue](https://github.com/cgsaxto/codetta/issues) if you'd use it.
 
 **The name?**
 A _codetta_ is a short closing passage in music. It also has "code" in it.

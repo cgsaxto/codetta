@@ -518,7 +518,7 @@ the search endpoint's separate budget already keeps this away from the parsing p
 
 ## Launch
 
-- [ ] README with the GIF/clip in the first screen, above everything else
+- [x] README with the GIF/clip in the first screen, above everything else
 - [x] MIT licence, CONTRIBUTING, issue templates
 
   The one template worth having written is **"It sounds wrong"**, and it asks for a commit
@@ -590,14 +590,23 @@ the search endpoint's separate budget already keeps this away from the parsing p
   image, already read at boot for the unfurls. The alternative was a second list of eight
   repositories in Go, correct until the day the gallery changed and nobody remembered.
 
-  The repository is `lduo8438-max/codetta`, and it is **private until the demo is up**. That
-  is not a retreat from "public from day one" in @CLAUDE.md, which is about how the code is
-  written — assume strangers read it — rather than about when it is published. What a stranger
-  would find today is a README whose first link goes nowhere and whose hero slot is empty,
-  because the clip is recorded from the deployed site. Public is one switch, and it is worth
-  spending it on a page that is finished.
+  The demo is deployed at <https://codetta.onrender.com>, using one Docker web service and
+  a private-network Key Value cache on Render Free in Singapore. `SITE_DIR=/srv/site` is
+  unchanged. Production verification caught a development-only assumption: Vite strips
+  `/api`, so the Go router now serves both `/api/v1` and `/v1`, with a regression test for
+  repository and username routes alongside the site handler.
 
-  Still to do: the hosting itself, then the clip, then flip it public.
+  The hosted routes, a non-gallery repository (`pallets/itsdangerous`), playback, both 3D
+  views, orbit and zoom were checked. The README's 30-second React peak was recorded using
+  the live site's square-video button, then compressed to 1.82 MB for its GitHub attachment.
+
+  The spike-readiness checkbox remains open. Render Free sleeps after inactivity, and the
+  React and Django cache warm exceeded the existing 25-second parsing budget on its limited
+  CPU. The committed gallery still plays without parsing, but a large pasted repository is
+  not guaranteed to succeed; this deployment has not been load-tested for a front-page spike.
+
+  The repository is now `cgsaxto/codetta`. Hosting and the README clip are ready; changing
+  the private repository to public is the remaining publication step, pending confirmation.
 
 - [ ] Post the gallery repos one at a time over several weeks, not all at once
 
