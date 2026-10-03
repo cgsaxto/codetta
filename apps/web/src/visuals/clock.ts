@@ -1,11 +1,12 @@
-import { TICKS_PER_BEAT, type NoteEvent } from '../music/score';
+import { TICKS_PER_BEAT } from '../music/score';
 
 /**
- * Where the piece is, and what just happened, in Score ticks.
+ * Where the piece is, in Score ticks.
  *
- * Pure: no Tone, no canvas, no clock of its own. It is handed a number of seconds and
- * answers questions about it, which is what makes the awkward part of a visualiser — the
- * part where a frame straddles a loop boundary — something a test can pin down.
+ * Pure: no Tone, no canvas, no clock of its own. It is handed a number of seconds and says
+ * where that is. What is sounding there is `activity.ts`, which is a function of the same
+ * position — nothing in the visuals asks what happened since the last frame, so nothing
+ * depends on how the frames arrived.
  *
  * ## The rule this file exists to keep
  *
@@ -36,58 +37,4 @@ export function ticksAtSeconds(seconds: number, bpm: number, totalTicks: number)
   // Twice, because the remainder of a negative number is negative in JavaScript and a
   // position behind the start is what a transport reports in the moment before it begins.
   return ((ticks % totalTicks) + totalTicks) % totalTicks;
-}
-
-/**
- * The notes that begin in the window a frame covers, `[from, to)`.
- *
- * Half-open, and that end rather than the other, so every onset fires exactly once: a note
- * on tick 0 belongs to the first frame of a playthrough, and belongs again to the first
- * frame after the loop comes back around to it.
- *
- * A frame whose window crosses the loop point covers two ranges rather than an empty one.
- * That case is roughly one frame in every three thousand, which is exactly the sort of thing
- * that survives to production and then shows up as a stutter once a loop, so it is handled
- * here where a test can reach it rather than in a draw call where nothing can.
- */
-export function onsetsBetween(
-  events: readonly NoteEvent[],
-  from: number,
-  to: number,
-  totalTicks: number,
-): NoteEvent[] {
-  if (!(totalTicks > 0) || from === to) return [];
-
-  const within = (tick: number, start: number, end: number) => tick >= start && tick < end;
-  const wrapped = to < from;
-
-  return events.filter((event) =>
-    wrapped
-      ? within(event.tick, from, totalTicks) || within(event.tick, 0, to)
-      : within(event.tick, from, to),
-  );
-}
-
-/**
- * The notes sounding at a position, and how far through each one is on 0–1.
- *
- * The progress is what a visual element needs in order to decay: a note is not a moment, it
- * has a length, and something that only knows an onset can only blink.
- */
-export interface SoundingNote {
-  event: NoteEvent;
-  /** 0 at the attack, approaching 1 at the release. */
-  progress: number;
-}
-
-export function soundingAt(events: readonly NoteEvent[], tick: number): SoundingNote[] {
-  const out: SoundingNote[] = [];
-
-  for (const event of events) {
-    const age = tick - event.tick;
-    if (age < 0 || age >= event.durationTicks) continue;
-    out.push({ event, progress: event.durationTicks > 0 ? age / event.durationTicks : 0 });
-  }
-
-  return out;
 }

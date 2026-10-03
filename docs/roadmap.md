@@ -229,6 +229,21 @@ else", and it was accurate when it was written — nothing but the music read th
 then. **A recorded trade-off expires when a new consumer arrives, and nothing goes back to
 check it.** That is the one worth remembering from this phase.
 
+**Superseded during Launch.** The 2D field this phase describes was replaced by a 3D scene,
+`visuals/SpatialField.tsx`, and its code is deleted: the canvas component, `draw.ts`, the
+layout and the frame budget. What carried over is the rule and not the picture — position
+comes from the audio clock, never from frame timestamps — and the scene goes one step
+further than the field did. The field knew what had happened since the last frame; the scene
+is a function of the position alone (`visuals/activity.ts`, `visuals/spatial.ts`), which is
+what lets a card, a video and the page draw the same thing.
+
+Two things on this list no longer hold and are not replaced. **There is no frame budget**:
+nothing sheds detail when a machine is slow, so "degrade element count, never framerate" is
+currently untrue, and the 60 fps figure was measured on the 2D field and has not been
+measured on the scene. And the picture no longer shows files in the repository's traversal
+order with a line descending through them — a pillar is a file and its height is its
+length, but nothing on screen says how far through the repository the piece has read.
+
 ---
 
 ## Phase 3 — The gallery (this is the landing page)
@@ -304,6 +319,20 @@ The README was corrected at the same time, since the gallery is what made it pos
 table of keys and tempos was hand-written fiction, and four of the six repositories it
 listed are in languages the parser cannot read. It is now generated output, and
 `gallery.test.ts` fails if it drifts.
+
+**Superseded during Launch.** The landing page is no longer the gallery. It is one
+repository on a stage — the 3D scene — with the eight in a rail of text beneath it, on a
+dark page. That reverses two decisions recorded above and it is worth saying which: the
+page now does contribute colour, and "eight repositories look like eight repositories" is
+no longer shown at a glance, since only one scene is on screen. It is shown by switching
+between them and by the cover card, which still draws all eight side by side. The order,
+smallest first, and the input held back until something has been heard, both carried over.
+
+One finding from this phase came back in a new form. `palettesFor` lays colours around the
+wheel in the order it is handed seeds, so two callers that order the same eight differently
+give every repository a different colour: the page sorted by size, the link-unfurl cards
+used file order, and all eight cards wore colours the site never showed. Each looked right
+alone. `GALLERY_BY_SIZE` is now the one order.
 
 ---
 
@@ -389,7 +418,8 @@ This phase is the growth loop. It is not polish, and it is not optional.
 - [x] Per-repo OG image generated server-side so links unfurl with the repo's waveform
 
   Not generated per request. The eight gallery repositories have their cards screenshotted at
-  build time by Playwright, from the site's own `drawField` through `?og=owner/name`, and
+  build time by Playwright, from the site's own drawing through `?og=owner/name` — `drawField`
+  when this was written, the 3D scene now, which is the point of doing it this way — and
   everything else unfurls with a cover showing all eight. A live renderer would mean a
   headless browser in the deployment and a slow first unfurl for a repository nobody has
   shared yet; a card is a picture of a fixed commit, so there is nothing to recompute.

@@ -43,7 +43,7 @@ describe('prepareActivity', () => {
   });
 
   it('gives the same answer however often it is asked, and in any order', () => {
-    // The flare map in draw.ts cannot do this: its value at a tick depends on the frames that
+    // A level integrated frame by frame cannot do this: its value at a tick depends on the frames that
     // reached it, so a dropped frame changes the picture. That is fine for a canvas being
     // driven by a transport and disqualifying for anything rendered offline.
     const read = prepareActivity(generateScore(reactFeatures));

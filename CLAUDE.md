@@ -13,7 +13,8 @@ would post. Features that don't serve "sounds good" or "gets shared" are out of 
 ## Architecture
 
 ```
-apps/web     Vite + React 19 + TypeScript + Tone.js + Tailwind. Owns ALL music and visuals.
+apps/web     Vite + React 19 + TypeScript + Tone.js + three.js + Tailwind. Owns ALL music and
+             visuals.
 apps/api     Go 1.23+. Fetches repo tarballs, parses with tree-sitter, emits RepoFeatures JSON.
 packages/schema   TypeScript types + Go structs for RepoFeatures. Hand-written in both
                   languages; conformance tests prove the two agree. Single source of truth.

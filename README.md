@@ -122,7 +122,7 @@ recipe in a file rather than in somebody's shell history.
 ## How it's put together
 
 ```
-apps/web    React + TypeScript + Tone.js. Owns all music and visuals.
+apps/web    React + TypeScript + Tone.js + three.js. Owns all music and visuals.
 apps/api    Go + tree-sitter. Owns all parsing. Knows nothing about music.
 ```
 

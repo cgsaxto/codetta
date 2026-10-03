@@ -32,20 +32,17 @@ function audioModule() {
 }
 
 /**
- * The gallery is the page.
+ * One repository on a stage, and the rest in a rail beneath it.
  *
- * Not a headline with examples underneath: eight repositories, drawn, in a grid, and one
- * click plays any of them. The largest type on the page is fifteen pixels, which is the one
- * real risk here — the eight pictures are the headline, and if they cannot carry it then no
- * sentence above them would have either.
+ * The stage is the 3D scene of whichever repository is selected. The rail is the eight
+ * gallery repositories, smallest first, because size is what sets tempo: reading it left to
+ * right is reading it slowest to fastest. A repository the visitor loads joins the end.
  *
- * The page itself contributes no colour. Every hue on screen comes from a commit sha, which
- * is the whole claim of the project, and a dark page would have merged the tiles into it and
- * spent the contrast that makes eight repositories look like eight repositories.
- *
- * Ordered by size, smallest first, because size is what sets tempo: reading the grid left to
- * right is reading it slowest to fastest. The order encodes something true rather than
- * decorating, which is the only reason to impose one.
+ * It replaced a page that was the gallery itself — eight drawn tiles on a light ground,
+ * arguing that eight repositories visibly unlike each other was the whole claim and no
+ * sentence above them would carry it better. That claim is no longer made at a glance:
+ * the rail is text and one scene is on screen at a time. It is made by switching between
+ * them, and by the cover card a shared link unfurls with, which still shows all eight.
  */
 
 /** Seconds of playback after which someone has heard enough to be offered the input. */

@@ -1,7 +1,7 @@
 import type { RepoFeatures } from '@codetta/schema';
+import { MODULE_VOICE_ORDER, moduleVoiceCount } from '../music/arrangement';
 import { barToTick, VOICE_ORDER, type Score, type VoiceId } from '../music/score';
 import type { Activity, ActivityReader } from './activity';
-import { fieldFor } from './layout';
 
 /**
  * The numbers behind the 3D scene, with no three.js in them.
@@ -59,12 +59,24 @@ export interface SphereNode {
 /** Evenly spaced representatives per module, so one huge module cannot push the rest off frame. */
 const PILLARS_PER_MODULE = 18;
 
-function voicesByPath(features: RepoFeatures): Map<string, VoiceId> {
-  return new Map(fieldFor(features).map((column) => [column.path, column.voice]));
+/**
+ * The voice each module plays, by path.
+ *
+ * Only the modules that became voices. One past the voice count is in the document and is
+ * not playing, and it has no entry here — which is how a pillar finds out that it belongs to
+ * the repository and not to the music.
+ */
+export function moduleVoices(features: RepoFeatures): Map<string, VoiceId> {
+  const count = Math.min(moduleVoiceCount(features), features.modules.length);
+  return new Map(
+    features.modules
+      .slice(0, count)
+      .map((module, rank) => [module.path, MODULE_VOICE_ORDER[rank] ?? 'lead']),
+  );
 }
 
 export function pillarsFor(features: RepoFeatures): Pillar[] {
-  const voices = voicesByPath(features);
+  const voices = moduleVoices(features);
   const moduleNames = features.modules.map((module) => module.path);
 
   // A large repository can put nearly all 256 timeline entries in one module. Drawing every
@@ -106,7 +118,7 @@ export function pillarsFor(features: RepoFeatures): Pillar[] {
 }
 
 export function sphereNodesFor(features: RepoFeatures): SphereNode[] {
-  const voices = voicesByPath(features);
+  const voices = moduleVoices(features);
   const count = Math.min(72, Math.max(28, features.timeline.length));
   const modules = Math.max(1, features.modules.length);
   const golden = Math.PI * (3 - Math.sqrt(5));

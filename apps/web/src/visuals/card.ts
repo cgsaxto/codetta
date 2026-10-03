@@ -9,23 +9,22 @@ import { palettesFor, type Palette } from './palette';
  * The card: the repository drawn, with its name and — when the visitor arrived by typing
  * their username — their face on it.
  *
- * One function, drawn onto whatever context it is handed, for the same reason `drawField` is
- * one function. Two of these existed for about an hour: the link-unfurl card built its text
+ * This file is the text and the choices around it; the picture underneath is the page's own
+ * 3D scene. Two layouts of the text existed for about an hour: the link-unfurl card built it
  * out of DOM for a screenshot to capture, and the downloadable one would have had to build
  * the same text out of canvas calls, since a screenshot is not available to a visitor. Two
  * implementations of one picture drift, and the drift here would be a downloaded card that
  * is subtly not the card people see in a timeline.
  *
- * So the text is canvas text in both, and the unfurl card is now this function plus a
- * screenshot rather than a layout of its own.
+ * So the text is canvas text everywhere it appears — the unfurl card, the downloaded card
+ * and the video — drawn by one function onto whatever context it is handed.
  *
- * The frame it draws is the last one of the clip — the thirty seconds starting at the peak,
- * the same window the WAV and the video are cut from. A card is a still of the thing being
- * shared, and this is the only frame that is one. It was tick 0 first, on the argument that
- * the card should show what a gallery tile shows before anything plays. At tile size that
- * reads as structure; at 1200×630 it is a dark rectangle with a hairline across the top,
- * because the whole legibility of this picture is the contrast between the region that has
- * been read and the region that has not, and at tick 0 there is no read region at all.
+ * The frame is the last one of the clip — the thirty seconds starting at the peak, the same
+ * window the WAV and the video are cut from. A card is a still of the thing being shared,
+ * and this is the only frame that is one. It was tick 0 first, on the argument that the card
+ * should show what the page shows before anything plays, and that is the one frame in which
+ * every repository looks least like itself: nothing is sounding, so nothing is raised and
+ * nothing is lit.
  */
 
 /**

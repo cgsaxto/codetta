@@ -25,12 +25,12 @@ import {
  * two callers at the same position agree, a test can pin any moment, and an offline renderer
  * gets exactly what the page gets.
  *
- * ## Why not the flare map in draw.ts
+ * ## Why not a level integrated frame by frame
  *
- * `Flares` is the same idea integrated frame by frame: set to 1 on an onset, multiplied down
- * by however long the last frame took. That is correct for a canvas being driven by a
- * transport and wrong for anything that has to be reproducible, because the value at a given
- * tick depends on the history of frames that reached it. A dropped frame changes the picture.
+ * The 2D visual this project started with kept one: set to 1 on an onset, multiplied down by
+ * however long the last frame took. That is correct for a canvas being driven by a transport
+ * and wrong for anything that has to be reproducible, because the value at a given tick
+ * depends on the history of frames that reached it. A dropped frame changes the picture.
  * Here, a level is a function of the notes alone.
  */
 

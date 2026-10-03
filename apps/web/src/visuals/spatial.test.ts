@@ -3,8 +3,9 @@ import { GALLERY } from '../features/gallery';
 import { generateScore } from '../music/generate';
 import { barToTick } from '../music/score';
 import { prepareActivity } from './activity';
-import { fieldFor } from './layout';
+import { MODULE_VOICE_ORDER, moduleVoiceCount } from '../music/arrangement';
 import {
+  moduleVoices,
   nodeScale,
   nodeGain,
   pillarGain,
@@ -28,9 +29,32 @@ const score = generateScore(requests);
 const reader = prepareActivity(score);
 const totalTicks = barToTick(score.bars);
 
+describe('moduleVoices', () => {
+  it('names a voice for the modules that are playing, in rank order, and for no others', () => {
+    // A module past the voice count is in the document and makes no sound. Giving it a voice
+    // would move something on screen in time with music it has no part in.
+    for (const features of GALLERY) {
+      const voices = moduleVoices(features);
+      const playing = Math.min(moduleVoiceCount(features), features.modules.length);
+
+      expect(voices.size, features.repo.name).toBe(playing);
+      features.modules.forEach((module, rank) => {
+        expect(voices.get(module.path), `${features.repo.name} ${module.path}`).toBe(
+          rank < playing ? MODULE_VOICE_ORDER[rank] : undefined,
+        );
+      });
+    }
+  });
+
+  it('returns nothing, rather than failing, for a repository with no modules', () => {
+    expect(moduleVoices({ ...requests, modules: [], timeline: [] }).size).toBe(0);
+    expect(pillarsFor({ ...requests, modules: [], timeline: [] })).toStrictEqual([]);
+  });
+});
+
 describe('pillarsFor', () => {
   it('gives each file the voice its module plays, and no voice past the voice count', () => {
-    const voices = new Map(fieldFor(requests).map((column) => [column.path, column.voice]));
+    const voices = moduleVoices(requests);
     for (const pillar of pillarsFor(requests)) {
       const path = requests.modules[pillar.module]?.path ?? '';
       expect(pillar.voice).toBe(voices.get(path) ?? null);
