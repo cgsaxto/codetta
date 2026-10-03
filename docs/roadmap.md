@@ -605,8 +605,8 @@ the search endpoint's separate budget already keeps this away from the parsing p
   CPU. The committed gallery still plays without parsing, but a large pasted repository is
   not guaranteed to succeed; this deployment has not been load-tested for a front-page spike.
 
-  The repository is now `cgsaxto/codetta`. Hosting and the README clip are ready; changing
-  the private repository to public is the remaining publication step, pending confirmation.
+  The repository is `cgsaxto/codetta`, made public on 2026-10-03 after the live demo, recorded
+  clip and README were verified and the owner confirmed publication.
 
 - [ ] Post the gallery repos one at a time over several weeks, not all at once
 
