@@ -107,6 +107,14 @@ export default function App() {
 
   const [saving, setSaving] = useState<'clip' | 'full' | 'card' | Shape | null>(null);
   const [recorded, setRecorded] = useState(0);
+  /**
+   * The repository a recording is being made of, while it is being made.
+   *
+   * Recording stops playback, and the panel that holds the progress readout is shown for
+   * whatever is playing — so pressing "square video" used to make the panel vanish, and with
+   * it the only sign that anything was happening, for the forty seconds a recording takes.
+   */
+  const [recording, setRecording] = useState<RepoFeatures | null>(null);
   /** The tile a shared link named, so arriving on one lands on it rather than on the grid. */
   const [focusSha, setFocusSha] = useState<string | null>(null);
   const [custom, setCustom] = useState<RepoFeatures | null>(null);
@@ -308,12 +316,15 @@ export default function App() {
   async function record(entry: RepoFeatures, shape: Shape) {
     const sha = entry.repo.commitSha;
     const score = scores.get(sha) ?? generateScore(entry);
+    const palette = palettes.get(sha);
     const type = supportedVideoType();
     if (!type) {
       setError('This browser cannot record video. The audio download still works.');
       return;
     }
+    if (!palette) return;
 
+    setRecording(entry);
     stop();
     setSaving(shape);
     setRecorded(0);
@@ -326,7 +337,10 @@ export default function App() {
         features: entry,
         audio,
         shape,
-        palette: palettes.get(sha),
+        palette,
+        // The view on screen, so the video is of what the visitor was watching.
+        mode: viewMode,
+        avatar: await loadAvatar(avatarFor(entry)),
         onProgress: setRecorded,
       });
       offer(blob, videoFilename(score, entry.repo.owner, entry.repo.name, shape, type));
@@ -335,6 +349,7 @@ export default function App() {
     } finally {
       setSaving(null);
       setRecorded(0);
+      setRecording(null);
     }
   }
 
@@ -475,6 +490,9 @@ export default function App() {
   useEffect(() => {
     if (!activeIsPlaying) reportSpectrum(EMPTY_SPECTRUM);
   }, [active.repo.commitSha, activeIsPlaying, reportSpectrum]);
+
+  // What the save and record buttons act on.
+  const artifactOf = playing ?? recording;
 
   return (
     <main className="min-h-dvh overflow-hidden bg-[var(--surface-page)] px-3 py-4 font-mono text-white sm:px-6 sm:py-6">
@@ -716,19 +734,19 @@ export default function App() {
           </ul>
         </div>
 
-        {playing && (
+        {artifactOf && (
           <div className="mt-5 flex flex-wrap items-center gap-x-4 gap-y-3 border-t border-white/8 px-2 pt-5">
             <button
               type="button"
-              onClick={() => void save(playing, true)}
+              onClick={() => void save(artifactOf, true)}
               disabled={saving !== null}
               className="text-ui-secondary min-h-11 rounded-full border border-white/12 bg-white/8 px-4 py-2 text-[9px] tracking-[0.14em] uppercase hover:bg-white/12 disabled:opacity-40"
             >
-              {saving === 'clip' ? 'Rendering' : `Save 30s of ${playing.repo.name}`}
+              {saving === 'clip' ? 'Rendering' : `Save 30s of ${artifactOf.repo.name}`}
             </button>
             <button
               type="button"
-              onClick={() => void save(playing, false)}
+              onClick={() => void save(artifactOf, false)}
               disabled={saving !== null}
               className="text-ui-muted min-h-11 rounded-full px-3 text-[9px] tracking-[0.1em] uppercase hover:bg-white/8 hover:text-white disabled:opacity-40"
             >
@@ -743,7 +761,7 @@ export default function App() {
                 <button
                   key={shape}
                   type="button"
-                  onClick={() => void record(playing, shape)}
+                  onClick={() => void record(artifactOf, shape)}
                   disabled={saving !== null}
                   className="text-ui-muted min-h-11 rounded-full border border-white/10 px-3 py-2 text-[9px] tracking-[0.12em] uppercase hover:border-white/25 hover:text-white disabled:opacity-40"
                 >
@@ -754,7 +772,7 @@ export default function App() {
               ))}
               <button
                 type="button"
-                onClick={() => void saveCard(playing)}
+                onClick={() => void saveCard(artifactOf)}
                 disabled={saving !== null}
                 className="text-ui-muted min-h-11 rounded-full border border-white/10 px-3 py-2 text-[9px] tracking-[0.12em] uppercase hover:border-white/25 hover:text-white disabled:opacity-40"
               >

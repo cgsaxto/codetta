@@ -62,6 +62,12 @@ interface SpatialFieldProps {
   /** Copy the rendered frame before WebGL releases its drawing buffer. */
   onCapture?: (canvas: HTMLCanvasElement) => void;
   onCaptureError?: (cause: Error) => void;
+  /**
+   * Called after every frame is drawn, with the canvas still holding it. The recorder's hook:
+   * it copies each frame onto the surface it is capturing, for the same reason `onCapture`
+   * copies its one — read any later and the drawing buffer may already be cleared.
+   */
+  onFrame?: (canvas: HTMLCanvasElement) => void;
 }
 
 interface SceneProps extends SpatialFieldProps {
@@ -285,6 +291,15 @@ function FrameCapture({ capture }: { capture: (canvas: HTMLCanvasElement) => voi
   return null;
 }
 
+function FramePump({ pump }: { pump: (canvas: HTMLCanvasElement) => void }) {
+  useFrame(({ gl, scene, camera }) => {
+    gl.render(scene, camera);
+    pump(gl.domElement);
+  }, 1);
+
+  return null;
+}
+
 function SpectrumReporter({
   frame,
   onSpectrum,
@@ -306,19 +321,26 @@ function SpectrumReporter({
   return null;
 }
 
-function CameraRig({ distance }: { distance: number }) {
-  const camera = useThree((state) => state.camera);
-  const gl = useThree((state) => state.gl);
+/**
+ * How far back the camera sits, as a multiple of the landscape framing.
+ *
+ * A portrait canvas has far less horizontal field of view, so the same scene is pulled back
+ * to keep the repository inside the frame rather than cropping its first and last modules.
+ */
+function useFraming(distance: number): number {
   const width = useThree((state) => state.size.width);
   const height = useThree((state) => state.size.height);
+  const aspect = width / Math.max(1, height);
+  return (aspect < 0.82 ? 1.45 : aspect < 1.2 ? 1.24 : 1) * distance;
+}
+
+function CameraRig({ framing }: { framing: number }) {
+  const camera = useThree((state) => state.camera);
+  const gl = useThree((state) => state.gl);
   const invalidate = useThree((state) => state.invalidate);
   const controls = useMemo(() => new OrbitControls(camera, gl.domElement), [camera, gl]);
 
   useEffect(() => {
-    const aspect = width / Math.max(1, height);
-    // A portrait canvas has far less horizontal field of view. Pulling the same scene back
-    // keeps the repository inside the frame rather than cropping its first and last modules.
-    const framing = (aspect < 0.82 ? 1.45 : aspect < 1.2 ? 1.24 : 1) * distance;
     camera.position.set(8.4 * framing, 5.2 * framing, 10.2 * framing);
     camera.lookAt(0, 0, 0);
     controls.target.set(0, 0, 0);
@@ -405,7 +427,7 @@ function CameraRig({ distance }: { distance: number }) {
       gl.domElement.removeEventListener('keydown', onKeyDown);
       controls.dispose();
     };
-  }, [camera, controls, distance, gl, height, invalidate, width]);
+  }, [camera, controls, framing, gl, invalidate]);
 
   useFrame(() => controls.update(), -1);
   return null;
@@ -433,6 +455,7 @@ function Scene(props: SceneProps) {
   const { features, mode, onReady, onSpectrum, palette, position, reduceMotion, score } = props;
   const reader = useMemo(() => prepareActivity(score), [score]);
   const invalidate = useThree((state) => state.invalidate);
+  const framing = useFraming(props.cameraDistance ?? 1);
   const frame = useRef<SceneFrame>(sceneFrame(reader, score, null, reduceMotion));
 
   // Read once per frame, before anything draws, so every part of the scene is looking at the
@@ -452,7 +475,14 @@ function Scene(props: SceneProps) {
   return (
     <>
       <color attach="background" args={[SCENE_BACKGROUND]} />
-      <fog attach="fog" args={[SCENE_BACKGROUND, 10, 25]} />
+      {/*
+        Fog is measured from the camera, so its range has to move with the camera. Fixed at
+        10–25 it was right for a landscape frame and wrong for every other: a square frame
+        sits the camera a quarter further back and a portrait one nearly half, which put the
+        whole repository deep in the fog. The scene was dimmer on a phone than on a laptop,
+        and dimmest of all in a vertical video.
+      */}
+      <fog attach="fog" args={[SCENE_BACKGROUND, 10 * framing, 25 * framing]} />
       <ambientLight intensity={0.58} />
       <directionalLight
         position={[5, 8, 7]}
@@ -473,8 +503,9 @@ function Scene(props: SceneProps) {
       )}
       <SpectrumReporter frame={frame} onSpectrum={onSpectrum} />
       <ReadySignal onReady={onReady} />
-      <CameraRig distance={props.cameraDistance ?? 1} />
+      <CameraRig framing={framing} />
       {props.onCapture && <FrameCapture capture={props.onCapture} />}
+      {props.onFrame && <FramePump pump={props.onFrame} />}
     </>
   );
 }
@@ -495,10 +526,13 @@ export function SpatialField(props: SpatialFieldProps) {
 
   const descriptionId = `spatial-help-${props.features.repo.commitSha.slice(0, 8)}`;
   const label = `${props.features.repo.owner}/${props.features.repo.name} interactive 3D audio visualisation`;
+  // A scene mounted to be copied from is never seen or operated, so it should not announce
+  // itself to a screen reader or take a place in the tab order.
+  const offscreen = Boolean(props.onCapture ?? props.onFrame);
 
   return (
     <>
-      {!props.onCapture && (
+      {!offscreen && (
         <p id={descriptionId} className="sr-only">
           Interactive repository topology. Drag to orbit, use the mouse wheel or plus and minus
           keys to zoom, arrow keys to rotate, and Home to reset the view.
@@ -532,9 +566,7 @@ export function SpatialField(props: SpatialFieldProps) {
         }
         aria-label={label}
       >
-        {!props.onCapture && (
-          <CanvasAccessibility label={label} descriptionId={descriptionId} />
-        )}
+        {!offscreen && <CanvasAccessibility label={label} descriptionId={descriptionId} />}
         <Scene {...props} reduceMotion={reduceMotion} />
       </Canvas>
     </>

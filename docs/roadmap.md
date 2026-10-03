@@ -353,6 +353,23 @@ This phase is the growth loop. It is not polish, and it is not optional.
   the one on the page now share `visuals/draw.ts`. Two implementations would have meant the
   video was a picture of a slightly different piece, findable only by watching both.
 
+  **Superseded, and it failed in exactly the way that paragraph warns about.** The page became
+  a 3D scene and the recorder went on drawing `visuals/draw.ts` into its own canvas, so the
+  button on a 3D scene saved a video of a picture the site no longer had. Nothing failed:
+  every promise resolved and the file played. The recorder now mounts the page's own
+  `SpatialField` offscreen at the size of the video and copies each frame, as it is drawn,
+  onto the 2D canvas that is captured, under the card's text.
+
+  Three things that only running it showed. A scene left on `demand` gives `MediaRecorder` no
+  frames, and it writes a zero-byte file without raising anything — so the frame loop is
+  stated, never inferred from whether something is playing, and an empty recording is now an
+  error rather than a download. The fog was a fixed range measured from the camera, and a
+  narrow frame pulls the camera back, so the scene was dimmest in a vertical video and dimmer
+  on a phone than a laptop; it scales with the framing now. And the panel holding the
+  progress readout was shown for whatever was playing, while recording stops playback, so
+  "Recording 43%" had been invisible for the whole forty seconds since this item was first
+  ticked.
+
 - [x] Permalink per repo: `/r/{owner}/{name}`
 
   Hand-rolled, not routed: there are two paths and one of them is `/`, so a router would be

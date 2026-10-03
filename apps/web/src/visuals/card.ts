@@ -213,12 +213,18 @@ export function drawCardOverlay(
   height: number,
   subject: CardSubject,
   ground: string,
+  /**
+   * Type size relative to the card's. A card is read on a timeline at about two fifths of its
+   * width; a video is watched on a phone held upright, where the same proportions put the
+   * caption near six points. The video asks for more.
+   */
+  scale = 1,
 ): void {
   const { features, score, palette, avatar } = subject;
 
   // Every measurement below is in card units and scaled, so one layout serves the 1200×630
   // this is normally drawn at and any other size someone hands it.
-  const unit = width / CARD_WIDTH;
+  const unit = (width / CARD_WIDTH) * scale;
   const accent = palette.modules[0] ?? '#ffffff';
   const left = 56 * unit;
   const baseline = height - 48 * unit;
