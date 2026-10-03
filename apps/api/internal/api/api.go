@@ -81,8 +81,12 @@ func Handler(deps Deps) http.Handler {
 	// Limited, and only these two. /healthz is what a platform calls to decide whether this
 	// process is alive, and rate-limiting the question "are you alive" gets the answer wrong;
 	// the site's static files cost nothing that GitHub meters.
-	mux.HandleFunc("GET /v1/features/{owner}/{name}", deps.limited(deps.featuresHandler))
-	mux.HandleFunc("GET /v1/users/{login}", deps.limited(deps.userHandler))
+	// The same-origin web app calls /api/v1; direct API clients still use /v1. Vite strips
+	// /api in development, but the production process must serve both without that proxy.
+	for _, prefix := range []string{"", "/api"} {
+		mux.HandleFunc("GET "+prefix+"/v1/features/{owner}/{name}", deps.limited(deps.featuresHandler))
+		mux.HandleFunc("GET "+prefix+"/v1/users/{login}", deps.limited(deps.userHandler))
+	}
 
 	// Registered last and matching everything left over, so the API's own routes always win.
 	// A repository called `v1` cannot shadow the endpoint, whatever else it does.

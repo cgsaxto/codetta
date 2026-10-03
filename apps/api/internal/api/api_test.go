@@ -171,6 +171,41 @@ func TestServesADocumentForARepository(t *testing.T) {
 	}
 }
 
+func TestSameOriginAPIRoutesTakePrecedenceOverTheSite(t *testing.T) {
+	routes := happyRoutes(t)
+	routes["/users/o"] = route{status: 200, body: `{"login":"o","type":"User"}`}
+	routes["/search/repositories"] = searchResults(item("o", "r", "TypeScript", 9))
+	gh, _ := upstream(t, routes)
+	server := httptest.NewServer(Handler(Deps{
+		GitHub: github.New("test-token", github.WithBaseURL(gh.URL)),
+		Site: http.HandlerFunc(func(w http.ResponseWriter, _ *http.Request) {
+			_, _ = io.WriteString(w, "site")
+		}),
+	}))
+	t.Cleanup(server.Close)
+
+	for _, prefix := range []string{"", "/api"} {
+		for _, endpoint := range []string{"/v1/features/o/r", "/v1/users/o"} {
+			t.Run(prefix+endpoint, func(t *testing.T) {
+				response, body := get(t, server, prefix+endpoint)
+				if response.StatusCode != http.StatusOK {
+					t.Fatalf("status = %d, body = %s", response.StatusCode, body)
+				}
+				if !strings.HasPrefix(response.Header.Get("Content-Type"), "application/json") {
+					t.Fatalf("API fell through to the site: %s", body)
+				}
+				if !strings.Contains(body, `"owner":"o"`) || !strings.Contains(body, `"name":"r"`) {
+					t.Errorf("wrong repository: %s", body)
+				}
+			})
+		}
+	}
+	_, body := get(t, server, "/r/o/r")
+	if body != "site" {
+		t.Errorf("permalink no longer reaches the site: %s", body)
+	}
+}
+
 func TestResolvesTheRefBeforeAnythingElse(t *testing.T) {
 	// The SHA is the cache key and the seed, so a branch name has to become one before any
 	// work happens. Branches move; the music must not.
