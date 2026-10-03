@@ -8,9 +8,9 @@ import { prepareActivity } from './activity';
 import type { Palette } from './palette';
 import {
   bandsOf,
-  nodeGlow,
+  nodeGain,
   nodeScale,
-  pillarGlow,
+  pillarGain,
   pillarHeight,
   pillarsFor,
   SCENE_BACKGROUND,
@@ -42,6 +42,14 @@ interface SpatialFieldProps {
    * frames, and MediaRecorder turns no frames into a zero-byte file without an error.
    */
   frameloop?: 'always' | 'demand' | 'never';
+  /**
+   * A multiplier on how far back the camera sits, 1 by default. Below 1 is closer.
+   *
+   * The framing is chosen for a scene someone can orbit, which means leaving room around it.
+   * A tile on the cover is 273px wide and nobody orbits it; the same room there is most of
+   * the picture spent on empty space, at the size where there is least picture to spend.
+   */
+  cameraDistance?: number;
   /** Device pixel ratio. The page caps it for speed; a screenshot wants every pixel. */
   dpr?: number | [number, number];
   onSpectrum?: (bands: SpectrumBands) => void;
@@ -60,7 +68,6 @@ interface SceneProps extends SpatialFieldProps {
 type FrameRef = RefObject<SceneFrame>;
 
 const FALLBACK_ACCENT = '#9be7ff';
-const WHITE = new THREE.Color('#ffffff');
 
 function moduleColour(palette: Palette, module: number): string {
   return (
@@ -95,7 +102,7 @@ function Pillars({
       dummy.updateMatrix();
       current.setMatrixAt(index, dummy.matrix);
 
-      colour.set(moduleColour(palette, pillar.module)).lerp(WHITE, pillarGlow(pillar, now));
+      colour.set(moduleColour(palette, pillar.module)).multiplyScalar(pillarGain(pillar, now));
       current.setColorAt(index, colour);
     });
 
@@ -168,7 +175,7 @@ function NodeSphere({
       dummy.updateMatrix();
       current.setMatrixAt(index, dummy.matrix);
 
-      colour.set(moduleColour(palette, node.module)).lerp(WHITE, nodeGlow(node, now));
+      colour.set(moduleColour(palette, node.module)).multiplyScalar(nodeGain(node, now));
       current.setColorAt(index, colour);
     });
 
@@ -281,7 +288,7 @@ function SpectrumReporter({
   return null;
 }
 
-function CameraRig() {
+function CameraRig({ distance }: { distance: number }) {
   const camera = useThree((state) => state.camera);
   const gl = useThree((state) => state.gl);
   const width = useThree((state) => state.size.width);
@@ -293,7 +300,7 @@ function CameraRig() {
     const aspect = width / Math.max(1, height);
     // A portrait canvas has far less horizontal field of view. Pulling the same scene back
     // keeps the repository inside the frame rather than cropping its first and last modules.
-    const framing = aspect < 0.82 ? 1.45 : aspect < 1.2 ? 1.24 : 1;
+    const framing = (aspect < 0.82 ? 1.45 : aspect < 1.2 ? 1.24 : 1) * distance;
     camera.position.set(8.4 * framing, 5.2 * framing, 10.2 * framing);
     camera.lookAt(0, 0, 0);
     controls.target.set(0, 0, 0);
@@ -380,7 +387,7 @@ function CameraRig() {
       gl.domElement.removeEventListener('keydown', onKeyDown);
       controls.dispose();
     };
-  }, [camera, controls, gl, height, invalidate, width]);
+  }, [camera, controls, distance, gl, height, invalidate, width]);
 
   useFrame(() => controls.update(), -1);
   return null;
@@ -448,7 +455,7 @@ function Scene(props: SceneProps) {
       )}
       <SpectrumReporter frame={frame} onSpectrum={onSpectrum} />
       <ReadySignal onReady={onReady} />
-      <CameraRig />
+      <CameraRig distance={props.cameraDistance ?? 1} />
     </>
   );
 }

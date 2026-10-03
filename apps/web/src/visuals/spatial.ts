@@ -217,17 +217,34 @@ export function pillarHeight(pillar: Pillar, frame: SceneFrame): number {
   );
 }
 
-/** How far toward white a sounding element is lit. Capped so the palette survives a peak. */
-export function pillarGlow(pillar: Pillar, frame: SceneFrame): number {
-  return Math.min(0.6, levelOf(pillar.voice, frame.activity) * 0.65);
+/**
+ * How much brighter a fully struck element is than one at rest, as a multiplier on its colour.
+ *
+ * A multiplier rather than a mix toward white, which is what this was. Mixing toward white
+ * is the obvious way to light something and it erases the one thing the palette is for: at a
+ * peak every sounding pillar slid toward the same pale grey, so two repositories 45 degrees
+ * apart on the hue wheel looked most alike at exactly the moment the card is a picture of.
+ * Scaling a colour in linear light changes how bright it is and leaves which colour it is
+ * alone. The renderer's tone mapping rolls the brightest values off, so this is a ceiling on
+ * intent rather than on pixels.
+ */
+const LIT_GAIN = 1.1;
+
+function gainOf(voice: VoiceId | null, activity: Activity): number {
+  return 1 + levelOf(voice, activity) * LIT_GAIN;
+}
+
+/** The brightness of a pillar's colour: exactly 1 at rest, so a silent scene is the palette. */
+export function pillarGain(pillar: Pillar, frame: SceneFrame): number {
+  return gainOf(pillar.voice, frame.activity);
 }
 
 export function nodeScale(node: SphereNode, frame: SceneFrame): number {
   return 0.7 + levelOf(node.voice, frame.activity) * 1.1;
 }
 
-export function nodeGlow(node: SphereNode, frame: SceneFrame): number {
-  return Math.min(0.7, levelOf(node.voice, frame.activity) * 0.75);
+export function nodeGain(node: SphereNode, frame: SceneFrame): number {
+  return gainOf(node.voice, frame.activity);
 }
 
 export function bandsOf(frame: SceneFrame): SpectrumBands {

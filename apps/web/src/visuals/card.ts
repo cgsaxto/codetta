@@ -80,6 +80,70 @@ export function cardCaption(features: RepoFeatures, score: Score): string {
     .join('  ·  ');
 }
 
+/** The title's size when the name is short enough, and the smallest it is allowed to get. */
+const TITLE_SIZE = 46;
+const TITLE_MIN_SIZE = 32;
+
+/** The fewest characters of a repository's name worth showing around an ellipsis. */
+const MIN_NAME_KEPT = 6;
+
+export interface FittedTitle {
+  text: string;
+  /** In card units, like every other measurement on the card. */
+  size: number;
+}
+
+function middle(text: string, keep: number): string {
+  const characters = Array.from(text);
+  if (keep >= characters.length) return text;
+  const head = Math.ceil(keep / 2);
+  const tail = Math.floor(keep / 2);
+  return `${characters.slice(0, head).join('')}…${tail > 0 ? characters.slice(-tail).join('') : ''}`;
+}
+
+/**
+ * Make `owner/name` fit on one line.
+ *
+ * The eight gallery names are short and the card was laid out against them. A card anyone can
+ * make for any repository meets names like `kubernetes-sigs/aws-load-balancer-controller`,
+ * and at a fixed 46px that runs off the right edge — on the one line a card exists to show.
+ *
+ * Smaller first, because a whole name at 32px is better than a cut one at 46. Then the name
+ * loses its middle and keeps both ends, since repository names put what distinguishes them at
+ * the end as often as at the start (`-controller`, `-rs`, `.js`). The owner goes last: it is
+ * the half of the address a reader is most likely to recognise, and it is only cut when it
+ * alone would leave no room for the name.
+ *
+ * `measure` is handed in so this can be tested without a canvas, and so nothing here assumes
+ * the font is monospaced — the stack falls back to whatever `monospace` means on the machine.
+ */
+export function fitCardTitle(
+  owner: string,
+  name: string,
+  maxWidth: number,
+  measure: (text: string, size: number) => number,
+): FittedTitle {
+  const full = `${owner}/${name}`;
+
+  for (let size = TITLE_SIZE; size >= TITLE_MIN_SIZE; size -= 2) {
+    if (measure(full, size) <= maxWidth) return { text: full, size };
+  }
+
+  const fits = (text: string) => measure(text, TITLE_MIN_SIZE) <= maxWidth;
+
+  for (let keep = Array.from(name).length - 1; keep >= MIN_NAME_KEPT; keep--) {
+    const text = `${owner}/${middle(name, keep)}`;
+    if (fits(text)) return { text, size: TITLE_MIN_SIZE };
+  }
+
+  for (let keep = Array.from(full).length - 1; keep >= 2; keep--) {
+    const text = middle(full, keep);
+    if (fits(text)) return { text, size: TITLE_MIN_SIZE };
+  }
+
+  return { text: '…', size: TITLE_MIN_SIZE };
+}
+
 /**
  * A palette colour at an opacity, as an 8-digit hex.
  *
@@ -236,20 +300,31 @@ export function drawCardOverlay(
   context.fillStyle = accent;
   context.textBaseline = 'alphabetic';
 
-  context.globalAlpha = 0.75;
-  context.font = `${15 * unit}px ${MONO}`;
-  drawTracked(context, 'CODETTA', textLeft, baseline - 74 * unit, 4.8 * unit);
-
-  context.globalAlpha = 1;
-  context.font = `500 ${46 * unit}px ${MONO}`;
-  context.fillText(
-    `${features.repo.owner}/${features.repo.name}`,
-    textLeft,
-    baseline - 24 * unit,
+  // The same margin on the right as on the left, so a long name stops where the layout does.
+  const title = fitCardTitle(
+    features.repo.owner,
+    features.repo.name,
+    width - textLeft - left,
+    (text, size) => {
+      context.font = `500 ${size * unit}px ${MONO}`;
+      return context.measureText(text).width;
+    },
   );
 
-  context.globalAlpha = 0.62;
-  context.font = `${17 * unit}px ${MONO}`;
+  context.globalAlpha = 0.75;
+  context.font = `${15 * unit}px ${MONO}`;
+  drawTracked(context, 'CODETTA', textLeft, baseline - 80 * unit, 4.8 * unit);
+
+  context.globalAlpha = 1;
+  context.font = `500 ${title.size * unit}px ${MONO}`;
+  context.fillText(title.text, textLeft, baseline - 30 * unit);
+
+  // 19px at 0.72, up from 17 at 0.62. A link preview is shown at something like 500px wide,
+  // which is this card at two fifths: the line was landing at about 7px in a colour a third
+  // of the way to the background, and it is the line that says what the piece is. The title
+  // and the wordmark move up six units to give its ascenders the room.
+  context.globalAlpha = 0.72;
+  context.font = `${19 * unit}px ${MONO}`;
   context.fillText(cardCaption(features, score), textLeft, baseline);
   context.globalAlpha = 1;
 }

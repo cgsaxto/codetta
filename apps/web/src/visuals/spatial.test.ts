@@ -6,7 +6,8 @@ import { prepareActivity } from './activity';
 import { fieldFor } from './layout';
 import {
   nodeScale,
-  pillarGlow,
+  nodeGain,
+  pillarGain,
   pillarHeight,
   pillarsFor,
   sceneFrame,
@@ -41,7 +42,8 @@ describe('sceneFrame', () => {
   it('rests when nothing is playing, rather than striking the first beat', () => {
     const frame = sceneFrame(reader, score, null, false);
     for (const pillar of pillarsFor(requests)) {
-      expect(pillarGlow(pillar, frame)).toBe(0);
+      // Exactly 1, not merely close: a scene at rest is the palette, untouched.
+      expect(pillarGain(pillar, frame)).toBe(1);
     }
     expect(frame.progress).toBe(0);
   });
@@ -78,8 +80,32 @@ describe('sceneFrame', () => {
       0, 0, 0, 0,
     ]);
 
-    const lit = pillarsFor(requests).some((pillar) => pillarGlow(pillar, calm) > 0);
+    const lit = pillarsFor(requests).some((pillar) => pillarGain(pillar, calm) > 1);
     expect(lit).toBe(true);
+  });
+});
+
+describe('lighting', () => {
+  it('brightens a sounding element and never dims one', () => {
+    // A multiplier on the colour rather than a mix toward white. The mix lit things by
+    // erasing their hue, so the repositories looked most alike at the peak — the frame the
+    // card is a picture of. Scaling keeps the colour and changes only how bright it is.
+    const pillars = pillarsFor(requests);
+    const nodes = sphereNodesFor(requests);
+    let brightest = 1;
+
+    for (let tick = 0; tick < totalTicks; tick += 7.3) {
+      const frame = sceneFrame(reader, score, tick, false);
+      for (const gain of [
+        ...pillars.map((pillar) => pillarGain(pillar, frame)),
+        ...nodes.map((node) => nodeGain(node, frame)),
+      ]) {
+        expect(gain).toBeGreaterThanOrEqual(1);
+        expect(gain).toBeLessThanOrEqual(2.1);
+        brightest = Math.max(brightest, gain);
+      }
+    }
+    expect(brightest).toBeGreaterThan(1.8);
   });
 });
 

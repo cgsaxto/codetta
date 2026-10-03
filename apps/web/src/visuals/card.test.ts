@@ -10,6 +10,7 @@ import {
   cardPalette,
   cardTick,
   drawCard,
+  fitCardTitle,
 } from './card';
 import { paletteFor, palettesFor } from './palette';
 
@@ -155,5 +156,68 @@ describe('cardPalette', () => {
     const loaded = { ...features, seed: 'feedbeef' };
     const onPage = palettesFor([...GALLERY_BY_SIZE.map((entry) => entry.seed), loaded.seed]);
     expect(cardPalette(loaded)).toStrictEqual(onPage[GALLERY_BY_SIZE.length]);
+  });
+});
+
+describe('fitCardTitle', () => {
+  // A stand-in for measureText: a monospaced face at 0.6em per character, which is close to
+  // what the real stack measures. The function itself assumes nothing about the font.
+  const measure = (text: string, size: number) => Array.from(text).length * size * 0.6;
+  const room = 1088; // The card's width less its two margins.
+
+  it('leaves a short name alone at full size', () => {
+    expect(fitCardTitle('facebook', 'react', room, measure)).toStrictEqual({
+      text: 'facebook/react',
+      size: 46,
+    });
+  });
+
+  it('shrinks before it cuts, because a whole name small beats a cut one large', () => {
+    const fitted = fitCardTitle(
+      'kubernetes-sigs',
+      'aws-load-balancer-controller',
+      room,
+      measure,
+    );
+    expect(fitted.text).toBe('kubernetes-sigs/aws-load-balancer-controller');
+    expect(fitted.size).toBeLessThan(46);
+    expect(fitted.size).toBeGreaterThanOrEqual(32);
+    expect(measure(fitted.text, fitted.size)).toBeLessThanOrEqual(room);
+  });
+
+  it('cuts the middle of the name and keeps the owner, the slash and both ends', () => {
+    const name = 'an-extremely-long-repository-name-that-keeps-going-and-going-until-the-end';
+    const fitted = fitCardTitle('some-organisation', name, room, measure);
+
+    expect(fitted.size).toBe(32);
+    expect(fitted.text.startsWith('some-organisation/an-')).toBe(true);
+    expect(fitted.text.endsWith('-the-end')).toBe(true);
+    expect(fitted.text).toContain('…');
+    expect(measure(fitted.text, fitted.size)).toBeLessThanOrEqual(room);
+  });
+
+  it('never overflows, whatever it is given and however little room there is', () => {
+    // Including the widths a card with an avatar leaves, and ones no card would ever have.
+    const owners = ['a', 'facebook', 'a'.repeat(39)];
+    const names = ['b', 'react', 'x'.repeat(40), 'y'.repeat(100)];
+    for (const owner of owners) {
+      for (const name of names) {
+        for (const width of [1088, 958, 400, 120, 30]) {
+          const fitted = fitCardTitle(owner, name, width, measure);
+          expect(
+            measure(fitted.text, fitted.size),
+            `${owner}/${name} in ${width}`,
+          ).toBeLessThanOrEqual(Math.max(width, measure('…', 32)));
+          expect(fitted.text.length).toBeGreaterThan(0);
+        }
+      }
+    }
+  });
+
+  it('gives up the owner only when the owner alone leaves no room for a name', () => {
+    const fitted = fitCardTitle('o'.repeat(39), 'n'.repeat(60), 400, measure);
+    expect(fitted.text).toContain('…');
+    expect(fitted.text.startsWith('o'.repeat(39))).toBe(false);
+    expect(measure(fitted.text, fitted.size)).toBeLessThanOrEqual(400);
   });
 });

@@ -24,6 +24,14 @@ const GAP = 12;
 const MARGIN = 36;
 const CAPTION = 88;
 
+/**
+ * Twelve percent closer than the page's framing, on the cover only. At the size a link
+ * preview is shown, the eight scenes were silhouettes with a name under them; closer, the
+ * columns separate. The single-repository card keeps the page's framing, because there the
+ * scene shares the frame with three lines of text and already fills what is left.
+ */
+const TILE_CAMERA_DISTANCE = 0.88;
+
 function Tile({
   index,
   palette,
@@ -57,6 +65,7 @@ function Tile({
         mode="pillars"
         position={position}
         frameloop="demand"
+        cameraDistance={TILE_CAMERA_DISTANCE}
         dpr={dpr}
         onReady={ready}
       />
@@ -125,7 +134,7 @@ export function OgCover() {
         <div style={{ fontSize: 15, letterSpacing: '0.34em', textTransform: 'uppercase' }}>
           Codetta
         </div>
-        <div style={{ fontSize: 18, color: 'rgb(255 255 255 / 62%)' }}>
+        <div style={{ fontSize: 20, color: 'rgb(255 255 255 / 72%)' }}>
           Paste a GitHub repository. Hear what it sounds like.
         </div>
       </div>
