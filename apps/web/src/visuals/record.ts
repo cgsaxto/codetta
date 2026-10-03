@@ -107,23 +107,6 @@ export function clipTick(score: Score, elapsedSeconds: number): number {
   return ticksAtSeconds(start + Math.max(0, elapsedSeconds), score.bpm, barToTick(score.bars));
 }
 
-/**
- * How far back the camera sits for each shape and view, against the page's framing.
- *
- * Measured, not chosen by eye: every gallery repository rendered at three moments of its
- * clip, counting lit pixels in the outermost column and row of the frame. These are the
- * closest distances at which nothing touches an edge for any of the eight.
- *
- * A square frame can come in, because the page's framing leaves room to orbit and a video
- * has no use for it. A vertical one cannot. Its field of view is so narrow that the pillars
- * of all eight repositories were cut off at the left at the page's own distance, so that
- * view goes a quarter further back — which costs nothing now the fog moves with the camera.
- */
-const CAMERA_DISTANCE: Record<Shape, Record<ViewMode, number>> = {
-  square: { pillars: 0.85, nodes: 0.85 },
-  vertical: { pillars: 1.25, nodes: 1 },
-};
-
 /** How long the scene may take to produce its first frames before the recording gives up. */
 const SCENE_TIMEOUT_MS = 15_000;
 
@@ -172,7 +155,6 @@ export async function recordClip(options: RecordOptions): Promise<Blob> {
     mode,
     width,
     height,
-    cameraDistance: CAMERA_DISTANCE[shape][mode],
     // The audio's own clock, not the frame's: a dropped frame moves the picture and never
     // the sound.
     position: () => clipTick(score, elapsed()),

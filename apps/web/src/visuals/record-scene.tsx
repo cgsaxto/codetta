@@ -36,12 +36,10 @@ export interface ClipSurfaceOptions {
   position: () => number;
   /** After each composited frame. */
   onFrame?: () => void;
-  /** See SpatialField. Below 1 brings the camera in. */
-  cameraDistance?: number;
 }
 
 export function mountClipSurface(options: ClipSurfaceOptions): ClipSurface {
-  const { subject, mode, width, height, position, onFrame, cameraDistance = 1 } = options;
+  const { subject, mode, width, height, position, onFrame } = options;
 
   const canvas = document.createElement('canvas');
   canvas.width = width;
@@ -111,7 +109,6 @@ export function mountClipSurface(options: ClipSurfaceOptions): ClipSurface {
       frameloop="always"
       // One device pixel per pixel: the surface is already the size of the video.
       dpr={1}
-      cameraDistance={cameraDistance}
       onFrame={compose}
       onCaptureError={unsupported}
     />,

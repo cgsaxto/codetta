@@ -24,14 +24,6 @@ const GAP = 12;
 const MARGIN = 36;
 const CAPTION = 88;
 
-/**
- * Twelve percent closer than the page's framing, on the cover only. At the size a link
- * preview is shown, the eight scenes were silhouettes with a name under them; closer, the
- * columns separate. The single-repository card keeps the page's framing, because there the
- * scene shares the frame with three lines of text and already fills what is left.
- */
-const TILE_CAMERA_DISTANCE = 0.88;
-
 function Tile({
   index,
   palette,
@@ -65,7 +57,6 @@ function Tile({
         mode="pillars"
         position={position}
         frameloop="demand"
-        cameraDistance={TILE_CAMERA_DISTANCE}
         dpr={dpr}
         onReady={ready}
       />

@@ -56,6 +56,30 @@ export interface SphereNode {
   position: readonly [number, number, number];
 }
 
+/**
+ * How wide each view is, as the aspect ratio below which it stops fitting at the landscape
+ * distance. The pillars are a slab seen from a corner and are wider than they are tall; the
+ * sphere is as wide as it is tall and fits a narrower frame before it has to back away.
+ *
+ * Measured rather than derived: every gallery repository, at three moments of its clip,
+ * counting lit pixels in the outermost column of the frame.
+ */
+const FIT_ASPECT: Record<ViewMode, number> = { pillars: 1.05, nodes: 0.82 };
+
+/**
+ * How far back the camera sits, as a multiple of the landscape distance.
+ *
+ * A frame narrower than the scene needs has less horizontal field of view in exact proportion
+ * to its aspect ratio, so the distance it needs is in inverse proportion — one line, and
+ * continuous. It replaced three steps (1, 1.24 below 1.2, 1.45 below 0.82), and the last of
+ * those was the trouble: a phone held upright is about 0.6, which needs 1.75, so on every
+ * phone the pillars of every repository ran off the left edge of the stage.
+ */
+export function framingFor(aspect: number, mode: ViewMode): number {
+  if (!(aspect > 0) || !Number.isFinite(aspect)) return 1;
+  return Math.max(1, FIT_ASPECT[mode] / aspect);
+}
+
 /** Evenly spaced representatives per module, so one huge module cannot push the rest off frame. */
 const PILLARS_PER_MODULE = 18;
 

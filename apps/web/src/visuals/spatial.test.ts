@@ -5,6 +5,7 @@ import { barToTick } from '../music/score';
 import { prepareActivity } from './activity';
 import { MODULE_VOICE_ORDER, moduleVoiceCount } from '../music/arrangement';
 import {
+  framingFor,
   moduleVoices,
   nodeScale,
   nodeGain,
@@ -28,6 +29,52 @@ const requests = GALLERY.find((entry) => entry.repo.name === 'requests')!;
 const score = generateScore(requests);
 const reader = prepareActivity(score);
 const totalTicks = barToTick(score.bars);
+
+describe('framingFor', () => {
+  it('leaves a landscape frame at the landscape distance', () => {
+    // The card is 1200×630 and the desktop stage is wider than it is tall. Anything this
+    // does to them changes eight committed pictures.
+    for (const aspect of [1200 / 630, 16 / 9, 1.4, 1.2]) {
+      expect(framingFor(aspect, 'pillars'), String(aspect)).toBe(1);
+      expect(framingFor(aspect, 'nodes'), String(aspect)).toBe(1);
+    }
+  });
+
+  it('backs away in proportion as the frame narrows, with no step in it', () => {
+    // The rule this replaced was three steps, and a step is a frame size at which the scene
+    // jumps. Halving the aspect ratio halves the field of view, so it doubles the distance.
+    let previous = framingFor(1.3, 'pillars');
+    for (let aspect = 1.29; aspect >= 0.4; aspect -= 0.01) {
+      const framing = framingFor(aspect, 'pillars');
+      expect(framing).toBeGreaterThanOrEqual(previous);
+      expect(framing - previous).toBeLessThan(0.08);
+      previous = framing;
+    }
+    expect(framingFor(0.5, 'pillars')).toBeCloseTo(framingFor(1, 'pillars') * 2, 6);
+  });
+
+  it('gives a phone held upright enough room for the pillars', () => {
+    // Stages on the phones this was measured on are between 0.59 and 0.61. The old step put
+    // all of them at 1.45, and every gallery repository ran off the left edge; nothing was
+    // cut at 1.72.
+    for (const aspect of [336 / 548, 366 / 625, 406 / 680]) {
+      expect(framingFor(aspect, 'pillars')).toBeGreaterThan(1.7);
+    }
+  });
+
+  it('keeps the sphere closer than the pillars, because it is not as wide', () => {
+    expect(framingFor(0.6, 'nodes')).toBeLessThan(framingFor(0.6, 'pillars'));
+    expect(framingFor(0.6, 'nodes')).toBeGreaterThan(1);
+  });
+
+  it('answers 1 rather than Infinity for a frame with no size yet', () => {
+    // The canvas is measured after it mounts, and a camera placed at infinity is a blank
+    // frame with nothing in the console.
+    for (const aspect of [0, -1, Number.NaN, Infinity]) {
+      expect(framingFor(aspect, 'pillars')).toBe(1);
+    }
+  });
+});
 
 describe('moduleVoices', () => {
   it('names a voice for the modules that are playing, in rank order, and for no others', () => {

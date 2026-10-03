@@ -562,27 +562,29 @@ export default function App() {
           <div className="stage-vignette pointer-events-none absolute inset-0" />
           <div className="stage-top-fade pointer-events-none absolute inset-x-0 top-0 h-40" />
 
-          <div className="pointer-events-none absolute inset-x-0 top-0 flex items-start justify-between gap-3 p-4 sm:p-7">
-            <div className="min-w-0">
+          {/*
+            On a phone the name takes the whole first row and the view switch wraps beneath
+            it. Side by side, the switch left the name 108px — eight characters at this size
+            — so `kubernetes` and `TypeScript` were cut to an ellipsis on the one line that
+            says which repository is on screen.
+          */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 flex flex-wrap items-start justify-between gap-3 p-4 sm:flex-nowrap sm:p-7">
+            <div className="min-w-0 basis-full sm:basis-auto">
               <p
-                className="text-ui-muted max-w-[120px] truncate text-[9px] tracking-[0.14em] uppercase sm:max-w-none sm:tracking-[0.22em]"
+                className="text-ui-muted truncate text-[9px] tracking-[0.14em] uppercase sm:tracking-[0.22em]"
                 title={`${active.repo.owner} / ${active.repo.primaryLanguage}`}
               >
                 {active.repo.owner} / {active.repo.primaryLanguage}
               </p>
               <h2
-                className="mt-2 max-w-[108px] truncate text-[24px] leading-none font-light tracking-[-0.04em] sm:max-w-none sm:text-[clamp(24px,4vw,50px)]"
+                className="mt-2 truncate pb-1 text-[24px] leading-none font-light tracking-[-0.04em] sm:text-[clamp(24px,4vw,50px)]"
                 title={active.repo.name}
               >
                 {active.repo.name}
               </h2>
               <p className="text-ui-muted mt-3 text-[9px] tracking-[0.08em] uppercase sm:text-[10px] sm:tracking-[0.14em]">
-                {active.repo.commitSha.slice(0, 7)}
-                <span className="hidden sm:inline">
-                  {' '}
-                  · {activeScore.root} {activeScore.mode}
-                </span>{' '}
-                · {activeScore.bpm} BPM
+                {active.repo.commitSha.slice(0, 7)} · {activeScore.root} {activeScore.mode} ·{' '}
+                {activeScore.bpm} BPM
               </p>
             </div>
 
@@ -601,14 +603,7 @@ export default function App() {
                       viewMode === mode ? `inset 0 0 0 1px ${activeAccent}40` : undefined,
                   }}
                 >
-                  {mode === 'pillars' ? (
-                    'Pillars'
-                  ) : (
-                    <>
-                      <span className="sm:hidden">Nodes</span>
-                      <span className="hidden sm:inline">Node sphere</span>
-                    </>
-                  )}
+                  {mode === 'pillars' ? 'Pillars' : 'Node sphere'}
                 </button>
               ))}
             </div>

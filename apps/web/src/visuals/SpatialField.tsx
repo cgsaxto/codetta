@@ -8,6 +8,7 @@ import { prepareActivity } from './activity';
 import type { Palette } from './palette';
 import {
   bandsOf,
+  framingFor,
   nodeGain,
   nodeScale,
   pillarGain,
@@ -42,14 +43,6 @@ interface SpatialFieldProps {
    * frames, and MediaRecorder turns no frames into a zero-byte file without an error.
    */
   frameloop?: 'always' | 'demand' | 'never';
-  /**
-   * A multiplier on how far back the camera sits, 1 by default. Below 1 is closer.
-   *
-   * The framing is chosen for a scene someone can orbit, which means leaving room around it.
-   * A tile on the cover is 273px wide and nobody orbits it; the same room there is most of
-   * the picture spent on empty space, at the size where there is least picture to spend.
-   */
-  cameraDistance?: number;
   /** Device pixel ratio. The page caps it for speed; a screenshot wants every pixel. */
   dpr?: number | [number, number];
   onSpectrum?: (bands: SpectrumBands) => void;
@@ -321,17 +314,10 @@ function SpectrumReporter({
   return null;
 }
 
-/**
- * How far back the camera sits, as a multiple of the landscape framing.
- *
- * A portrait canvas has far less horizontal field of view, so the same scene is pulled back
- * to keep the repository inside the frame rather than cropping its first and last modules.
- */
-function useFraming(distance: number): number {
+function useFraming(mode: ViewMode): number {
   const width = useThree((state) => state.size.width);
   const height = useThree((state) => state.size.height);
-  const aspect = width / Math.max(1, height);
-  return (aspect < 0.82 ? 1.45 : aspect < 1.2 ? 1.24 : 1) * distance;
+  return framingFor(width / Math.max(1, height), mode);
 }
 
 function CameraRig({ framing }: { framing: number }) {
@@ -339,11 +325,24 @@ function CameraRig({ framing }: { framing: number }) {
   const gl = useThree((state) => state.gl);
   const invalidate = useThree((state) => state.invalidate);
   const controls = useMemo(() => new OrbitControls(camera, gl.domElement), [camera, gl]);
+  const framed = useRef<number | null>(null);
 
   useEffect(() => {
-    camera.position.set(8.4 * framing, 5.2 * framing, 10.2 * framing);
-    camera.lookAt(0, 0, 0);
-    controls.target.set(0, 0, 0);
+    if (framed.current === null) {
+      camera.position.set(8.4 * framing, 5.2 * framing, 10.2 * framing);
+      controls.target.set(0, 0, 0);
+    } else {
+      // The frame changed shape — a rotated phone, or the other view, which needs a different
+      // distance in a narrow frame. Keep the angle the visitor chose and move only as far in
+      // or out as the new frame asks. Resetting here would undo an orbit every time someone
+      // switched between the two views.
+      camera.position
+        .sub(controls.target)
+        .multiplyScalar(framing / framed.current)
+        .add(controls.target);
+    }
+    framed.current = framing;
+    camera.lookAt(controls.target);
     controls.enableDamping = true;
     controls.dampingFactor = 0.055;
     controls.enablePan = false;
@@ -455,7 +454,7 @@ function Scene(props: SceneProps) {
   const { features, mode, onReady, onSpectrum, palette, position, reduceMotion, score } = props;
   const reader = useMemo(() => prepareActivity(score), [score]);
   const invalidate = useThree((state) => state.invalidate);
-  const framing = useFraming(props.cameraDistance ?? 1);
+  const framing = useFraming(mode);
   const frame = useRef<SceneFrame>(sceneFrame(reader, score, null, reduceMotion));
 
   // Read once per frame, before anything draws, so every part of the scene is looking at the
